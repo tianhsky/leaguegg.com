@@ -1,0 +1,11 @@
+// https://na.api.pvp.net/api/lol/na/v1.4/summoner/38990785?api_key=635ff54c-4df5-41e0-a471-012cc26faeae
+
+{
+  38990785: {
+    id: 38990785,
+    name: "tianhsky",
+    profileIconId: 711,
+    summonerLevel: 30,
+    revisionDate: 1425797695000
+  }
+}

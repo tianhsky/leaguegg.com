@@ -1,0 +1,1 @@
+$game_expires_threshold = 3.minutes

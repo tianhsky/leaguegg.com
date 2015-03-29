@@ -1,0 +1,6 @@
+!.gitignore
+.env
+*.log
+*.DS_Store*
+public/system
+public/assets

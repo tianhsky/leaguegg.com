@@ -1,0 +1,34 @@
+development:
+  sessions:
+    default:
+      database: lolbox_srv_development
+      hosts:
+        - localhost:27017
+      options:
+        pool_size: 5
+  options:
+    use_activesupport_time_zone: false
+    use_utc: true
+test:
+  sessions:
+    default:
+      database: lolbox_srv_test
+      hosts:
+        - localhost:27017
+      options:
+        read: primary
+        max_retries: 1
+        retry_interval: 0
+production:
+  sessions:
+    default:
+      database: lolbox_srv_development
+      hosts:
+        - mongo1:27017
+      username: <%= ENV['MONGODB_USERNAME'] %>
+      password: <%= ENV['MONGODB_PASSWORD'] %>
+      options:
+        pool_size: 5
+  options:
+    use_activesupport_time_zone: false
+    use_utc: true
