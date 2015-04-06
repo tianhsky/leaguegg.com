@@ -14,11 +14,12 @@ class MatchParticipant
   field :bot, type: Boolean
   field :time_line, type: Hash
   field :stats, type: Hash
-  
+
   # Relations
+  embedded_in :match_team
   embeds_many :match_masteries
   embeds_many :match_runes
-  embedded_in :match_team
+  embeds_one :summoner_ranked_stat
 
   # Indexes
 

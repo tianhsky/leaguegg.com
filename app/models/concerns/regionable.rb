@@ -4,6 +4,6 @@ module Regionable
 		before_validation :store_region_in_upper
 	end
 	def store_region_in_upper
-		region = region.try(:upcase)
+		self.region = self.region.try(:upcase)
 	end
 end

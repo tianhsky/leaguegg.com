@@ -5,7 +5,7 @@ gem 'dotenv-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+# gem 'mysql2'
 # User mongoid as documented store
 gem 'mongoid', '~> 4.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

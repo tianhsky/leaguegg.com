@@ -2,6 +2,7 @@ class Game
   include Mongoid::Document
   include Regionable
   include Platformable
+  include GameService
 
   # Fields
   field :region, type: String
@@ -19,26 +20,22 @@ class Game
   embeds_many :match_teams
 
   # Indexes
+  index({ match_id: 1, region: 1 }, { unique: true })
 
   # Validations
+  validates :region, presence: true
+  validates :match_id, presence: true
+  validates_uniqueness_of :match_id, :scope => [:region]
 
   # Callbacks
 
   # Functions
-  def started_at_in_utc
-    Time.at(started_at/1000).utc
+  def started_at_time
+    Time.at(started_at/1000)
   end
 
   def summoner_ids
     match_teams.map{|t|t.match_participants.map{|p|p.summoner_id}}.flatten
-  end
-
-  def self.cache_key_summoner_game(summoner_id, region)
-    "summoner_game?region=#{region.upcase}&summoner=#{summoner_id}"
-  end
-
-  def self.cache_key_game(game_id, region)
-    "game?region=#{region.upcase}&game_id=#{game_id}"
   end
 
 end

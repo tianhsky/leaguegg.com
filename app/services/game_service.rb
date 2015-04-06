@@ -1,133 +1,197 @@
+# Services related to current game, fetch live game status from riot or cache
 module GameService
 
-  class Factory
+  module Riot
 
-    @json
-    @region
-
-    def initialize (json, region)
-      @json = HashWithIndifferentAccess.new json
-      @region = region
-    end
-
-    def to_obj
-      game = Game.new(convert_json)
-    end
-
-    def convert_json
-      teams = @json['participants'].group_by{|x|x['teamId']}
-      {
-        region: @region,
-        match_id: @json['gameId'],
-        map_id: @json['mapId'],
-        match_mode: @json['gameMode'],
-        match_type: @json['gameType'],
-        game_queue_config_id: @json['gameQueueConfigId'],
-        platform_id: @json['platformId'],
-        observer_encryption_key: @json['observers'] ? @json['observers']['encryptionKey'] : nil,
-        started_at: @json['gameStartTime'],
-        game_length: @json['gameLength'],
-        match_teams: teams.map{|k,v|convert_team(k,v)}
-      }
-    end
-
-    private
-
-    def convert_team(team_id, participants)
-      bans = @json['bannedChampions'].select{|x|x['teamId']==team_id}
-      {
-        team_id: team_id,
-        match_banned_champions: bans.map{|x|convert_ban(x)},
-        match_participants: participants.map{|x|convert_participant(x)}
-      }
-    end
-
-    def convert_ban(ban)
-      {
-        champion_id: ban['championId'],
-        pick_turn: ban['pickTurn']
-      }
-    end
-
-    def convert_participant(participant)
-      {
-        spell1_id: participant['spell1Id'],
-        spell2_id: participant['spell2Id'],
-        champion_id: participant['championId'],
-        summoner_id: participant['summonerId'],
-        summoner_name: participant['summoner_name'],
-        profile_icon_id: participant['profileIconId'],
-        bot: participant['bot'],
-        match_masteries: participant['masteries'].map{|x|convert_mastery(x)},
-        match_runes: participant['runes'].map{|x|convert_rune(x)}
-      }
-    end
-
-    def convert_mastery(mastery)
-      {
-        rank: mastery['rank'],
-        mastery_id: mastery['masteryId']
-      }
-    end
-
-    def convert_rune(rune)
-      {
-        rank: rune['count'],
-        rune_id: rune['runeId']
-      }
-    end
-  end
-
-  class Riot
     def self.find_game_by_summoner_id(summoner_id, region)
-      platform_id = Enums::REGION_TO_PLATFORM[region.upcase]
+      platform_id = Consts::Platform.find_by_region(region)['platform']
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
       resp = HttpService.get(url)
     end
 
   end
 
-  class Searcher
+  module Service
 
-    def self.find_game_by_summonner_name(summoner_name, region)
+    def self.find_game_by_summoner_name(summoner_name, region)
+      summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
+      find_game_by_summoner_id(summoner.summoner_id, region)
     end
 
     def self.find_game_by_summoner_id(summoner_id, region)
       region.upcase!
+
       # check cache
-      game = self.find_game_from_cache(summoner_id, region)
-      # check riot
+      game = find_game_from_cache(summoner_id, region)
+
       unless game
-        json = GameService::Riot.find_game_by_summoner_id(summoner_id, region)
-        factory = GameService::Factory.new(json, region)
-        game = factory.to_obj
-        self.write_game_to_cache(game, summoner_id, region)
+        # check riot
+        json = Riot.find_game_by_summoner_id(summoner_id, region)
+        game_hash = Factory.build_game_hash(json, region)
+
+        # check db
+        game = Game.where(match_id: game_hash[:match_id]).first
+
+        summoners = game_hash[:match_teams].map{|t|t[:match_participants]}.flatten
+        unless game
+          # store summoner in db if not exist
+          ensure_summoners_in_db(summoners, region)
+
+          # create game
+          game = Game.new(game_hash)
+
+          # store summoner stats and update game
+          store_summoners_stats_to_game(game, region)
+
+          # save game
+          game.save
+        end
+
+        # cache game for a short period
+        summoner_ids = summoners.map{|s|s[:summoner_id]}
+        store_game_to_cache(game, summoner_ids, region)
       end
       game
     end
 
     def self.find_game_from_cache(summoner_id, region)
       region.upcase!
-      summoner_game_key = Game.cache_key_summoner_game(summoner_id, region)
+      summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
       game = nil
       if summoner_game = Rails.cache.read(summoner_game_key)
         game_id = summoner_game[:game_id]
-        game_key = Game.cache_key_game(game_id, region)
+        game_key = cache_key_for_game(game_id, region)
         game = Rails.cache.read(game_key)
       end
       game
     end
 
-    def self.write_game_to_cache(game, summoner_id, region)
+    def self.store_game_to_cache(game, summoner_ids, region)
       region.upcase!
       game_id = game.match_id
-      game_key = Game.cache_key_game(game_id, region)
+      game_key = cache_key_for_game(game_id, region)
       Rails.cache.write(game_key, game, expires_in: $game_expires_threshold)
-      game.summoner_ids.each do |sum_id|
-        summoner_game_key = Game.cache_key_summoner_game(sum_id, region)
+      summoner_ids.each do |summoner_id|
+        summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
         summoner_game = {game_id: game_id}
         Rails.cache.write(summoner_game_key, summoner_game, expires_in: $game_expires_threshold)
       end
+    end
+
+    def self.store_summoners_stats_to_game(game, region)
+      workers = []
+
+      game.match_teams.each do |team|
+        team.match_participants.each do |participant|
+          summoner_id = participant.summoner_id
+          champion_id = participant.champion_id
+          workers << Thread.new do
+            summoner_stat = SummonerSeasonStat::Service.find_summoner_season_stats(summoner_id, region)
+            champ_status = summoner_stat.summoner_ranked_stats.select{|s|s.champion_id==champion_id}.first
+            participant.summoner_ranked_stat = champ_status.try(:clone)
+          end
+        end
+      end
+
+      workers.map(&:join)
+    end
+
+    def self.ensure_summoners_in_db(summoners, region)
+      summoners.each do |summoner_hash|
+        summoner_obj_hash = {
+          region: region.upcase,
+          summoner_id: summoner_hash[:summoner_id],
+          name: summoner_hash[:summoner_name],
+          profile_icon_id: summoner_hash[:profile_icon_id]
+        }
+        if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash[:summoner_id]}).first
+          if summoner.name != summoner_hash[:summoner_name]
+            summoner.update_attributes(summoner_obj_hash)
+          end
+        else
+          Summoner.create(summoner_obj_hash)
+        end
+      end
+    end
+
+    def self.cache_key_for_summoner_game(summoner_id, region)
+      "summoner_game?region=#{region.upcase}&summoner=#{summoner_id}"
+    end
+
+    def self.cache_key_for_game(game_id, region)
+      "game?region=#{region.upcase}&game_id=#{game_id}"
+    end
+
+  end
+
+  module Factory
+
+    def self.build_game_hash(game, region)
+      game = game.with_indifferent_access
+      region.upcase!
+      teams = game['participants'].group_by{|x|x['teamId']}
+      {
+        region: region,
+        match_id: game['gameId'],
+        map_id: game['mapId'],
+        match_mode: game['gameMode'],
+        match_type: game['gameType'],
+        game_queue_config_id: game['gameQueueConfigId'],
+        platform_id: game['platformId'],
+        observer_encryption_key: game['observers'] ? game['observers']['encryptionKey'] : nil,
+        started_at: game['gameStartTime'],
+        game_length: game['gameLength'],
+        match_teams: teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
+      }.with_indifferent_access
+    end
+
+    def self.build_team_hash(team_id, participants, bans)
+      # participants = participants.with_indifferent_access
+      # bans = bans.with_indifferent_access
+      {
+        team_id: team_id,
+        match_banned_champions: bans.map{|x|build_banned_champion_hash(x)},
+        match_participants: participants.map{|x|build_participant_hash(x)}
+      }.with_indifferent_access
+    end
+
+    def self.build_banned_champion_hash(ban)
+      ban = ban.with_indifferent_access
+      {
+        champion_id: ban['championId'],
+        pick_turn: ban['pickTurn']
+      }.with_indifferent_access
+    end
+
+    def self.build_participant_hash(participant)
+      participant = participant.with_indifferent_access
+      {
+        spell1_id: participant['spell1Id'],
+        spell2_id: participant['spell2Id'],
+        champion_id: participant['championId'],
+        summoner_id: participant['summonerId'],
+        summoner_name: participant['summonerName'],
+        profile_icon_id: participant['profileIconId'],
+        bot: participant['bot'],
+        match_masteries: participant['masteries'].map{|x|build_mastery_hash(x)},
+        match_runes: participant['runes'].map{|x|build_rune_hash(x)}
+      }.with_indifferent_access
+    end
+
+    def self.build_mastery_hash(mastery)
+      mastery = mastery.with_indifferent_access
+      {
+        rank: mastery['rank'],
+        mastery_id: mastery['masteryId']
+      }.with_indifferent_access
+    end
+
+    def self.build_rune_hash(rune)
+      rune = rune.with_indifferent_access
+      {
+        rank: rune['count'],
+        rune_id: rune['runeId']
+      }.with_indifferent_access
     end
 
   end

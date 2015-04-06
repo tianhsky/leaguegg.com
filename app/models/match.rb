@@ -21,14 +21,14 @@ class Match
   embeds_many :match_teams
 
   # Indexes
-  index({ match_id: 1 }, { unique: false })
+  index({ match_id: 1, region: 1 }, { unique: true })
   index({ 'match_teams.match_participants.summoner_id' => 1, match_created_at: -1 }, { unique: false })
 
   # Validations
   validates :season, presence: true
   validates :region, presence: true
   validates :match_id, presence: true
-  validates_uniqueness_of :match_id, :scope => [:region, :season]
+  validates_uniqueness_of :match_id, :scope => [:region]
 
   # Callbacks
 

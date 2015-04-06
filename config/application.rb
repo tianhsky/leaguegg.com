@@ -1,15 +1,16 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
-
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "thread"
 Bundler.require(*Rails.groups)
 
 module LolboxSrv
   class Application < Rails::Application
-    config.assets.paths << Rails.root.join('lib/assets')
+    config.autoload_paths += %W(#{Rails.root.join('lib')})
     config.autoload_paths += %W(#{Rails.root.join('app/validators')})
+    # config.assets.paths << Rails.root.join('lib/assets')
 
     # Cache
     config.cache_store = :redis_store, "redis://#{ENV['REDIS_HOST']}:6379/0/cache"
