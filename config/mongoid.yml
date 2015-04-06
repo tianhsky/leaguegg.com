@@ -24,7 +24,7 @@ production:
     default:
       database: <%= ENV['MONGODB_NAME'] || 'lolbox_srv_production' %>
       hosts:
-        - <%= ENV['MONGODB_HOST'] %>:<%= ENV['MONGODB_PORT'] || 27017 %>
+        - "<%= ENV['MONGODB_HOST'] %>":<%= ENV['MONGODB_PORT'] || 27017 %>
       username: <%= ENV['MONGODB_USERNAME'] %>
       password: <%= ENV['MONGODB_PASSWORD'] %>
       options:
