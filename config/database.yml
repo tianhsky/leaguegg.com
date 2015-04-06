@@ -16,6 +16,6 @@ test:
 
 production:
   <<: *default
-  database: lolbox_srv_production
+  database: <%= ENV['MYSQL_USERNAME'] %>
   username: <%= ENV['MYSQL_USERNAME'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
