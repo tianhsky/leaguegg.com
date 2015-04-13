@@ -30,24 +30,26 @@ module SummonerStats
     field :per_min_dmg_taken_at_10m, type: Float, default: 0
 
     # Aggregated stats
-    field :avg_team_jungle_kills, type: Integer
-    field :avg_enemy_jungle_kills, type: Integer
-    field :avg_minion_kills, type: Integer
+    field :avg_team_jungle_kills, type: Float
+    field :avg_enemy_jungle_kills, type: Float
+    field :avg_minion_kills, type: Float
     field :avg_kills, type: Float
     field :avg_deaths, type: Float
     field :avg_assists, type: Float
-    field :avg_physical_to_champion, type: Integer
-    field :avg_magic_to_champion, type: Integer
-    field :avg_true_to_champion, type: Integer
-    field :avg_heals, type: Integer
-    field :avg_wards_placed, type: Integer
-    field :avg_wards_killed, type: Integer
-    field :avg_sight_wards_bought, type: Integer
-    field :avg_crowd_control_time, type: Integer
+    field :avg_physical_to_champion, type: Float
+    field :avg_magic_to_champion, type: Float
+    field :avg_true_to_champion, type: Float
+    field :avg_heals, type: Float
+    field :avg_wards_placed, type: Float
+    field :avg_wards_killed, type: Float
+    field :avg_sight_wards_bought, type: Float
+    field :avg_crowd_control_time, type: Float
+    field :avg_cs_at_10m, type: Float
+    field :avg_per_min_dmg_taken_at_10m, type: Float
+
+    # Rates
     field :aggresive_rate, type: Float
     field :win_rate, type: Float
-    field :avg_cs_at_10m, type: Integer
-    field :avg_per_min_dmg_taken_at_10m, type: Integer
     field :jungle_rate, type: Float
     field :cs_rate, type: Float
     field :helpful_rate, type: Float
@@ -74,22 +76,22 @@ module SummonerStats
     end
 
     def calculate_avgs
-      self.avg_team_jungle_kills = team_jungle_kills / games
-      self.avg_enemy_jungle_kills = enemy_jungle_kills / games
-      self.avg_minion_kills = minion_kills / games
+      self.avg_team_jungle_kills = (team_jungle_kills.to_f / games).round(3)
+      self.avg_enemy_jungle_kills = (enemy_jungle_kills.to_f / games).round(3)
+      self.avg_minion_kills = (minion_kills.to_f / games).round(3)
       self.avg_kills = (kills.to_f / games).round(3)
-      self.avg_deaths = (deaths / games).round(3)
-      self.avg_assists = (assists / games).round(3)
-      self.avg_physical_to_champion = physical_to_champion / games
-      self.avg_magic_to_champion = magic_to_champion / games
-      self.avg_true_to_champion = true_to_champion / games
-      self.avg_heals = heals / games
-      self.avg_wards_placed = wards_placed / games
-      self.avg_wards_killed = wards_killed / games
-      self.avg_sight_wards_bought = sight_wards_bought / games
-      self.avg_crowd_control_time = crowd_control_time / games
-      self.avg_cs_at_10m = (per_min_cs_at_10m*10) / games
-      self.avg_per_min_dmg_taken_at_10m = per_min_dmg_taken_at_10m / games
+      self.avg_deaths = (deaths.to_f / games).round(3)
+      self.avg_assists = (assists.to_f / games).round(3)
+      self.avg_physical_to_champion = (physical_to_champion.to_f / games).round(3)
+      self.avg_magic_to_champion = (magic_to_champion.to_f / games).round(3)
+      self.avg_true_to_champion = (true_to_champion.to_f / games).round(3)
+      self.avg_heals = (heals.to_f / games).round(3)
+      self.avg_wards_placed = (wards_placed.to_f / games).round(3)
+      self.avg_wards_killed = (wards_killed.to_f / games).round(3)
+      self.avg_sight_wards_bought = (sight_wards_bought.to_f / games).round(3)
+      self.avg_crowd_control_time = (crowd_control_time.to_f / games).round(3)
+      self.avg_cs_at_10m = ((per_min_cs_at_10m*10).to_f / games).round(3)
+      self.avg_per_min_dmg_taken_at_10m = (per_min_dmg_taken_at_10m.to_f / games).round(3)
     end
 
     def calculate_aggresive_rate
