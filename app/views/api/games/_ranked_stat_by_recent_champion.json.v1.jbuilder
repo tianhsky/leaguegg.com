@@ -14,6 +14,7 @@ json.avg_true_to_champion rstat.avg_true_to_champion
 json.avg_heals rstat.avg_heals
 json.avg_wards_placed rstat.avg_wards_placed
 json.avg_wards_killed rstat.avg_wards_killed
+json.avg_sight_wards_bought rstat.avg_sight_wards_bought
 json.avg_crowd_control_time rstat.avg_crowd_control_time
 json.avg_cs_at_10m rstat.avg_cs_at_10m
 json.avg_per_min_dmg_taken_at_10m rstat.avg_per_min_dmg_taken_at_10m

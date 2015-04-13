@@ -124,6 +124,7 @@ module SummonerMatchService
         stats.heals += stat['total_heal']
         stats.wards_placed += stat['wards_placed']
         stats.wards_killed += stat['wards_killed']
+        stats.sight_wards_bought += stat['sight_wards_bought_in_game']
         if timeline = m.timeline
           stats.per_min_cs_at_10m += timeline['creeps_per_min_deltas']['zero_to_ten']
           stats.per_min_dmg_taken_at_10m += timeline['damage_taken_per_min_deltas']['zero_to_ten']

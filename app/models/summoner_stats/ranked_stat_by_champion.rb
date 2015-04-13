@@ -35,7 +35,7 @@ module SummonerStats
     field :avg_kills, type: Float
     field :avg_deaths, type: Float
     field :avg_assists, type: Float
-    field :avg_minion_kills, type: Float
+    field :avg_minion_kills, type: Integer
     field :cs_rate, type: Float
 
     # Relations

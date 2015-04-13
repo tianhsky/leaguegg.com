@@ -24,6 +24,7 @@ module SummonerStats
     field :heals, type: Integer, default: 0
     field :wards_placed, type: Integer, default: 0
     field :wards_killed, type: Integer, default: 0
+    field :sight_wards_bought, type: Integer, default: 0
     field :crowd_control_time, type: Integer, default: 0
     field :per_min_cs_at_10m, type: Float, default: 0
     field :per_min_dmg_taken_at_10m, type: Float, default: 0
@@ -41,6 +42,7 @@ module SummonerStats
     field :avg_heals, type: Integer
     field :avg_wards_placed, type: Integer
     field :avg_wards_killed, type: Integer
+    field :avg_sight_wards_bought, type: Integer
     field :avg_crowd_control_time, type: Integer
     field :aggresive_rate, type: Float
     field :win_rate, type: Float
@@ -84,6 +86,7 @@ module SummonerStats
       self.avg_heals = heals / games
       self.avg_wards_placed = wards_placed / games
       self.avg_wards_killed = wards_killed / games
+      self.avg_sight_wards_bought = sight_wards_bought / games
       self.avg_crowd_control_time = crowd_control_time / games
       self.avg_cs_at_10m = (per_min_cs_at_10m*10) / games
       self.avg_per_min_dmg_taken_at_10m = per_min_dmg_taken_at_10m / games
