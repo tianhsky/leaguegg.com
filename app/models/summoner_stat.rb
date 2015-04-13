@@ -1,20 +1,21 @@
-class SummonerSeasonStat
+# summoner stat by season
+class SummonerStat
   include Mongoid::Document
+  include TimeTrackable
   include Seasonable
   include Regionable
-  include SummonerSeasonStatsService
+  include SummonerStatService
 
   # Fields
   field :season, type: String
   field :region, type: String
   field :summoner_id, type: Integer
-  field :ranked_stats_modified_at, type: Integer
 
   # Relations
   # belongs_to :summoner, foreign_key: 'app_summoner_id'
-  embeds_many :summoner_player_stats
-  embeds_many :summoner_ranked_stats
-  embeds_one :summoner_ranked_stat_summary
+  embeds_many :player_stats, class_name: 'SummonerStats::PlayerStat'
+  embeds_many :ranked_stats_by_champion, class_name: 'SummonerStats::RankedStatByChampion'
+  embeds_one :ranked_stat_summary, class_name: 'SummonerStats::RankedStatSummary'
 
   # Indexes
   index({ summoner_id: 1, region: 1, season: 1 }, { unique: true })

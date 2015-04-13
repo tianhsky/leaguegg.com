@@ -18,13 +18,18 @@ json.champion do
   json.name Consts::Champion.find_by_id(participant.champion_id)['name']
 end
 
-ranked_stat = participant.summoner_ranked_stat
-json.ranked_stat do
-  json.offensive_rate ranked_stat.try(:offensive_rate)
-  json.defensive_rate ranked_stat.try(:defensive_rate)
-  json.cs_rate ranked_stat.try(:cs_rate)
-  json.win_rate ranked_stat.try(:win_rate)
-  json.avg_kills ranked_stat.try(:avg_kills)
-  json.avg_deaths ranked_stat.try(:avg_deaths)
-  json.avg_assists ranked_stat.try(:avg_assists)
+if participant.ranked_stat_by_champion
+  json.ranked_stat_overall do
+    json.partial! 'ranked_stat_by_champion', rstat: participant.ranked_stat_by_champion
+  end
+else
+  json.ranked_stat_overall nil
+end
+
+if participant.ranked_stat_by_recent_champion
+  json.ranked_stat_recent do
+    json.partial! 'ranked_stat_by_recent_champion', rstat: participant.ranked_stat_by_recent_champion
+  end
+else
+  json.ranked_stat_recent nil
 end

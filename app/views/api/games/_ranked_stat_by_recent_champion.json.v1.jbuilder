@@ -1,0 +1,22 @@
+json.games rstat.games
+json.won rstat.won
+json.lost rstat.lost
+
+json.avg_kills rstat.avg_kills
+json.avg_deaths rstat.avg_deaths
+json.avg_assists rstat.avg_assists
+json.avg_minion_kills rstat.avg_minion_kills
+json.avg_team_jungle_kills rstat.avg_team_jungle_kills
+json.avg_enemy_jungle_kills rstat.avg_enemy_jungle_kills
+json.avg_physical_to_champion rstat.avg_physical_to_champion
+json.avg_magic_to_champion rstat.avg_magic_to_champion
+json.avg_true_to_champion rstat.avg_true_to_champion
+json.avg_heals rstat.avg_heals
+json.avg_wards_placed rstat.avg_wards_placed
+json.avg_wards_killed rstat.avg_wards_killed
+json.avg_crowd_control_time rstat.avg_crowd_control_time
+json.avg_cs_at_10m rstat.avg_cs_at_10m
+json.avg_per_min_dmg_taken_at_10m rstat.avg_per_min_dmg_taken_at_10m
+
+json.aggresive_rate rstat.aggresive_rate
+json.win_rate rstat.win_rate

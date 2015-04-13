@@ -6,14 +6,13 @@ module Consts
 
     def self.find_by_id(id)
       setup
-      @data[id.to_i]
+      @data[id.to_i] || {}
     end
 
     def self.find_by_name(name)
       setup
       found = @data.find{|id,v|v['name'].downcase == name.downcase}
-      return found[1] if found
-      nil
+      found[1] || {}
     end
 
     def self.setup

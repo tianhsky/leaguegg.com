@@ -1,9 +1,10 @@
 
-json.match do
-  json.id @game.match_id
-  json.mode @game.match_mode
-  json.type @game.match_type
-  json.started_at @game.started_at/1000
+json.id @game.game_id
+json.started_at @game.started_at
+
+json.game_queue do
+  json.id @game.game_queue_config_id
+  json.name Consts::GameQueue.find_by_id(@game.game_queue_config_id)['name'] 
 end
 
 json.map do
@@ -11,4 +12,4 @@ json.map do
   json.name Consts::Map.find_by_id(@game.map_id)['name']
 end
 
-json.teams @game.match_teams, partial: 'team', as: :team
+json.teams @game.teams, partial: 'team', as: :team

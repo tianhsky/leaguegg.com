@@ -6,14 +6,13 @@ module Consts
 
     def self.find_by_name(name)
       setup
-      @data[name.upcase]
+      @data[name.upcase] || {}
     end
 
     def self.find_by_region(region)
       setup
       found = @data.find{|id,v|v['region'].upcase == region.upcase}
-      return found[1] if found
-      nil
+      found[1] || {}
     end
 
     def self.setup

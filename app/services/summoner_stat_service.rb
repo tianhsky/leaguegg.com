@@ -1,4 +1,4 @@
-module SummonerSeasonStatsService
+module SummonerStatService
 
   module Riot
 
@@ -26,18 +26,18 @@ module SummonerSeasonStatsService
       if rank_stats
         rank_stats = rank_stats.with_indifferent_access
         rank_summary = rank_stats['champions'].select{|c|c['id']==0}.first
-        r['ranked_stats_modified_at'] = rank_stats['modifyDate']
-        r['summoner_ranked_stats'] = rank_stats['champions'].map{|c|build_ranked_stat_hash(c)}.compact
-        r['summoner_ranked_stat_summary'] = build_ranked_stat_summary_hash(rank_summary)
+        # r['riot_updated_at'] = rank_stats['modifyDate']
+        r['ranked_stats_by_champion'] = rank_stats['champions'].map{|c|build_ranked_stat_by_champion_hash(c)}.compact
+        r['ranked_stat_summary'] = build_ranked_stat_summary_hash(rank_stats['modifyDate'], rank_summary)
       end
       if player_stats
         player_stats = player_stats.with_indifferent_access
-        r['summoner_player_stats'] = player_stats['playerStatSummaries'].map{|p|build_player_stat_hash(p)}
+        r['player_stats'] = player_stats['playerStatSummaries'].map{|p|build_player_stat_hash(p)}
       end
       r.with_indifferent_access
     end
 
-    def self.build_ranked_stat_hash(champ)
+    def self.build_ranked_stat_by_champion_hash(champ)
       champ = champ.with_indifferent_access
       champ_id = champ['id']
       return if champ_id == 0
@@ -70,10 +70,11 @@ module SummonerSeasonStatsService
       }.with_indifferent_access
     end
 
-    def self.build_ranked_stat_summary_hash(summary)
+    def self.build_ranked_stat_summary_hash(riot_updated_at, summary)
       summary = summary.with_indifferent_access
       stat = summary['stats']
       r = {}
+      stat['riot_updated_at'] = riot_updated_at
       stat.each{ |k,v| r["#{k.to_s.underscore}"] = v }
       r.with_indifferent_access
     end
@@ -84,7 +85,7 @@ module SummonerSeasonStatsService
       new_stat = {}
       stat.each{ |k,v| new_stat["#{k.to_s.underscore}"] = v }
       {
-        modified_at: player_summary['modifyDate'],
+        riot_updated_at: player_summary['modifyDate'],
         player_stat_summary_type: player_summary['playerStatSummaryType'],
         wins: player_summary['wins'],
         losses: player_summary['losses'],
@@ -100,19 +101,16 @@ module SummonerSeasonStatsService
       region.upcase!
       season = season.upcase
       # check db
-      stats = SummonerSeasonStat.where({summoner_id: summoner_id, region: region, season: season}).first
+      stats = SummonerStat.where({summoner_id: summoner_id, region: region, season: season}).first
       # check riot
       unless stats
-        stats = SummonerSeasonStat.new
+        stats = SummonerStat.new
       end
       player_stats_json = nil
-      if stats.summoner_player_stats.blank?
-        player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
-      end
+      # player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
+
       ranked_stats_json = nil
-      if stats.summoner_ranked_stats.blank?
-        ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
-      end
+      ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
 
       season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
       stats.update_attributes(season_stats_hash)

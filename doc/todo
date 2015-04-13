@@ -1,0 +1,35 @@
+recent 15:
+aggresive (pentad*5^2 + quadd*4^2 + tripd*3^2 + doubled*2^2 + singd) / kills
+helpful (heal + wardplaced*50 + wardkilled*100 + crowdcontroltime*30)
+cs (minion / 280)
+jungle ((teamjungle + enemyjungle*2) / 180)
+ph/ma/tr physical2c, magic2c, true2c
+
+k/d/a
+w/l
+
+
+all:
+aggresive
+cs
+k/d/a
+w/l
+
+
+x title to queuetype + counter
+x add banned champions
+add 10 min stat
+add detail page and runes
+
+add help page
+add app logo
+add app name
+add btn effects
+add loading animation
+
+add website
+release app
+request key
+
+backlog:
+group show all compare with rotate background

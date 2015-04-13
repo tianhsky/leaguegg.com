@@ -25,7 +25,7 @@ module SummonerService
         name: summoner['name'],
         profile_icon_id: summoner['profileIconId'],
         summoner_level: summoner['summonerLevel'],
-        modified_at: summoner['revisionDate']
+        riot_updated_at: summoner['revisionDate']
       }.with_indifferent_access
     end
 

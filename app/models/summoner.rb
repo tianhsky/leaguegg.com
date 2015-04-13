@@ -1,21 +1,22 @@
 class Summoner
   include Mongoid::Document
+  include TimeTrackable
   include Regionable
   include SummonerService
 
   # Fields
+  field :riot_updated_at, type: Integer
+
   field :region, type: String
   field :summoner_id, type: Integer
-  field :modified_at, type: Integer
   field :profile_icon_id, type: Integer
   field :summoner_level, type: Integer
   field :name, type: String
   field :name_lowercase, type: String # for searching
   field :inquiries, type: Integer, default: 1
-  field :meta, type: Hash
 
   # Relations
-  # has_many :summoner_season_stats
+  # has_many :summoner_stats
 
   # Indexes
   index({ summoner_id: 1, region: 1 }, { unique: true })

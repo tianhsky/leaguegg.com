@@ -22,19 +22,17 @@ module GameService
       region.upcase!
 
       # check cache
-      game = find_game_from_cache(summoner_id, region)
-
-      unless game
+      unless game = find_game_from_cache(summoner_id, region)
         # check riot
         json = Riot.find_game_by_summoner_id(summoner_id, region)
-        game_hash = Factory.build_game_hash(json, region)
+        game_id = json['gameId']
 
         # check db
-        game = Game.where(match_id: game_hash[:match_id]).first
+        unless game = Game.where(game_id: game_id).first
+          game_hash = Factory.build_game_hash(json, region)
 
-        summoners = game_hash[:match_teams].map{|t|t[:match_participants]}.flatten
-        unless game
           # store summoner in db if not exist
+          summoners = game_hash[:teams].map{|t|t[:participants]}.flatten
           ensure_summoners_in_db(summoners, region)
 
           # create game
@@ -48,8 +46,7 @@ module GameService
         end
 
         # cache game for a short period
-        summoner_ids = summoners.map{|s|s[:summoner_id]}
-        store_game_to_cache(game, summoner_ids, region)
+        store_game_to_cache(game, region)
       end
       game
     end
@@ -66,9 +63,10 @@ module GameService
       game
     end
 
-    def self.store_game_to_cache(game, summoner_ids, region)
+    def self.store_game_to_cache(game, region)
       region.upcase!
-      game_id = game.match_id
+      summoner_ids = game.summoner_ids
+      game_id = game.game_id
       game_key = cache_key_for_game(game_id, region)
       Rails.cache.write(game_key, game, expires_in: $game_expires_threshold)
       summoner_ids.each do |summoner_id|
@@ -81,14 +79,18 @@ module GameService
     def self.store_summoners_stats_to_game(game, region)
       workers = []
 
-      game.match_teams.each do |team|
-        team.match_participants.each do |participant|
+      game.teams.each do |team|
+        team.participants.each do |participant|
           summoner_id = participant.summoner_id
           champion_id = participant.champion_id
           workers << Thread.new do
-            summoner_stat = SummonerSeasonStat::Service.find_summoner_season_stats(summoner_id, region)
-            champ_status = summoner_stat.summoner_ranked_stats.select{|s|s.champion_id==champion_id}.first
-            participant.summoner_ranked_stat = champ_status.try(:clone)
+            summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
+            champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
+            participant.ranked_stat_by_champion = champ_status.try(:clone)
+
+            recent_stats = SummonerMatchService::Service.find_recent_matches(summoner_id, champion_id, region)
+            recent_stats_aggregation = SummonerMatchService::Service.get_matches_aggregation(recent_stats, champion_id)      
+            participant.ranked_stat_by_recent_champion = recent_stats_aggregation
           end
         end
       end
@@ -132,16 +134,16 @@ module GameService
       teams = game['participants'].group_by{|x|x['teamId']}
       {
         region: region,
-        match_id: game['gameId'],
+        game_id: game['gameId'],
         map_id: game['mapId'],
-        match_mode: game['gameMode'],
-        match_type: game['gameType'],
+        game_mode: game['gameMode'],
+        game_type: game['gameType'],
         game_queue_config_id: game['gameQueueConfigId'],
         platform_id: game['platformId'],
         observer_encryption_key: game['observers'] ? game['observers']['encryptionKey'] : nil,
         started_at: game['gameStartTime'],
         game_length: game['gameLength'],
-        match_teams: teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
+        teams: teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
       }.with_indifferent_access
     end
 
@@ -150,8 +152,8 @@ module GameService
       # bans = bans.with_indifferent_access
       {
         team_id: team_id,
-        match_banned_champions: bans.map{|x|build_banned_champion_hash(x)},
-        match_participants: participants.map{|x|build_participant_hash(x)}
+        banned_champions: bans.map{|x|build_banned_champion_hash(x)},
+        participants: participants.map{|x|build_participant_hash(x)}
       }.with_indifferent_access
     end
 
@@ -173,8 +175,8 @@ module GameService
         summoner_name: participant['summonerName'],
         profile_icon_id: participant['profileIconId'],
         bot: participant['bot'],
-        match_masteries: participant['masteries'].map{|x|build_mastery_hash(x)},
-        match_runes: participant['runes'].map{|x|build_rune_hash(x)}
+        masteries: participant['masteries'].map{|x|build_mastery_hash(x)},
+        runes: participant['runes'].map{|x|build_rune_hash(x)}
       }.with_indifferent_access
     end
 
