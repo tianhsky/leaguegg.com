@@ -12,7 +12,7 @@ module Consts
     def self.find_by_name(name)
       setup
       found = @data.find{|id,c|c['name'].downcase == name.downcase}
-      found[1] || {}
+      found ? found[1] : {}
     end
 
     def self.setup

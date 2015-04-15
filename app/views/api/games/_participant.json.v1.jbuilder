@@ -18,6 +18,10 @@ json.champion do
   json.name Consts::Champion.find_by_id(participant.champion_id)['name']
 end
 
+json.runes participant.runes, partial: 'rune', as: :rune
+
+json.masteries participant.masteries, partial: 'mastery', as: :mastery
+
 if participant.ranked_stat_by_champion
   json.ranked_stat_overall do
     json.partial! 'ranked_stat_by_champion', rstat: participant.ranked_stat_by_champion

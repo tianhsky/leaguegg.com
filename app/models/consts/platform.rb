@@ -12,7 +12,7 @@ module Consts
     def self.find_by_region(region)
       setup
       found = @data.find{|id,v|v['region'].upcase == region.upcase}
-      found[1] || {}
+      found ? found[1] : {}
     end
 
     def self.setup

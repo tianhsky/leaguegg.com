@@ -191,7 +191,7 @@ module GameService
     def self.build_rune_hash(rune)
       rune = rune.with_indifferent_access
       {
-        rank: rune['count'],
+        count: rune['count'],
         rune_id: rune['runeId']
       }.with_indifferent_access
     end

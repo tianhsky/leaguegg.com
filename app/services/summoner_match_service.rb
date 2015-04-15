@@ -126,8 +126,8 @@ module SummonerMatchService
         stats.wards_killed += stat['wards_killed']
         stats.sight_wards_bought += stat['sight_wards_bought_in_game']
         if timeline = m.timeline
-          stats.per_min_cs_at_10m += timeline['creeps_per_min_deltas']['zero_to_ten']
-          stats.per_min_dmg_taken_at_10m += timeline['damage_taken_per_min_deltas']['zero_to_ten']
+          stats.per_min_cs_at_10m += timeline.try(:[],'creeps_per_min_deltas').try(:[],'zero_to_ten') || 0
+          stats.per_min_dmg_taken_at_10m += timeline.try(:[],'damage_taken_per_min_deltas').try(:[],'zero_to_ten') || 0
         end
       end
       stats

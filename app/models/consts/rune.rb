@@ -1,6 +1,6 @@
 module Consts
 
-  module Spell
+  module Rune
 
     @lock = Mutex.new
 
@@ -18,7 +18,7 @@ module Consts
     def self.setup
       unless @data
         @lock.synchronize do
-          json_file_path = 'app/models/consts/data/spells.json'
+          json_file_path = 'app/models/consts/data/runes.json'
           @json ||= Utils::JsonLoader.read_from_file(json_file_path).with_indifferent_access
           @data ||= load_data
         end
@@ -32,8 +32,8 @@ module Consts
           "id" => value['id'],
           "name" => value['name'],
           "description" => value['description'],
-          "key" => value['description'],
-          "summoner_level" => value['summonerLevel']
+          "tier" => value['rune']['tier'],
+          "type" => value['rune']['type']
         }
       end
       r.with_indifferent_access
