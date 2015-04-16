@@ -21,3 +21,4 @@ json.avg_per_min_dmg_taken_at_10m rstat.avg_per_min_dmg_taken_at_10m
 
 json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate
+json.kda_rate rstat.kda_rate

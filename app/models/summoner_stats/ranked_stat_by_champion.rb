@@ -30,13 +30,13 @@ module SummonerStats
     field :max_num_deaths, type: Integer
 
     # Aggregated stats
-    field :aggresive_rate, type: Float
-    field :win_rate, type: Float
     field :avg_kills, type: Float
     field :avg_deaths, type: Float
     field :avg_assists, type: Float
     field :avg_minion_kills, type: Float
-    field :cs_rate, type: Float
+    field :aggresive_rate, type: Float
+    field :win_rate, type: Float
+    field :kda_rate, type: Float
 
     # Relations
     embedded_in :summoner_stat, class_name: 'SummonerStat'
@@ -54,7 +54,7 @@ module SummonerStats
         calculate_avgs
         calculate_aggressive_rate
         calculate_win_rate
-        # calculate_cs_rate
+        calculate_kda_rate
       end
     end
 
@@ -76,9 +76,9 @@ module SummonerStats
       self.aggresive_rate = score.round(3)
     end
 
-    def calculate_defensive_rate
-      rate = total_assists.to_f / (total_assists + total_deaths).to_f
-      self.defensive_rate = rate.round(3)
+    def calculate_kda_rate
+      rate = (total_champion_kills + total_assists).to_f / (total_deaths == 0 ? 1 : total_deaths)
+      self.kda_rate = rate.round(3)
     end
 
     def calculate_avgs
@@ -86,11 +86,6 @@ module SummonerStats
       self.avg_deaths = (total_deaths.to_f / total_sessions_played).round(3)
       self.avg_assists = (total_assists.to_f / total_sessions_played).round(3)
       self.avg_minion_kills = (total_minion_kills.to_f / total_sessions_played).round(3)
-    end
-
-    def calculate_cs_rate
-      rate = (total_minion_kills / total_sessions_played).to_f / AppConsts::CS_KILLS_CAP
-      self.cs_rate = rate.round(3)
     end
 
     def calculate_win_rate

@@ -9,3 +9,4 @@ json.avg_minion_kills rstat.avg_minion_kills
 
 json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate
+json.kda_rate rstat.kda_rate

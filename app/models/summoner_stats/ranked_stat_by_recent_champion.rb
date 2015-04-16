@@ -51,7 +51,7 @@ module SummonerStats
     field :aggresive_rate, type: Float
     field :win_rate, type: Float
     field :jungle_rate, type: Float
-    field :cs_rate, type: Float
+    field :kda_rate, type: Float
     field :helpful_rate, type: Float
 
     # Relations
@@ -69,8 +69,8 @@ module SummonerStats
         calculate_avgs
         calculate_aggresive_rate
         calculate_win_rate
+        calculate_kda_rate
         # calculate_helpful_rate
-        # calculate_cs_rate
         # calculate_jungle_rate
       end
     end
@@ -121,9 +121,9 @@ module SummonerStats
       self.helpful_rate = score.round(3)
     end
 
-    def calculate_cs_rate
-      rate = (minion_kills / games).to_f / AppConsts::CS_KILLS_CAP
-      self.cs_rate = rate.round(3)
+    def calculate_kda_rate
+      rate = (kills + assists).to_f / (deaths == 0 ? 1 : deaths)
+      self.kda_rate = rate.round(3)
     end
 
     def calculate_jungle_rate
