@@ -14,6 +14,7 @@ class Summoner
   field :name, type: String
   field :name_lowercase, type: String # for searching
   field :inquiries, type: Integer, default: 1
+  field :twitch_channel, type: String
 
   # Relations
   # has_many :summoner_stats
@@ -45,9 +46,16 @@ class Summoner
     self.update_attributes(profile_hash)
   end
 
+  def self.search_by_name(name, region)
+    name_key = name.try(:downcase).try(:gsub, /\s+/, "")
+    region_key = region.try(:upcase)
+    self.where(:name_lowercase => name_key, :region => region_key).first
+  end
+
   protected
 
   def store_name_in_lower_case
-    self.name_lowercase = self.name.try(:downcase)
+    self.name_lowercase = self.name.try(:downcase).try(:gsub, /\s+/, "")
   end
+
 end

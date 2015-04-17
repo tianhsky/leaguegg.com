@@ -45,7 +45,7 @@ module SummonerService
     end
 
     def self.find_summoner_by_summoner_name(summoner_name, region)
-      summoner = Summoner.where({name_lowercase: summoner_name.downcase, region: region.upcase}).first
+      summoner = Summoner.search_by_name(summoner_name, region)
       unless summoner
         summoner_json = Riot.find_summoner_by_summoner_name(summoner_name, region)
         summoner_hash = Factory.build_summoner_hash(summoner_json, region)

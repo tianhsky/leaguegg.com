@@ -32,14 +32,12 @@ module GameService
           game_hash = Factory.build_game_hash(json, region)
 
           # store summoner in db if not exist
-          summoners = game_hash[:teams].map{|t|t[:participants]}.flatten
-          ensure_summoners_in_db(summoners, region)
+          summoners_hash = game_hash[:teams].map{|t|t[:participants]}.flatten
+          summoners = ensure_summoners_in_db(summoners_hash, region)
 
           # create game
           game = Game.new(game_hash)
-
-          # store summoner stats and update game
-          store_summoners_stats_to_game(game, region)
+          store_summoners_info_to_game(summoners, game, region)
 
           # save game
           game.save
@@ -76,13 +74,14 @@ module GameService
       end
     end
 
-    def self.store_summoners_stats_to_game(game, region)
+    def self.store_summoners_info_to_game(summoners, game, region)
       workers = []
-
       game.teams.each do |team|
         team.participants.each do |participant|
           summoner_id = participant.summoner_id
           champion_id = participant.champion_id
+          summoner = summoners.find{|s|s.summoner_id==summoner_id}
+          participant.meta['twitch_channel'] = summoner.twitch_channel if summoner
           workers << Thread.new do
             summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
             champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
@@ -94,12 +93,12 @@ module GameService
           end
         end
       end
-
       workers.map(&:join)
     end
 
-    def self.ensure_summoners_in_db(summoners, region)
-      summoners.each do |summoner_hash|
+    def self.ensure_summoners_in_db(summoners_hash, region)
+      summoners = []
+      summoners_hash.each do |summoner_hash|
         summoner_obj_hash = {
           region: region.upcase,
           summoner_id: summoner_hash[:summoner_id],
@@ -111,9 +110,11 @@ module GameService
             summoner.update_attributes(summoner_obj_hash)
           end
         else
-          Summoner.create(summoner_obj_hash)
+          summoner = Summoner.create(summoner_obj_hash)
         end
+        summoners << summoner
       end
+      summoners
     end
 
     def self.cache_key_for_summoner_game(summoner_id, region)

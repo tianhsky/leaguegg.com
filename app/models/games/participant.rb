@@ -15,6 +15,7 @@ module Games
     field :bot, type: Boolean
     field :runes, type: Array #{rune_id, rank}
     field :masteries, type: Array #{mastery_id, rank}
+    field :meta, type: Hash, default: {}
 
     # Relations
     embedded_in :team, class_name: 'Games::Team'
