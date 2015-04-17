@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: lolbox_srv_development
+      database: lolcaf_development
       hosts:
         - localhost:27017
       options:
@@ -12,7 +12,7 @@ development:
 test:
   sessions:
     default:
-      database: lolbox_srv_test
+      database: lolcaf_test
       hosts:
         - localhost:27017
       options:
@@ -22,13 +22,13 @@ test:
 production:
   sessions:
     default:
-      database: <%= ENV['MONGODB_NAME'] || 'lolbox_srv_production' %>
+      database: <%= ENV['MONGODB_NAME'] || 'lolcaf_production' %>
       hosts:
         - <%= ENV['MONGODB_URI'] %>
       username: <%= ENV['MONGODB_USERNAME'] %>
       password: <%= ENV['MONGODB_PASSWORD'] %>
       options:
-        pool_size: 5
+        pool_size: 20
   options:
     use_activesupport_time_zone: false
     use_utc: true
