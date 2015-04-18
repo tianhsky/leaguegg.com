@@ -11,6 +11,14 @@ set :linked_dirs, %w{log tmp}
 
 namespace :deploy do
 
+  after :publishing, :bundle_install do
+    on release_roles :all, in: :parallel do
+      within release_path do
+        execute :bundle, 'install'
+      end
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

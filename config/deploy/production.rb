@@ -1,4 +1,4 @@
-server 'www.lolcaf.com', roles: %w{app}, user: 'root'
+server 'www.lolcaf.com', roles: %w{app}, user: 'deployer'
 
 set :rails_env, 'production'
 set :branch, 'master'
