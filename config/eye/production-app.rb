@@ -7,7 +7,7 @@ APP_PID = "tmp/pids/puma.pid"
 APP_PUMA = "config/puma/production.rb"
 
 Eye.application APP_NAME do
-  # env APP_ENV # global env for each processes
+  load_env '.env' # global env for each processes
   working_dir APP_ROOT # path below can be relative to this
 
   process :puma do
