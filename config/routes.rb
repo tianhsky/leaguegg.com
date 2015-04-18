@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resource :version, only: [:show]
   end
 
+  root :to => 'home#index'
+
 end
