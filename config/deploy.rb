@@ -19,14 +19,14 @@ set :assets_roles, [:web, :app]
 
 namespace :deploy do
 
-  before :publishing, 'bundle:install' do
-    on roles(:app), in: :parallel do
-      within release_path do
-        execute :gem, 'install bundle'
-        execute :bundle, 'install'
-      end
-    end
-  end
+  # before :publishing, 'bundle:install' do
+  #   on roles(:app), in: :parallel do
+  #     within release_path do
+  #       execute :gem, 'install bundle'
+  #       execute :bundle, 'install'
+  #     end
+  #   end
+  # end
 
   after :published, 'app:restart' do
     on roles(:app), in: :groups, limit: 3, wait: 10 do

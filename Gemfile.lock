@@ -222,7 +222,7 @@ DEPENDENCIES
   capistrano (~> 3.4.0)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
-  capistrano-rbenv
+  capistrano-rbenv (~> 2.0.3)
   database_cleaner
   dotenv-rails
   eye

@@ -22,7 +22,7 @@ gem 'puma'
 gem 'eye'
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.4.0'
-gem 'capistrano-rbenv'
+gem 'capistrano-rbenv', '~> 2.0.3'
 gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-bundler', '~> 1.1.2'
 # Project version
