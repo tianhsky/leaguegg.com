@@ -14,7 +14,7 @@ Eye.application APP_NAME do
   env "RAILS_ENV" => APP_ENV
   env "PATH" => "/home/deployer/.rbenv/shims:#{ENV['PATH']}"
   env "RBENV_ROOT" => "/home/deployer/.rbenv"
-  env "RBENV_VERSION" => File.read("#{APP_PATH}/.ruby-version").strip
+  env "RBENV_VERSION" => File.read("#{APP_ROOT}/.ruby-version").strip
   env 'BUNDLE_GEMFILE' => File.join(APP_ROOT, 'Gemfile')
 
   process :puma do
