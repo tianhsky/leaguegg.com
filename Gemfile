@@ -6,6 +6,7 @@ gem 'dotenv-rails'
 gem 'rails', '4.1.4'
 # JavaScript runtime
 gem 'execjs', '~> 2.5.2'
+gem 'therubyracer' , '~> 0.12.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
