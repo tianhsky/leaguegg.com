@@ -20,7 +20,7 @@ gem 'capistrano-rvm'
 gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-bundler', '~> 1.1.2'
 # Project version
-gem 'semver'
+gem 'semver', '~> 1.0.1'
 # Api version management
 gem 'versioncake'
 # Error tracking

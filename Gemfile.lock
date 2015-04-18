@@ -208,6 +208,6 @@ DEPENDENCIES
   rails (= 4.1.4)
   redis-rails
   rspec-rails (~> 3.0.0)
-  semver
+  semver (~> 1.0.1)
   spring
   versioncake
