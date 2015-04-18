@@ -30,9 +30,8 @@ Eye.application APP_NAME do
     restart_command "kill -s SIGUSR1 {PID}" # phased restart
 
     monitor_children do
-      restart_command "kill -s SIGTERM {PID}" # safe stop
-
       # each puma child process
+      restart_command "kill -s SIGTERM {PID}" # safe stop
       check :cpu, every: 15.seconds, below: 90, times: 3
       check :memory, every: 20.seconds, below: 1600.megabytes, times: [2, 5]
     end
