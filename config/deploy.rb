@@ -30,8 +30,10 @@ namespace :deploy do
 
   after :published, 'app:restart' do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      execute :eye, 'load config/eye/production-app.rb'
-      execute :eye, 'restart lolcaf'
+      within current_path do
+        execute :eye, 'load config/eye/production-app.rb'
+        execute :eye, 'restart lolcaf'
+      end
     end
   end
 
