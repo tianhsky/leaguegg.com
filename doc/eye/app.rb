@@ -9,7 +9,6 @@ APP_ROOT = "/srv/#{APP_ENV}/#{APP_NAME}/current"
 APP_SOCK = File.join(APP_ROOT, "tmp/sockets/puma.sock")
 APP_PID = File.join(APP_ROOT, "tmp/pids/puma.pid")
 PUMA_PATH = File.join(APP_ROOT, 'config/puma/production.rb')
-APP_ENV = {'BUNDLE_GEMFILE' => "#{APP_ROOT}/Gemfile"}
 
 Eye.application APP_NAME do
   env APP_ENV # global env for each processes

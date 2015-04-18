@@ -1,3 +1,5 @@
+ENV["BUNDLE_GEMFILE"] = "/srv/production/lolcaf1/current/Gemfile"
+
 env = 'production'
 environment env
 daemonize false
