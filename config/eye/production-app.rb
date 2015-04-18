@@ -2,9 +2,9 @@ APP_NAME = 'lolcaf'
 APP_ENV = 'production'
 
 APP_ROOT = "/home/deployer/srv/#{APP_ENV}/#{APP_NAME}/current"
-APP_SOCK = File.join(APP_ROOT, "tmp/sockets/puma.sock")
-APP_PID = File.join(APP_ROOT, "tmp/pids/puma.pid")
-PUMA_PATH = File.join(APP_ROOT, 'config/puma/production.rb')
+APP_SOCK = "tmp/sockets/puma.sock"
+APP_PID = "tmp/pids/puma.pid"
+APP_PUMA = "config/puma/production.rb"
 
 Eye.application APP_NAME do
   # env APP_ENV # global env for each processes
@@ -18,7 +18,7 @@ Eye.application APP_NAME do
     stop_timeout 10.seconds
     restart_grace 15.seconds
 
-    start_command "bin/puma -C #{PUMA_PATH}"
+    start_command "puma -C #{APP_PUMA}"
     stop_command "kill -s SIGTERM {PID}" # safe stop
     restart_command "kill -s SIGUSR1 {PID}" # phased restart
 

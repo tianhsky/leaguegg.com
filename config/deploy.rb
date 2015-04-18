@@ -8,11 +8,12 @@ set :format, :pretty
 set :log_level, :info
 set :keep_releases, 10
 set :linked_dirs, %w{log tmp}
+set :linked_files, %w{.env}
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.2.0'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_map_bins, %w{rake gem bundle ruby rails eye}
 
 namespace :deploy do
 
@@ -27,9 +28,7 @@ namespace :deploy do
 
   after :published, 'app:restart' do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      within release_path do
-        execute :eye, 'restart lolcaf'
-      end
+      execute :eye, 'restart lolcaf'
     end
   end
 

@@ -13,14 +13,6 @@ module LolboxSrv
     # config.assets.paths << Rails.root.join('lib/assets')
 
     # Cache
-    # redis_cache_config = {}
-    # redis_cache_config[:host] = ENV['REDIS_HOST'] || "localhost"
-    # redis_cache_config[:port] = ENV['REDIS_PORT'] || 6379
-    # redis_cache_config[:db] = ENV['REDIS_DB'] || 0
-    # redis_cache_config[:password] = ENV['REDIS_PASSWORD'] if ENV['REDIS_PASSWORD']
-    # redis_cache_config[:namespace] = ENV['REDIS_NAMESPACE'] if ENV['REDIS_NAMESPACE']
-    # redis_cache_config[:expires_in] = 90.minutes
-    # config.cache_store = :redis_store, redis_cache_config
     config.cache_store = :redis_store, ENV['REDIS_CACHE_URL']
 
     # Generator
