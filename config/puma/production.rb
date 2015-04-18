@@ -11,5 +11,5 @@ pidfile "tmp/pids/puma.pid"
 state_path "tmp/pids/puma.state"
 stdout_redirect "log/#{env}.out.log", "log/#{env}.err.log", true
 
-prune_bundler
-activate_control_app
+# prune_bundler
+# activate_control_app
