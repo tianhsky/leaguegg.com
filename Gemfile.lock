@@ -225,6 +225,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0.3)
   database_cleaner
   dotenv-rails
+  execjs (~> 2.5.2)
   eye
   factory_girl_rails
   httparty

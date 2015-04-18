@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'dotenv-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
+# JavaScript runtime
+gem 'execjs', '~> 2.5.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -24,7 +26,6 @@ gem 'eye'
 gem 'capistrano', '~> 3.4.0'
 gem 'capistrano-rbenv', '~> 2.0.3'
 gem 'capistrano-rails', '~> 1.1'
-gem 'capistrano-bundler', '~> 1.1.2'
 # Project version
 gem 'semver', '~> 1.0.1'
 # Api version management
