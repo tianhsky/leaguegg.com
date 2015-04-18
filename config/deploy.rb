@@ -16,20 +16,20 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 namespace :deploy do
 
-  after :publishing, :bundle_install do
-    on release_roles :all, in: :parallel do
+  before :publishing, 'bundle:install' do
+    on roles(:app), in: :parallel do
       within release_path do
+        execute :gem, 'install bundle'
         execute :bundle, 'install'
       end
     end
   end
 
-  after :restart, :clear_cache do
+  after :published, 'app:restart' do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        execute :eye, 'restart lolcaf'
+      end
     end
   end
 

@@ -14,6 +14,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'spring',        group: :development
 # Use puma as the app server
 gem 'puma'
+# Process monitor
+gem 'eye'
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.4.0'
 gem 'capistrano-rbenv'
