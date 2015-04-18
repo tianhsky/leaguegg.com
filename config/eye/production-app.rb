@@ -7,7 +7,7 @@ APP_PID = File.join(APP_ROOT, "tmp/pids/puma.pid")
 PUMA_PATH = File.join(APP_ROOT, 'config/puma/production.rb')
 
 Eye.application APP_NAME do
-  env APP_ENV # global env for each processes
+  # env APP_ENV # global env for each processes
   working_dir APP_ROOT # path below can be relative to this
 
   process :puma do
