@@ -1,6 +1,5 @@
 env = 'production'
 app_path = "/home/deployer/srv/#{env}/lolcaf"
-ENV["BUNDLE_GEMFILE"] = "#{app_path}/current/Gemfile"
 
 environment env
 daemonize false

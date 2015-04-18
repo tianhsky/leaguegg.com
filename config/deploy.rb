@@ -6,7 +6,7 @@ set :repo_url, 'git@bitbucket.org:tianhsky/lolcaf-srv.git'
 set :scm, :git
 set :format, :pretty
 set :log_level, :info
-set :keep_releases, 10
+set :keep_releases, 0
 set :linked_dirs, %w{log tmp}
 set :linked_files, %w{.env}
 
