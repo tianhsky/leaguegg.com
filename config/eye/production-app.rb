@@ -8,15 +8,14 @@ APP_PUMA = "config/puma/production.rb"
 
 Eye.application APP_NAME do
   working_dir APP_ROOT # path below can be relative to this
+
+  clear_bundler_env
   load_env '.env' # global env for each processes
-  if File.exist? File.join(APP_ROOT, 'Gemfile')
-    clear_bundler_env
-    # env "RAILS_ENV" => APP_ENV
-    # env "PATH" => "/opt/rbenv/shims:/opt/rbenv/bin:#{ENV['PATH']}"
-    # env "RBENV_ROOT" => "/opt/rbenv"
-    # env "RBENV_VERSION" => File.read("#{APP_PATH}/.ruby-version").strip
-    env 'BUNDLE_GEMFILE' => File.join(APP_ROOT, 'Gemfile')
-  end
+  env "RAILS_ENV" => APP_ENV
+  env "PATH" => "/home/deployer/.rbenv/shims:#{ENV['PATH']}"
+  env "RBENV_ROOT" => "/home/deployer/.rbenv"
+  env "RBENV_VERSION" => File.read("#{APP_PATH}/.ruby-version").strip
+  env 'BUNDLE_GEMFILE' => File.join(APP_ROOT, 'Gemfile')
 
   process :puma do
     daemonize true
