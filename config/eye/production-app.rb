@@ -7,8 +7,8 @@ APP_PID = "tmp/pids/puma.pid"
 APP_PUMA = "config/puma/production.rb"
 
 Eye.application APP_NAME do
-  load_env '.env' # global env for each processes
   working_dir APP_ROOT # path below can be relative to this
+  load_env '.env' # global env for each processes
 
   process :puma do
     daemonize true
