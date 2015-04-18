@@ -1,9 +1,5 @@
-# Prerequisit
-# rvm wrapper current lolcaf bundle
-
-APP_NAME = 'lolcaf1'
+APP_NAME = 'lolcaf'
 APP_ENV = 'production'
-BUNDLE_PATH = '/usr/local/rvm/bin/lolcaf_bundle'
 
 APP_ROOT = "/srv/#{APP_ENV}/#{APP_NAME}/current"
 APP_SOCK = File.join(APP_ROOT, "tmp/sockets/puma.sock")
@@ -22,7 +18,7 @@ Eye.application APP_NAME do
     stop_timeout 10.seconds
     restart_grace 15.seconds
 
-    start_command "#{BUNDLE_PATH} exec puma -C #{PUMA_PATH}"
+    start_command "bin/puma -C #{PUMA_PATH}"
     stop_command "kill -s SIGTERM {PID}" # safe stop
     restart_command "kill -s SIGUSR1 {PID}" # phased restart
 
