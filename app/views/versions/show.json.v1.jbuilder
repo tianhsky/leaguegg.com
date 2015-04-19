@@ -1,5 +1,5 @@
 json.version do
-  json.api do
+  json.server do
     json.full "#{@version.major}.#{@version.minor}.#{@version.patch}"
     json.major @version.major
     json.minor @version.minor
