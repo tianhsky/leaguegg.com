@@ -32,7 +32,7 @@ namespace :deploy do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within shared_path do
         execute :eye, 'load eye/app.rb'
-        execute :eye, 'restart lolcaf'
+        execute :eye, "restart #{fetch(:app_name)}"
       end
     end
   end
