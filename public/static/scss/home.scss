@@ -1,0 +1,89 @@
+@import "../libs/bootstrap/assets/stylesheets/bootstrap";
+@import "../libs/font-awesome/scss/font-awesome";
+@import "button";
+@import "blink";
+body {
+  margin: 0;
+  background: #000;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#home-content {
+  margin-bottom: 130px;
+  .btn {
+    margin: 10px;
+  }
+  .left-pane {
+    text-align: center;
+    .phone {
+      height: 600px;
+      margin-top: 50px;
+    }
+  }
+  .right-pane {
+    text-align: center;
+    font-weight: bold;
+    .description {
+      margin-top: 20%;
+      color: white;
+      ul.title-items {
+        list-style-type: none;
+        li {
+          font-weight: bolder;
+          font-size: 25pt;
+          padding: 13px;
+        }
+      }
+    }
+    .buttons {
+      margin-top: 50px;
+    }
+  }
+}
+
+#footer {
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  bottom: 0px;
+  background: rgba(6, 44, 44, 0.48);
+  border-radius: 100px 0px 0px 0px;
+  border-top-color: rgba(255, 255, 255, 0.54);
+  border-top-style: double;
+  border-top-width: 3px;
+  .site-logo {
+    position: absolute;
+    bottom: 5px;
+    right: 25px;
+    img {
+      position: relative;
+      height: 60px;
+      width: 60px;
+      opacity: 0.9;
+    }
+  }
+  .site-name {
+    text-align: center;
+    color: white;
+  }
+  .gp-btn {
+    margin-top: 30px;
+  }
+  .fb-btn {
+    
+  }
+}
+
+#bg-vid {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  background: url('../img/home-bg.png') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+}

@@ -1,0 +1,3 @@
+echo "compile public sassets ..."
+scss --style compressed --sourcemap=none public/static/scss/home.scss public/static/css/home.css
+echo "compile public sassets done"

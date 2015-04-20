@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <title>LoLCaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/ico" href="favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="static/css/home.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+
+<body>
+  <!-- facebook plugin begin -->
+  <div id="fb-root"></div>
+  <script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!-- facebook plugin end -->
+  <!-- background video begin -->
+  <video id="bg-vid" autoplay poster="static/img/home-bg.png" loop>
+    <source src="static/video/home-bg.mp4" type="video/mp4" />
+    <source src="static/video/home-bg.webm" type="video/webm" />
+  </video>
+  <!-- background video end -->
+  <!-- main content begin -->
+  <div id="home-content" class="container">
+    <div class="col-md-4 left-pane">
+      <img class="phone blink" src="static/img/mobile-stream.png">
+    </div>
+    <div class="col-md-8 right-pane">
+      <div class="description">
+        <ul class="title-items">
+          <li>REALTIME STATS</li>
+          <li>SEASON VS RECENT
+            <br/>COMPARISON</li>
+          <li><i class="fa fa-twitch"></i> LIVE STREAM</li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <a class="btn btn-lg btn-danger btn-download btn-cycle" href="#"><span class="fa fa-apple"></span> App Store</a>
+        <a class="btn btn-lg btn-danger btn-download btn-cycle" href="https://play.google.com/store/apps/details?id=com.ty.lolcaf"><span class="fa fa-android"></span> Google Play</a>
+      </div>
+    </div>
+  </div>
+  <!-- main content end -->
+  <!-- footer begin -->
+  <div id="footer" class="">
+    <center>
+      <div class="gp-btn">
+        <div class="g-plusone" data-annotation="none" data-href="http://www.lolcaf.com"></div>
+      </div>
+      <div class="fb-btn">
+        <div class="b-like" data-href="http://www.lolcaf.com" data-width="120" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+      </div>
+    </center>
+    <div class="site-logo">
+      <img src="static/img/lolcaf-icon.png">
+      <div class="site-name">LoLCaf</div>
+    </div>
+  </div>
+  <!-- footer end -->
+</body>
+
+</html>
