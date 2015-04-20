@@ -1,4 +1,4 @@
-server 'app1.nj.lolcaf.com', roles: %w{app}, user: 'deployer'
+server 'app1.nj.lolcaf.com:2223', roles: %w{app}, user: 'deployer'
 
 set :app_name, 'lolcaf2'
 set :rails_env, 'production'
