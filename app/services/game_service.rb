@@ -83,13 +83,18 @@ module GameService
           summoner = summoners.find{|s|s.summoner_id==summoner_id}
           participant.meta['twitch_channel'] = summoner.twitch_channel if summoner
           workers << Thread.new do
-            summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
-            champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
-            participant.ranked_stat_by_champion = champ_status.try(:clone)
-
-            recent_stats = SummonerMatchService::Service.find_recent_matches(summoner_id, champion_id, region)
-            recent_stats_aggregation = SummonerMatchService::Service.get_matches_aggregation(recent_stats, champion_id)      
-            participant.ranked_stat_by_recent_champion = recent_stats_aggregation
+            begin
+              summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
+              champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
+              participant.ranked_stat_by_champion = champ_status.try(:clone)
+            rescue
+            end
+            begin
+              recent_stats = SummonerMatchService::Service.find_recent_matches(summoner_id, champion_id, region)
+              recent_stats_aggregation = SummonerMatchService::Service.get_matches_aggregation(recent_stats, champion_id)
+              participant.ranked_stat_by_recent_champion = recent_stats_aggregation
+            rescue
+            end
           end
         end
       end
