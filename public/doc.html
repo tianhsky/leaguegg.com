@@ -1,0 +1,116 @@
+<html>
+
+<head>
+  <title>LoLCaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LoLCaf, aka. League of Legends Caffeine. Provides live game search, player stats and analysis, know your team and enemy team. In game live stream from TwitchTV available. See pro champion plays. Suggest builds from pro players."></meta>
+  <meta name="keywoards" content="LoLCaf, League of Legends, LoL Caffeine, League of Legends Caffeine, live game search, player stats, live stream, twitch tv, champion builds, counter, professional players."></meta>
+  <link rel="icon" type="image/ico" href="favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="static/css/home.css">
+</head>
+
+<body>
+  <!-- google analytics begin -->
+  <script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-61898295-2', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <!-- google analytics end -->
+
+  <!-- main content begin -->
+  <div id="doc-content" class="container">
+    <div class="header">
+      <h1>How to use?</h1>
+    </div>
+    <div class="row item">
+      <div class="left-pane col-md-5">
+        <img src="static/img/screenshots/01 game search.png">
+      </div>
+      <div class="right-pane col-md-7">
+        <h3>Search Current Game</h3>
+        <p>Enter summoner's name who is currently in game</p>
+      </div>
+    </div>
+    <div class="row item">
+      <div class="left-pane col-md-5">
+        <img src="static/img/screenshots/02a blue team.png">
+      </div>
+      <div class="right-pane col-md-7">
+        <h3>View Stats By Team</h3>
+        <p>Use tabs at bottom of screen to switch team view</p>
+        <p>Stats shown in this screen reflects performance of recent 15 games</p>
+        <p><i class="fa fa-arrow-up green"></i> is shown if recent performance increased compare with current season</p>
+        <p><i class="fa fa-arrow-down red"></i> is shown if recent performance decreased compare with current season</p>
+        <p><i class="fa fa-video-camera green"> LIVE</i> icon indicates live stream is available for this player at this time</p>
+        <p>Click on summoner to view detail stats</p>
+      </div>
+    </div>
+    <div class="row item">
+      <div class="left-pane col-md-5">
+        <img src="static/img/screenshots/03a stats.png">
+      </div>
+      <div class="right-pane col-md-7">
+        <h3>View Stats By Summoner</h3>
+        <p>Runes section shows total tunes group by rune type</p>
+        <p>Stats section shows stats of current season vs recent 15 games</p>
+      </div>
+    </div>
+    <div class="row item">
+      <div class="left-pane col-md-5">
+        <img src="static/img/screenshots/03b stream.png">
+      </div>
+      <div class="right-pane col-md-7">
+        <h3>Live Stream</h3>
+        <p>You will see player's screen if live stream is available for this player</p>
+        <p>Click to play!</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row item">
+      <div class="col-md-12">
+        <p class="desc">
+          * Aggresive Rate is calculated using the following formula <br> 
+          &nbsp; rate = ( (penta kills * 5^2) + <br>
+          &nbsp;&nbsp; ((quadra kills - penta kills) * 4^2) + <br>
+          &nbsp;&nbsp; ((triple kills - quadra kills) * 3^2) + <br>
+          &nbsp;&nbsp; ((double kills - triple kills) * 2^2) + <br>
+          &nbsp;&nbsp; (total kills - (penta)*5 - (quadra - penta)*4 - (triple - quadra)*3 - (double -triple)*2) <br>
+          &nbsp; ) / total kills <br>
+          rate-1 is within range of 1 ~ 5 and is represented with percentage
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- main content end -->
+  <!-- footer begin -->
+  <div id="footer" class="">
+    <a class="social-button google-plus-btn" href="https://plus.google.com/share?url=http://www.lolcaf.com">
+      <img src="static/img/google-plus-icon.png">
+    </a>
+    <a class="social-button twitter-btn" href="http://twitter.com/home?status=LoLCaf - League of Legends Live Game Stats+http://www.lolcaf.com">
+      <img src="static/img/twitter-icon.png">
+    </a>
+    <a class="social-button facebook-btn" href="http://www.facebook.com/share.php?u=http://www.lolcaf.com&title=LoLCaf - League of Legends Live Game Stats">
+      <img src="static/img/facebook-icon.png">
+    </a>
+    <a class="site-logo" href="http://www.lolcaf.com">
+      <img src="static/img/lolcaf-icon.png">
+      <div class="site-name">LoLCaf</div>
+    </a>
+  </div>
+  <!-- footer end -->
+</body>
+
+</html>

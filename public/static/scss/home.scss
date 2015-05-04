@@ -4,40 +4,79 @@
 @import "blink";
 body {
   margin: 0;
-  background: #000;
+  background: black;
   font-family: 'Open Sans', sans-serif;
 }
 
 #home-content {
   margin-bottom: 120px;
+  color: white;
   .btn {
     margin: 10px;
   }
   .left-pane {
     text-align: center;
     .phone {
-      height: 580px;
-      width: 350px;
+      // height: 580px;
+      width: 330px;
       margin-top: 50px;
     }
   }
   .right-pane {
-    text-align: center;
+    padding-left: 15%;
+    text-align: left;
     font-weight: bold;
     .description {
-      margin-top: 20%;
+      padding-top: 15%;
       color: white;
       ul.title-items {
         list-style-type: none;
         li {
-          font-weight: bolder;
-          font-size: 25pt;
-          padding: 13px;
+          &.title {
+            font-weight: bolder;
+            font-size: 20pt;
+            padding-top: 15px;
+          }
+          &.subtitle {
+            font-weight: bold;
+            font-size: 15pt;
+            padding-top: 10px;
+            padding-left: 15px;
+          }
+          a {
+            color: rgb(79, 186, 133);
+            &:hover {
+              opacity: 0.7;
+            }
+          }
         }
       }
     }
     .buttons {
       margin-top: 50px;
+    }
+  }
+}
+
+#doc-content {
+  padding: 30px;
+  color: white;
+  .header {
+    border-bottom: 1px solid white;
+  }
+  .item {
+    padding: 20px;
+    .left-pane {
+      img {
+        width: 300px;
+      }
+    }
+    .right-pane {
+      padding: 5px 30px 10px 30px;
+      font-size: 13pt;
+      h3 {
+        color: rgb(84, 146, 157);
+      }
     }
   }
 }
@@ -109,4 +148,18 @@ body {
   background: url('../img/home-bg.png') no-repeat;
   background-size: cover;
   transition: 1s opacity;
+}
+
+.green {
+  color: rgb(47, 214, 47)
+}
+
+.red {
+  color: #C96831;
+}
+
+.desc {
+  font-size: 8pt;
+  font-style: italic;
+  color: #5490E0;
 }
