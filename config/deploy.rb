@@ -31,7 +31,7 @@ namespace :deploy do
   after :published, 'app:restart' do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within shared_path do
-        execute :eye, 'load eye/app.rb'
+        execute :eye, 'load eye/app*.rb'
         execute :eye, "restart #{fetch(:app_name)}"
       end
     end
