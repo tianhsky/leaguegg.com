@@ -1,0 +1,29 @@
+<%= javascript_include_tag 'rotation' %>
+
+<div class="inner cover free-champions">
+
+    <% if !@rotation.blank? %>
+      <ul>
+        <% @rotation[0..4].each do |champion| %>
+          <li data-splash="<%=champion['img_splashes'][0]%>" data-name="<%=champion['name']%>" data-title="<%=champion['title']%>">
+            <img src="<%=champion['img']%>">
+          </li>
+        <% end %>
+      </ul>
+      <ul>
+        <% @rotation[5..9].each do |champion| %>
+          <li data-splash="<%=champion['img_splashes'][0]%>" data-name="<%=champion['name']%>" data-title="<%=champion['title']%>">
+            <img src="<%=champion['img']%>">
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="champion-info">
+      <div class="champion-name">
+      </div>
+      <div class="champion-title">
+      </div>
+    </div>
+
+</div>

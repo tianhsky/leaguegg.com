@@ -1,4 +1,4 @@
-server 'app1.nj.lolcaf.com:2223', roles: %w{app}, user: 'deployer'
+server 'app1.nj.leaguegg.com:2223', roles: %w{web}, user: 'deployer'
 
 set :rails_env, 'production'
 set :branch, 'master'

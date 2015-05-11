@@ -12,15 +12,15 @@ module Api
     protected
 
     def summoner_id
-      params[:summoner_id]
+      params['summoner_id']
     end
 
     def summoner_name
-      params[:summoner_name]
+      params['summoner_name']
     end
 
     def region
-      params[:region]
+      params['region']
     end
     
   end

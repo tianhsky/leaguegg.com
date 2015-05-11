@@ -1,9 +1,23 @@
 module AppConsts
-  CS_KILLS_CAP = 280
-  JUNGLE_KILLS_CAP = 180
-  ENEMY_JUNGLE_KILL_FACTOR = 2
+  puts "Setting up preferences"
+  GAME_EXPIRES_THRESHOLD = 4.minutes
+  FREE_ROTATION_EXPIRES_THRESHOLD = 3.hours
+  RIOT_CONSTS_EXPIRES_THRESHOLD = 1.day
+
+  puts "Seting up consts"
   HEALS_FACTOR = 1
   WARDP_FACTOR = 50
   WARDK_FACTOR = 100
   CCONTROL_FACTOR = 30
+
+  puts "Loading static data from riot"
+  Consts::Version.setup
+  Consts::Champion.setup
+  Consts::Map.setup
+  Consts::Mastery.setup
+  Consts::Rune.setup
+  Consts::Spell.setup
+  Consts::GameQueue.setup
+  Consts::Platform.setup
+  ChampionService::Service.find_free_champions
 end

@@ -1,0 +1,17 @@
+<div class="col-md-12">
+  <div class="live-game inner cover">
+
+    <% if @error %>
+      <h3>
+        Summonor not found or summoner not in game.
+      </h3>
+    <% else %>
+
+      <%= render partial: 'team', locals: {team: @game.teams[0], name: 'blue'} %>
+      <%= render partial: 'team', locals: {team: @game.teams[1], name: 'red'} %>
+
+    <% end %>
+
+  </div>
+</div>
+

@@ -17,16 +17,15 @@ module SummonerService
   module Factory
 
     def self.build_summoner_hash(summoner, region)
-      summoner = summoner.with_indifferent_access
       region.upcase!
       {
-        region: region,
-        summoner_id: summoner['id'],
-        name: summoner['name'],
-        profile_icon_id: summoner['profileIconId'],
-        summoner_level: summoner['summonerLevel'],
-        riot_updated_at: summoner['revisionDate']
-      }.with_indifferent_access
+        'region' => region,
+        'summoner_id' => summoner['id'],
+        'name' => summoner['name'],
+        'profile_icon_id' => summoner['profileIconId'],
+        'summoner_level' => summoner['summonerLevel'],
+        'riot_updated_at' => summoner['revisionDate']
+      }
     end
 
   end

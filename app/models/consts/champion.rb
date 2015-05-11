@@ -1,8 +1,9 @@
 module Consts
 
-  module Champion
+  class Champion < Consts::StaticData
 
     @lock = Mutex.new
+    CACHE_KEY = 'static_champions'
 
     def self.find_by_id(id)
       setup
@@ -16,6 +17,10 @@ module Consts
     end
 
     def self.setup
+      setup_from_api
+    end
+
+    def self.setup_from_file
       unless @data
         @lock.synchronize do
           json_file_path = 'app/models/consts/data/champions.json'
@@ -25,17 +30,34 @@ module Consts
       end
     end
 
+    def self.setup_from_api
+      if local_cache_expired?
+        unless @data = Rails.cache.read(CACHE_KEY)
+          @lock.synchronize do
+            @json = StaticDataService::Riot.fetch_champions
+            @data = load_data
+            Rails.cache.write(CACHE_KEY, @data, expires_in: AppConsts::RIOT_CONSTS_EXPIRES_THRESHOLD)
+            @updated_at = Time.now
+          end
+        end
+      end
+    end
+
     def self.load_data
+      @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
         r["#{value['id']}".to_i] = {
           "id" => value['id'],
           "key" => value['key'],
           "name" => value['name'],
-          "title" => value['title']
+          "title" => value['title'],
+          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/champion/#{value['key']}.png",
+          "img_loadings" => ["https://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{value['key']}_0.jpg"],
+          "img_splashes" => ["https://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{value['key']}_0.jpg"]
         }
       end
-      r.with_indifferent_access
+      r
     end
 
   end

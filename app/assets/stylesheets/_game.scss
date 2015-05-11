@@ -1,0 +1,43 @@
+.live-game {
+  .team {
+    .team-banner {
+      &.blue-team {
+        background-color: rgb(60, 63, 124);
+      }
+      &.red-team {
+        background-color: rgb(158, 25, 25);
+      }
+      .team-name {
+        float: left;
+        vertical-align: bottom;
+      }
+      .team-bans {
+        float: right;
+        img {
+          width: 30px;
+        }
+      }
+    }
+    .team-header {
+      font-size: 12px;
+    }
+    .team-player {
+      .champion-spells {
+        width: 115px;
+      }
+      .champion {
+        float: left;
+        img {
+          width: 60px;
+        }
+      }
+      .spells {
+        float: left;
+        padding-left: 5px;
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+}

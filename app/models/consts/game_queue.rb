@@ -1,6 +1,6 @@
 module Consts
 
-  module GameQueue
+  class GameQueue < Consts::StaticData
 
     @lock = Mutex.new
 
@@ -28,7 +28,7 @@ module Consts
           "type" => q['type']
         }
       end
-      r.with_indifferent_access
+      r
     end
 
   end

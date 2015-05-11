@@ -28,11 +28,11 @@ module GameService
         game_id = json['gameId']
 
         # check db
-        unless game = Game.where(game_id: game_id).first
+        unless game = Game.where('game_id' => game_id).first
           game_hash = Factory.build_game_hash(json, region)
 
           # store summoner in db if not exist
-          summoners_hash = game_hash[:teams].map{|t|t[:participants]}.flatten
+          summoners_hash = game_hash['teams'].map{|t|t['participants']}.flatten
           summoners = ensure_summoners_in_db(summoners_hash, region)
 
           # create game
@@ -54,7 +54,7 @@ module GameService
       summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
       game = nil
       if summoner_game = Rails.cache.read(summoner_game_key)
-        game_id = summoner_game[:game_id]
+        game_id = summoner_game['game_id']
         game_key = cache_key_for_game(game_id, region)
         game = Rails.cache.read(game_key)
       end
@@ -69,8 +69,8 @@ module GameService
       Rails.cache.write(game_key, game, expires_in: $game_expires_threshold)
       summoner_ids.each do |summoner_id|
         summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
-        summoner_game = {game_id: game_id}
-        Rails.cache.write(summoner_game_key, summoner_game, expires_in: $game_expires_threshold)
+        summoner_game = {'game_id' => game_id}
+        Rails.cache.write(summoner_game_key, summoner_game, expires_in: AppConsts::GAME_EXPIRES_THRESHOLD)
       end
     end
 
@@ -105,13 +105,13 @@ module GameService
       summoners = []
       summoners_hash.each do |summoner_hash|
         summoner_obj_hash = {
-          region: region.upcase,
-          summoner_id: summoner_hash[:summoner_id],
-          name: summoner_hash[:summoner_name],
-          profile_icon_id: summoner_hash[:profile_icon_id]
+          'region' => region.upcase,
+          'summoner_id' => summoner_hash[:summoner_id],
+          'name' => summoner_hash[:summoner_name],
+          'profile_icon_id' => summoner_hash[:profile_icon_id]
         }
         if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash[:summoner_id]}).first
-          if summoner.name != summoner_hash[:summoner_name]
+          if summoner.name != summoner_hash['summoner_name']
             summoner.update_attributes(summoner_obj_hash)
           end
         else
@@ -135,71 +135,64 @@ module GameService
   module Factory
 
     def self.build_game_hash(game, region)
-      game = game.with_indifferent_access
       region.upcase!
       teams = game['participants'].group_by{|x|x['teamId']}
       {
-        region: region,
-        game_id: game['gameId'],
-        map_id: game['mapId'],
-        game_mode: game['gameMode'],
-        game_type: game['gameType'],
-        game_queue_config_id: game['gameQueueConfigId'],
-        platform_id: game['platformId'],
-        observer_encryption_key: game['observers'] ? game['observers']['encryptionKey'] : nil,
-        started_at: game['gameStartTime'],
-        game_length: game['gameLength'],
-        teams: teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
-      }.with_indifferent_access
+        'region' => region,
+        'game_id' => game['gameId'],
+        'map_id' => game['mapId'],
+        'game_mode' => game['gameMode'],
+        'game_type' => game['gameType'],
+        'game_queue_config_id' => game['gameQueueConfigId'],
+        'platform_id' => game['platformId'],
+        'observer_encryption_key' => game['observers'] ? game['observers']['encryptionKey'] : nil,
+        'started_at' => game['gameStartTime'],
+        'game_length' => game['gameLength'],
+        'teams' => teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
+      }
     end
 
     def self.build_team_hash(team_id, participants, bans)
-      # participants = participants.with_indifferent_access
-      # bans = bans.with_indifferent_access
       {
-        team_id: team_id,
-        banned_champions: bans.map{|x|build_banned_champion_hash(x)},
-        participants: participants.map{|x|build_participant_hash(x)}
-      }.with_indifferent_access
+        'team_id' => team_id,
+        'banned_champions' => bans.map{|x|build_banned_champion_hash(x)},
+        'participants' => participants.map{|x|build_participant_hash(x)}
+      }
     end
 
     def self.build_banned_champion_hash(ban)
-      ban = ban.with_indifferent_access
       {
-        champion_id: ban['championId'],
-        pick_turn: ban['pickTurn']
-      }.with_indifferent_access
+        'champion_id' => ban['championId'],
+        'pick_turn' => ban['pickTurn']
+      }
     end
 
     def self.build_participant_hash(participant)
-      participant = participant.with_indifferent_access
       {
-        spell1_id: participant['spell1Id'],
-        spell2_id: participant['spell2Id'],
-        champion_id: participant['championId'],
-        summoner_id: participant['summonerId'],
-        summoner_name: participant['summonerName'],
-        profile_icon_id: participant['profileIconId'],
-        bot: participant['bot'],
-        masteries: participant['masteries'].map{|x|build_mastery_hash(x)},
-        runes: participant['runes'].map{|x|build_rune_hash(x)}
-      }.with_indifferent_access
+        'spell1_id' => participant['spell1Id'],
+        'spell2_id' => participant['spell2Id'],
+        'champion_id' => participant['championId'],
+        'summoner_id' => participant['summonerId'],
+        'summoner_name' => participant['summonerName'],
+        'profile_icon_id' => participant['profileIconId'],
+        'bot' => participant['bot'],
+        'masteries' => participant['masteries'].map{|x|build_mastery_hash(x)},
+        'runes' => participant['runes'].map{|x|build_rune_hash(x)}
+      }
     end
 
     def self.build_mastery_hash(mastery)
-      mastery = mastery.with_indifferent_access
       {
-        rank: mastery['rank'],
-        mastery_id: mastery['masteryId']
-      }.with_indifferent_access
+        'rank' => mastery['rank'],
+        'mastery_id' => mastery['masteryId']
+      }
     end
 
     def self.build_rune_hash(rune)
-      rune = rune.with_indifferent_access
       {
-        count: rune['count'],
-        rune_id: rune['runeId']
-      }.with_indifferent_access
+        'count' => rune['count'],
+        'rune_id' => rune['runeId']
+      }
     end
 
   end

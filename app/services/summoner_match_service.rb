@@ -42,23 +42,20 @@ module SummonerMatchService
     end
 
     def self.build_mastery_hash(mastery)
-      mastery = mastery.with_indifferent_access
       {
-        rank: mastery['rank'],
-        mastery_id: mastery['masteryId']
-      }.with_indifferent_access
+        'rank' => mastery['rank'],
+        'mastery_id' => mastery['masteryId']
+      }
     end
 
     def self.build_rune_hash(rune)
-      rune = rune.with_indifferent_access
       {
-        rank: rune['count'],
-        rune_id: rune['runeId']
-      }.with_indifferent_access
+        'rank' => rune['count'],
+        'rune_id' => rune['runeId']
+      }
     end
 
     def self.build_time_line_hash(time_line_json)
-      time_line_json = time_line_json.with_indifferent_access
       r = {}
       time_line_json.each do |k,v|
         rv = {}
@@ -69,16 +66,15 @@ module SummonerMatchService
           r["#{k.to_s.underscore}"] = rv
         end
       end
-      r.with_indifferent_access
+      r
     end
 
     def self.build_stats_hash(stats_json)
-      stats_json = stats_json.with_indifferent_access
       r = {}
       stats_json.each do |k,v|
         r["#{k.to_s.underscore}"] = v
       end
-      r.with_indifferent_access
+      r
     end
   end
 

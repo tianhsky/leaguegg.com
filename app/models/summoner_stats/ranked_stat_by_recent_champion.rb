@@ -71,7 +71,6 @@ module SummonerStats
         calculate_win_rate
         calculate_kda_rate
         # calculate_helpful_rate
-        # calculate_jungle_rate
       end
     end
 
@@ -124,11 +123,6 @@ module SummonerStats
     def calculate_kda_rate
       rate = (kills + assists).to_f / (deaths == 0 ? 1 : deaths)
       self.kda_rate = rate.round(3)
-    end
-
-    def calculate_jungle_rate
-      rate = ((team_jungle_kills + enemy_jungle_kills*AppConsts::ENEMY_JUNGLE_KILL_FACTOR) / games).to_f / AppConsts::JUNGLE_KILLS_CAP
-      self.jungle_rate = rate.round(3)
     end
 
     def calculate_win_rate

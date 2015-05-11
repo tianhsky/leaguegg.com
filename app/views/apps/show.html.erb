@@ -1,0 +1,33 @@
+
+<% content_for :before_head do %>
+  <video id="bg-vid" autoplay poster="static/img/home-bg.png" loop>
+    <source src="static/video/home-bg.mp4" type="video/mp4" />
+    <source src="static/video/home-bg.webm" type="video/webm" />
+  </video>
+<% end %>
+
+<div id="home-content" class="container">
+  <div class="col-md-4 left-pane">
+    <img class="phone blink" src="static/img/mobile-stream.png">
+  </div>
+  <div class="col-md-8 right-pane">
+    <div class="description">
+      <ul class="title-items">
+        <li class="title"><i class="fa fa-bar-chart"></i> Live Game Stats</li>
+        <li class="subtitle"><i class="fa fa-minus"></i> Season Performance</li>
+        <li class="subtitle"><i class="fa fa-minus"></i> Recent Performance</li>
+        <li class="subtitle"><i class="fa fa-minus"></i> Runes & Masteries</li>
+        <li class="title"><i class="fa fa-pie-chart"></i> Detailed Analysis</li>
+        <li class="subtitle"><i class="fa fa-minus"></i> Jungle & CS Performance</li>
+        <li class="subtitle"><i class="fa fa-minus"></i> Aggresive Rating</li>
+        <li class="title"><i class="fa fa-twitch"></i> TwitchTV Live Stream</li>
+        <li class="title"><i class="fa fa-trophy"></i> Counter & Build (Coming)</li>
+        <li class="title"><a class="doc hidden" href="doc.html"><i class="fa fa-info-circle"></i> How to use?</a></li>
+      </ul>
+    </div>
+    <div class="buttons">
+      <a class="btn btn-lg btn-danger btn-download btn-cycle disabled" href="#"><span class="fa fa-apple"></span> App Store</a>
+      <a class="btn btn-lg btn-danger btn-download btn-cycle" href="https://play.google.com/store/apps/details?id=com.ty.lolcaf"><span class="fa fa-android"></span> Google Play</a>
+    </div>
+  </div>
+</div>

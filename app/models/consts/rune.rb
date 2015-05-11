@@ -1,8 +1,9 @@
 module Consts
 
-  module Rune
+  class Rune < Consts::StaticData
 
     @lock = Mutex.new
+    CACHE_KEY = 'static_runes'
 
     def self.find_by_id(id)
       setup
@@ -16,6 +17,10 @@ module Consts
     end
 
     def self.setup
+      setup_from_api
+    end
+
+    def self.setup_from_file
       unless @data
         @lock.synchronize do
           json_file_path = 'app/models/consts/data/runes.json'
@@ -25,7 +30,21 @@ module Consts
       end
     end
 
+    def self.setup_from_api
+      if local_cache_expired?
+        unless @data = Rails.cache.read(CACHE_KEY)
+          @lock.synchronize do
+            @json = StaticDataService::Riot.fetch_runes
+            @data = load_data
+            Rails.cache.write(CACHE_KEY, @data, expires_in: AppConsts::RIOT_CONSTS_EXPIRES_THRESHOLD)
+            @updated_at = Time.now
+          end
+        end
+      end
+    end
+
     def self.load_data
+      @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
         r["#{value['id']}".to_i] = {
@@ -33,10 +52,11 @@ module Consts
           "name" => value['name'],
           "description" => value['description'],
           "tier" => value['rune']['tier'],
-          "type" => value['rune']['type']
+          "type" => value['rune']['type'],
+          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/rune/#{value['id']}.png"
         }
       end
-      r.with_indifferent_access
+      r
     end
 
   end

@@ -7,12 +7,22 @@ gem 'rails', '4.1.4'
 # JavaScript runtime
 gem 'execjs', '~> 2.5.2'
 gem 'therubyracer' , '~> 0.12.2'
+
+# jquery
+# gem 'jquery-rails'
+# Boostrap
+# gem 'bootstrap-sass', '~> 3.3.4'
+# Fontawesome
+# gem 'font-awesome-rails', '~> 4.3.0.0'
+
+# Frontend js framework
+gem 'angular-rails-templates'
+# Manage frontend dependencies
+gem 'bower-rails', '~> 0.9.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use mysql as the database for Active Record
-# gem 'mysql2'
 # User mongoid as documented store
 gem 'mongoid', '~> 4.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

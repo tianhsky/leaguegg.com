@@ -1,6 +1,6 @@
 module Consts
 
-  module Platform
+  class Platform < Consts::StaticData
 
     @lock = Mutex.new
 
@@ -25,17 +25,17 @@ module Consts
 
     def self.load_data
       {
-        'NA1' => { platform: 'NA1', region: 'NA' },
-        'BR1' => { platform: 'BR1', region: 'BR' },
-        'LA1' => { platform: 'LA1', region: 'LAN' },
-        'LA2' => { platform: 'LA2', region: 'LAS' },
-        'OC1' => { platform: 'OC1', region: 'OCE' },
-        'EUN1' => { platform: 'EUN1', region: 'EUNE' },
-        'TR1' => { platform: 'TR1', region: 'TR' },
-        'RU' => { platform: 'RU', region: 'RU' },
-        'EUW1' => { platform: 'EUW1', region: 'EUW' },
-        'KR' => { platform: 'KR', region: 'KR' }
-      }.with_indifferent_access
+        'NA1' => { 'platform' => 'NA1', 'region' => 'NA' },
+        'BR1' => { 'platform' => 'BR1', 'region' => 'BR' },
+        'LA1' => { 'platform' => 'LA1', 'region' => 'LAN' },
+        'LA2' => { 'platform' => 'LA2', 'region' => 'LAS' },
+        'OC1' => { 'platform' => 'OC1', 'region' => 'OCE' },
+        'EUN1' => { 'platform' => 'EUN1', 'region' => 'EUNE' },
+        'TR1' => { 'platform' => 'TR1', 'region' => 'TR' },
+        'RU' => { 'platform' => 'RU', 'region' => 'RU' },
+        'EUW1' => { 'platform' => 'EUW1', 'region' => 'EUW' },
+        'KR' => { 'platform' => 'KR', 'region' => 'KR' }
+      }
     end
 
   end

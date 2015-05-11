@@ -1,8 +1,9 @@
 module Consts
 
-  module Map
+  class Map < Consts::StaticData
 
     @lock = Mutex.new
+    CACHE_KEY = 'static_maps'
 
     def self.find_by_id(id)
       setup
@@ -16,6 +17,10 @@ module Consts
     end
 
     def self.setup
+      setup_from_api
+    end
+
+    def self.setup_from_file
       unless @data
         @lock.synchronize do
           json_file_path = 'app/models/consts/data/maps.json'
@@ -25,15 +30,30 @@ module Consts
       end
     end
 
+    def self.setup_from_api
+      if local_cache_expired?
+        unless @data = Rails.cache.read(CACHE_KEY)
+          @lock.synchronize do
+            @json = StaticDataService::Riot.fetch_maps
+            @data = load_data
+            Rails.cache.write(CACHE_KEY, @data, expires_in: AppConsts::RIOT_CONSTS_EXPIRES_THRESHOLD)
+            @updated_at = Time.now
+          end
+        end
+      end
+    end
+
     def self.load_data
+      @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
         r["#{value['mapId']}".to_i] = {
           "id" => value['mapId'],
-          "name" => value['mapName']
+          "name" => value['mapName'],
+          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/map/#{value['image']['full']}"
         }
       end
-      r.with_indifferent_access
+      r
     end
 
   end

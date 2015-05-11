@@ -15,28 +15,12 @@ set :rbenv_ruby, '2.2.0'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails eye}
 
-set :assets_roles, [:web, :app]
+set :assets_roles, [:web]
 
 namespace :deploy do
 
-  before :updated, 'bundle:install' do
-    on roles(:app), in: :parallel do
-      within release_path do
-        execute :gem, 'install bundle'
-        execute :bundle, 'install'
-      end
-    end
-  end
-
-  after :published, 'app:restart' do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
-      within shared_path do
-        execute :eye, "load eye/app*.rb"
-        execute :eye, "restart lolcaf_app"
-        sleep 20
-        execute :eye, "restart lolcaf_app2"
-      end
-    end
-  end
+  before 'updated', 'bundle:install'
+  # before 'deploy:compile_assets', 'bower:install'
+  after 'published', 'service:restart_puma'
 
 end
