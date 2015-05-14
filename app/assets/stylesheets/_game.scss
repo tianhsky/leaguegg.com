@@ -36,6 +36,12 @@
       th {
         border-top: none;
         cursor: pointer;
+        &:hover {
+          background-color: rgb(152, 152, 152);
+        }
+        &.sorted{
+          background-color: rgb(152, 152, 152);
+        }
         &.sorted.ascending:after {
           content: "  \2191";
         }
