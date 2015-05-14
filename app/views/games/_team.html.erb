@@ -1,5 +1,5 @@
 <div class="team table-reponsive">
-  <table class="table table-stripe table-compact">
+  <table class="table table-stripe table-condensed">
     <thead>
       <tr class="team-banner <%= name %>-team">
         <th colspan="100">
@@ -23,34 +23,34 @@
           Summoner
         </th>
         <th>
-          Recent KDA
+          Recent<br>KDA
         </th>
         <th>
-          Season KDA
+          Season<br>KDA
         </th>
         <th>
-          Recent W/L
+          Recent<br>W/L
         </th>
         <th>
-          Season W/L
+          Season<br>W/L
         </th>
         <th>
-          Aggresive Rating
+          Aggresive<br>Rating
         </th>
         <th>
-          10min(Total) CS
+          10min<br>CS
         </th>
         <th>
           10min(Avg)<br>DmgTaken
         </th>
         <th>
-          Jungle CS
+          Jungle<br>CS
         </th>
         <th>
-          Counter JCS
+          Counter<br>JCS
         </th>
         <th>
-          Wards Placed
+          Wards<br>Placed
         </th>
       </tr>
     </thead>
@@ -64,12 +64,12 @@
               <img src="<%= Consts::Champion.find_by_id(player.champion_id)['img'] %>">
             </div>
             <div class="spells">
-              <img src="<%= Consts::Spell.find_by_id(player.spell1_id)['img'] %>"><br>
+              <img src="<%= Consts::Spell.find_by_id(player.spell1_id)['img'] %>">
               <img src="<%= Consts::Spell.find_by_id(player.spell2_id)['img'] %>">
             </div>
           </td>
           <td class="summoner">
-            <%= player.summoner_name %>
+            <span title="<%= player.summoner_name %>"><%= truncate(player.summoner_name, length: 8) %></span>
           </td>
           <td class="kda">
             <% if stats_recent %>

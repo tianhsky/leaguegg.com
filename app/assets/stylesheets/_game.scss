@@ -1,10 +1,17 @@
 .live-game {
   .team {
-    th{
+    th {
       vertical-align: bottom;
       text-align: center;
     }
+    td {
+      vertical-align: middle;
+    }
     .team-banner {
+      th {
+        position: relative;
+        border-bottom: none;
+      }
       &.blue-team {
         background-color: rgb(60, 63, 124);
       }
@@ -12,8 +19,9 @@
         background-color: rgb(158, 25, 25);
       }
       .team-name {
-        float: left;
-        vertical-align: bottom;
+        position: absolute;
+        left: 10px;
+        bottom: 5px;
       }
       .team-bans {
         float: right;
@@ -24,22 +32,27 @@
     }
     .team-header {
       font-size: 12px;
+      background-color: rgb(90, 90, 90);
+      th {
+        border-top: none;
+      }
     }
     .team-player {
       .champion-spells {
-        width: 119px;
-      }
-      .champion {
-        float: left;
-        img {
-          width: 60px;
+        // width: 119px;
+        .champion {
+          // float: left;
+          img {
+            width: 60px;
+          }
         }
-      }
-      .spells {
-        float: left;
-        padding-left: 5px;
-        img {
-          width: 30px;
+        .spells {
+          // float: left;
+          // padding-left: 5px;
+          padding: 1px 0px;
+          img {
+            width: 26px;
+          }
         }
       }
     }
