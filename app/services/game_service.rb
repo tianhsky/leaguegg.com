@@ -6,7 +6,11 @@ module GameService
     def self.find_game_by_summoner_id(summoner_id, region)
       platform_id = Consts::Platform.find_by_region(region)['platform']
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
-      resp = HttpService.get(url)
+      begin
+        resp = HttpService.get(url)
+      rescue Errors::NotFoundError => ex
+        raise Errors::GameNotFoundError
+      end
     end
 
   end
@@ -14,11 +18,13 @@ module GameService
   module Service
 
     def self.find_game_by_summoner_name(summoner_name, region)
+      raise Errors::SummonerNotFoundError if summoner_name.blank? || region.blank?
       summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
       find_game_by_summoner_id(summoner.summoner_id, region)
     end
 
     def self.find_game_by_summoner_id(summoner_id, region)
+      raise Errors::SummonerNotFoundError if summoner_id.blank? || region.blank?
       region.upcase!
 
       # check cache

@@ -1,5 +1,9 @@
 .live-game {
   .team {
+    th{
+      vertical-align: bottom;
+      text-align: center;
+    }
     .team-banner {
       &.blue-team {
         background-color: rgb(60, 63, 124);
@@ -23,7 +27,7 @@
     }
     .team-player {
       .champion-spells {
-        width: 115px;
+        width: 119px;
       }
       .champion {
         float: left;

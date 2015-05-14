@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
-  include Errors::RescueRateLimitError
-  include Errors::RescueNotFoundError
+  include ApiErrorRescuers
+  
   respond_to :json
   skip_before_filter :set_nav
 

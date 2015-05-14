@@ -1,7 +1,6 @@
 <%= javascript_include_tag 'rotation' %>
 
-<div class="inner cover free-champions">
-
+<div class="free-champions">
     <% if !@rotation.blank? %>
       <ul>
         <% @rotation[0..4].each do |champion| %>
@@ -25,5 +24,4 @@
       <div class="champion-title">
       </div>
     </div>
-
 </div>

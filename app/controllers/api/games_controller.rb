@@ -8,11 +8,7 @@ module Api
     protected
 
     def find_game
-      if summoner_id.present?
-        @game = Game::Service.find_game_by_summoner_id(summoner_id, region)
-      elsif summoner_name.present?
-        @game = Game::Service.find_game_by_summoner_name(summoner_name, region)
-      end
+      @game = Game::Service.find_game_by_summoner_name(summoner_name, region)
     end
 
     def summoner_id

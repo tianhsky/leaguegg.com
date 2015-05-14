@@ -5,7 +5,9 @@ class GamesController < ApplicationController
   def show
     begin
       @game = Game::Service.find_game_by_summoner_name(summoner_name, region)
-    rescue Exception => ex
+    rescue Errors::SummonerNotFoundError => ex
+      @error = ex
+    rescue Errors::GameNotFoundError => ex
       @error = ex
     end
   end

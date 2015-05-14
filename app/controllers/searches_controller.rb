@@ -4,6 +4,9 @@ class SearchesController < ApplicationController
 
   def show
     if search_type == 'game'
+      if search_region.blank? || search_summoner.blank?
+        redirect_to :back and return
+      end
       redirect_to game_path({
         'region' => search_region,
         'summoner_name' => search_summoner

@@ -1,40 +1,34 @@
 @import "button";
 @import "blink";
 
-#home-content {
-  margin-bottom: 120px;
-  color: white;
+.app-content {
   .btn {
     margin: 10px;
   }
-  .left-pane {
+  .preview-pane {
     text-align: center;
     .phone {
-      // height: 580px;
-      width: 330px;
-      margin-top: 50px;
+      width: 60%;
     }
   }
-  .right-pane {
-    padding-left: 15%;
-    text-align: left;
+  .instruction-pane {
     font-weight: bold;
     .description {
-      padding-top: 15%;
-      color: white;
+      text-align: center;
       ul.title-items {
         list-style-type: none;
+        padding: 0px;
         li {
           &.title {
             font-weight: bolder;
-            font-size: 20pt;
-            padding-top: 15px;
+            font-size: 18pt;
+            padding-top: 14px;
           }
           &.subtitle {
             font-weight: bold;
-            font-size: 15pt;
-            padding-top: 10px;
-            padding-left: 15px;
+            font-size: 13pt;
+            padding-top: 14px;
+            // padding-left: 18px;
           }
           a {
             color: rgb(79, 186, 133);
@@ -47,6 +41,7 @@
     }
     .buttons {
       margin-top: 50px;
+      text-align: center;
     }
   }
 }

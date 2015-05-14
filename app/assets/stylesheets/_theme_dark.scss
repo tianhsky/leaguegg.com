@@ -37,7 +37,6 @@
   top: 0px;
   width: 100%;
   background-color: $black_20;
-  padding: 30px 50px;
 }
 
 .masthead-brand {
@@ -151,15 +150,5 @@
   }
   .masthead-nav {
     float: right;
-  }
-  .cover-container {
-    width: 100%;
-  }
-}
-
-
-@media(min-width: 1200px) {
-  .container {
-    width: 100%;
   }
 }
