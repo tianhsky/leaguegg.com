@@ -2,7 +2,6 @@
 //= require initializers
 
 //= require jquery
-//= //require jquery-cycle
-//= //require jquery-maximage
+//= require jquery-tablesort
 
 //= require bootstrap-sass-official

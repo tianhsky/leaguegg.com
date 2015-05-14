@@ -1,5 +1,5 @@
 <div class="team table-reponsive">
-  <table class="table table-stripe table-condensed">
+  <table class="table table-stripe table-condensed table-team">
     <thead>
       <tr class="team-banner <%= name %>-team">
         <th colspan="100">
@@ -23,6 +23,9 @@
           Summoner
         </th>
         <th>
+          Aggresive<br>Score
+        </th>
+        <th>
           Recent<br>KDA
         </th>
         <th>
@@ -33,9 +36,6 @@
         </th>
         <th>
           Season<br>W/L
-        </th>
-        <th>
-          Aggresive<br>Rating
         </th>
         <th>
           10min<br>CS
@@ -56,89 +56,106 @@
     </thead>
     <tbody>
       <% team.participants.each do |player| %>
-        <% stats_recent = player.ranked_stat_by_recent_champion %>
-        <% stats_season = player.ranked_stat_by_champion %>
+        <% 
+          stats_recent = player.ranked_stat_by_recent_champion
+          stats_season = player.ranked_stat_by_champion
+          champion = Consts::Champion.find_by_id(player.champion_id)
+          if stats_season
+            season_kda = decimal(stats_season.kda_rate, 2)
+            season_wl = percentage(stats_season.win_rate, 2)
+          end
+          if stats_recent
+            recent_kda = decimal(stats_recent.kda_rate, 2)
+            recent_wl = percentage(stats_recent.win_rate, 2)
+            aggresive = percentage(stats_recent.aggresive_rate, 2)
+            cs10 = decimal(stats_recent.avg_cs_at_10m, 1)
+            dmgt = decimal(stats_recent.avg_per_min_dmg_taken_at_10m, 1)
+            jg = decimal(stats_recent.avg_team_jungle_kills, 1)
+            cjg = decimal(stats_recent.avg_enemy_jungle_kills, 1)
+            wards = decimal(stats_recent.avg_wards_placed, 1)
+          end
+        %>
         <tr class="team-player">
-          <td class="champion-spells">
+          <td class="champion-spells" data-sort-value="<%= champion['name'] %>">
             <div class="champion">
-              <img src="<%= Consts::Champion.find_by_id(player.champion_id)['img'] %>">
+              <img src="<%= champion['img'] %>">
             </div>
             <div class="spells">
               <img src="<%= Consts::Spell.find_by_id(player.spell1_id)['img'] %>">
               <img src="<%= Consts::Spell.find_by_id(player.spell2_id)['img'] %>">
             </div>
           </td>
-          <td class="summoner">
+          <td class="summoner" data-sort-value="<%= player.summoner_name %>">
             <span title="<%= player.summoner_name %>"><%= truncate(player.summoner_name, length: 8) %></span>
           </td>
-          <td class="kda">
+          <td class="aggresive" data-sort-value="<%= aggresive %>">
             <% if stats_recent %>
-              <div class="kda-rate"><%= decimal(stats_recent.kda_rate, 2) %></div>
+              <%= aggresive %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td class="kda" data-sort-value="<%= recent_kda %>">
+            <% if stats_recent %>
+              <div class="kda-rate"><%= recent_kda %></div>
               <span class="k"><%= decimal(stats_recent.avg_kills, 1) %></span>/<span class="d"><%= decimal(stats_recent.avg_deaths, 1) %></span>/<span class="a"><%= decimal(stats_recent.avg_assists, 1) %></span>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="kda">
+          <td class="kda" data-sort-value="<%= season_kda %>">
             <% if stats_season %>
-              <div class="kda-rate"><%= decimal(stats_season.kda_rate, 2) %></div>
+              <div class="kda-rate"><%= season_kda %></div>
               <span class="k"><%= decimal(stats_season.avg_kills, 1) %></span>/<span class="d"><%= decimal(stats_season.avg_deaths, 1) %></span>/<span class="a"><%= decimal(stats_season.avg_assists, 1) %></span>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="wl">
+          <td class="wl" data-sort-value="<%= recent_wl %>">
             <% if stats_recent %>
-              <%= percentage(stats_recent.win_rate, 2) %>
+              <%= recent_wl %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="wl">
+          <td class="wl" data-sort-value="<%= season_wl %>">
             <% if stats_season %>
-              <%= percentage(stats_season.win_rate, 2) %>
+              <%= season_wl %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="aggresive">
+          <td class="cs" data-sort-value="<%= cs10 %>">
             <% if stats_recent %>
-              <%= percentage(stats_recent.aggresive_rate, 2) %>
+              <%= cs10 %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="cs">
+          <td class="dmg" data-sort-value="<%= dmgt %>">
             <% if stats_recent %>
-              <%= decimal(stats_recent.avg_cs_at_10m, 1) %>
+              <%= dmgt %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="dmg">
+          <td class="cs" data-sort-value="<%= jg %>">
             <% if stats_recent %>
-              <%= decimal(stats_recent.avg_per_min_dmg_taken_at_10m, 1) %>
+              <%= jg %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="cs">
+          <td class="cs" data-sort-value="<%= cjg %>">
             <% if stats_recent %>
-              <%= decimal(stats_recent.avg_team_jungle_kills, 1) %>
+              <%= cjg %>
             <% else %>
               -
             <% end %>
           </td>
-          <td class="cs">
+          <td class="cs" data-sort-value="<%= wards %>">
             <% if stats_recent %>
-              <%= decimal(stats_recent.avg_enemy_jungle_kills, 1) %>
-            <% else %>
-              -
-            <% end %>
-          </td>
-          <td class="cs">
-            <% if stats_recent %>
-              <%= decimal(stats_recent.avg_wards_placed, 1) %>
+              <%= wards %>
             <% else %>
               -
             <% end %>
