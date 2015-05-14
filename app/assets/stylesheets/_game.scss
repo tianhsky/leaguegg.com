@@ -39,21 +39,33 @@
     }
     .team-player {
       .champion-spells {
-        // width: 119px;
         .champion {
-          // float: left;
           img {
             width: 60px;
           }
         }
         .spells {
-          // float: left;
-          // padding-left: 5px;
           padding: 1px 0px;
           img {
             width: 26px;
           }
         }
+      }
+      .kda-rate {
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .k {
+        color: rgb(8, 184, 8);
+        padding: 2px;
+      }
+      .d {
+        color: rgb(237, 0, 0);
+        padding: 2px;
+      }
+      .a {
+        color: rgb(178, 178, 43);
+        padding: 2px;
       }
     }
   }

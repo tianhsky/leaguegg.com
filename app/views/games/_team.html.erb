@@ -73,16 +73,16 @@
           </td>
           <td class="kda">
             <% if stats_recent %>
-              <%= decimal(stats_recent.kda_rate, 2) %><br>
-              <%= decimal(stats_recent.avg_kills, 1) %>/<%= decimal(stats_recent.avg_deaths, 1) %>/<%= decimal(stats_recent.avg_assists, 1) %>
+              <div class="kda-rate"><%= decimal(stats_recent.kda_rate, 2) %></div>
+              <span class="k"><%= decimal(stats_recent.avg_kills, 1) %></span>/<span class="d"><%= decimal(stats_recent.avg_deaths, 1) %></span>/<span class="a"><%= decimal(stats_recent.avg_assists, 1) %></span>
             <% else %>
               -
             <% end %>
           </td>
           <td class="kda">
             <% if stats_season %>
-              <%= decimal(stats_season.kda_rate, 2) %><br>
-              <%= decimal(stats_season.avg_kills, 1) %>/<%= decimal(stats_season.avg_deaths, 1) %>/<%= decimal(stats_season.avg_assists, 1) %>
+              <div class="kda-rate"><%= decimal(stats_season.kda_rate, 2) %></div>
+              <span class="k"><%= decimal(stats_season.avg_kills, 1) %></span>/<span class="d"><%= decimal(stats_season.avg_deaths, 1) %></span>/<span class="a"><%= decimal(stats_season.avg_assists, 1) %></span>
             <% else %>
               -
             <% end %>
