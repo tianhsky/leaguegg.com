@@ -1,55 +1,173 @@
 .search-game {
-  padding-top: 8%;
-  .search-game-container {
-    width: auto;
-    font-size: 19px;
-    .input-search {
-      width: 56%;
-      display: inline-block;
-      border: none;
-      border-radius: 0;
-      background-color: rgb(37, 37, 37);
-      margin: 5px -3px;
-      &:focus {
-        outline: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important
-      }
+  .search-panel {
+    margin: 50px 0px 30px 0px;
+    form {
+      padding: 70px 0px 40px 0px;
     }
-    .input-region {
-      width: auto;
+    .search-game-container {
+      background-color: $gray_b_1;
       display: inline-block;
-      border: none;
-      border-radius: 0 !important;
-      background-color: rgb(37, 37, 37);
-      margin: 5px -4px;
-      color: white;
-      &:focus {
-        outline: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important
+      border-radius: 0px;
+      .form-element {
+        display: inline-block;
+        background-color: transparent;
+        vertical-align: bottom;
+        border-color: none;
+        border: none;
+        &:focus {
+          @extend %no_outline;
+        }
       }
-    }
-    .btn-search {
-      width: auto;
-      display: inline-block;
-      border: none;
-      border-radius: 0;
-      background-color: rgb(37, 37, 37);
-      font-size: 20px;
-      margin: 5px -3px;
-      color: white;
-      &:focus {
-        outline: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important
+      .input-search {
+        width: 340px;
+      }
+      .input-region {
+        width: auto;
+        font-size: 19px;
+      }
+      .btn-search {
+        color: white;
+      }
+      @media(max-width: 767px) {
+        .input-search {
+          width: 50%;
+          font-size: 15px;
+        }
+        .input-region {
+          width: auto;
+          font-size: 15px;
+        }
+        .btn-search {
+          color: white;
+          font-size: 16px;
+        }
       }
     }
   }
-}
-
-.featured-games {
-  padding-top: 15%;
-  width: 100%;
-  height: 100%;
+  .featured-panel {
+    .featured-header {
+      overflow: hidden;
+      padding: 0px 10px;
+      background-color: $gray_b_1;
+      h4 {
+        float: left;
+      }
+      .carousel-indicators {
+        position: static;
+        float: right;
+        width: auto;
+        margin: 10px 0px;
+      }
+    }
+    .carousel-inner {
+      top: 15px;
+      position: relative;
+      .featured-team {
+        width: 50%;
+        overflow: hidden;
+        .player {
+          margin: 10px 5px;
+          .summoner-name {
+            display: inline;
+            vertical-align: middle;
+            font-size: 12px;
+          }
+          .champion-img {
+            display: inline;
+            width: 40px;
+          }
+        }
+        .team-banner {
+          position: relative;
+          height: 40px;
+          .bans {
+            text-align: center;
+            .ban-item {
+              display: inline-block;
+              width: 35px;
+              height: 35px;
+              position: relative;
+              .champion-img {
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+              }
+              .champion-ban-icon {
+                position: relative;
+                font-size: 35px;
+                opacity: 0.8;
+                // color: $ban_color;
+              }
+            }
+          }
+        }
+        &.left {
+          float: left;
+          text-align: right;
+          padding-right: 15px;
+          border-right: 1px solid white;
+          .player {
+            .summoner-name {
+              margin-right: 5px;
+            }
+            .champion-img {
+              float: right;
+            }
+          }
+          .team-banner {
+            .bans {
+              position: absolute;
+              right: 0px;
+              bottom: 0px;
+              color: $blue_team;
+            }
+          }
+        }
+        &.right {
+          float: right;
+          text-align: left;
+          padding-left: 15px;
+          .player {
+            .summoner-name {
+              margin-left: 5px;
+            }
+            .champion-img {
+              float: left;
+            }
+          }
+          .team-banner {
+            .bans {
+              position: absolute;
+              left: 0px;
+              bottom: 0px;
+              color: $red_team;
+            }
+          }
+        }
+      }
+      .play-mask {
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        .play {
+          position: absolute;
+          margin-left: -50px;
+          top: 100px;
+          opacity: 0.0;
+          i {
+            font-size: 100px;
+          }
+        }
+        &:hover {
+          .play {
+            opacity: 0.6;
+            &:hover{
+              opacity: 0.9;
+            }
+          }
+        }
+      }
+    }
+  }
 }

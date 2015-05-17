@@ -24,9 +24,14 @@
 }
 
 .cover-container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-bottom: 80px;
+  .cover {
+    margin: 30px 5px 195px 5px;
+    // min-height: 400px;
+    .btn-lg {
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+  }
 }
 
 .inner {
@@ -82,15 +87,6 @@
       color: $white;
       border-bottom-color: $white;
     }
-  }
-}
-
-.cover {
-  padding: 30px 20px 150px 20px;
-  min-height: 400px;
-  .btn-lg {
-    padding: 10px 20px;
-    font-weight: bold;
   }
 }
 

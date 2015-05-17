@@ -13,10 +13,10 @@
         border-bottom: none;
       }
       &.blue-team {
-        background-color: rgb(60, 63, 124);
+        background-color: $blue_team;
       }
       &.red-team {
-        background-color: rgb(158, 25, 25);
+        background-color: $red_team;
       }
       .team-name {
         position: absolute;

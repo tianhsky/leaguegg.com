@@ -1,0 +1,6 @@
+<% team['participants'].each do |p| %>
+  <div class="player row">
+    <img class="champion-img" src="<%=Consts::Champion.find_by_id(p['champion_id'])['img']%>">
+    <p class="summoner-name"><%= truncate(p['summoner_name'], length:12)%></p>
+  </div>
+<% end %>

@@ -9,3 +9,14 @@ $color_mountain_mist_approx: #999;
 
 $black_20: rgba(0,0,0,.20);
 $black_50: rgba(0,0,0,.5);
+
+$gray_b_1: rgb(82, 82, 82);
+$blue_team: rgb(60, 63, 124);
+$red_team: rgb(158, 25, 25);
+$ban_color: rgba(255, 29, 0, 0.6);
+
+%no_outline {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important
+}

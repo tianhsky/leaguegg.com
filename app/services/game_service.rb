@@ -13,9 +13,25 @@ module GameService
       end
     end
 
+    def self.find_current_featured_game(region)
+      url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/featured"
+      resp = HttpService.get(url)
+    end
+
   end
 
   module Service
+
+    def self.find_current_featured_games(region)
+      region.upcase!
+      unless r = find_featured_games_from_cache(region)
+        r = {}
+        featured = Riot.find_current_featured_game(region)
+        r['game_list'] = featured['gameList'].map{|g| Factory.build_game_hash(g, region)}
+        store_featured_games_to_cache(r, region)
+      end
+      r
+    end
 
     def self.find_game_by_summoner_name(summoner_name, region)
       raise Errors::SummonerNotFoundError if summoner_name.blank? || region.blank?
@@ -80,6 +96,18 @@ module GameService
       end
     end
 
+    def self.find_featured_games_from_cache(region)
+      region.upcase!
+      cache_key = cache_key_for_featured_games(region)
+      Rails.cache.read(cache_key)
+    end
+
+    def self.store_featured_games_to_cache(featured, region)
+      region.upcase!
+      cache_key = cache_key_for_featured_games(region)
+      Rails.cache.write(cache_key, featured, expires_in: AppConsts::GAME_EXPIRES_THRESHOLD*2)
+    end
+
     def self.store_summoners_info_to_game(summoners, game, region)
       workers = []
       game.teams.each do |team|
@@ -136,6 +164,10 @@ module GameService
       "game?region=#{region.upcase}&game_id=#{game_id}"
     end
 
+    def self.cache_key_for_featured_games(region)
+      "featured?region=#{region.upcase}"
+    end
+
   end
 
   module Factory
@@ -174,17 +206,22 @@ module GameService
     end
 
     def self.build_participant_hash(participant)
-      {
+      r = {
         'spell1_id' => participant['spell1Id'],
         'spell2_id' => participant['spell2Id'],
         'champion_id' => participant['championId'],
         'summoner_id' => participant['summonerId'],
         'summoner_name' => participant['summonerName'],
         'profile_icon_id' => participant['profileIconId'],
-        'bot' => participant['bot'],
-        'masteries' => participant['masteries'].map{|x|build_mastery_hash(x)},
-        'runes' => participant['runes'].map{|x|build_rune_hash(x)}
+        'bot' => participant['bot']
       }
+      if participant['masteries']
+        r['masteries'] = participant['masteries'].map{|x|build_mastery_hash(x)}
+      end
+      if participant['runes']
+        r['runes'] = participant['runes'].map{|x|build_rune_hash(x)}
+      end
+      r
     end
 
     def self.build_mastery_hash(mastery)

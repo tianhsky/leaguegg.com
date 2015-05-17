@@ -1,0 +1,8 @@
+<div class="bans">
+  <% team['banned_champions'].each do |c| %>
+    <div class="ban-item">
+      <img class="champion-img" src="<%=Consts::Champion.find_by_id(c['champion_id'])['img']%>">
+      <i class="champion-ban-icon glyphicon glyphicon-ban-circle"></i>
+    </div>
+  <% end %>
+</div>
