@@ -27,7 +27,6 @@ class SummonerStat
   validates_uniqueness_of :summoner_id, scope: [:region, :season]
 
   # Functions
-
   scope :for_summoner, ->(summoner_id, season=nil) do
     r = where({summoner_id: summoner_id})
     r = r.where({ season: season.upcase }) if season
@@ -43,6 +42,14 @@ class SummonerStat
     ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
     season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
     self.update_attributes(season_stats_hash)
+  end
+
+  def outdated?
+    return true if self.new_record?
+    if time = Utils::Time.time_to_epunix(self.synced_at)
+      return true if time < Time.now - AppConsts::CHAMPION_SEASON_STATS_EXPIRES_THRESHOLD
+    end
+    false
   end
 
 end

@@ -98,17 +98,20 @@ module SummonerStatService
       # check db
       stats = SummonerStat.where({summoner_id: summoner_id, region: region, season: season}).first
       # check riot
-      unless stats
-        stats = SummonerStat.new
+      stats = SummonerStat.new unless stats
+
+      if stats.new_record? || stats.outdated?
+        player_stats_json = nil
+        # player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
+
+        ranked_stats_json = nil
+        ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
+
+        season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
+        stats.touch_synced_at
+        stats.update_attributes(season_stats_hash)
       end
-      player_stats_json = nil
-      # player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
 
-      ranked_stats_json = nil
-      ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
-
-      season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
-      stats.update_attributes(season_stats_hash)
       stats
     end
 

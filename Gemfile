@@ -51,6 +51,8 @@ gem 'httparty'
 gem 'redis-rails'
 # Print object nicely
 gem 'awesome_print', :require => 'ap'
+# Schedule task
+gem 'whenever', :require => false
 group :development do
 	# Debug tools
 	gem 'better_errors'

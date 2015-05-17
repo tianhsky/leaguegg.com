@@ -96,8 +96,8 @@ module GameService
             rescue
             end
             begin
-              recent_stats = SummonerMatchService::Service.find_recent_matches(summoner_id, champion_id, region)
-              recent_stats_aggregation = SummonerMatchService::Service.get_matches_aggregation(recent_stats, champion_id)
+              recent_stats = SummonerMatch::Service.find_recent_matches(summoner_id, champion_id, region)
+              recent_stats_aggregation = SummonerMatch::Service.get_matches_aggregation(recent_stats, champion_id)
               participant.ranked_stat_by_recent_champion = recent_stats_aggregation
             rescue
             end
