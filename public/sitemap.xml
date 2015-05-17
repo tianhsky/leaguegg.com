@@ -7,11 +7,18 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-  <loc>http://www.lolcaf.com/</loc>
+  <loc>http://www.leaguegg.com</loc>
   <priority>1.00</priority>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.lolcaf.com/doc.html</loc>
-  <priority>0.80</priority>
+  <loc>http://www.leaguegg.com/rotation</loc>
+  <priority>1.00</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.leaguegg.com/app</loc>
+  <priority>1.00</priority>
+  <changefreq>monthly</changefreq>
 </url>
 </urlset>
