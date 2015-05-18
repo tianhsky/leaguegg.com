@@ -53,7 +53,7 @@ module Consts
           "description" => value['description'],
           "tier" => value['rune']['tier'],
           "type" => value['rune']['type'],
-          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/rune/#{value['id']}.png"
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/rune/#{value['id']}.png"
         }
       end
       r

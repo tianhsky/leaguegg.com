@@ -25,8 +25,11 @@
 
 .cover-container {
   .cover {
-    margin: 30px 5px 195px 5px;
-    // min-height: 400px;
+    margin: 30px 5px 180px 5px;
+    min-height: 350px;
+    @media(max-width: 767px) {
+      margin: 30px 5px 250px 5px;
+    }
     .btn-lg {
       padding: 10px 20px;
       font-weight: bold;

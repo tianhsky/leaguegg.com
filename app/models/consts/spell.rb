@@ -53,7 +53,7 @@ module Consts
           "description" => value['description'],
           "key" => value['description'],
           "summoner_level" => value['summonerLevel'],
-          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/spell/#{value['key']}.png"
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/spell/#{value['key']}.png"
         }
       end
       r

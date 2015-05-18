@@ -52,9 +52,9 @@ module Consts
           "key" => value['key'],
           "name" => value['name'],
           "title" => value['title'],
-          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/champion/#{value['key']}.png",
-          "img_loadings" => ["https://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{value['key']}_0.jpg"],
-          "img_splashes" => ["https://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{value['key']}_0.jpg"]
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/champion/#{value['key']}.png",
+          "img_loadings" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{value['key']}_0.jpg"],
+          "img_splashes" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{value['key']}_0.jpg"]
         }
       end
       r

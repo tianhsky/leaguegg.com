@@ -50,7 +50,7 @@ module Consts
         r["#{value['mapId']}".to_i] = {
           "id" => value['mapId'],
           "name" => value['mapName'],
-          "img" => "https://ddragon.leagueoflegends.com/cdn/#{@version}/img/map/#{value['image']['full']}"
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/map/#{value['image']['full']}"
         }
       end
       r
