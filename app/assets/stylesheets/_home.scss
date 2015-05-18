@@ -79,6 +79,7 @@
             text-overflow: ellipsis;
             @media(max-width: 351px) {
               display: block;
+              clear: both;
               font-size: 9px;
             }
           }
