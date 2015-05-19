@@ -17,15 +17,19 @@ module Consts
     end
 
     def self.setup
-      setup_from_api
+      begin
+        setup_from_api
+      rescue
+        setup_from_file
+      end
     end
 
     def self.setup_from_file
       unless @data
         @lock.synchronize do
           json_file_path = 'app/models/consts/data/spells.json'
-          @json ||= Utils::JsonLoader.read_from_file(json_file_path).with_indifferent_access
-          @data ||= load_data
+          @json = Utils::JsonLoader.read_from_file(json_file_path).with_indifferent_access
+          @data = load_data
         end
       end
     end

@@ -11,7 +11,11 @@ module Consts
     end
 
     def self.setup
-      setup_from_api
+      begin
+        setup_from_api
+      rescue
+        # setup_from_file
+      end
     end
 
     def self.setup_from_api
