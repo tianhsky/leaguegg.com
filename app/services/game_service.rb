@@ -127,12 +127,20 @@ module GameService
               recent_stats = SummonerMatch::Service.find_recent_matches(summoner_id, champion_id, region)
               recent_stats_aggregation = SummonerMatch::Service.get_matches_aggregation(recent_stats, champion_id)
               participant.ranked_stat_by_recent_champion = recent_stats_aggregation
+              update_summoner_tier(summoner, recent_stats, region)
             rescue
             end
           end
         end
       end
       workers.map(&:join)
+    end
+
+    def self.update_summoners_tiers(summoner, recent_stats, region)
+      if stat = recent_stats.first
+        summoner.highest_tier = stat['highest_achieved_season_tier']
+        summoner.save
+      end
     end
 
     def self.ensure_summoners_in_db(summoners_hash, region)

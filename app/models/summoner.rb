@@ -15,6 +15,7 @@ class Summoner
   field :name_lowercase, type: String # for searching
   field :inquiries, type: Integer, default: 1
   field :twitch_channel, type: String
+  field :highest_tier, type: String
 
   # Relations
   # has_many :summoner_stats
@@ -33,6 +34,7 @@ class Summoner
 
   # Callbacks
   before_validation :store_name_in_lower_case
+  before_validation :store_highest_tier_in_upper_case
 
   # Functions
 
@@ -56,6 +58,10 @@ class Summoner
 
   def store_name_in_lower_case
     self.name_lowercase = self.name.try(:downcase).try(:gsub, /\s+/, "")
+  end
+
+  def store_highest_tier_in_upper_case
+    self.highest_tier = self.highest_tier.try(:upcase)
   end
 
 end
