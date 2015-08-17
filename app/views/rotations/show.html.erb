@@ -1,19 +1,17 @@
-<%= javascript_include_tag 'rotation' %>
+<% content_for :js do %>
+  <%= javascript_include_tag 'rotation' %>
+<% end %>
 
 <div class="free-champions">
     <% if !@rotation.blank? %>
       <ul>
         <% @rotation[0..4].each do |champion| %>
-          <li data-splash="<%=champion['img_splashes'][0]%>" data-name="<%=champion['name']%>" data-title="<%=champion['title']%>">
-            <img src="<%=champion['img']%>">
-          </li>
+          <%= render partial: 'champion_item', locals: {champion: champion} %>
         <% end %>
       </ul>
       <ul>
         <% @rotation[5..9].each do |champion| %>
-          <li data-splash="<%=champion['img_splashes'][0]%>" data-name="<%=champion['name']%>" data-title="<%=champion['title']%>">
-            <img src="<%=champion['img']%>">
-          </li>
+          <%= render partial: 'champion_item', locals: {champion: champion} %>
         <% end %>
       </ul>
     <% end %>

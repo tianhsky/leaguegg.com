@@ -10,6 +10,6 @@ group :vendor do
   asset 'angular-ui-router', '0.2.14'
   asset 'angular-animate', '1.4.0-build.3993+sha.1268b17'
   asset 'angular-truncate', 'latest'
-  
+
   resolution "angular", "1.4.0-build.3993+sha.1268b17"
 end

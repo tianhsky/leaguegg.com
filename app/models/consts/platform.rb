@@ -25,16 +25,16 @@ module Consts
 
     def self.load_data
       {
-        'NA1' => { 'platform' => 'NA1', 'region' => 'NA' },
-        'BR1' => { 'platform' => 'BR1', 'region' => 'BR' },
-        'LA1' => { 'platform' => 'LA1', 'region' => 'LAN' },
-        'LA2' => { 'platform' => 'LA2', 'region' => 'LAS' },
-        'OC1' => { 'platform' => 'OC1', 'region' => 'OCE' },
-        'EUN1' => { 'platform' => 'EUN1', 'region' => 'EUNE' },
-        'TR1' => { 'platform' => 'TR1', 'region' => 'TR' },
-        'RU' => { 'platform' => 'RU', 'region' => 'RU' },
-        'EUW1' => { 'platform' => 'EUW1', 'region' => 'EUW' },
-        'KR' => { 'platform' => 'KR', 'region' => 'KR' }
+        'NA1' => { 'platform' => 'NA1', 'region' => 'NA', 'name' => 'North America' },
+        'BR1' => { 'platform' => 'BR1', 'region' => 'BR' , 'name' => 'Brazil'},
+        'LA1' => { 'platform' => 'LA1', 'region' => 'LAN', 'name' => 'Latin America North' },
+        'LA2' => { 'platform' => 'LA2', 'region' => 'LAS', 'name' => 'Latin America North' },
+        'OC1' => { 'platform' => 'OC1', 'region' => 'OCE', 'name' => 'Oceania' },
+        'EUN1' => { 'platform' => 'EUN1', 'region' => 'EUNE', 'name' => 'Europe Nordic & East' },
+        'TR1' => { 'platform' => 'TR1', 'region' => 'TR', 'name' => 'Turkey' },
+        'RU' => { 'platform' => 'RU', 'region' => 'RU', 'name' => 'Russia' },
+        'EUW1' => { 'platform' => 'EUW1', 'region' => 'EUW', 'name' => 'Europe West' },
+        'KR' => { 'platform' => 'KR', 'region' => 'KR', 'name' => 'Republic of Korea' }
       }
     end
 

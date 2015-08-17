@@ -62,6 +62,7 @@
     display: inline-block;
     + li {
       margin-left: 20px;
+      margin-top: 10px;
     }
     > a {
       padding-right: 0;
@@ -81,14 +82,14 @@
   }
   .active > a {
     color: $white;
-    border-bottom-color: $white;
+    // border-bottom-color: $white;
     &:hover {
       color: $white;
-      border-bottom-color: $white;
+      // border-bottom-color: $white;
     }
     &:focus {
       color: $white;
-      border-bottom-color: $white;
+      // border-bottom-color: $white;
     }
   }
 }
@@ -142,6 +143,40 @@
       padding: 10px 0px 0px 0px;
       font-size: 35px;
       font-weight: 500;
+    }
+  }
+}
+
+.summoner-search-bar{
+  vertical-align: middle;
+  background-color: $gray_b_1;
+  display: inline-block;
+  border-radius: 0px;
+  .form-element {
+    display: inline-block;
+    background-color: transparent;
+    vertical-align: bottom;
+    border-color: none;
+    border: none;
+    &:focus {
+      @extend %no_outline;
+    }
+  }
+  .input-search {
+    width: 120px;
+  }
+  .input-region {
+    width: auto;
+    font-size: 9px;
+    &:focus {
+      background-color: $gray_b_1;
+      color: white;
+    }
+  }
+  .btn-search {
+    color: white;
+    &:hover{
+      background: rgb(156, 156, 156);
     }
   }
 }

@@ -9,3 +9,11 @@
     background-color: #d9534f;
   }
 }
+
+.btn-green {
+  border: 2px solid #36542B;
+  background-color: rgba(92, 214, 82, 0.72);
+  &:hover {
+    background-color: rgba(127, 218, 120, 0.72);
+  }
+}

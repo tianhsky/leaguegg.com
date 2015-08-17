@@ -1,0 +1,18 @@
+<div class="row well error-block">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-3 error-icon">
+      <img src="/static/img/icon-404.png">
+    </div>
+    <div class="col-md-9 error-text">
+      <% if defined?(error) && error %>
+        <% if error.is_a?(Errors::RateLimitError) %>
+          <h2>There was a problem with Riot, please check back later.</h2>
+        <% else %>
+          <h2><%= error.respond_to?(:message) ? error.message : 'Error Occurred' %></h2>
+        <% end %>
+      <% else %>
+        <h2><%= message %></h2>
+      <% end %>
+    </div>
+  </div>
+</div>

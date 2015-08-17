@@ -22,6 +22,11 @@ module StaticDataService
       resp = HttpService.get(url)
     end
 
+    def self.fetch_items(region='na')
+      url = "https://global.api.pvp.net/api/lol/static-data/#{region.downcase}/v1.2/item"
+      resp = HttpService.get(url)
+    end
+
     def self.fetch_spells(region='na')
       url = "https://global.api.pvp.net/api/lol/static-data/#{region.downcase}/v1.2/summoner-spell"
       resp = HttpService.get(url)

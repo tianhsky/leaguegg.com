@@ -1,0 +1,178 @@
+.summoner{
+  .left-panel{
+
+  }
+  .profile{
+    position: relative;
+    background-color: rgba(40, 40, 40, 0.66);
+    .profile-bg-mask{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0px;
+      top: 0px;
+      background-color: rgba(0, 0, 0, 0.31);
+    }
+    .icon{
+      img{
+        border: 3px solid rgba(35, 35, 35, 0.52);
+        width: 100px;
+      }
+    }
+    .name{
+      h2{
+      }
+    }
+    .region, .level{
+      font-weight: 900;
+      padding-right: 20px;
+    }
+    .info{
+      .update_timestamp{
+        font-size: 8pt;
+      }
+      .btn-renew{
+        font-size: 15pt;
+        padding: 5px 15px 5px 15px;
+        margin-top: 10px;
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .recent-stats{
+    .graph{
+
+    }
+    .stats{
+      color: gray;
+      font-size: 9pt;
+    }
+  }
+  .matches{
+    .match-item{
+      color: white;
+      background-color: #000000;
+      margin-bottom: 3px;
+      .panel-heading{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        .title-left{
+          position: absolute;
+          left: 20px;
+        }
+        .title-right{
+          position: absolute;
+          right: 20px;
+        }
+      }
+      .panel-body{
+        padding-top: 5px;
+        padding-bottom: 0px;
+      }
+      &.won{
+        .panel-heading{
+          background-color: #8989FF;
+        }
+        .panel-body{
+          background: linear-gradient(#7C7CFF, #003F71);
+        }
+      }
+      &.lost{
+        .panel-heading{
+          background-color: #631D1D;
+        }
+        .panel-body{
+          background: linear-gradient(rgba(255, 55, 75, 0.5), rgba(255, 55, 75, 0.3));
+        }
+      }
+      .champion-spells{
+        display: table;
+        margin: auto; 
+        text-align: center;
+        .champion-item{
+          display: table-cell;
+          .champion-icon{
+            width: 70px;
+            border-radius: 50%;
+          }
+          p{
+
+          }
+        }
+        .spell-items{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          .spell-icon{
+            width: 35px;
+            border-radius: 50%;
+            margin: 0px 0px 3px 10px;
+          }
+        }
+      }
+      .game-items{
+        display: table;
+        margin: auto; 
+        text-align: center;
+        vertical-align: middle;
+
+        .main-items{
+          display: table-cell;
+        }
+        .side-items{
+          display: table-cell;
+          vertical-align: middle;
+        }
+        .item-row{
+          margin: 3px 0px 3px 0px;
+          .item{
+            width: 28px;
+            margin: 1px 1px;
+          }
+        }
+      }
+      .kda-stats{
+        vertical-align: middle;
+        .item{
+          font-size: 9pt;
+        }
+        .k, .d, .a{
+          font-size: 13pt;
+          font-weight: 800;
+        }
+        .k{
+          color: #FF6A7A;
+        }
+        .d{
+          color: #757575;
+        }
+        .a{
+          color: #A28226;
+        }
+      }
+      .game-stats{
+        vertical-align: middle;
+        .item{
+          font-size: 9pt;
+        }
+        .level, .gold, .creeps{
+          font-size: 13pt;
+          font-weight: 800;
+        }
+      }
+      .overall-stats{
+        display: table;
+        margin: auto; 
+        text-align: center;
+        min-height: 90px;
+        .best-kills{
+          display: table-cell;
+          vertical-align: middle;
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,13 @@
 <% content_for :js do %>
-
+  <%= javascript_include_tag 'game' %>
 <% end %>
-<%= javascript_include_tag 'game' %>
 
 <div class="live-game">
-
   <% if @error %>
-    <h3>
-      <%= @error.message %>
-    </h3>
+    <%= render partial: 'shared/error', locals: {error: @error} %>
   <% else %>
-
     <%= render partial: 'team', locals: {team: @game.teams[0], name: 'blue'} %>
     <%= render partial: 'team', locals: {team: @game.teams[1], name: 'red'} %>
-
   <% end %>
 
 </div>

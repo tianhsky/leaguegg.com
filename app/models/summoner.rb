@@ -6,6 +6,7 @@ class Summoner
 
   # Fields
   field :riot_updated_at, type: Integer
+  field :recent_matches_updated_at, type: Integer
 
   field :region, type: String
   field :summoner_id, type: Integer
@@ -39,13 +40,41 @@ class Summoner
   # Functions
 
   def inc_inquires(num=1)
-    self.inc(inquiries: 1)
+    self.inc(inquiries: num)
   end
 
   def sync_from_riot
     profile_json = Riot.find_summoner_by_summoner_id(summoner_id, region)
     profile_hash = Factory.build_summoner_hash(profile_json, region)
     self.update_attributes(profile_hash)
+  end
+
+  def recent_matches(reload)
+    r = SummonerMatch::Service.find_recent_matches(summoner_id, region, reload)
+    touch_recent_matches_updated_at
+    save
+    r
+  end
+
+  def recent_matches_updated_at_time
+    Time.at(recent_matches_updated_at/1000) if recent_matches_updated_at
+  end
+
+  def recent_matches_update_expired?
+    if t = recent_matches_updated_at_time
+      now = Time.now
+      if now - t > AppConsts::RECENT_MATCH_EXPIRES_THRESHOLD
+        return true
+      end
+    else
+      return true
+    end
+    false
+  end
+
+  def touch_recent_matches_updated_at
+    now = Utils::Time.time_to_epunix(Time.now)
+    self.recent_matches_updated_at = now
   end
 
   def self.search_by_name(name, region)

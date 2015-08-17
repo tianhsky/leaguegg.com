@@ -1,14 +1,14 @@
 {
   "name": "dsl-generated dependencies",
   "dependencies": {
+    "normalize.css": "3.0.2",
+    "underscore": "1.8.3",
+    "fontawesome": "4.3.0",
+    "bootstrap-sass-official": "3.3.3",
     "angular": "1.4.0-build.3993+sha.1268b17",
     "angular-ui-router": "0.2.14",
     "angular-animate": "1.4.0-build.3993+sha.1268b17",
-    "angular-truncate": "latest",
-    "bootstrap-sass-official": "3.3.3",
-    "fontawesome": "4.3.0",
-    "normalize.css": "3.0.2",
-    "underscore": "1.8.3"
+    "angular-truncate": "latest"
   },
   "resolutions": {
     "angular": "1.4.0-build.3993+sha.1268b17"

@@ -1,0 +1,9 @@
+<%
+  item = Consts::Item.find_by_id(item_id)
+%>
+
+<% if item %>
+  <img class="item" src="<%=item['img']%>">
+<% else %>
+  <img class="item" >
+<% end %>

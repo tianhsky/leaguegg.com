@@ -5,4 +5,8 @@
 
 //= require bootstrap-sass-official
 
+//= require chartjs
+
 //= require initializers
+
+//= require search_bar

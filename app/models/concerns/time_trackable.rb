@@ -6,11 +6,20 @@ module TimeTrackable
     field :synced_at, type: Integer
 
     before_create :touch_created_at
+    before_create :touch_updated_at
     before_update :touch_updated_at
   end
 
   def touch_synced_at
     self.synced_at = epunix_now
+  end
+
+  def created_at_time
+    Time.at(created_at/1000)
+  end
+
+  def updated_at_time
+    Time.at(updated_at/1000)
   end
 
   private

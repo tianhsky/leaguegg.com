@@ -1,0 +1,32 @@
+<div class="profile row well"
+<% if @last_champion_played %>
+  style="
+          position: relative;
+          background:url(<%=@last_champion_played['img_splashes'][0]%>);
+          background-position-y: -150px;
+        "
+<% end %>
+>
+  <div class="profile-bg-mask"></div>
+  <div class="col-md-2 icon">
+    <img src="<%= Consts::Profile.find_by_id(@summoner.profile_icon_id)['img'] %>">
+  </div>
+  <div class="col-md-8">
+    <h1 class="name"><%= @summoner.name %></h1>
+    <div>
+      <span class="level">LEVEL <%=@summoner.summoner_level%></span>
+      <span class="region"><%= Consts::Platform.find_by_region(@summoner.region)['name']%></span>
+    </div>
+  </div>
+  <div class="col-md-2 info">
+    <div class="update_timestamp">
+      <br>
+      Last updated:
+      <br>
+      <%= time_ago_in_words(@summoner.recent_matches_updated_at_time || @summoner.updated_at_time) %> ago
+    </div>
+    <div class="btn-green btn-cycle btn-renew">
+      <a href="?reload=1">Update</a>
+    </div>
+  </div>
+</div>

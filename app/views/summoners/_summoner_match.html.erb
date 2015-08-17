@@ -1,0 +1,81 @@
+<% 
+  champion = Consts::Champion.find_by_id(match.champion_id)
+  spell1 = Consts::Spell.find_by_id(match.spell1_id)
+  spell2 = Consts::Spell.find_by_id(match.spell2_id)
+  stats = match.stats
+  won = stats['winner']
+  queue_type = match['queue_type']
+  duration = match.duration
+%>
+
+<div class="panel match-item <%=won ? 'won' : 'lost'%>">
+  <div class="panel-heading">
+    <div class="title-left">
+      <%= queue_type.try(:titleize) %> - <%= time_ago_in_words(match.riot_created_at_time) %> ago
+    </div>
+    <div class="title-right">
+      <%= "#{duration[0]}m" %>
+    </div>
+    &nbsp;
+  </div>
+  <div class="panel-body">
+    <div class="col-md-3">
+      <div class="champion-spells">
+        <div class="champion-item">
+          <img class="champion-icon" src="<%=champion['img']%>">
+          <p alt="<%=champion['name']%>"><%= truncate(champion['name'], length: 10) %></p>
+        </div>
+        <div class="spell-items">
+          <div>
+          <img class="spell-icon" src="<%=spell1['img']%>">
+          </div>
+          <div>
+          <img class="spell-icon" src="<%=spell2['img']%>">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="kda-stats">
+        <div class="item"><span class="k"><%= stats['kills'] %></span> KILLS</div>
+        <div class="item"><span class="d"><%= stats['deaths'] %></span> DEATH</div>
+        <div class="item"><span class="a"><%= stats['assists'] %></span> ASSISTS</div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="game-stats">
+        <div class="item"><span class="level"><%= stats['champ_level'] %></span> LV</div>
+        <div class="item"><span class="gold"><%= number_to_human(stats['gold_earned'], :format => '%n%u', :units => { :thousand => 'K' }, precision: 0)  %></span> GOLD</div>
+        <div class="item"><span class="creeps"><%= stats['minions_killed'] %></span> CS</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="game-items">
+        <div class="main-items">
+          <div class="item-row">
+            <%= render partial: 'item', locals: {item_id: stats['item0']} %> 
+            <%= render partial: 'item', locals: {item_id: stats['item1']} %> 
+            <%= render partial: 'item', locals: {item_id: stats['item2']} %> 
+          </div>
+          <div class="item-row">
+            <%= render partial: 'item', locals: {item_id: stats['item3']} %> 
+            <%= render partial: 'item', locals: {item_id: stats['item4']} %> 
+            <%= render partial: 'item', locals: {item_id: stats['item5']} %> 
+          </div>
+        </div>
+        <div class="side-items">
+          <div class="item-row">
+            <%= render partial: 'item', locals: {item_id: stats['item6']} %> 
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="overall-stats">
+        <div class="best-kills"><%= match.best_kills %></div>
+      </div>
+    </div>
+  </div>
+</div>
