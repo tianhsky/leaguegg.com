@@ -51,8 +51,10 @@ class Summoner
 
   def recent_matches(reload)
     r = SummonerMatch::Service.find_recent_matches(summoner_id, region, reload)
-    touch_recent_matches_updated_at
-    save
+    if reload
+      touch_recent_matches_updated_at
+      save
+    end
     r
   end
 
