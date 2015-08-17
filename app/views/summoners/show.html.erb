@@ -1,4 +1,5 @@
 <% if @error %>
+  <br> <br>
   <%= render partial: 'shared/error', locals: {error: @error} %>
 <% else %>
   <% content_for :js do %>

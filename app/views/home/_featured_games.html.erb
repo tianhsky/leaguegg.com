@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="play-mask">
-          <a class="play" href='<%="/game/na/#{game['teams'][0]['participants'][0]['summoner_name']}"%>'>
+          <a class="play" href="<%=search_path({:type=>'game',:region=>'na',:summoner=>game['teams'][0]['participants'][0]['summoner_name']})%>">
             <i class="glyphicon glyphicon-play-circle"></i>
           </a>
         </div>

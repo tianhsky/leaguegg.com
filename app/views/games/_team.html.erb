@@ -86,7 +86,7 @@
             </div>
           </td>
           <td class="summoner" data-sort-value="<%= player.summoner_name %>">
-            <a title="<%= player.summoner_name %>" href="<%=summoner_path({:region=>params['region'].downcase,:summoner_name=>player.summoner_name})%>"><%= truncate(player.summoner_name, length: 8) %></a>
+            <a title="<%= player.summoner_name %>" href="<%=search_path({:type=>'summoner', :region=>params['region'].downcase,:summoner=>player.summoner_name})%>"><%= truncate(player.summoner_name, length: 8) %></a>
           </td>
           <td class="aggresive" data-sort-value="<%= aggresive %>">
             <% if stats_recent %>

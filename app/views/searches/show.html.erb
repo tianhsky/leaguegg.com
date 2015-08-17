@@ -1,0 +1,28 @@
+<% content_for :js do %>
+  <script type="text/javascript">
+    window.data = {};
+    window.data.search = {
+      type: "<%= @search_type %>",
+      region: "<%= @search_region %>",
+      summoner: "<%= @search_summoner %>"
+    };
+  </script>
+<% end %>
+
+<br> <br>
+
+<div class="row well search-block">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-2 search-icon">
+      <img src="/static/gif/volibear.gif">
+    </div>
+    <div class="col-md-10 search-text">
+      <h1 class="search-message">
+        Searching ...
+      </h1>
+      <h2 class="search-error hidden">
+        Sorry, there was problem with the search, click <a href="javascript:history.back()">here</a> to go back.
+      </h2>
+    </div>
+  </div>
+</div>

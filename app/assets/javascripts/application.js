@@ -9,4 +9,4 @@
 
 //= require initializers
 
-//= require search_bar
+//= require search
