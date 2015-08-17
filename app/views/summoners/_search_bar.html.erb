@@ -1,18 +1,11 @@
 <form class="summoner-search-bar" action="/search" role="search" method="get">
   <div class="summoner-search-container">
     <input type="hidden" name="type" value="summoner">
-    <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-sm input-search" name="summoner" placeholder="Summoner..." value="<%=params['summoner_name']%>">
+    <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-sm input-search" name="summoner_name" placeholder="Summoner..." value="<%=params['summoner_name']%>">
     <select class="form-element input-sm input-region" name="region">
-      <option value="na">NA</option>
-      <option value="euw">EUW</option>
-      <option value="eune">EUNE</option>
-      <option value="br">BR</option>
-      <option value="tr">TR</option>
-      <option value="ru">RU</option>
-      <option value="lan">LAN</option>
-      <option value="las">LAS</option>
-      <option value="oce">OCE</option>
-      <option value="kr">KR</option>
+      <% Consts::Platform.region_list.each do |r| %>
+        <option value="<%=r%>" <%= params['region'].try(:downcase)==r ? 'selected' : '' %> ><%=r.upcase%></option>
+      <% end %>
     </select>
     <button class=" form-element btn btn-default btn-sm btn-search" type="submit">
       <span class="glyphicon glyphicon-search"></span>

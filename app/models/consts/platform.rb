@@ -38,6 +38,10 @@ module Consts
       }
     end
 
+    def self.region_list
+      ['na', 'euw', 'eune', 'br', 'tr', 'ru', 'lan', 'las', 'oce', 'kr']
+    end
+
   end
 
 end

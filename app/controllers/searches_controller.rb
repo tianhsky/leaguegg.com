@@ -4,20 +4,20 @@ class SearchesController < ApplicationController
 
   def show
     if search_type == 'game'
-      if search_region.blank? || search_summoner.blank?
+      if search_region.blank? || search_summoner_name.blank?
         redirect_to :back and return
       end
       # redirect_to game_path({
       #   'region' => search_region,
-      #   'summoner_name' => search_summoner
+      #   'summoner_name' => search_summoner_name
       # })
     elsif search_type == 'summoner'
-      if search_region.blank? || search_summoner.blank?
+      if search_region.blank? || search_summoner_name.blank?
         redirect_to :back and return
       end
       # redirect_to summoner_path({
       #   'region' => search_region,
-      #   'summoner_name' => search_summoner
+      #   'summoner_name' => search_summoner_name
       # })
     end
   end
@@ -32,8 +32,8 @@ class SearchesController < ApplicationController
     @search_region ||= params['region'].try(:downcase)
   end
 
-  def search_summoner
-    @search_summoner ||= params['summoner']
+  def search_summoner_name
+    @search_summoner_name ||= params['summoner_name']
   end
 
 end
