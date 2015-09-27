@@ -19,14 +19,13 @@ class Match
   field :map_id, type: Integer
   field :match_version, type: String
 
-  field :participants, type: Array
   field :teams, type: Array
 
   # Relations
 
   # Indexes
   index({ match_id: 1, region: 1 }, { unique: true })
-  index({ 'participants.summoner_id' => 1, 'region' => 1, 'riot_created_at' => -1 })
+  index({ 'teams.participants.summoner_id' => 1, 'region' => 1, 'riot_created_at' => -1 })
 
   # Validations
   validates :season, presence: true

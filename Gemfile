@@ -55,6 +55,9 @@ gem 'redis-rails'
 gem 'awesome_print', require: 'ap'
 # Schedule task
 gem 'whenever', require: false
+
+gem 'ratelimit'
+
 group :development do
   # Debug tools
   gem 'better_errors'

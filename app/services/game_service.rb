@@ -7,7 +7,7 @@ module GameService
       platform_id = Consts::Platform.find_by_region(region)['platform']
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
       begin
-        resp = HttpService.get(url)
+        resp = HttpService.get(url, region)
       rescue Errors::NotFoundError => ex
         raise Errors::GameNotFoundError
       end
@@ -15,7 +15,7 @@ module GameService
 
     def self.find_current_featured_game(region)
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/featured"
-      resp = HttpService.get(url)
+      resp = HttpService.get(url, region)
     end
 
   end
