@@ -4,6 +4,9 @@
     form {
       padding: 70px 0px 40px 0px;
     }
+    .search-form {
+      padding: 70px 0px 40px 0px;
+    }
     .search-game-container {
       background-color: $gray_b_1;
       display: inline-block;
@@ -65,13 +68,20 @@
       }
     }
     .carousel-inner {
-      top: 15px;
+      min-height: 450px;
+      top: 3px;
       position: relative;
+      .carousel-control{
+        display: none;
+      }
+      .carousel-indicators{
+        display: none;
+      }
       .featured-team {
         width: 50%;
         overflow: hidden;
         .player {
-          margin: 10px 5px;
+          margin: 15px 5px;
           .summoner-name {
             display: inline;
             vertical-align: middle;
@@ -85,7 +95,7 @@
           }
           .champion-img {
             display: inline;
-            width: 40px;
+            width: 50px;
           }
         }
         .team-banner {
@@ -163,11 +173,11 @@
         height: 100%;
         .play {
           position: absolute;
-          margin-left: -50px;
-          top: 100px;
+          margin-left: -75px;
+          top: 125px;
           opacity: 0.0;
           i {
-            font-size: 100px;
+            font-size: 150px;
           }
         }
         &:hover {

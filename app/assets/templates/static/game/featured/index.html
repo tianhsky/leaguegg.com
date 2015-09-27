@@ -1,0 +1,20 @@
+<div class="carousel slide" data-ride="carousel">
+  <div class="featured-header">
+    <h4>Featured Games</h4>
+  </div>
+  <carousel class="carousel-inner" role="listbox" interval="rotate_interval" no-wrap="no_wrap_slide">
+    <slide class="item" ng-repeat="game in featured_games" active="game.active">
+      <div class="featured-team left">
+        <featured-team team="game.teams[0]" />
+      </div>
+      <div class="featured-team right">
+        <featured-team team="game.teams[1]" />
+      </div>
+      <div class="play-mask">
+        <a class="play" href="{{game.url}}">
+          <i class="glyphicon glyphicon-play-circle"></i>
+        </a>
+      </div>
+    </slide>
+  </carousel>
+</div>

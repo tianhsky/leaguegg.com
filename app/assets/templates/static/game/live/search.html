@@ -1,0 +1,31 @@
+<h3>
+  Find out how aggresive your opponents are,
+  <br>and how helpful your team is.
+</h3>
+
+<div class="search-form">
+  <!-- large page form -->
+  <div class="hidden-xs" role="search">
+    <div class="search-game-container">
+      <!-- <input type="hidden" name="type" value="game"> -->
+      <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search for summoner in game..." ng-model="query.summoner">
+      <select class="form-element input-lg input-region" ng-options="p for p in platforms" ng-model="query.region"></select>
+
+      <button class=" form-element btn btn-default btn-lg btn-search" type="submit" ng-click="submitSearch()">
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- small page form -->
+  <div class="visible-xs-inline-block" role="search">
+    <div class="search-game-container">
+      <!-- <input type="hidden" name="type" value="game"> -->
+      <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search for summoner in game..." ng-model="query.summoner">
+      <select class="form-element input-lg input-region" ng-options="p for p in platforms" ng-model="query.region"></select>
+      <button class=" form-element btn btn-default btn-lg btn-search" type="submit" ng-click="submitSearch()">
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="player" ng-repeat="p in team.participants">
+  <div class="logo">
+    <div class="summoner-name">
+      {{p.summoner.name}}
+    </div>
+    <div class="champion-icon">
+      <img ng-src="{{p.champion.img_url}}" width="59">
+    </div>
+    <div class="skills">
+      <img ng-src="{{p.spell1.img_url}}" width="27">
+      <img ng-src="{{p.spell2.img_url}}" width="27">
+    </div>
+  </div>
+  <div class="stats">
+    <div class="level">
+    </div>
+    <div class="aggresive">
+      {{p.ranked_stat_overall.aggresive_rate}}
+    </div>
+    <div class="kda">
+      <kda k="p.ranked_stat_overall.avg_kills" d="p.ranked_stat_overall.avg_deaths" a="p.ranked_stat_overall.avg_assists" rate="p.ranked_stat_overall.kda_rate" />
+      <kda k="p.ranked_stat_recent.avg_kills" d="p.ranked_stat_recent.avg_deaths" a="p.ranked_stat_recent.avg_assists" rate="p.ranked_stat_recent.kda_rate" />
+    </div>
+    <div class="wl">
+      <wl w="p.ranked_stat_overall.won" l="p.ranked_stat_overall.lost" rate="p.ranked_stat_overall.win_rate" />
+      <wl w="p.ranked_stat_recent.won" l="p.ranked_stat_recent.lost" rate="p.ranked_stat_recent.win_rate" />
+    </div>
+    <div class="dmgtk">
+      {{p.ranked_stat_recent.avg_per_min_dmg_taken_at_10m}}
+    </div>
+    <div class="cs">
+      {{p.ranked_stat_recent.avg_cs_at_10m}}
+    </div>
+    <div class="jcs">
+      {{p.ranked_stat_recent.avg_team_jungle_kills}} / {{p.ranked_stat_recent.avg_enemy_jungle_kills}}
+    </div>
+    <div class="wards">
+      {{p.ranked_stat_recent.avg_wards_placed}} {{p.ranked_stat_recent.avg_wards_killed}}
+    </div>
+  </div>
+</div>

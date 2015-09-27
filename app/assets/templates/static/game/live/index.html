@@ -1,0 +1,10 @@
+<div class="live-game">
+  <div class="error" ng-if="error">
+    {{ error }}
+  </div>
+  <div ng-if="!error">
+    <div class="team" ng-repeat="team in teams">
+      <gameTeam team="team" />
+    </div>
+  </div>
+</div>

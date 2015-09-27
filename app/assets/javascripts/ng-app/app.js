@@ -1,17 +1,25 @@
-app = angular.module('app', [
-  'ngAnimate',
-  'ui.router',
-  'truncate',
-  'templates'
-]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-  function($stateProvider, $urlRouterProvider, $locationProvider) {
-    $stateProvider
-      .state('game', {
-        url: '/',
-        templateUrl: 'game/show.html',
-        controller: 'GameCtrl'
-      });
-    $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);
-  }
+//leaguegg
+//templates, ui.router, ngAnimate, UtilModule, ConstsModule
+//HomeModule, GameModule, SearchbarModule, 
+
+angular.module('UtilModule', []);
+
+angular.module('ConstsModule', []);
+
+angular.module('PartialModule', []);
+
+angular.module('HomeModule', [
+  'templates', 'ui.router', 'truncate', 'UtilModule'
+]);
+
+angular.module('GameModule', [
+  'templates', 'ui.router', 'ui.bootstrap', 'truncate', 'UtilModule', 'ConstsModule'
+]);
+
+angular.module('SearchbarModule', [
+  'templates', 'ui.router', 'truncate', 'UtilModule', 'ConstsModule'
+]);
+
+angular.module('leaguegg', [
+  'HomeModule', 'GameModule', 'SearchbarModule'
 ]);

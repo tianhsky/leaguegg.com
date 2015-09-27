@@ -1,7 +1,7 @@
 //= require underscore
 
 //= require jquery
-//= require jquery-tablesort
+//= //require jquery-tablesort
 
 //= require bootstrap-sass-official
 
@@ -9,4 +9,6 @@
 
 //= require initializers
 
-//= require search
+//= //require search
+
+//= require ng_app
