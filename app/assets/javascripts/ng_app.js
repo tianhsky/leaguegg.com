@@ -2,6 +2,7 @@
 //= require angular
 //= require angular-bootstrap
 //= require angular-animate
+//= require angular-ui-router-anim-in-out
 //= require angular-ui-router
 //= require angular-truncate
 //= require angular-rails-templates
