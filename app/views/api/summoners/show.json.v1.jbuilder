@@ -1,0 +1,1 @@
+json.partial! 'info', {summoner: @summoner}

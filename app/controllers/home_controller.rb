@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  def index
+  def show
     @featured = Game::Service.find_current_featured_games('NA')
   end
 

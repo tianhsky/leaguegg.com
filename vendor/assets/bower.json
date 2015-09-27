@@ -5,12 +5,14 @@
     "underscore": "1.8.3",
     "fontawesome": "4.3.0",
     "bootstrap-sass-official": "3.3.3",
-    "angular": "1.4.0-build.3993+sha.1268b17",
+    "angular": "1.4.6",
     "angular-ui-router": "0.2.14",
-    "angular-animate": "1.4.0-build.3993+sha.1268b17",
-    "angular-truncate": "latest"
+    "angular-bootstrap": "0.13.4",
+    "angular-animate": "1.4.6",
+    "angular-truncate": "latest",
+    "angular-mocks": "1.4.6"
   },
   "resolutions": {
-    "angular": "1.4.0-build.3993+sha.1268b17"
+    "angular": "1.4.6"
   }
 }

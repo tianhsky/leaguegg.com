@@ -6,10 +6,12 @@ group :vendor do
   asset 'underscore', '1.8.3'
   asset 'fontawesome', '4.3.0'
   asset 'bootstrap-sass-official', '3.3.3'
-  asset 'angular', '1.4.0-build.3993+sha.1268b17'
+  asset 'angular', '1.4.6'
   asset 'angular-ui-router', '0.2.14'
-  asset 'angular-animate', '1.4.0-build.3993+sha.1268b17'
+  asset 'angular-bootstrap', '0.13.4'
+  asset 'angular-animate', '1.4.6'
   asset 'angular-truncate', 'latest'
+  asset 'angular-mocks', '1.4.6'
 
-  resolution "angular", "1.4.0-build.3993+sha.1268b17"
+  resolution "angular", "1.4.6"
 end

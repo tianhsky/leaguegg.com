@@ -1,11 +1,9 @@
 json.spell1 do
-  json.id participant.spell1_id
-  json.name Consts::Spell.find_by_id(participant.spell1_id)['name']
+  json.partial! 'api/consts/spell', {spell_id: participant.spell1_id}
 end
 
 json.spell2 do
-  json.id participant.spell2_id
-  json.name Consts::Spell.find_by_id(participant.spell2_id)['name']
+  json.partial! 'api/consts/spell', {spell_id: participant.spell2_id}
 end
 
 json.summoner do
@@ -14,19 +12,23 @@ json.summoner do
 end
 
 json.champion do
-  json.id participant.champion_id
-  json.name Consts::Champion.find_by_id(participant.champion_id)['name']
+  json.partial! 'api/consts/champion', {champion_id: participant.champion_id}
 end
 
 json.meta participant.meta
 
-json.runes participant.runes, partial: 'rune', as: :rune
+json.runes participant.runes do |r|
+  json.partial! 'api/consts/rune', {rune_id: r['rune_id']}
+  json.count r['count']
+end
 
-json.masteries participant.masteries, partial: 'mastery', as: :mastery
+json.masteries participant.masteries do |m|
+  json.partial! 'api/consts/mastery', {mastery_id: m['mastery_id'], rank: m['rank']}
+end
 
 if participant.ranked_stat_by_champion
   json.ranked_stat_overall do
-    json.partial! 'ranked_stat_by_champion', rstat: participant.ranked_stat_by_champion
+    json.partial! 'ranked_stat_by_champion', {rstat: participant.ranked_stat_by_champion}
   end
 else
   json.ranked_stat_overall nil
@@ -34,7 +36,7 @@ end
 
 if participant.ranked_stat_by_recent_champion
   json.ranked_stat_recent do
-    json.partial! 'ranked_stat_by_recent_champion', rstat: participant.ranked_stat_by_recent_champion
+    json.partial! 'ranked_stat_by_recent_champion', {rstat: participant.ranked_stat_by_recent_champion}
   end
 else
   json.ranked_stat_recent nil

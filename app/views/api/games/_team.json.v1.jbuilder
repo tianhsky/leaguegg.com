@@ -1,8 +1,7 @@
 json.id team.team_id
 
 json.banned_champions team.banned_champions do |c|
-  json.id c['champion_id']
-  json.name Consts::Champion.find_by_id(c['champion_id'])['name']
+  json.partial! 'api/consts/champion', {champion_id: c['champion_id']}
   json.pick_turn c['pick_turn']
 end
 

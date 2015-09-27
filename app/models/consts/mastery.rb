@@ -54,7 +54,8 @@ module Consts
         r["#{value['id']}".to_i] = {
           "id" => value['id'],
           "name" => value['name'],
-          "description" => value['description']
+          "description" => value['description'],
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/mastery/#{value['id']}.png"
         }
       end
       r

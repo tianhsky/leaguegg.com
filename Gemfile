@@ -6,7 +6,7 @@ gem 'dotenv-rails'
 gem 'rails', '4.1.4'
 # JavaScript runtime
 gem 'execjs', '~> 2.5.2'
-gem 'therubyracer' , '~> 0.12.2'
+gem 'therubyracer', '~> 0.12.2'
 
 # jquery
 # gem 'jquery-rails'
@@ -28,7 +28,9 @@ gem 'mongoid', '~> 4.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', group: :development
+# Development starter
+gem 'foreman'
 # Use puma as the app server
 gem 'puma'
 # Process monitor
@@ -50,17 +52,18 @@ gem 'httparty'
 # Cache
 gem 'redis-rails'
 # Print object nicely
-gem 'awesome_print', :require => 'ap'
+gem 'awesome_print', require: 'ap'
 # Schedule task
-gem 'whenever', :require => false
+gem 'whenever', require: false
 group :development do
-	# Debug tools
-	gem 'better_errors'
-	gem 'binding_of_caller' # together with better_errors enables instance variable inspection
+  # Debug tools
+  gem 'better_errors'
+  gem 'binding_of_caller' # together with better_errors enables instance variable inspection
 end
 group :development, :test do
-	# Test suite
-	gem 'rspec-rails', '~> 3.0.0'
-	gem 'database_cleaner'
-	gem 'factory_girl_rails'
+  # Test suite
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'jasmine'
 end

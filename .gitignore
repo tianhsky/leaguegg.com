@@ -1,8 +1,8 @@
 !.gitignore
+/.bundle
 /.env
 *.log
 *.DS_Store*
 .sass-cache
-tmp
-public/system
 public/assets
+tmp
