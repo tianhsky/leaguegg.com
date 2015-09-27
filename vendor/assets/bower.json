@@ -10,9 +10,11 @@
     "angular-bootstrap": "0.13.4",
     "angular-animate": "1.4.6",
     "angular-truncate": "latest",
-    "angular-mocks": "1.4.6"
+    "angular-mocks": "1.4.6",
+    "angular-ui-router-anim-in-out": "latest"
   },
   "resolutions": {
-    "angular": "1.4.6"
+    "angular": "1.4.6",
+    "angular-animate": "1.2.28"
   }
 }

@@ -23,13 +23,20 @@ module HttpService
     {'api_key' => get_api_key}
   end
 
-  def self.get(url, opts={})
+  def self.get(url, region, opts={})
     url = URI::encode(url)
     opts[:query] ||= {}
     opts[:query].merge!(get_api_key_param)
     opts[:headers] ||= {}
     opts[:headers].merge!(HEADERS)
-    resp = HTTParty.get(url, opts)
+
+    key = region.try(:downcase) || 'all'
+    resp = nil
+    
+    AppService::RIOT_THROTTLE.exec_within_threshold key, threshold: 3000, interval: 10 do
+      resp = HTTParty.get(url, opts)
+      AppService::RIOT_THROTTLE.add(key)
+    end
 
     status_code = resp.response.code.to_i
     raise Errors::RateLimitError.new if status_code == 429

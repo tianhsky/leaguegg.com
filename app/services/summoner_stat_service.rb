@@ -4,12 +4,12 @@ module SummonerStatService
 
     def self.find_summoner_player_stats(summoner_id, region, season)
       url = "https://#{region.downcase}.api.pvp.net/api/lol/#{region.downcase}/v1.3/stats/by-summoner/#{summoner_id}/summary?season=#{season.upcase}"
-      resp = HttpService.get(url)
+      resp = HttpService.get(url, region)
     end
 
     def self.find_summoner_ranked_stats(summoner_id, region, season)
       url = "https://#{region.downcase}.api.pvp.net/api/lol/#{region.downcase}/v1.3/stats/by-summoner/#{summoner_id}/ranked?season=#{season.upcase}"
-      resp = HttpService.get(url)
+      resp = HttpService.get(url, region)
     end
 
   end
