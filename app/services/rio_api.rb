@@ -1,4 +1,4 @@
-module HttpService
+module RiotAPI
 
   HEADERS = {
     'Content-Type' => 'application/json',
@@ -33,9 +33,9 @@ module HttpService
     key = region.try(:downcase) || 'all'
     resp = nil
     
-    AppService::RIOT_THROTTLE.exec_within_threshold key, threshold: 3000, interval: 10 do
+    AppConsts::RIOT_THROTTLE.exec_within_threshold key, threshold: 3000, interval: 10 do
       resp = HTTParty.get(url, opts)
-      AppService::RIOT_THROTTLE.add(key)
+      AppConsts::RIOT_THROTTLE.add(key)
     end
 
     status_code = resp.response.code.to_i

@@ -4,7 +4,7 @@ module MatchService
     def self.find_match(match_id, region)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.2/match/#{match_id}"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
     def self.find_match_list(summoner_id, region, season=ENV['CURRENT_SEASON'], champion_id=nil, begin_index=nil, end_index=nil)
@@ -14,7 +14,7 @@ module MatchService
       url += "&championIds=#{champion_id}" if champion_id
       url += "&beginIndex=#{begin_index}" if begin_index
       url += "&endIndex=#{end_index}" if end_index
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
   end
 

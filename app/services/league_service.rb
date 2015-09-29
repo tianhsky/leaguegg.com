@@ -6,7 +6,7 @@ module LeagueService
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.5/league/by-summoner/#{summoner_id}"
       begin
-        resp = HttpService.get(url, region).values.first
+        resp = RiotAPI.get(url, region).values.first
       rescue Errors::NotFoundError => ex
         raise Errors::LeagueNotFoundError
       end

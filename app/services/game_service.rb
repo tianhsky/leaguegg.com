@@ -7,7 +7,7 @@ module GameService
       platform_id = Consts::Platform.find_by_region(region)['platform']
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
       begin
-        resp = HttpService.get(url, region)
+        resp = RiotAPI.get(url, region)
       rescue Errors::NotFoundError => ex
         raise Errors::GameNotFoundError
       end
@@ -15,7 +15,7 @@ module GameService
 
     def self.find_current_featured_game(region)
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/featured"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
   end
@@ -27,7 +27,7 @@ module GameService
       unless r = find_featured_games_from_cache(region)
         r = {}
         featured = Riot.find_current_featured_game(region)
-        r['game_list'] = featured['gameList'].map{|g| Factory.build_game_hash(g, region)}
+        r['game_list'] = featured['game_list'].map{|g| Factory.build_game_hash(g, region)}
         store_featured_games_to_cache(r, region)
       end
       r
@@ -47,7 +47,7 @@ module GameService
       unless game = find_game_from_cache(summoner_id, region)
         # check riot
         json = Riot.find_game_by_summoner_id(summoner_id, region)
-        game_id = json['gameId']
+        game_id = json['game_id']
 
         # check db
         unless game = Game.where('game_id' => game_id).first
@@ -74,7 +74,7 @@ module GameService
     def self.find_game_by_summoner_id2(summoner_id, region)
       # game
       game_json = Riot.find_game_by_summoner_id(summoner_id, region)
-      game_id = game_json['gameId']
+      game_id = game_json['game_id']
       game_hash = Factory.build_game_hash(game_json, region)
 
       # summoners
@@ -222,69 +222,29 @@ module GameService
 
     def self.build_game_hash(game, region)
       region.upcase!
-      teams = game['participants'].group_by{|x|x['teamId']}
-      {
-        'region' => region,
-        'game_id' => game['gameId'],
-        'map_id' => game['mapId'],
-        'game_mode' => game['gameMode'],
-        'game_type' => game['gameType'],
-        'game_queue_config_id' => game['gameQueueConfigId'],
-        'platform_id' => game['platformId'],
-        'observer_encryption_key' => game['observers'] ? game['observers']['encryptionKey'] : nil,
-        'started_at' => game['gameStartTime'],
-        'game_length' => game['gameLength'],
-        'teams' => teams.map{|k,v|build_team_hash(k,v,game['bannedChampions'].select{|x|x['teamId']==k})}
-      }
-    end
-
-    def self.build_team_hash(team_id, participants, bans)
-      {
-        'team_id' => team_id,
-        'banned_champions' => bans.map{|x|build_banned_champion_hash(x)},
-        'participants' => participants.map{|x|build_participant_hash(x)}
-      }
-    end
-
-    def self.build_banned_champion_hash(ban)
-      {
-        'champion_id' => ban['championId'],
-        'pick_turn' => ban['pickTurn']
-      }
-    end
-
-    def self.build_participant_hash(participant)
-      r = {
-        'spell1_id' => participant['spell1Id'],
-        'spell2_id' => participant['spell2Id'],
-        'champion_id' => participant['championId'],
-        'summoner_id' => participant['summonerId'],
-        'summoner_name' => participant['summonerName'],
-        'profile_icon_id' => participant['profileIconId'],
-        'bot' => participant['bot']
-      }
-      if participant['masteries']
-        r['masteries'] = participant['masteries'].map{|x|build_mastery_hash(x)}
-      end
-      if participant['runes']
-        r['runes'] = participant['runes'].map{|x|build_rune_hash(x)}
-      end
+      teams = game['participants'].group_by{|x|x['team_id']}
+      r = Utils::JsonParser.clone_to([
+        'game_id', 'map_id', 'game_mode', 'game_type', 'game_queue_config_id',
+        'platform_id', 'game_length'
+        ],game,{})
+      r['region'] = region
+      r['observer_encryption_key'] = game['observers'] ? game['observers']['encryption_key'] : nil,
+      r['started_at'] = game['game_start_time']
+      r['teams'] = teams.map{|k,v|build_team_hash(k,v,game['banned_champions'].select{|x|x['team_id']==k})}
       r
     end
 
-    def self.build_mastery_hash(mastery)
+    def self.build_team_hash(team_id, participants, bans)
+      bans.each{|b|b.delete('team_id')}
+      participants.each{|p|p.delete('team_id')}
+
       {
-        'rank' => mastery['rank'],
-        'mastery_id' => mastery['masteryId']
+        'team_id' => team_id,
+        'banned_champions' => bans,
+        'participants' => participants
       }
     end
 
-    def self.build_rune_hash(rune)
-      {
-        'count' => rune['count'],
-        'rune_id' => rune['runeId']
-      }
-    end
 
   end
 

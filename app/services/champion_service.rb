@@ -4,7 +4,7 @@ module ChampionService
 
     def self.find_free_champions(region='na')
       url = "https://#{region.downcase}.api.pvp.net/api/lol/#{region.downcase}/v1.2/champion?freeToPlay=true"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
   end

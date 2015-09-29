@@ -4,19 +4,19 @@ module SummonerMatchService
     def self.find_matches(summoner_id, champion_id, region, begin_index, end_index)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.2/matchhistory/#{summoner_id}?championIds=#{champion_id}&beginIndex=#{begin_index}&endIndex=#{end_index}"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
     def self.find_recent_games(summoner_id, region)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v1.3/game/by-summoner/#{summoner_id}/recent"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
     def self.find_match(match_id, region)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.2/match/#{match_id}"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
   end
 

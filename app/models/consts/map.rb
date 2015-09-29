@@ -51,9 +51,9 @@ module Consts
       @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
-        r["#{value['mapId']}".to_i] = {
-          "id" => value['mapId'],
-          "name" => value['mapName'],
+        r["#{value['map_id']}".to_i] = {
+          "id" => value['map_id'],
+          "name" => value['map_name'],
           "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/map/#{value['image']['full']}"
         }
       end
