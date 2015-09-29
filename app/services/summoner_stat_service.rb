@@ -19,73 +19,50 @@ module SummonerStatService
     def self.build_season_stat_hash(rank_stats, player_stats, summoner_id, season, region)
       season.upcase!
       region.upcase!
-      r = HashWithIndifferentAccess.new
+      rank_stats = Utils::JsonParser.underscoreize(rank_stats)
+      player_stats = Utils::JsonParser.underscoreize(player_stats)
+
+      r = {}
       r['summoner_id'] = summoner_id
       r['season'] = season
       r['region'] = region
       if rank_stats
         rank_summary = rank_stats['champions'].select{|c|c['id']==0}.first
-        # r['riot_updated_at'] = rank_stats['modifyDate']
+        r['ranked_stat_summary'] = build_ranked_stat_summary_hash(rank_stats['modify_date'], rank_summary)
         r['ranked_stats_by_champion'] = rank_stats['champions'].map{|c|build_ranked_stat_by_champion_hash(c)}.compact
-        r['ranked_stat_summary'] = build_ranked_stat_summary_hash(rank_stats['modifyDate'], rank_summary)
       end
       if player_stats
-        r['player_stats'] = player_stats['playerStatSummaries'].map{|p|build_player_stat_hash(p)}
+        r['player_stats'] = player_stats['player_stat_summaries'].map{|p|build_player_stat_hash(p)}
       end
       r
     end
 
     def self.build_ranked_stat_by_champion_hash(champ)
       champ_id = champ['id']
-      return if champ_id == 0
+      return if champ_id == 0 # do not build for overall stats
+      champ.delete('id')
+
       stat = champ['stats']
-      {
-        'champion_id' => champ_id,
-        'total_sessions_played' => stat['totalSessionsPlayed'],
-        'total_sessions_lost' => stat['totalSessionsLost'],
-        'total_sessions_won' => stat['totalSessionsWon'],
-        'total_champion_kills' => stat['totalChampionKills'],
-        'total_damage_dealt' => stat['totalDamageDealt'],
-        'total_damage_taken' => stat['totalDamageTaken'],
-        'most_champion_kills' => stat['mostChampionKillsPerSession'],
-        'total_minion_kills' => stat['totalMinionKills'],
-        'total_double_kills' => stat['totalDoubleKills'],
-        'total_triple_kills' => stat['totalTripleKills'],
-        'total_quadra_kills' => stat['totalQuadraKills'],
-        'total_penta_kills' => stat['totalPentaKills'],
-        'total_unreal_kills' => stat['totalUnrealKills'],
-        'total_deaths' => stat['totalDeathsPerSession'],
-        'total_gold_earned' => stat['totalGoldEarned'],
-        'most_spells_cast' => stat['mostSpellsCast'],
-        'total_turrets_killed' => stat['totalTurretsKilled'],
-        'total_physical_damage_dealt' => stat['totalPhysicalDamageDealt'],
-        'total_magic_damage_dealt' => stat['totalMagicDamageDealt'],
-        'total_first_blood' => stat['totalFirstBlood'],
-        'total_assists' => stat['totalAssists'],
-        'max_champions_killed' => stat['maxChampionsKilled'],
-        'max_num_deaths' => stat['maxNumDeaths']
-      }
+      stat['champion_id'] = champ_id
+      stat_underscoreized = Utils::JsonParser.underscoreize(stat)
+      stat_underscoreized
     end
 
     def self.build_ranked_stat_summary_hash(riot_updated_at, summary)
       stat = summary['stats']
-      r = {}
       stat['riot_updated_at'] = riot_updated_at
-      stat.each{ |k,v| r["#{k.to_s.underscore}"] = v }
-      r
+      stat_underscoreized = Utils::JsonParser.underscoreize(stat)
+      stat_underscoreized
     end
 
     def self.build_player_stat_hash(player_summary)
-      stat = player_summary['aggregatedStats']
-      new_stat = {}
-      stat.each{ |k,v| new_stat["#{k.to_s.underscore}"] = v }
-      {
-        'riot_updated_at' => player_summary['modifyDate'],
-        'player_stat_summary_type' => player_summary['playerStatSummaryType'],
-        'wins' => player_summary['wins'],
-        'losses' => player_summary['losses'],
-        'stats' => new_stat
-      }
+      stat = player_summary['aggregated_stats']
+      r = Utils::JsonParser.clone_to([
+        'player_stat_summary_type', 'wins', 'losses'
+      ], player_summary, {})
+      r['riot_updated_at'] = player_summary['modify_date']
+      r['stats'] = stat
+      r
     end
 
   end

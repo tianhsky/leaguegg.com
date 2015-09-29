@@ -26,14 +26,15 @@ module SummonerService
 
     def self.build_summoner_hash(summoner, region)
       region.upcase!
-      {
-        'region' => region,
-        'summoner_id' => summoner['id'],
-        'name' => summoner['name'],
-        'profile_icon_id' => summoner['profileIconId'],
-        'summoner_level' => summoner['summonerLevel'],
-        'riot_updated_at' => summoner['revisionDate']
-      }
+      summoner_underscoreized = Utils::JsonParser.underscoreize(summoner)
+      summoner_underscoreized['region'] = region
+      summoner_underscoreized['summoner_id'] = summoner_underscoreized['id']
+      summoner_underscoreized['riot_updated_at'] = summoner_underscoreized['revision_date']
+      r = Utils::JsonParser.clone_to([
+        'region', 'summoner_id', 'riot_updated_at', 'name',
+        'profile_icon_id', 'summoner_level'
+      ], summoner_underscoreized, {})
+      r
     end
 
   end

@@ -21,10 +21,10 @@ module SummonerMatchService
   end
 
   module Factory
-    def self.build_match_hash(json, participant_index)
+    def self.build_summoner_match_hash(json, participant_index)
       p = json['participants'][participant_index]
       pi = json['participantIdentities'][participant_index]
-      
+
       r = HashWithIndifferentAccess.new
       r['riot_created_at'] = json['matchCreation']
       r['season'] = json['season']
@@ -49,7 +49,7 @@ module SummonerMatchService
         r['stats'] = build_stats_hash(p['stats'])
         r['match_id'] = json['matchId']
       end
-      
+
       if pi
         r['participant_id'] = pi['participantId']
         if pl = pi['player']
@@ -137,14 +137,14 @@ module SummonerMatchService
 
         if pi = match_json['participantIdentities'][index]
           if pi['player']
-            summoner_match_hash = Factory::build_match_hash(match_json, index)
+            summoner_match_hash = Factory::build_summoner_match_hash(match_json, index)
             match = SummonerMatch.new(summoner_match_hash)
             match.save
             matches << match
           end
         end
       end
-      
+
       matches.find{|m| m.summoner_id == summoner_id}
     end
 
@@ -154,7 +154,7 @@ module SummonerMatchService
         matches_json.each do |mj|
           match = SummonerMatch.where(match_id: mj['matchId'], summoner_id: summoner_id, region: region.upcase).first
           unless match
-            match_hash = Factory.build_match_hash(mj, 0)
+            match_hash = Factory.build_summoner_match_hash(mj, 0)
             match = SummonerMatch.new(match_hash)
             match.save
           end
@@ -176,7 +176,7 @@ module SummonerMatchService
             match = Service::find_match(summoner_id, game_id, region, g)
             matches << match if match
           rescue Errors::NotFoundError => ex
-            
+
           end
         end
       else

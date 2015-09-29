@@ -1,7 +1,6 @@
 class Summoner
   include Mongoid::Document
   include TimeTrackable
-  include Regionable
   include SummonerService
 
   # Fields
@@ -34,8 +33,7 @@ class Summoner
   validates_uniqueness_of :summoner_id, scope: [:region]
 
   # Callbacks
-  before_validation :store_name_in_lower_case
-  before_validation :store_highest_tier_in_upper_case
+  before_validation :sanitize_attrs
 
   # Functions
 
@@ -85,14 +83,21 @@ class Summoner
     self.where(:name_lowercase => name_key, :region => region_key).first
   end
 
+  def outdated?
+    return true if self.new_record?
+    if time = Utils::Time.time_to_epunix(self.synced_at)
+      return true if time < Time.now - AppConsts::SUMMONER_EXPIRES_THRESHOLD
+    end
+    false
+  end
+
   protected
 
-  def store_name_in_lower_case
+  def sanitize_attrs
     self.name_lowercase = self.name.try(:downcase).try(:gsub, /\s+/, "")
+    self.highest_tier.try(:upcase!)
+    self.region.try(:upcase!)
   end
 
-  def store_highest_tier_in_upper_case
-    self.highest_tier = self.highest_tier.try(:upcase)
-  end
 
 end

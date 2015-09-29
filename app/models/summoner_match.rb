@@ -1,8 +1,6 @@
 class SummonerMatch
   include Mongoid::Document
   include TimeTrackable
-  include Seasonable
-  include Regionable
   include SummonerMatchService
 
   # Fields
@@ -46,6 +44,10 @@ class SummonerMatch
   validates :match_id, presence: true 
   validates :summoner_id, presence: true
   validates_uniqueness_of :match_id, scope: [:summoner_id, :region]
+
+  # Callbacks
+  before_validation :sanitize_attrs
+
 
   # Functions
   scope :for_summoner, ->(summoner_id, season=nil) do
@@ -116,6 +118,11 @@ class SummonerMatch
 
   def duration
     match_duration.divmod(60)
+  end
+
+  def sanitize_attrs
+    self.region.try(:upcase!)
+    self.season.try(:upcase!)
   end
 
 end

@@ -33,18 +33,12 @@ module ChampionService
   module Factory
 
     def self.build_champions_hash(json)
-      champions = json.map do |c|
+      json_underscoreized = Utils::JsonParser.underscoreize(json)
+      champions = json_underscoreized.map do |c|
         champ = Consts::Champion.find_by_id(c['id'])
-        c = {
-          'id' => c['id'],
-          'active' => c['active'],
-          'bot_enabled' => c['botEnabled'],
-          'free_to_play' => c['freeToPlay'],
-          'bot_mm_enabled' => c['botMmEnabled'],
-          'ranked_play_enabled' => c['rankedPlayEnabled']
-        }
         c.merge!(champ)
       end
+      champions
     end
 
   end

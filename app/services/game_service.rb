@@ -71,6 +71,15 @@ module GameService
       game
     end
 
+    def self.find_game_by_summoner_id2(summoner_id, region)
+      # game
+      game_json = Riot.find_game_by_summoner_id(summoner_id, region)
+      game_id = game_json['gameId']
+      game_hash = Factory.build_game_hash(game_json, region)
+
+      # summoners
+    end
+
     def self.find_game_from_cache(summoner_id, region)
       region.upcase!
       summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
@@ -118,16 +127,47 @@ module GameService
           participant.meta['twitch_channel'] = summoner.twitch_channel if summoner
           workers << Thread.new do
             begin
+              # summoner season stats
               summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
               champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
               participant.ranked_stat_by_champion = champ_status.try(:clone)
             rescue
             end
+
             begin
-              recent_stats = SummonerMatch::Service.find_matches(summoner_id, champion_id, region, 0, 15)
-              recent_stats_aggregation = SummonerMatch::Service.get_matches_aggregation(recent_stats, champion_id)
-              participant.ranked_stat_by_recent_champion = recent_stats_aggregation
-              update_summoner_tier(summoner, recent_stats, region)
+              # all matches
+              match_list_json = MatchService::Riot.find_match_list(summoner_id, region)
+
+              # player roles
+              player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
+              summoner_stat.update_attributes({:player_roles => player_roles_json})
+              participant.player_roles = summoner_stat.aggregate_player_roles
+
+              # last match
+              last_match_json = MatchService::Factory.get_match_list_for(match_list_json, champion_id, 1)
+              if last_match_json
+                last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
+                match_stats_aggregation = MatchService::Service.get_match_aggregation(last_match)
+                participant.ranked_stat_by_recent_champion = match_stats_aggregation
+              end
+
+            rescue
+            end
+
+            # begin
+            #   recent_stats = SummonerMatch::Service.find_matches(summoner_id, champion_id, region, 0, 15)
+            #   recent_stats_aggregation = SummonerMatch::Service.get_matches_aggregation(recent_stats, champion_id)
+            #   participant.ranked_stat_by_recent_champion = recent_stats_aggregation
+            # rescue
+            # end
+          end
+
+          workers << Thread.new do
+            begin
+              league = LeagueService::Service.find_league_by_summoner_id(summoner_id, region)
+              league_entry = league.entries.find{|l| l['player_of_team_id'].to_i == summoner_id.to_i}
+              league_entry['tier'] = league.tier
+              participant.league_entry = league_entry
             rescue
             end
           end

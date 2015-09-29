@@ -2,8 +2,6 @@ class Match
 
   include Mongoid::Document
   include TimeTrackable
-  include Seasonable
-  include Regionable
 
   # Fields
   field :riot_created_at, type: Integer
@@ -32,5 +30,14 @@ class Match
   validates :region, presence: true
   validates :match_id, presence: true 
   validates_uniqueness_of :match_id, scope: [:region]
+
+  # Callbacks
+  before_validation :sanitize_attrs
+
+
+  def sanitize_attrs
+    self.region.try(:upcase!)
+    self.season.try(:upcase!)
+  end
 
 end
