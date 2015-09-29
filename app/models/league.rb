@@ -18,7 +18,7 @@ class League
   validates :tier, presence: true
   validates :queue, presence: true
 
-  validates_uniqueness_of :name, :scope => [:region, :tier, :queue]
+  validates_uniqueness_of :name, :scope => [:region, :tier, :queue], :case_sensitive => false
 
   # Callbacks
   before_validation :sanitize_attrs

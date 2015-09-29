@@ -1,6 +1,3 @@
-//https://na.api.pvp.net/api/lol/na/v2.2/matchhistory/38990785?beginIndex=0&endIndex=1&api_key=635ff54c-4df5-41e0-a471-012cc26faeae
-
-
 {
   matches: [{
     matchId: 1731750892,

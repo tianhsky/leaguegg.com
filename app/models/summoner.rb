@@ -29,7 +29,7 @@ class Summoner
   validates :name, presence: true
   validates :name_lowercase, presence: true
   validates :summoner_id, presence: true
-  validates_uniqueness_of :name_lowercase, scope: [:region]
+  validates_uniqueness_of :name_lowercase, scope: [:region], :case_sensitive => false
   validates_uniqueness_of :summoner_id, scope: [:region]
 
   # Callbacks
