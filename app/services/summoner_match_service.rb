@@ -23,89 +23,50 @@ module SummonerMatchService
   module Factory
     def self.build_summoner_match_hash(json, participant_index)
       p = json['participants'][participant_index]
-      pi = json['participantIdentities'][participant_index]
+      pi = json['participant_identities'][participant_index]
+      json['riot_created_at'] = json['match_creation']
+      json.delete('match_creation')
 
-      r = HashWithIndifferentAccess.new
-      r['riot_created_at'] = json['matchCreation']
-      r['season'] = json['season']
-      r['region'] = json['region']
-      r['platform_id'] = json['platformId']
-      r['match_mode'] = json['matchMode']
-      r['match_type'] = json['matchType']
-      r['match_duration'] = json['matchDuration']
-      r['queue_type'] = json['queueType']
-      r['map_id'] = json['mapId']
-      r['match_version'] = json['matchVersion']
+      r = Utils::JsonParser.clone_to([
+        'riot_created_at', 'season', 'region', 'platform_id',
+        'match_mode', 'match_type', 'match_duration', 'queue_type',
+        'map_id', 'match_version', 'match_id'
+      ], json, {})
 
       if p
-        r['team_id'] = p['teamId']
-        r['spell1_id'] = p['spell1Id']
-        r['spell2_id'] = p['spell2Id']
-        r['champion_id'] = p['championId']
-        r['highest_achieved_season_tier'] = p['highestAchievedSeasonTier']
-        r['masteries'] = p['masteries'].map{|x|build_mastery_hash(x)} if p['masteries']
+        Utils::JsonParser.clone_to([
+          'team_id', 'spell1_id', 'spell2_id', 'champion_id', 'timeline',
+          'highest_achieved_season_tier', 'masteries', 'stats'
+        ], p, r)
         r['runes'] = p['runes'].map{|x|build_rune_hash(x)} if p['runes']
-        r['timeline'] = build_time_line_hash(p['timeline'])
-        r['stats'] = build_stats_hash(p['stats'])
-        r['match_id'] = json['matchId']
       end
 
       if pi
-        r['participant_id'] = pi['participantId']
+        r['participant_id'] = pi['participant_id']
         if pl = pi['player']
-          r['summoner_id'] = pl['summonerId']
-          r['summoner_name'] = pl['summonerName']
-          r['profile_icon'] = pl['profileIcon']
-          r['match_history_uri'] = pl['matchHistoryUri']
+          Utils::JsonParser.clone_to([
+            'summoner_id', 'summoner_name', 'profile_icon', 'match_history_uri'
+          ], pl, r)
         end
       end
       r
-    end
-
-    def self.build_mastery_hash(mastery)
-      {
-        'rank' => mastery['rank'],
-        'mastery_id' => mastery['masteryId']
-      }
     end
 
     def self.build_rune_hash(rune)
+      rank = rune['rank'] || rune['count']
       {
-        'rank' => rune['count'],
-        'rune_id' => rune['runeId']
+        'rank' => rank,
+        'rune_id' => rune['rune_id']
       }
     end
 
-    def self.build_time_line_hash(time_line_json)
-      r = {}
-      time_line_json.each do |k,v|
-        rv = {}
-        if v.is_a? String
-          r["#{k.to_s.underscore}"] = v
-        else
-          v.each{|vk, vv| rv["#{vk.to_s.underscore}"] = vv }
-          r["#{k.to_s.underscore}"] = rv
-        end
-      end
-      r
-    end
-
-    def self.build_stats_hash(stats_json)
-      r = {}
-      stats_json.each do |k,v|
-        r["#{k.to_s.underscore}"] = v
-      end
-      r
-    end
-
     def self.build_games_hash(json)
-      games = json['games']
-      r = games.map do |g|
+      r = json['games'].map do |g|
         {
-          'game_id' => g['gameId'],
-          'team_id' => g['teamId'],
-          'champion_id' => g['championId'],
-          'riot_created_at' => g['createDate']
+          'game_id' => g['game_id'],
+          'team_id' => g['team_id'],
+          'champion_id' => g['champion_id'],
+          'riot_created_at' => g['create_date']
         }
       end
       r
@@ -152,7 +113,7 @@ module SummonerMatchService
       matches = []
       if matches_json = Riot::find_matches(summoner_id, champion_id, region, begin_index, end_index)['matches']
         matches_json.each do |mj|
-          match = SummonerMatch.where(match_id: mj['matchId'], summoner_id: summoner_id, region: region.upcase).first
+          match = SummonerMatch.where(match_id: mj['match_id'], summoner_id: summoner_id, region: region.upcase).first
           unless match
             match_hash = Factory.build_summoner_match_hash(mj, 0)
             match = SummonerMatch.new(match_hash)

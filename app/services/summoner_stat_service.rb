@@ -19,8 +19,6 @@ module SummonerStatService
     def self.build_season_stat_hash(rank_stats, player_stats, summoner_id, season, region)
       season.upcase!
       region.upcase!
-      rank_stats = Utils::JsonParser.underscoreize(rank_stats)
-      player_stats = Utils::JsonParser.underscoreize(player_stats)
 
       r = {}
       r['summoner_id'] = summoner_id
@@ -44,15 +42,13 @@ module SummonerStatService
 
       stat = champ['stats']
       stat['champion_id'] = champ_id
-      stat_underscoreized = Utils::JsonParser.underscoreize(stat)
-      stat_underscoreized
+      stat
     end
 
     def self.build_ranked_stat_summary_hash(riot_updated_at, summary)
       stat = summary['stats']
       stat['riot_updated_at'] = riot_updated_at
-      stat_underscoreized = Utils::JsonParser.underscoreize(stat)
-      stat_underscoreized
+      stat
     end
 
     def self.build_player_stat_hash(player_summary)

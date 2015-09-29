@@ -22,7 +22,7 @@ module LeagueService
       if json.is_a? Array
         r = json.map{|x| build_league_hash(x, region)}
       else
-        r = Utils::JsonParser.underscoreize(json)
+        r = json
         r.delete('participant_id')
         r['region'] = region
       end

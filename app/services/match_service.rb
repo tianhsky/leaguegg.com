@@ -21,7 +21,6 @@ module MatchService
   module Factory
 
     def self.build_match_hash(match_json)
-      match_json = Utils::JsonParser.underscoreize(match_json)
       r = Utils::JsonParser.clone_to([
         'match_id', 'season', 'region', 'platform_id', 'match_mode',
         'match_type', 'riot_created_at', 'match_duration', 'map_id',

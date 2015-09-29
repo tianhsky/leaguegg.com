@@ -42,7 +42,8 @@ module HttpService
     raise Errors::RateLimitError.new if status_code == 429
     raise Errors::NotFoundError.new if status_code == 404
 
-    JSON.parse resp.body
+    json = JSON.parse resp.body
+    Utils::JsonParser.underscoreize(json)
   end
 
 end
