@@ -74,6 +74,7 @@ module SummonerStats
       score = 1 if score >= 1
 
       self.aggresive_rate = score.round(3)
+      self.aggresive_rate = nil if self.aggresive_rate.nan?
     end
 
     def calculate_kda_rate

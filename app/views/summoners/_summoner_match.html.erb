@@ -1,8 +1,9 @@
 <% 
-  champion = Consts::Champion.find_by_id(match.champion_id)
-  spell1 = Consts::Spell.find_by_id(match.spell1_id)
-  spell2 = Consts::Spell.find_by_id(match.spell2_id)
-  stats = match.stats
+  participant = match.find_match_stats_for_summoner(@summoner.summoner_id)
+  champion = Consts::Champion.find_by_id(participant['champion_id'])
+  spell1 = Consts::Spell.find_by_id(participant['spell1_id'])
+  spell2 = Consts::Spell.find_by_id(participant['spell2_id'])
+  stats = participant['stats']
   won = stats['winner']
   queue_type = match['queue_type']
   duration = match.duration
@@ -74,7 +75,7 @@
     </div>
     <div class="col-md-2">
       <div class="overall-stats">
-        <div class="best-kills"><%= match.best_kills %></div>
+        <div class="best-kills"><%= MatchService::Factory.best_kills(stats) %></div>
       </div>
     </div>
   </div>

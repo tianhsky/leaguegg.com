@@ -1,6 +1,7 @@
 module Utils
   module JsonParser
     def self.underscoreize(json)
+      return json if json.is_a?(Boolean)
       return nil if json.blank?
       if json.is_a?(Hash)
         r = {}

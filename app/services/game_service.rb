@@ -142,24 +142,20 @@ module GameService
               player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
               summoner_stat.update_attributes({:player_roles => player_roles_json})
               participant.player_roles = summoner_stat.aggregate_player_roles
-
-              # last match
-              last_match_json = MatchService::Factory.get_match_list_for(match_list_json, champion_id, 1)
-              if last_match_json
-                last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
-                match_stats_aggregation = MatchService::Service.get_match_aggregation(last_match)
-                participant.ranked_stat_by_recent_champion = match_stats_aggregation
-              end
-
             rescue
             end
 
-            # begin
-            #   recent_stats = SummonerMatch::Service.find_matches(summoner_id, champion_id, region, 0, 15)
-            #   recent_stats_aggregation = SummonerMatch::Service.get_matches_aggregation(recent_stats, champion_id)
-            #   participant.ranked_stat_by_recent_champion = recent_stats_aggregation
-            # rescue
-            # end
+            begin
+              # last match
+              last_match_json = match_list_json.try(:[],'matches').try(:first)
+              if last_match_json
+                last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
+                last_match_stats = last_match.find_match_stats_for_summoner(summoner_id)
+                match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_participants([last_match_stats])
+                participant.ranked_stat_by_recent_champion = match_stats_aggregation
+              end
+            rescue
+            end
           end
 
           workers << Thread.new do
@@ -226,11 +222,11 @@ module GameService
       r = Utils::JsonParser.clone_to([
         'game_id', 'map_id', 'game_mode', 'game_type', 'game_queue_config_id',
         'platform_id', 'game_length'
-        ],game,{})
+      ],game,{})
       r['region'] = region
       r['observer_encryption_key'] = game['observers'] ? game['observers']['encryption_key'] : nil,
       r['started_at'] = game['game_start_time']
-      r['teams'] = teams.map{|k,v|build_team_hash(k,v,game['banned_champions'].select{|x|x['team_id']==k})}
+      r['teams'] = teams.map{|k,v|build_team_hash(k,v,(game['banned_champions']||[]).select{|x|x['team_id']==k})}
       r
     end
 

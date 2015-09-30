@@ -21,8 +21,8 @@ module Games
 
     # Relations
     embedded_in :team, class_name: 'Games::Team'
-    embeds_one :ranked_stat_by_champion, class_name: 'SummonerStats::RankedStatByChampion'
     embeds_one :ranked_stat_by_recent_champion, class_name: 'SummonerStats::RankedStatByRecentChampion'
+    embeds_one :ranked_stat_by_champion, class_name: 'SummonerStats::RankedStatByChampion'
 
     # Indexes
 
