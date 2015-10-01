@@ -43,11 +43,12 @@ module MatchService
       grouped_participants.each do |team_id, participants|
         participants.each do |par|
           pl = match_json['participant_identities'].find{|p| p['participant_id'] == par['participant_id']}
-          pl = pl['player']
-          par['summoner_id'] = pl['summoner_id']
-          par['summoner_name'] = pl['summoner_name']
-          par['profile_icon'] = pl['profile_icon']
-          par['match_history_uri'] = pl['match_history_uri']
+          if pl = pl['player']
+            par['summoner_id'] = pl['summoner_id']
+            par['summoner_name'] = pl['summoner_name']
+            par['profile_icon'] = pl['profile_icon']
+            par['match_history_uri'] = pl['match_history_uri']
+          end
         end
         team = match_json['teams'].find{|t|t['team_id'].to_s == team_id.to_s}
         team['participants'] = participants
@@ -113,27 +114,29 @@ module MatchService
       stats = SummonerStats::RankedStatByRecentChampion.new
       stats.games = participants.count
       participants.each do |m|
-        stat = m['stats']
+        next if m.blank?
         stats.champion_id = m['champion_id']
-        stats.won += 1 if stat['winner']
-        stats.lost +=1 unless stat['winner']
-        stats.double_kills += stat['double_kills']
-        stats.triple_kills += stat['triple_kills']
-        stats.quadra_kills += stat['quadra_kills']
-        stats.penta_kills += stat['penta_kills']
-        stats.team_jungle_kills += stat['neutral_minions_killed_team_jungle']
-        stats.enemy_jungle_kills += stat['neutral_minions_killed_enemy_jungle']
-        stats.minion_kills += stat['minions_killed']
-        stats.kills += stat['kills']
-        stats.deaths += stat['deaths']
-        stats.assists += stat['assists']
-        stats.physical_to_champion += stat['physical_damage_dealt_to_champions']
-        stats.magic_to_champion += stat['magic_damage_dealt_to_champions']
-        stats.true_to_champion += stat['true_damage_dealt_to_champions']
-        stats.heals += stat['total_heal']
-        stats.wards_placed += stat['wards_placed']
-        stats.wards_killed += stat['wards_killed']
-        stats.sight_wards_bought += stat['sight_wards_bought_in_game']
+        if stat = m['stats']
+          stats.won += 1 if stat['winner']
+          stats.lost +=1 unless stat['winner']
+          stats.double_kills += stat['double_kills']
+          stats.triple_kills += stat['triple_kills']
+          stats.quadra_kills += stat['quadra_kills']
+          stats.penta_kills += stat['penta_kills']
+          stats.team_jungle_kills += stat['neutral_minions_killed_team_jungle']
+          stats.enemy_jungle_kills += stat['neutral_minions_killed_enemy_jungle']
+          stats.minion_kills += stat['minions_killed']
+          stats.kills += stat['kills']
+          stats.deaths += stat['deaths']
+          stats.assists += stat['assists']
+          stats.physical_to_champion += stat['physical_damage_dealt_to_champions']
+          stats.magic_to_champion += stat['magic_damage_dealt_to_champions']
+          stats.true_to_champion += stat['true_damage_dealt_to_champions']
+          stats.heals += stat['total_heal']
+          stats.wards_placed += stat['wards_placed']
+          stats.wards_killed += stat['wards_killed']
+          stats.sight_wards_bought += stat['sight_wards_bought_in_game']
+        end
         if timeline = m['timeline']
           stats.per_min_gold_at_10m += timeline.try(:[],'gold_per_min_deltas').try(:[],'zero_to_ten') || 0
           stats.per_min_cs_at_10m += timeline.try(:[],'creeps_per_min_deltas').try(:[],'zero_to_ten') || 0

@@ -1,12 +1,13 @@
 <% 
   participant = match.find_match_stats_for_summoner(@summoner.summoner_id)
+  return if participant.blank?
+  queue_type = match['queue_type']
+  duration = match.duration
   champion = Consts::Champion.find_by_id(participant['champion_id'])
   spell1 = Consts::Spell.find_by_id(participant['spell1_id'])
   spell2 = Consts::Spell.find_by_id(participant['spell2_id'])
   stats = participant['stats']
   won = stats['winner']
-  queue_type = match['queue_type']
-  duration = match.duration
 %>
 
 <div class="panel match-item <%=won ? 'won' : 'lost'%>">
