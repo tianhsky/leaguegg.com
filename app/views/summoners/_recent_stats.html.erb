@@ -17,7 +17,7 @@
             <%= @recent_stats['assists'] %>(A)
           </div>
           <div>
-            Average <%= @recent_stats['kda'] %> KDA
+            Average <%= @recent_stats['kda_rate'] %> KDA
           </div>
         </div>
       </div>
@@ -28,8 +28,8 @@
         </div>
         <div class="stats">
           <div>
-            <%= @recent_stats['wons'] %>(W) / 
-            <%= @recent_stats['losts'] %>(L)
+            <%= @recent_stats['won'] %>(W) / 
+            <%= @recent_stats['lost'] %>(L)
           </div>
           <div>
             Won <%= @recent_stats['win_rate']*100 %> %

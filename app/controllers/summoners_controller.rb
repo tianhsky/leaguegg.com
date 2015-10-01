@@ -9,12 +9,13 @@ class SummonersController < ApplicationController
         should_reload = true if @summoner.recent_matches_update_expired?
       end
       @recent_matches = @summoner.recent_matches(should_reload)
-      @recent_stats = SummonerMatch.aggretate_stats(@recent_matches)
-      if last_game = @recent_matches.first
-        @last_champion_played = Consts::Champion.find_by_id(last_game.champion_id)
+      @recent_stats = MatchService::Service.get_matches_aggregation_for_matches(@recent_matches, @summoner.summoner_id)
+      if last_match = @recent_matches.first
+        last_match_participant = last_match.find_match_stats_for_summoner(@summoner.summoner_id)
+        @last_champion_played = Consts::Champion.find_by_id(last_match_participant['champion_id'])
       end
-    rescue Exception => ex
-      @error = ex
+    # rescue Exception => ex
+      # @error = ex
     end
   end
 

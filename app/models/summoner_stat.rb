@@ -2,8 +2,6 @@
 class SummonerStat
   include Mongoid::Document
   include TimeTrackable
-  include Seasonable
-  include Regionable
   include SummonerStatService
 
   # Fields
@@ -14,6 +12,7 @@ class SummonerStat
   # Relations
   # belongs_to :summoner, foreign_key: 'app_summoner_id'
   embeds_many :player_stats, class_name: 'SummonerStats::PlayerStat'
+  embeds_many :player_roles, class_name: 'SummonerStats::PlayerRole'
   embeds_many :ranked_stats_by_champion, class_name: 'SummonerStats::RankedStatByChampion'
   embeds_one :ranked_stat_summary, class_name: 'SummonerStats::RankedStatSummary'
 
@@ -25,6 +24,9 @@ class SummonerStat
   validates :region, presence: true
   validates :summoner_id, presence: true
   validates_uniqueness_of :summoner_id, scope: [:region, :season]
+
+  # Callbacks
+  before_validation :sanitize_attrs
 
   # Functions
   scope :for_summoner, ->(summoner_id, season=nil) do
@@ -44,12 +46,29 @@ class SummonerStat
     self.update_attributes(season_stats_hash)
   end
 
+  def aggregate_player_roles
+    grouped_roles = player_roles.group_by{|r| r['player_role']}
+    result = []
+    grouped_roles.each do |k, v|
+      result << {
+        player_role: k,
+        games: v.sum{|x|x['games']}
+      }
+    end
+    result
+  end
+
   def outdated?
-    return true if self.new_record?
-    if time = Utils::Time.time_to_epunix(self.synced_at)
+    return false if self.new_record?
+    if time = Utils::Time.time_to_epunix(self.updated_at)
       return true if time < Time.now - AppConsts::CHAMPION_SEASON_STATS_EXPIRES_THRESHOLD
     end
     false
+  end
+
+  def sanitize_attrs
+    self.region.try(:upcase!)
+    self.season.try(:upcase!)
   end
 
 end

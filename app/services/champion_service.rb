@@ -4,7 +4,7 @@ module ChampionService
 
     def self.find_free_champions(region='na')
       url = "https://#{region.downcase}.api.pvp.net/api/lol/#{region.downcase}/v1.2/champion?freeToPlay=true"
-      resp = HttpService.get(url, region)
+      resp = RiotAPI.get(url, region)
     end
 
   end
@@ -35,16 +35,9 @@ module ChampionService
     def self.build_champions_hash(json)
       champions = json.map do |c|
         champ = Consts::Champion.find_by_id(c['id'])
-        c = {
-          'id' => c['id'],
-          'active' => c['active'],
-          'bot_enabled' => c['botEnabled'],
-          'free_to_play' => c['freeToPlay'],
-          'bot_mm_enabled' => c['botMmEnabled'],
-          'ranked_play_enabled' => c['rankedPlayEnabled']
-        }
         c.merge!(champ)
       end
+      champions
     end
 
   end

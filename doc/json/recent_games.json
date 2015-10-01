@@ -1,4 +1,4 @@
-https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/66233649/recent?api_key=635ff54c-4df5-41e0-a471-012cc26faeae
+// https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/66233649/recent?api_key=635ff54c-4df5-41e0-a471-012cc26faeae
 {
     summonerId: 66233649,
     games: [{

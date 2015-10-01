@@ -15,8 +15,6 @@ class Rotation
   validates_uniqueness_of :date_begin
 
   # Functions
-  def self.now
-
-  end
+  
 
 end

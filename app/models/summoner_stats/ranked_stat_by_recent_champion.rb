@@ -26,8 +26,11 @@ module SummonerStats
     field :wards_killed, type: Integer, default: 0
     field :sight_wards_bought, type: Integer, default: 0
     field :crowd_control_time, type: Integer, default: 0
+    field :per_min_gold_at_10m, type: Float, default: 0
     field :per_min_cs_at_10m, type: Float, default: 0
+    field :per_min_cs_diff_at_10m, type: Float, default: 0
     field :per_min_dmg_taken_at_10m, type: Float, default: 0
+    field :per_min_dmg_taken_diff_at_10m, type: Float, default: 0
 
     # Aggregated stats
     field :avg_team_jungle_kills, type: Float
@@ -44,8 +47,11 @@ module SummonerStats
     field :avg_wards_killed, type: Float
     field :avg_sight_wards_bought, type: Float
     field :avg_crowd_control_time, type: Float
+    field :avg_gold_at_10m, type: Float
     field :avg_cs_at_10m, type: Float
+    field :avg_cs_diff_at_10m, type: Float
     field :avg_per_min_dmg_taken_at_10m, type: Float
+    field :avg_per_min_dmg_taken_diff_at_10m, type: Float
 
     # Rates
     field :aggresive_rate, type: Float
@@ -89,8 +95,11 @@ module SummonerStats
       self.avg_wards_killed = (wards_killed.to_f / games).round(3)
       self.avg_sight_wards_bought = (sight_wards_bought.to_f / games).round(3)
       self.avg_crowd_control_time = (crowd_control_time.to_f / games).round(3)
+      self.avg_gold_at_10m = ((per_min_gold_at_10m*10).to_f / games).round(3)
       self.avg_cs_at_10m = ((per_min_cs_at_10m*10).to_f / games).round(3)
+      self.avg_cs_diff_at_10m = ((per_min_cs_diff_at_10m*10).to_f / games).round(3)
       self.avg_per_min_dmg_taken_at_10m = (per_min_dmg_taken_at_10m.to_f / games).round(3)
+      self.avg_per_min_dmg_taken_diff_at_10m = (per_min_dmg_taken_diff_at_10m.to_f / games).round(3)
     end
 
     def calculate_aggresive_rate
@@ -109,6 +118,7 @@ module SummonerStats
       score = 1 if score >= 1
 
       self.aggresive_rate = score.round(3)
+      self.aggresive_rate = nil if self.aggresive_rate.nan?
     end
 
     def calculate_helpful_rate

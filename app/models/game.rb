@@ -1,8 +1,6 @@
 class Game
   include Mongoid::Document
   include TimeTrackable
-  include Regionable
-  include Platformable
   include GameService
 
   # Fields
@@ -30,6 +28,7 @@ class Game
   validates_uniqueness_of :game_id, :scope => [:region]
 
   # Callbacks
+  before_validation :sanitize_attrs
 
   # Functions
   def started_at_time
@@ -38,6 +37,11 @@ class Game
 
   def summoner_ids
     teams.map{|t|t.participants.map{|p|p.summoner_id}}.flatten
+  end
+
+  def sanitize_attrs
+    self.region.try(:upcase!)
+    self.platform_id.try(:upcase!)
   end
 
 end

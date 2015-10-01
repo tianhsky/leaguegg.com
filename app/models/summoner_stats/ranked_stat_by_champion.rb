@@ -11,14 +11,14 @@ module SummonerStats
     field :total_champion_kills, type: Integer
     field :total_damage_dealt, type: Integer
     field :total_damage_taken, type: Integer
-    field :most_champion_kills, type: Integer
+    field :most_champion_kills_per_session, type: Integer
     field :total_minion_kills, type: Integer
     field :total_double_kills, type: Integer
     field :total_triple_kills, type: Integer
     field :total_quadra_kills, type: Integer
     field :total_penta_kills, type: Integer
     field :total_unreal_kills, type: Integer
-    field :total_deaths, type: Integer
+    field :total_deaths_per_session, type: Integer
     field :total_gold_earned, type: Integer
     field :most_spells_cast, type: Integer
     field :total_turrets_killed, type: Integer
@@ -74,16 +74,17 @@ module SummonerStats
       score = 1 if score >= 1
 
       self.aggresive_rate = score.round(3)
+      self.aggresive_rate = nil if self.aggresive_rate.nan?
     end
 
     def calculate_kda_rate
-      rate = (total_champion_kills + total_assists).to_f / (total_deaths == 0 ? 1 : total_deaths)
+      rate = (total_champion_kills + total_assists).to_f / (total_deaths_per_session == 0 ? 1 : total_deaths_per_session)
       self.kda_rate = rate.round(3)
     end
 
     def calculate_avgs
       self.avg_kills = (total_champion_kills.to_f / total_sessions_played).round(3)
-      self.avg_deaths = (total_deaths.to_f / total_sessions_played).round(3)
+      self.avg_deaths = (total_deaths_per_session.to_f / total_sessions_played).round(3)
       self.avg_assists = (total_assists.to_f / total_sessions_played).round(3)
       self.avg_minion_kills = (total_minion_kills.to_f / total_sessions_played).round(3)
     end

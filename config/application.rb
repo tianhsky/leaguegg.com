@@ -8,8 +8,7 @@ Bundler.require(*Rails.groups)
 
 module LolboxSrv
   class Application < Rails::Application
-    config.autoload_paths += %W(#{Rails.root.join('lib')})
-    config.autoload_paths += %W(#{Rails.root.join('app/validators')})
+    config.eager_load_paths += %W(#{Rails.root.join('lib')})
     # config.assets.paths << Rails.root.join('lib/assets')
 
     # Cache

@@ -2,8 +2,6 @@ class Match
 
   include Mongoid::Document
   include TimeTrackable
-  include Seasonable
-  include Regionable
 
   # Fields
   field :riot_created_at, type: Integer
@@ -30,7 +28,35 @@ class Match
   # Validations
   validates :season, presence: true
   validates :region, presence: true
-  validates :match_id, presence: true 
+  validates :match_id, presence: true
   validates_uniqueness_of :match_id, scope: [:region]
+
+  # Callbacks
+  before_validation :sanitize_attrs
+
+  def find_match_stats_for_summoner(summoner_id)
+    r = nil
+    self.teams.each do |team|
+      team['participants'].each do |participant|
+        if participant['summoner_id'].to_s == summoner_id.to_s
+          r = participant
+        end
+      end
+    end
+    return r
+  end
+
+  def sanitize_attrs
+    self.region.try(:upcase!)
+    self.season.try(:upcase!)
+  end
+
+  def riot_created_at_time
+    Time.at(riot_created_at/1000)
+  end
+
+  def duration
+    match_duration.divmod(60)
+  end
 
 end

@@ -5,12 +5,17 @@ module AppConsts
   RIOT_CONSTS_EXPIRES_THRESHOLD = 1.day
   CHAMPION_SEASON_STATS_EXPIRES_THRESHOLD = 1.day
   RECENT_MATCH_EXPIRES_THRESHOLD = 3.hours
+  LEAGUE_EXPIRES_THRESHOLD = 5.minutes
+  SUMMONER_EXPIRES_THRESHOLD = 1.day
 
   puts 'Seting up consts'
   HEALS_FACTOR = 1
   WARDP_FACTOR = 50
   WARDK_FACTOR = 100
   CCONTROL_FACTOR = 30
+
+  puts 'Setting up limit'
+  RIOT_THROTTLE = Ratelimit.new('riot_api_throttle', {:bucket_interval=>2})
 
   puts 'Loading static data from riot'
   Consts::Version.setup

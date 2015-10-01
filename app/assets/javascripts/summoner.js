@@ -33,13 +33,13 @@ $(function(){
   var wlChartEle = document.getElementById("wl-chart").getContext("2d");
   var wlChartData = [
     {
-      value: window.data.recent_stats.wons,
+      value: window.data.recent_stats.won,
       color: "#5ADA24",
       highlight: "#A9F58A",
       label: "Won"
     },
     {
-      value: window.data.recent_stats.losts,
+      value: window.data.recent_stats.lost,
       color: "#D40C0C",
       highlight: "#FF7373",
       label: "Lost"

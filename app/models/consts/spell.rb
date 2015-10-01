@@ -55,8 +55,8 @@ module Consts
           "id" => value['id'],
           "name" => value['name'],
           "description" => value['description'],
-          "key" => value['description'],
-          "summoner_level" => value['summonerLevel'],
+          "key" => value['key'],
+          "summoner_level" => value['summoner_level'],
           "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/spell/#{value['key']}.png"
         }
       end

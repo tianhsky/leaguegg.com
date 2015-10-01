@@ -3,7 +3,7 @@ module Api
 
     def show
       begin
-        @summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
+        find_summoner
       rescue Exception => ex
         @error = ex
       end
@@ -11,7 +11,7 @@ module Api
 
     def recent_matches
       begin
-        @summoner = Summoner::Service.find_summoner_by_summoner_id(summoner_id, region)
+        find_summoner
       rescue Exception => ex
         if reload?
           should_reload = reload?
@@ -19,16 +19,22 @@ module Api
           should_reload = true if @summoner.recent_matches_update_expired?
         end
         @recent_matches = @summoner.recent_matches(should_reload)
-        @recent_stats = SummonerMatch.aggretate_stats(@recent_matches)
-        if last_game = @recent_matches.first
-          @last_champion_played = Consts::Champion.find_by_id(last_game.champion_id)
-        end
+        @recent_stats = Match.aggretate_stats(@recent_matches)
+        
       rescue Exception => ex
         @error = ex
       end
     end
 
     protected
+
+    def find_summoner
+      if summoner_name.present?
+        @summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
+      elsif summoner_id.present?
+        @summoner = Summoner::Service.find_summoner_by_summoner_id(summoner_id, region)
+      end
+    end
 
     def summoner_id
       params['summoner_id']
