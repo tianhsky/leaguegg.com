@@ -1,14 +1,15 @@
-//= require underscore
-
+// browser
 //= require jquery
-//= //require jquery-tablesort
+//= require bowser
+//= require browser_check
 
+// libs
+//= require underscore
 //= require bootstrap-sass-official
-
 //= require chartjs
 
+// custom
 //= require initializers
 
-//= //require search
-
+// angular
 //= require ng_app

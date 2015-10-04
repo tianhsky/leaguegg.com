@@ -43,8 +43,8 @@ angular.module('leaguegg.game').service('LiveGameService', [
       return $http.get(url)
         .then(function(resp) {
           return resp.data;
-        }, function(resp) {
-          console.log(resp);
+        }, function(err) {
+          return err;
         });
     }
 

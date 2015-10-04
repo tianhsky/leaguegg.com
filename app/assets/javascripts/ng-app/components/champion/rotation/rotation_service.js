@@ -9,10 +9,10 @@ angular.module('leaguegg.champion').service('RotationService', [
         .then(function(resp) {
           var data = resp.data;
           return data;
-        }, function(resp) {
-          console.log(resp);
+        }, function(err) {
+          return err;
         });
     }
-    
+
   }
 ]);

@@ -16,7 +16,11 @@
     <%= yield(:before_head) %>
   <% end %>
 
-  <div ui-view></div>
+  <div id="page">
+    <div ui-view></div>
+  </div>
+  
+  <%= render 'shared/error_browser' %>
   
   <% if content_for?(:js) %>
     <%= yield(:js) %>

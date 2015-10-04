@@ -1,11 +1,13 @@
-.error-block{
-  background-color: rgba(0, 0, 0, 0.41);
-  .error-icon{
-    img{
+.error-block {
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  .error-icon {
+    img {
       width: 150px;
     }
   }
-  .error-text{
-
+  .error-text {
+    padding: 20px;
   }
 }

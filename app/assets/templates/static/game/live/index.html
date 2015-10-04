@@ -2,7 +2,12 @@
   <loading status="loading.game">
   </loading>
   <div class="error" ng-if="error">
-    {{ error }}
+    <div class="error-img janna">
+      <img src="/assets/gif/janna-applogize.gif" />
+    </div>
+    <div class="error-text">
+      {{ error }}
+    </div>
   </div>
   <div class="fade-in-anim" ng-if="!error && game">
     <game-team class="team col-sm-6" team="team" ng-repeat="team in game.teams" />

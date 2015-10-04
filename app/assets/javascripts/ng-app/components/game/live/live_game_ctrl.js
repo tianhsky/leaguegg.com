@@ -18,13 +18,13 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
 
     LiveGameService.getGameBySummoner($scope.query)
       .then(function(resp) {
-        $scope.error = null;
-        $scope.game = resp;
         $scope.loading.game.active = false;
-      })
-      .then(function(err) {
-        $scope.error = err;
-        $scope.loading.game.active = false;
+        if (resp.data && resp.data.id == null) {
+          $scope.error = "Sorry, there was a problem";
+        } else {
+          $scope.error = null;
+          $scope.game = resp;
+        }
       });
 
   }

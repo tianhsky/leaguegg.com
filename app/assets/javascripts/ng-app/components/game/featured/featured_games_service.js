@@ -12,8 +12,8 @@ angular.module('leaguegg.game').service('FeaturedGamesService', [
             g.url = self.findUrlForGame(g);
           });
           return data;
-        }, function(resp) {
-          console.log(resp);
+        }, function(err) {
+          return err;
         });
     }
 

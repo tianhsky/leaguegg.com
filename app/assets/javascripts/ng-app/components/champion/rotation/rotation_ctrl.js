@@ -13,9 +13,6 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
         $scope.list2 = $scope.champions.slice(mid, len);
         selectNextChampion();
         interval = $interval(selectNextChampion, 5000);
-      })
-      .then(function(err) {
-
       });
 
     $scope.selectChampion = function(champion) {
