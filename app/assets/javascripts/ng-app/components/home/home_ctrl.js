@@ -1,4 +1,4 @@
-angular.module('HomeModule').controller('HomeCtrl', [
+angular.module('leaguegg.home').controller('HomeCtrl', [
   '$scope',
   function($scope) {
 

@@ -41,3 +41,5 @@ if participant.ranked_stat_by_recent_champion
 else
   json.ranked_stat_recent nil
 end
+
+json.league_entry participant.league_entry

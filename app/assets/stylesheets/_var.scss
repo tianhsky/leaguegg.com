@@ -1,18 +1,29 @@
+$color_font: #ddd;
+$color_mine_shaft_approx: #222222;
+$color_shady_lady_approx: #a9a9a9;
+$color_mountain_mist_approx: #999;
+$color_label: #797979;
+
+$color_win: #2CC53F;
+$color_lost: #C32424;
+$color_assist: #BFBA11;
+
 $white: #fff;
 $white_25: rgba(255,255,255,.25);
 $white_50: rgba(255,255,255,.5);
 $white_75: rgba(255,255,255,.75);
 
-$color_mine_shaft_approx: #333;
-$color_shady_lady_approx: #a9a9a9;
-$color_mountain_mist_approx: #999;
-
+$black_10: rgba(0,0,0,.10);
 $black_20: rgba(0,0,0,.20);
 $black_50: rgba(0,0,0,.5);
 
+$purple: #DC3FDC;
+
+$gray: rgb(82, 82, 82);
+
 $gray_b_1: rgb(82, 82, 82);
-$blue_team: rgb(60, 63, 124);
-$red_team: rgb(158, 25, 25);
+$blue_team: rgba(26, 103, 148, 0.68);
+$red_team: rgba(197, 41, 41, 0.85);
 $ban_color: rgba(255, 29, 0, 0.6);
 
 %no_outline {

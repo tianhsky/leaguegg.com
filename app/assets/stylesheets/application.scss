@@ -2,12 +2,18 @@
 //*= require bootstrap-sass-official
 //*= require fontawesome
 
+// cores
+@import 'cols';
 @import 'var';
 @import 'core';
-@import 'theme_dark';
+@import 'animation';
+@import 'loading';
+@import 'theme';
 @import 'err';
+
+// pages
 @import 'home';
 @import 'app';
-@import 'game';
+@import 'game2';
 @import 'summoner';
-@import 'search';
+@import 'rotation';

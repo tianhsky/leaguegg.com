@@ -1,14 +1,15 @@
-angular.module('PartialModule').directive('kda', function() {
+angular.module('leaguegg.partials').directive('kda', function() {
   return {
     restrict: 'E',
-    templateUrl: 'templates/static/game/_kda.html',
+    templateUrl: 'static/partials/kda.html',
     scope: {
-      k: '=k',
-      d: '=d',
-      a: '=a',
-      k_diff: '=k_diff',
-      d_diff: '=d_diff',
-      a_diff: '=a_diff'
+      rate: '=',
+      k: '=',
+      d: '=',
+      a: '=',
+      k_diff: '=',
+      d_diff: '=',
+      a_diff: '='
     }
   }
 });

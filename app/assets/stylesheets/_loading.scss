@@ -1,0 +1,20 @@
+.loading{
+  margin: 0px auto;
+  padding: 10px;
+  margin: 10px;
+  .loading-img{
+    &.taichi{
+      img{
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+  }
+  .loading-text{
+    font-size: 1.5em;
+    color: $gray;
+    margin: 10px;
+    padding: 10px;
+  }
+}

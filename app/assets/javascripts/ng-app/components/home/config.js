@@ -1,4 +1,4 @@
-angular.module('HomeModule').config([
+angular.module('leaguegg.home').config([
   '$stateProvider',
   function($stateProvider) {
     $stateProvider
@@ -6,6 +6,10 @@ angular.module('HomeModule').config([
         url: "/",
         templateUrl: "static/home/index.html",
         controller: 'HomeCtrl'
+      })
+      .state('index.app', {
+        url: "/app",
+        templateUrl: "static/home/app.html"
       });
   }
 ]);

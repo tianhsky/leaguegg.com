@@ -1,4 +1,4 @@
-angular.module('GameModule').service('LiveGameService', [
+angular.module('leaguegg.game').service('LiveGameService', [
   '$localStorage', '_', '$http',
   function($localStorage, _, $http) {
     var self = this;

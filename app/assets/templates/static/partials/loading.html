@@ -1,0 +1,11 @@
+<div class="loading fade-in-anim" ng-if="status.active">
+  <div class="loading-img taichi" ng-if="status.theme=='taichi'">
+    <img src="/assets/gif/taichi-spin.gif" />
+  </div>
+  <div class="loading-img zac" ng-if="status.theme=='zac'">
+    <img src="/assets/gif/zac-bounce.gif" />
+  </div>
+  <div class="loading-text">
+    {{status.text}}
+  </div>
+</div>

@@ -1,4 +1,4 @@
-angular.module('GameModule').service('FeaturedGamesService', [
+angular.module('leaguegg.game').service('FeaturedGamesService', [
   '$http', '_',
   function($http, _) {
     var self = this;

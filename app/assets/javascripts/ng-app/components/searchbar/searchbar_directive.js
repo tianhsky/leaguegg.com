@@ -1,4 +1,4 @@
-angular.module('SearchbarModule').directive('searchbar', function() {
+angular.module('leaguegg.searchbar').directive('searchbar', function() {
   return {
     restrict: 'E',
     templateUrl: 'static/searchbar/index.html',

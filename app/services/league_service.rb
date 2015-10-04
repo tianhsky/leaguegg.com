@@ -35,7 +35,7 @@ module LeagueService
 
     def self.find_league_by_summoner_id(summoner_id, region)
       json = Riot.find_league_by_summoner_id(summoner_id, region)
-      json = json.find{|x|x['participantId'].to_s == summoner_id.to_s}
+      json = json.find{|x|x['participant_id'].to_s == summoner_id.to_s}
       return nil if json.blank?
       hash = Factory.build_league_hash(json, region)
       league = League.find_or_create_by({

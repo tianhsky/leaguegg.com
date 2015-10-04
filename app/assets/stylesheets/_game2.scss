@@ -1,0 +1,140 @@
+.live-game {
+  font-size: 0.9em;
+  text-align: center;
+  .team {
+    margin-top: 10px;
+  }
+  .team-bar {
+    padding: 2px 2px;
+    position: relative;
+    font-weight: bold;
+    &.blue {
+      background-color: $blue_team;
+    }
+    &.red {
+      background-color: $red_team;
+    }
+    .team-name {
+      position: absolute;
+      bottom: 8px;
+    }
+    &.left-pane {
+      text-align: left;
+      .team-name {
+        text-align: right;
+        right: 10px;
+      }
+    }
+    &.right-pane {
+      text-align: right;
+      .team-name {
+        text-align: left;
+        left: 10px;
+      }
+    }
+    .ban-item {
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+  .players {
+    .player {
+      padding: 10px 1px;
+      // width: 130px;
+      .intro {
+        .summoner-name {
+          height: 40px;
+          font-weight: bold;
+        }
+        .champion-icon {
+          // height: 75px;
+          img {
+            width: 72px;
+            height: 72px;
+          }
+        }
+        .skills {
+          // height: 40px;
+          img {
+            margin: 3px 1px;
+            width: 35px;
+            height: 35px;
+          }
+        }
+        .tier {
+          padding-top: 10px;
+          min-height: 25px;
+        }
+        .lp {
+          min-height: 25px;
+        }
+      }
+      .hr {
+        border-top: 2px solid $gray;
+      }
+      .stats {
+        .item-label {
+          font-size: 0.7em;
+          color: $color_label;
+          // border-bottom: 2px dotted;
+        }
+        .champion-name {
+          padding-top: 5px;
+          color: $purple;
+          font-weight: 500;
+          // border-bottom: 1px solid $gray;
+        }
+        .performance {
+          font-size: 0.8em;
+          padding: 0px 4px;
+          border-bottom: 1px solid $gray;
+        }
+        .wl {
+          height: 65px;
+          padding: 5px 0px;
+          .rate {
+            font-weight: 600;
+            font-size: 1.3em;
+          }
+          .w {
+            color: $color_win;
+          }
+          .l {
+            color: $color_lost;
+          }
+        }
+        .kda {
+          height: 85px;
+          padding: 5px 0px;
+          .rate {
+            font-weight: 600;
+            font-size: 1.3em;
+          }
+          .k {
+            color: $color_win;
+          }
+          .d {
+            color: $color_lost;
+          }
+          .a {
+            color: $color_assist;
+          }
+        }
+        .cs {
+          min-height: 40px;
+          padding: 5px 0px;
+        }
+        .jcs {
+          min-height: 40px;
+          padding: 5px 0px;
+        }
+        .support {
+          min-height: 40px;
+          padding: 5px 0px;
+        }
+      }
+    }
+  }
+}

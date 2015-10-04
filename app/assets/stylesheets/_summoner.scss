@@ -1,11 +1,43 @@
-.summoner{
-  .left-panel{
-
+.summoner-search-bar {
+  vertical-align: middle;
+  background-color: $gray_b_1;
+  display: inline-block;
+  border-radius: 0px;
+  .form-element {
+    display: inline-block;
+    background-color: transparent;
+    vertical-align: bottom;
+    border-color: none;
+    border: none;
+    &:focus {
+      @extend %no_outline;
+    }
   }
-  .profile{
+  .input-search {
+    width: 120px;
+  }
+  .input-region {
+    width: auto;
+    font-size: 9px;
+    &:focus {
+      background-color: $gray_b_1;
+      color: white;
+    }
+  }
+  .btn-search {
+    color: white;
+    &:hover {
+      background: rgb(156, 156, 156);
+    }
+  }
+}
+
+.summoner {
+  .left-panel {}
+  .profile {
     position: relative;
     background-color: rgba(40, 40, 40, 0.66);
-    .profile-bg-mask{
+    .profile-bg-mask {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -13,161 +45,160 @@
       top: 0px;
       background-color: rgba(0, 0, 0, 0.31);
     }
-    .icon{
-      img{
+    .icon {
+      img {
         border: 3px solid rgba(35, 35, 35, 0.52);
         width: 100px;
       }
     }
-    .name{
-      h2{
-      }
+    .name {
+      h2 {}
     }
-    .region, .level{
+    .region,
+    .level {
       font-weight: 900;
       padding-right: 20px;
     }
-    .info{
-      .update_timestamp{
+    .info {
+      .update_timestamp {
         font-size: 8pt;
       }
-      .btn-renew{
+      .btn-renew {
         font-size: 15pt;
         padding: 5px 15px 5px 15px;
         margin-top: 10px;
-        a{
+        a {
           text-decoration: none;
         }
       }
     }
   }
-  .recent-stats{
-    .graph{
-
-    }
-    .stats{
+  .recent-stats {
+    .graph {}
+    .stats {
       color: gray;
       font-size: 9pt;
     }
   }
-  .matches{
-    .match-item{
+  .matches {
+    .match-item {
       color: white;
       background-color: #000000;
       margin-bottom: 3px;
-      .panel-heading{
+      .panel-heading {
         padding-top: 0px;
         padding-bottom: 0px;
-        .title-left{
+        .title-left {
           position: absolute;
           left: 20px;
         }
-        .title-right{
+        .title-right {
           position: absolute;
           right: 20px;
         }
       }
-      .panel-body{
+      .panel-body {
         padding-top: 5px;
         padding-bottom: 0px;
       }
-      &.won{
-        .panel-heading{
+      &.won {
+        .panel-heading {
           background-color: #8989FF;
         }
-        .panel-body{
+        .panel-body {
           background: linear-gradient(#7C7CFF, #003F71);
         }
       }
-      &.lost{
-        .panel-heading{
+      &.lost {
+        .panel-heading {
           background-color: #631D1D;
         }
-        .panel-body{
+        .panel-body {
           background: linear-gradient(rgba(255, 55, 75, 0.5), rgba(255, 55, 75, 0.3));
         }
       }
-      .champion-spells{
+      .champion-spells {
         display: table;
-        margin: auto; 
+        margin: auto;
         text-align: center;
-        .champion-item{
+        .champion-item {
           display: table-cell;
-          .champion-icon{
+          .champion-icon {
             width: 70px;
             border-radius: 50%;
           }
-          p{
-
-          }
+          p {}
         }
-        .spell-items{
+        .spell-items {
           display: table-cell;
           vertical-align: middle;
           text-align: center;
-          .spell-icon{
+          .spell-icon {
             width: 35px;
             border-radius: 50%;
             margin: 0px 0px 3px 10px;
           }
         }
       }
-      .game-items{
+      .game-items {
         display: table;
-        margin: auto; 
+        margin: auto;
         text-align: center;
         vertical-align: middle;
-
-        .main-items{
+        .main-items {
           display: table-cell;
         }
-        .side-items{
+        .side-items {
           display: table-cell;
           vertical-align: middle;
         }
-        .item-row{
+        .item-row {
           margin: 3px 0px 3px 0px;
-          .item{
+          .item {
             width: 28px;
             margin: 1px 1px;
           }
         }
       }
-      .kda-stats{
+      .kda-stats {
         vertical-align: middle;
-        .item{
+        .item {
           font-size: 9pt;
         }
-        .k, .d, .a{
+        .k,
+        .d,
+        .a {
           font-size: 13pt;
           font-weight: 800;
         }
-        .k{
+        .k {
           color: #FF6A7A;
         }
-        .d{
+        .d {
           color: #757575;
         }
-        .a{
+        .a {
           color: #A28226;
         }
       }
-      .game-stats{
+      .game-stats {
         vertical-align: middle;
-        .item{
+        .item {
           font-size: 9pt;
         }
-        .level, .gold, .creeps{
+        .level,
+        .gold,
+        .creeps {
           font-size: 13pt;
           font-weight: 800;
         }
       }
-      .overall-stats{
+      .overall-stats {
         display: table;
-        margin: auto; 
+        margin: auto;
         text-align: center;
         min-height: 90px;
-        .best-kills{
+        .best-kills {
           display: table-cell;
           vertical-align: middle;
           font-weight: 900;

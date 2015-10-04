@@ -161,7 +161,7 @@ module GameService
           workers << Thread.new do
             begin
               league = LeagueService::Service.find_league_by_summoner_id(summoner_id, region)
-              league_entry = league.entries.find{|l| l['player_of_team_id'].to_i == summoner_id.to_i}
+              league_entry = league.entries.find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
               league_entry['tier'] = league.tier
               participant.league_entry = league_entry
             rescue

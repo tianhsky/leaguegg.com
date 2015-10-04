@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="leaguegg">
 <head>
+  <base href="/">
   <title><%= content_for?(:title) ? yield(:title)+'|LeagueGG' : 'LeagueGG' %></title>
   <meta name="description" content="LeagueGG, aka. League of Legends Good Game. Provides live game search, player stats and analysis, know your team and enemy team. In game live stream from TwitchTV available. See pro champion plays. Suggest builds from pro players."></meta>
   <meta name="keywoards" content="LeagueGG, League of Legends, LoL GG, League of Legends GG, live game search, player stats, live stream, twitch tv, champion builds, counter, professional players."></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag 'application' %>
-  <% if content_for?(:js) %>
-    <%= yield(:js) %>
-  <% end %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,12 +15,11 @@
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
   <% end %>
-  <div class="site-wrapper">
-    <div class="site-wrapper-inner">
-      <%= render 'shared/header' %>
-      <%= render 'shared/body' %>
-      <%= render 'shared/footer' %>
-    </div>
-  </div>
+
+  <div ui-view></div>
+  
+  <% if content_for?(:js) %>
+    <%= yield(:js) %>
+  <% end %>
 </body>
 </html>

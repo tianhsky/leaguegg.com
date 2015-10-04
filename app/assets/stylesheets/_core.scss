@@ -1,16 +1,12 @@
-html {
-  height: 100%;
-  background-color: $color_mine_shaft_approx;
-}
-
-body {
+html, body {
   margin: 0px;
   height: 100%;
-  background-color: $color_mine_shaft_approx;
-  color: $white;
-  text-align: center;
+  background-color: #2A2A2A;
+  color: $color_font;
+  font-size: 1em;
   text-shadow: 0 1px 3px $black_50;
   font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  // font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
 }
 
 a {

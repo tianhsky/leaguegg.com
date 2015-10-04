@@ -1,25 +1,39 @@
+//templates, ui.router, ngAnimate
 //leaguegg
-//templates, ui.router, ngAnimate, UtilModule, ConstsModule
-//HomeModule, GameModule, SearchbarModule, 
+//utils, leaguegg.consts
+//leaguegg.home, leaguegg.game, leaguegg.searchbar
+//leaguegg.champion, leaguegg.layout
 
-angular.module('UtilModule', []);
-
-angular.module('ConstsModule', []);
-
-angular.module('PartialModule', []);
-
-angular.module('HomeModule', [
-  'templates', 'ui.router', 'truncate', 'UtilModule'
+angular.module('utils', [
+  'templates', 'ui.router', 'ui.bootstrap',
+  'truncate', 'ngAnimate'
 ]);
 
-angular.module('GameModule', [
-  'templates', 'ui.router', 'ui.bootstrap', 'truncate', 'UtilModule', 'ConstsModule'
+angular.module('leaguegg.consts', []);
+
+angular.module('leaguegg.partials', []);
+
+angular.module('leaguegg.layouts', [
+  'utils'
 ]);
 
-angular.module('SearchbarModule', [
-  'templates', 'ui.router', 'truncate', 'UtilModule', 'ConstsModule'
+angular.module('leaguegg.home', [
+  'utils'
+]);
+
+angular.module('leaguegg.game', [
+  'utils', 'leaguegg.consts', 'leaguegg.partials'
+]);
+
+angular.module('leaguegg.searchbar', [
+  'utils', 'leaguegg.consts'
+]);
+
+angular.module('leaguegg.champion', [
+  'utils'
 ]);
 
 angular.module('leaguegg', [
-  'HomeModule', 'GameModule', 'SearchbarModule'
+  'leaguegg.home', 'leaguegg.game', 'leaguegg.searchbar', 'leaguegg.champion',
+  'leaguegg.layouts'
 ]);

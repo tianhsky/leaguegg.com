@@ -1,4 +1,4 @@
-angular.module('UtilModule').factory('$url', ['$window',
+angular.module('utils').factory('$url', ['$window',
   function($window) {
     return {
       params: function() {

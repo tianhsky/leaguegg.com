@@ -1,0 +1,20 @@
+<div class="free-champions">
+  <ul>
+    <li ng-repeat="champion in list1" ng-class="{active:champion.selected}">
+      <img ng-src="{{champion.img}}" ng-click="selectChampion(champion)">
+    </li>
+  </ul>
+  <ul>
+    <li ng-repeat="champion in list2" ng-class="{active:champion.selected}">
+      <img ng-src="{{champion.img}}" ng-click="selectChampion(champion)">
+    </li>
+  </ul>
+  <div class="champion-info">
+    <div class="champion-name">
+      {{getCurrentSelectedChampion().name}}
+    </div>
+    <div class="champion-title">
+      {{getCurrentSelectedChampion().title}}
+    </div>
+  </div>
+</div>

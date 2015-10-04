@@ -1,5 +1,7 @@
 json.id match.match_id
 json.season match.season
+json.region match.region
+
 json.queue_type match.queue_type
 json.match_mode match.match_mode
 json.match_type match.match_type

@@ -18,9 +18,9 @@ json.avg_sight_wards_bought rstat.avg_sight_wards_bought
 json.avg_crowd_control_time rstat.avg_crowd_control_time
 json.avg_gold_at_10m rstat.avg_gold_at_10m
 json.avg_cs_at_10m rstat.avg_cs_at_10m
-json.avg_cs_diff_at_10m rstat.avg_cs_at_10m
+json.avg_cs_diff_at_10m rstat.avg_cs_diff_at_10m
 json.avg_per_min_dmg_taken_at_10m rstat.avg_per_min_dmg_taken_at_10m
-json.avg_per_min_dmg_taken_diff_at_10m rstat.avg_per_min_dmg_taken_at_10m
+json.avg_per_min_dmg_taken_diff_at_10m rstat.avg_per_min_dmg_taken_diff_at_10m
 
 json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate

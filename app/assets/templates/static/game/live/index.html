@@ -1,10 +1,10 @@
 <div class="live-game">
+  <loading status="loading.game">
+  </loading>
   <div class="error" ng-if="error">
     {{ error }}
   </div>
-  <div ng-if="!error">
-    <div class="team" ng-repeat="team in teams">
-      <gameTeam team="team" />
-    </div>
+  <div class="fade-in-anim" ng-if="!error && game">
+    <game-team class="team col-sm-6" team="team" ng-repeat="team in game.teams" />
   </div>
 </div>

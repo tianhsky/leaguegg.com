@@ -1,4 +1,4 @@
-angular.module('GameModule').config([
+angular.module('leaguegg.game').config([
   '$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $stateProvider

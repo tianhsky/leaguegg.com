@@ -1,4 +1,4 @@
-angular.module('SearchbarModule').service('SearchbarService', [
+angular.module('leaguegg.searchbar').service('SearchbarService', [
   '$localStorage', '_',
   function($localStorage, _) {
     var self = this;

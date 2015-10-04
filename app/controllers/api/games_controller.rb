@@ -8,6 +8,7 @@ module Api
     protected
 
     def find_game
+      # return @game = Game.last # todo remove
       @game = Game::Service.find_game_by_summoner_name(summoner_name, region)
     end
 

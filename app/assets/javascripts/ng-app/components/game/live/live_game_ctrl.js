@@ -1,6 +1,13 @@
-angular.module('GameModule').controller('LiveGameCtrl', [
+angular.module('leaguegg.game').controller('LiveGameCtrl', [
   '$scope', '$stateParams', 'LiveGameService',
   function($scope, $stateParams, LiveGameService) {
+    $scope.loading = {
+      game: {
+        active: true,
+        text: 'Loading game stats from RIOT ...',
+        theme: 'taichi'
+      }
+    };
     $scope.query = {
       region: $stateParams.region,
       summoner: $stateParams.summoner
@@ -13,9 +20,11 @@ angular.module('GameModule').controller('LiveGameCtrl', [
       .then(function(resp) {
         $scope.error = null;
         $scope.game = resp;
+        $scope.loading.game.active = false;
       })
       .then(function(err) {
         $scope.error = err;
+        $scope.loading.game.active = false;
       });
 
   }

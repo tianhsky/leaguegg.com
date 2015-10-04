@@ -1,4 +1,4 @@
-angular.module('GameModule').directive('featuredTeam', function() {
+angular.module('leaguegg.game').directive('featuredTeam', function() {
   return {
     restrict: 'E',
     templateUrl: 'static/game/featured/team.html',

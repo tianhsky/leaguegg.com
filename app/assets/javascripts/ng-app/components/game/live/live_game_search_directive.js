@@ -1,4 +1,4 @@
-angular.module('GameModule').directive('liveGameSearch', function() {
+angular.module('leaguegg.game').directive('liveGameSearch', function() {
   return {
     restrict: 'E',
     templateUrl: 'static/game/live/search.html',
@@ -11,16 +11,10 @@ angular.module('GameModule').directive('liveGameSearch', function() {
 
         $scope.submitSearch = function() {
           LiveGameService.SetCacheQuery($scope.query);
-          LiveGameService.getGameBySummoner($scope.query)
-            .then(function(resp) {
-              var searchUrl = LiveGameService.getSearchUrl('html', $scope.query);
-              if (searchUrl) {
-                $location.path(searchUrl);
-              }
-            })
-            .then(function(err) {
-              $scope.error = err;
-            });
+          var searchUrl = LiveGameService.getSearchUrl('html', $scope.query);
+          if (searchUrl) {
+            $location.path(searchUrl);
+          }
         }
 
       }

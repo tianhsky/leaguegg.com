@@ -1,4 +1,4 @@
-angular.module('UtilModule').factory('$localStorage', ['$window',
+angular.module('utils').factory('$localStorage', ['$window',
   function($window) {
     return {
       set: function(key, value) {
