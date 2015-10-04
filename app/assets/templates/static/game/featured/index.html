@@ -1,22 +1,25 @@
-<div class="carousel slide" data-ride="carousel">
-  <div class="featured-header">
-    <h4>Featured Games</h4>
+<div class="featured-header">
+  <h4>Featured Games</h4>
+  <ol class="game-indicators list-unstyled list-inline">
+    <li ng-repeat="game in featured_games" ng-class="{active:game.active}">
+      <i class="fa fa-gamepad"></i>
+    </li>
+  </ol>
+</div>
+<loading class="fade-in-anim" status="loading.featured">
+</loading>
+<div class="featured-games" ng-if="featured_games">
+  <div class="item fade-out-anim fade-with-show" ng-repeat="game in featured_games" ng-show="game.active">
+    <div class="featured-team left">
+      <featured-team team="::game.teams[0]" />
+    </div>
+    <div class="featured-team right">
+      <featured-team team="::game.teams[1]" />
+    </div>
+    <div class="play-mask">
+      <a class="play" href="{{::game.url}}">
+        <i class="glyphicon glyphicon-play-circle"></i>
+      </a>
+    </div>
   </div>
-  <loading class="fade-in-anim" status="loading.featured">
-  </loading>
-  <carousel class="carousel-inner fade-out-anim" role="listbox" interval="rotate_interval" no-wrap="no_wrap_slide" ng-if="featured_games">
-    <slide class="item" ng-repeat="game in featured_games" active="game.active">
-      <div class="featured-team left">
-        <featured-team team="::game.teams[0]" />
-      </div>
-      <div class="featured-team right">
-        <featured-team team="::game.teams[1]" />
-      </div>
-      <div class="play-mask">
-        <a class="play" href="{{::game.url}}">
-          <i class="glyphicon glyphicon-play-circle"></i>
-        </a>
-      </div>
-    </slide>
-  </carousel>
 </div>

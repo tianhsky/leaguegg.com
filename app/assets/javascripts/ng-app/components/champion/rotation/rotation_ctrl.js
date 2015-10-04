@@ -12,6 +12,7 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
         $scope.list1 = $scope.champions.slice(0, mid);
         $scope.list2 = $scope.champions.slice(mid, len);
         selectNextChampion();
+        interval = $interval(selectNextChampion, 5000);
       })
       .then(function(err) {
 
@@ -62,9 +63,7 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
       }
     }
 
-    interval = $interval(selectNextChampion, 5000);
-
-    $scope.$on('$destroy', function(){
+    $scope.$on('$destroy', function() {
       $interval.cancel(interval);
       LayoutService.setBGImg(null);
     });

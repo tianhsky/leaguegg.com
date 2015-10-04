@@ -38,7 +38,8 @@
 }
 
 .fade-in-anim {
-  &.ng-enter{
+  &.ng-enter,
+  &.fade-with-show {
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
@@ -50,10 +51,14 @@
   &.ng-enter-active {
     opacity: 1;
   }
+  &.ng-hide {
+    opacity: 0;
+  }
 }
 
 .fade-out-anim {
-  &.ng-leave{
+  &.ng-leave,
+  &.fade-with-show {
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
@@ -62,7 +67,8 @@
   &.ng-leave {
     opacity: 1;
   }
-  &.ng-leave-active {
+  &.ng-leave-active,
+  &.ng-hide {
     opacity: 0;
   }
 }

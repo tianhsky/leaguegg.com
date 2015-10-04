@@ -1,7 +1,13 @@
 .home {
   text-align: center;
   .search-panel {
-    margin: 50px 0px 30px 0px;
+    padding: 10px 0px 55px 0px;
+    .title-message{
+      padding-bottom: 30px;
+      line-height: 1.8em;
+      font-size: 1.8em;
+      font-weight: 800;
+    }
     form {
       padding: 70px 0px 40px 0px;
     }
@@ -58,14 +64,18 @@
       h4 {
         float: left;
       }
-      .carousel-indicators {
+      .game-indicators {
         position: static;
         float: right;
         width: auto;
         margin: 10px 0px;
+        color: $gray;
+        .active{
+          color: white;
+        }
       }
     }
-    .carousel-inner {
+    .featured-games {
       top: 15px;
       position: relative;
       .featured-team {
