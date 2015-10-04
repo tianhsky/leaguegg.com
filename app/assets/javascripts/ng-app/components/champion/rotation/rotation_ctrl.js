@@ -67,7 +67,7 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
     $scope.$on('$destroy', function(){
       $interval.cancel(interval);
       LayoutService.setBGImg(null);
-    })
+    });
 
   }
 ]);

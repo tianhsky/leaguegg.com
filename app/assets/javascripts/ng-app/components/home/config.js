@@ -9,7 +9,8 @@ angular.module('leaguegg.home').config([
       })
       .state('index.app', {
         url: "/app",
-        templateUrl: "static/home/app.html"
+        templateUrl: "static/home/app.html",
+        controller: 'AppCtrl'
       });
   }
 ]);
