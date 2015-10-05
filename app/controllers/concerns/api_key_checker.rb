@@ -10,7 +10,7 @@ module ApiKeyChecker
   end
 
   def check_mobile_api_key
-    api_key = request.headers['api-key']
+    api_key = request.headers['api-key']||params['api-key']
     return false if api_key.blank?
     if api_key == AppConsts::MOBILE_API_KEY
       # api key match
@@ -22,7 +22,7 @@ module ApiKeyChecker
   end
 
   def check_web_api_token
-    request_token = request.headers['at']
+    request_token = request.headers['at']||params['at']
     raise Errors::UnauthorizedError.new if request_token.blank?
     valid_token_unencrypted = "#{AppConsts::WEB_API_SALT}:#{request.fullpath}"
     md5 = Digest::MD5.new
