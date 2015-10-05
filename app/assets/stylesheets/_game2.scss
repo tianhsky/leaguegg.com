@@ -1,5 +1,8 @@
 .live-game {
   font-size: 0.9em;
+  @media(max-width: 991px) {
+    font-size: 1em;
+  }
   text-align: center;
   .team {
     margin-top: 10px;
@@ -42,6 +45,10 @@
   .players {
     .player {
       padding: 10px 1px;
+      @media(max-width: 991px) {
+        border-bottom: 4px solid $gray;
+        padding: 15px 1px;
+      }
       // width: 130px;
       .intro {
         .summoner-name {
@@ -72,11 +79,19 @@
         }
       }
       .hr {
-        border-top: 2px solid $gray;
+        &.b1 {
+          border-top: 1px solid $gray;
+        }
+        &.b2 {
+          border-top: 2px solid $gray;
+        }
       }
       .stats {
         .item-label {
           font-size: 0.7em;
+          @media(max-width: 991px) {
+            font-size: 0.8em;
+          }
           color: $color_label;
           // border-bottom: 2px dotted;
         }
@@ -89,7 +104,10 @@
         .performance {
           font-size: 0.8em;
           padding: 0px 4px;
-          border-bottom: 1px solid $gray;
+          // border-bottom: 1px solid $gray;
+          // @media(max-width: 767px) {
+          //   border-bottom: none;
+          // }
         }
         .wl {
           height: 65px;
@@ -97,6 +115,9 @@
           .rate {
             font-weight: 600;
             font-size: 1.3em;
+            @media(max-width: 991px) {
+              font-size: 1.4em;
+            }
           }
           .w {
             color: $color_win;
@@ -111,6 +132,9 @@
           .rate {
             font-weight: 600;
             font-size: 1.3em;
+            @media(max-width: 991px) {
+              font-size: 1.4em;
+            }
           }
           .k {
             color: $color_win;
