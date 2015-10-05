@@ -1,6 +1,7 @@
 // error track
 //= require airbrake-js-client
 //= require error_track
+//= require md5
 
 // browser
 //= require jquery

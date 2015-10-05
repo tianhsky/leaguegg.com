@@ -1,6 +1,8 @@
 angular.module('leaguegg').config([
-  '$locationProvider', '$urlRouterProvider', '$stateProvider',
-  function($locationProvider, $urlRouterProvider, $stateProvider) {
+  '$locationProvider', '$urlRouterProvider',
+  '$stateProvider', '$httpProvider',
+  function($locationProvider, $urlRouterProvider,
+    $stateProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise("/404");
 
@@ -26,6 +28,9 @@ angular.module('leaguegg').config([
         url: '/404',
         templateUrl: "static/home/404.html"
       });
+
+
+    $httpProvider.interceptors.push('$authInjector');
 
   }
 ]);

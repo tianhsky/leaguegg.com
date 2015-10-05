@@ -8,6 +8,10 @@ module AppConsts
   LEAGUE_EXPIRES_THRESHOLD = 5.minutes
   SUMMONER_EXPIRES_THRESHOLD = 1.day
 
+  puts 'setting up keys'
+  WEB_API_SALT = 'f9242bd8f2e520cdd67ac5fe7f691495'
+  MOBILE_API_KEY = 'lolcaf-mobile-apikey'
+
   puts 'Seting up consts'
   HEALS_FACTOR = 1
   WARDP_FACTOR = 50
