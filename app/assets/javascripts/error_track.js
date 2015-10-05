@@ -18,5 +18,3 @@ window.ErrorTracker = function() {
   }
 }
 window.errorTracker = new ErrorTracker();
-
-b();
