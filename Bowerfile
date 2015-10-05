@@ -14,6 +14,7 @@ group :vendor do
   asset 'angular-truncate', 'latest'
   asset 'angular-mocks', '1.4.6'
   asset 'angular-ui-router-anim-in-out', 'latest'
+  asset 'airbrake-js-client', '0.5.3'
 
   resolution "angular", "1.4.7"
   resolution "angular-animate", "1.4.7"

@@ -12,7 +12,8 @@
     "angular-bootstrap": "0.13.4",
     "angular-truncate": "latest",
     "angular-mocks": "1.4.6",
-    "angular-ui-router-anim-in-out": "latest"
+    "angular-ui-router-anim-in-out": "latest",
+    "airbrake-js-client": "0.5.3"
   },
   "resolutions": {
     "angular": "1.4.7",

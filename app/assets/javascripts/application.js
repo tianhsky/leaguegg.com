@@ -1,3 +1,7 @@
+// error track
+//= require airbrake-js-client
+//= require error_track
+
 // browser
 //= require jquery
 //= require bowser
