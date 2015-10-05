@@ -3,7 +3,7 @@ angular.module('utils').factory('$authInjector', [
   function($md5, $window) {
     var authInjector = {
       request: function(config) {
-        var path = config.url;
+        var path = encodeURI(config.url);
         if (path.startsWith('/api')) {
           var salt = $window.WAPS || '';
           var content = salt + ':' + path;

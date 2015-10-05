@@ -85,7 +85,7 @@ class Summoner
 
   def outdated?
     return true if self.new_record?
-    if time = Utils::Time.time_to_epunix(self.synced_at)
+    if time = Utils::Time.epunix_to_time(self.synced_at)
       return true if time < Time.now - AppConsts::SUMMONER_EXPIRES_THRESHOLD
     end
     false
