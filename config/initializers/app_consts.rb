@@ -19,7 +19,7 @@ module AppConsts
   CCONTROL_FACTOR = 30
 
   puts 'Setting up limit'
-  RIOT_THROTTLE = Ratelimit.new('riot_api_throttle', {:bucket_interval=>2})
+  RIOT_THROTTLE = Ratelimit.new('riot_api_throttle', {:bucket_interval=>1})
 
   puts 'Loading static data from riot'
   Consts::Version.setup

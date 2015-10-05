@@ -43,3 +43,5 @@ else
 end
 
 json.league_entry participant.league_entry
+
+json.player_roles participant.player_roles

@@ -17,7 +17,7 @@ module Games
     field :masteries, type: Array #{mastery_id, rank}
     field :meta, type: Hash, default: {}
     field :league_entry, type: Hash, default: {}
-    field :player_roles, type: Hash, default: {}
+    field :player_roles, type: Array, default: []
 
     # Relations
     embedded_in :team, class_name: 'Games::Team'
