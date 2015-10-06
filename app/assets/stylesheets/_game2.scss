@@ -158,6 +158,17 @@
           min-height: 40px;
           padding: 5px 0px;
         }
+        .badge-item {
+          .badge {
+            &.hot {
+              background: #E82626;
+            }
+            &.veteran {}
+            &.fresh {
+              background: #46A47D;
+            }
+          }
+        }
       }
     }
   }

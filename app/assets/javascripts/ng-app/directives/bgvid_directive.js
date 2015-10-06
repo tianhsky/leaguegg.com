@@ -23,7 +23,7 @@ angular.module('utils').directive('bgvid', [
               vid.empty();
               vid.hide();
             }
-          })
+          });
         }
       ]
     };

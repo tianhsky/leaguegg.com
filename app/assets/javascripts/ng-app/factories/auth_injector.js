@@ -4,11 +4,11 @@ angular.module('utils').factory('$authInjector', [
     var authInjector = {
       request: function(config) {
         var path = encodeURI(config.url);
-        if (path.startsWith('/api')) {
-          var salt = $window.WAPS || '';
+        if (path.indexOf('/api')==0) {
+          var salt = $window['W'+'A'+'P'+'S'] || '';
           var content = salt + ':' + path;
           var token = $md5(content);
-          config.headers['at'] = token;
+          config.headers['a'+'t'] = token;
         }
         return config;
       }

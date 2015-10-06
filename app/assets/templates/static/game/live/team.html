@@ -19,7 +19,6 @@
     </span>
   </div>
 </div>
-
 <div class="players five-cols col-md-12">
   <div class="player col-md-1" ng-repeat="p in team.participants">
     <div class="intro">
@@ -69,8 +68,7 @@
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_cs_at_10m}}
-        </span>
-        &nbsp;&nbsp;
+        </span> &nbsp;&nbsp;
         <span class="counter">
           {{p.ranked_stat_recent.avg_cs_diff_at_10m}}
         </span>
@@ -79,8 +77,7 @@
         <div><span class="item-label">JCS&nbsp;&nbsp;CJCS</span></div>
         <span class="me">
           {{p.ranked_stat_recent.avg_team_jungle_kills}}
-        </span>
-        &nbsp;&nbsp;
+        </span> &nbsp;&nbsp;
         <span class="counter">
           {{p.ranked_stat_recent.avg_enemy_jungle_kills}}
         </span>
@@ -89,15 +86,28 @@
         <div><span class="item-label">Gold&nbsp;&nbsp;Wards</span></div>
         <span class="gold">
           {{p.ranked_stat_recent.avg_gold_at_10m}}
-        </span>
-        &nbsp;&nbsp;
+        </span> &nbsp;&nbsp;
         <span class="wards">
           {{p.ranked_stat_recent.avg_wards_placed}}
         </span>
       </div>
       <div class="aggresive hide">
         <div><span class="item-label">Aggresive</span></div>
-        {{p.ranked_stat_overall.aggresive_rate}}
+        <div>
+          {{p.ranked_stat_overall.aggresive_rate}}
+        </div>
+      </div>
+      <div class="badges">
+        <div><span class="item-label">Ranked Badges</span></div>
+        <div class="badge-item" ng-if="p.league_entry.is_hot_streak">
+          <span class="badge hot">Hot Streak</span>
+        </div>
+        <div class="badge-item" ng-if="p.league_entry.is_veteran">
+          <span class="badge veteran">Veteran</span>
+        </div>
+        <div class="badge-item" ng-if="p.league_entry.is_fresh_blood">
+          <span class="badge fresh">Fresh Blood</span>
+        </div>
       </div>
     </div>
   </div>
