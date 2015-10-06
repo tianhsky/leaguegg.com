@@ -6,7 +6,7 @@
 // browser
 //= require jquery
 //= require bowser
-//= require browser_check
+//= //require browser_check
 
 // libs
 //= require underscore
