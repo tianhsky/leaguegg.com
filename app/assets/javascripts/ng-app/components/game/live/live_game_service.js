@@ -17,7 +17,7 @@ angular.module('leaguegg.game').service('LiveGameService', [
 
     self.getSearchQuery = function() {
       var query = self.getCacheQuery();
-      if (!query) {
+      if (_.isEmpty(query)) {
         query = {
           region: 'NA',
           summoner: null

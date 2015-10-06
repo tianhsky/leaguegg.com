@@ -1,6 +1,6 @@
 angular.module('leaguegg.champion').controller('RotationCtrl', [
-  '$scope', '$interval', 'RotationService', 'LayoutService',
-  function($scope, $interval, RotationService, LayoutService) {
+  '$scope', '$rootScope', '$interval', 'RotationService', 'LayoutService',
+  function($scope, $rootScope, $interval, RotationService, LayoutService) {
     $scope.champions = null;
     var interval = null;
 
