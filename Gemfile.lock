@@ -107,6 +107,10 @@ GEM
       multi_json (~> 1.2)
     json (1.8.1)
     libv8 (3.16.14.7)
+    logstash-event (1.2.02)
+    logstash-logger (0.15.1)
+      logstash-event (~> 1.2)
+      stud
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -214,6 +218,7 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machine (1.2.0)
+    stud (0.0.22)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -260,6 +265,7 @@ DEPENDENCIES
   httparty
   jasmine
   jbuilder (~> 2.0)
+  logstash-logger
   mongoid (~> 4.0.0)
   puma
   rails (= 4.1.4)

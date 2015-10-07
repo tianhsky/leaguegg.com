@@ -8,7 +8,7 @@ module LeagueService
       begin
         resp = RiotAPI.get(url, region).values.first
       rescue Errors::NotFoundError => ex
-        raise Errors::LeagueNotFoundError
+        raise Errors::LeagueNotFoundError.new
       end
     end
 

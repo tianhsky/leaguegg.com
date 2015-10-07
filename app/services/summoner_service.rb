@@ -7,7 +7,7 @@ module SummonerService
       begin
         resp = RiotAPI.get(url, region).values.first
       rescue Errors::NotFoundError => ex
-        raise Errors::SummonerNotFoundError
+        raise Errors::SummonerNotFoundError.new
       end
     end
 
@@ -16,7 +16,7 @@ module SummonerService
       begin
         resp = RiotAPI.get(url, region).values.first
       rescue Errors::NotFoundError => ex
-        raise Errors::SummonerNotFoundError
+        raise Errors::SummonerNotFoundError.new
       end
     end
 

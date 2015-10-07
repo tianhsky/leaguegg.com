@@ -55,8 +55,10 @@ gem 'redis-rails'
 gem 'awesome_print', require: 'ap'
 # Schedule task
 gem 'whenever', require: false
-
+# Limit api request rate
 gem 'ratelimit'
+# Logger
+gem 'logstash-logger'
 
 group :development do
   # Debug tools

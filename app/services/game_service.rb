@@ -4,12 +4,13 @@ module GameService
   module Riot
 
     def self.find_game_by_summoner_id(summoner_id, region)
+      Rails.logger.tagged('GAME'){Rails.logger.info("Find by summoner id")}
       platform_id = Consts::Platform.find_by_region(region)['platform']
       url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
       begin
         resp = RiotAPI.get(url, region)
       rescue Errors::NotFoundError => ex
-        raise Errors::GameNotFoundError
+        raise Errors::GameNotFoundError.new
       end
     end
 
@@ -34,53 +35,86 @@ module GameService
     end
 
     def self.find_game_by_summoner_name(summoner_name, region)
-      raise Errors::SummonerNotFoundError if summoner_name.blank? || region.blank?
+      raise Errors::SummonerNotFoundError.new if summoner_name.blank? || region.blank?
       summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
       find_game_by_summoner_id(summoner.summoner_id, region)
     end
 
     def self.find_game_by_summoner_id(summoner_id, region)
-      raise Errors::SummonerNotFoundError if summoner_id.blank? || region.blank?
+      raise Errors::SummonerNotFoundError.new if summoner_id.blank? || region.blank?
       region.upcase!
 
+      start_time = Time.now
+
       # check cache
-      unless game = find_game_from_cache(summoner_id, region)
+      game_in_cache = find_game_from_cache(summoner_id, region)
+
+      if game_in_cache.blank? # if no game found, fetch
         # check riot
         json = Riot.find_game_by_summoner_id(summoner_id, region)
         game_id = json['game_id']
 
         # check db
-        unless game = Game.where('game_id' => game_id).first
+        game = Game.where('game_id' => game_id).first
+        unless game # game not found in db
+          # fetch game
           game_hash = Factory.build_game_hash(json, region)
+          summoners_hash = game_hash['teams'].map{|t|t['participants']}.flatten
+          summoner_ids = summoners_hash.map{|s|s['summoner_id']}
+
+          # lock
+          store_game_attrs_to_cache(game_id, nil, summoner_ids, region)
 
           # store summoner in db if not exist
-          summoners_hash = game_hash['teams'].map{|t|t['participants']}.flatten
           summoners = ensure_summoners_in_db(summoners_hash, region)
 
           # create game
           game = Game.new(game_hash)
+
+          # add summoners to game
           store_summoners_info_to_game(summoners, game, region)
 
           # save game
+          game.fetch_time_length = (Time.now - start_time).to_i
           game.save
+          Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
         end
 
-        # cache game for a short period
+        # cache game for a short time
         store_game_to_cache(game, region)
+      else # if game found
+        game = find_game_from_cache_waiting(summoner_id, region, AppConsts::FETCH_GAME_MAX_SECONDS)
       end
+
       game
     end
 
-    def self.find_game_by_summoner_id2(summoner_id, region)
-      # game
-      game_json = Riot.find_game_by_summoner_id(summoner_id, region)
-      game_id = game_json['game_id']
-      game_hash = Factory.build_game_hash(game_json, region)
+    def self.find_game_from_cache_waiting(summoner_id, region, wait_time)
+      game = nil
+      waited_time = 0
+      check_game_thread = Thread.new do
+        loop do
+          Rails.logger.tagged('GAME'){Rails.logger.info("Wait for fetch: #{waited_time} / #{wait_time}")}
+          game_in_cache = find_game_from_cache(summoner_id, region)
+          completed = game_in_cache['fetch_completed']
+          if completed # if fetch completed, done
+            game = game_in_cache['game']
+            break
+          else
+            sleep(2)
+            raise Errors::GameNotFoundError.new if waited_time > wait_time
+            waited_time += 2
+          end
+        end
 
-      # summoners
+        raise Errors::GameNotFoundError.new if game.blank?
+      end
+      check_game_thread.join
+      game
     end
 
     def self.find_game_from_cache(summoner_id, region)
+      Rails.logger.tagged('GAME'){Rails.logger.debug("Find in cache...")}
       region.upcase!
       summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
       game = nil
@@ -92,17 +126,24 @@ module GameService
       game
     end
 
-    def self.store_game_to_cache(game, region)
+    def self.store_game_attrs_to_cache(game_id, game, summoner_ids, region)
+      Rails.logger.tagged('GAME'){Rails.logger.debug("Store game #{game_id} #{game.nil? ? 'lock' : 'json'} to cache")}
       region.upcase!
-      summoner_ids = game.summoner_ids
-      game_id = game.game_id
       game_key = cache_key_for_game(game_id, region)
-      Rails.cache.write(game_key, game, expires_in: $game_expires_threshold)
+      hash = {
+        'fetch_completed' => !game.blank?,
+        'game' => game
+      }
+      Rails.cache.write(game_key, hash, expires_in: $game_expires_threshold)
       summoner_ids.each do |summoner_id|
         summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
         summoner_game = {'game_id' => game_id}
         Rails.cache.write(summoner_game_key, summoner_game, expires_in: AppConsts::GAME_EXPIRES_THRESHOLD)
       end
+    end
+
+    def self.store_game_to_cache(game, region)
+      store_game_attrs_to_cache(game.game_id, game, game.summoner_ids, region)
     end
 
     def self.find_featured_games_from_cache(region)
@@ -180,15 +221,16 @@ module GameService
     end
 
     def self.ensure_summoners_in_db(summoners_hash, region)
+      Rails.logger.tagged('GAME'){Rails.logger.debug("Store summoners to db")}
       summoners = []
       summoners_hash.each do |summoner_hash|
         summoner_obj_hash = {
           'region' => region.upcase,
-          'summoner_id' => summoner_hash[:summoner_id],
-          'name' => summoner_hash[:summoner_name],
-          'profile_icon_id' => summoner_hash[:profile_icon_id]
+          'summoner_id' => summoner_hash['summoner_id'],
+          'name' => summoner_hash['summoner_name'],
+          'profile_icon_id' => summoner_hash['profile_icon_id']
         }
-        if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash[:summoner_id]}).first
+        if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash['summoner_id']}).first
           if summoner.name != summoner_hash['summoner_name']
             summoner.update_attributes(summoner_obj_hash)
           end

@@ -36,6 +36,7 @@ module RiotAPI
     AppConsts::RIOT_THROTTLE.exec_within_threshold key, threshold: 3000, interval: 10 do
       resp = HTTParty.get(url, opts)
       AppConsts::RIOT_THROTTLE.add(key)
+      Rails.logger.tagged('RIOT'){Rails.logger.info("[#{Time.now}] #{url}")}
     end
 
     status_code = resp.response.code.to_i

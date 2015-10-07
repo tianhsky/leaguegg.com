@@ -4,6 +4,7 @@ class Game
   include GameService
 
   # Fields
+  field :fetch_time_length, type: Integer
   field :started_at, type: Integer
   field :game_length, type: Integer
 

@@ -6,14 +6,12 @@ angular.module('utils').directive('bgimg', [
       controller: ['$scope', '$rootScope', '_',
         function($scope, $rootScope, _) {
           $rootScope.$watch('bgImg', function(newVal, oldVal) {
-            if (!_.isEmpty(newVal)) {
-              var img = $('#bg-img');
-              var img_url = newVal;
-              if (!_.isEmpty(img_url)) {
-                img.attr('style', 'display:"";' + "background-image:url(" + img_url + ");");
-              } else {
-                img.attr('style', 'display:"none"; background-image:"none"');
-              }
+            var img_url = newVal;
+            var img = $('#bg-img');
+            if (!_.isEmpty(img_url)) {
+              img.attr('style', 'display:"";' + "background-image:url(" + img_url + ");");
+            } else {
+              img.attr('style', 'display:"none"; background-image:"none"');
             }
           });
         }
