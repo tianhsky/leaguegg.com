@@ -64,7 +64,8 @@
       </div>
       <div class="cs">
         <div>
-          <div class="item-label">CS&nbsp;&nbsp;CSD</div>
+          <span class="item-label" data-tooltip="CS at 10m">CS</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="CS difference at 10m">CSD</span>
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_cs_at_10m}}
@@ -74,7 +75,10 @@
         </span>
       </div>
       <div class="jcs">
-        <div><span class="item-label">JCS&nbsp;&nbsp;CJCS</span></div>
+        <div>
+          <span class="item-label" data-tooltip="Jungle CS">JCS</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Enemy Jungle CS">CJCS</span>
+        </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_team_jungle_kills}}
         </span> &nbsp;&nbsp;
@@ -83,7 +87,10 @@
         </span>
       </div>
       <div class="support">
-        <div><span class="item-label">Gold&nbsp;&nbsp;Wards</span></div>
+        <div>
+          <span class="item-label" data-tooltip="Gold earned at 10 min">Gold</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Wards placed">Wards</span>
+        </div>
         <span class="gold">
           {{p.ranked_stat_recent.avg_gold_at_10m}}
         </span> &nbsp;&nbsp;
