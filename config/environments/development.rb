@@ -19,9 +19,8 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   # config.active_support.deprecation = :log
-  # config.logger = LogStashLogger.new(type: :stdout)
-  # config.logger = LogStashLogger.new(type: :tcp, host: 'elk.leaguegg.com', port: 5000)
-  config.logger = LogStashLogger.new(type: :tcp, host: 'elk.leaguegg.com', port: 5000, ssl_certificate: "#{Rails.root.join('certs/logstash-forwarder.crt')}")
+  config.logger = LogStashLogger.new(type: :stdout)
+  # config.logger = LogStashLogger.new(type: :tcp, host: 'elk.leaguegg.com', port: 5000, ssl_certificate: "#{Rails.root.join('certs/logstash-forwarder.crt')}")
 
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load
