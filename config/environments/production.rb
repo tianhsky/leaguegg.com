@@ -49,7 +49,8 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-  config.logger = LogStashLogger.new(type: :stdout)
+  config.logger = LogStashLogger.new(type: :tcp, host: 'elk.leaguegg.com', port: 5000, ssl_certificate: "#{Rails.root.join('certs/logstash-forwarder.crt')}")
+
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
