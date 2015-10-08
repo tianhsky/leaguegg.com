@@ -1,15 +1,15 @@
 // error track
 //= require airbrake-js-client
 //= require error_track
-//= require md5
 
 // browser
-//= require inflection
 //= require jquery
 //= require bowser
-//= //require browser_check
+//= require browser_check
 
 // libs
+//= require md5
+//= require inflection
 //= require underscore
 //= require bootstrap-sass-official
 //= require chartjs
