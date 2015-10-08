@@ -52,8 +52,8 @@
       // width: 130px;
       .intro {
         .summoner-name {
-          height: 40px;
-          font-weight: bold;
+          height: 45px;
+          font-weight: 500;
         }
         .champion-icon {
           // height: 75px;
@@ -87,13 +87,16 @@
         }
       }
       .stats {
-        .item-label {
-          font-size: 0.7em;
-          @media(max-width: 991px) {
-            font-size: 0.8em;
+        .item-labels {
+          line-height: 0.7em;
+          .item-label {
+            font-size: 0.7em;
+            @media(max-width: 991px) {
+              font-size: 0.8em;
+            }
+            color: $color_label;
+            // border-bottom: 2px dotted;
           }
-          color: $color_label;
-          // border-bottom: 2px dotted;
         }
         .champion-name {
           padding-top: 5px;
@@ -110,7 +113,7 @@
           // }
         }
         .wl {
-          height: 65px;
+          height: 88px;
           padding: 5px 0px;
           .rate {
             font-weight: 600;
@@ -127,7 +130,7 @@
           }
         }
         .kda {
-          height: 85px;
+          height: 88px;
           padding: 5px 0px;
           .rate {
             font-weight: 600;
@@ -160,10 +163,14 @@
         }
         .badge-item {
           .badge {
+            cursor: pointer;
+            margin: 2px;
             &.hot {
-              background: #E82626;
+              background: #A75151;
             }
-            &.veteran {}
+            &.veteran {
+              background: #8A9939;
+            }
             &.fresh {
               background: #46A47D;
             }

@@ -1,11 +1,12 @@
 <div class="rate">{{rate | number: 1 | nullcheck}} KDA</div>
-
-<span class="k">{{k | number: 1 | nullcheck}}</span>
-<span ng-if="k_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
-<span ng-if="k_diff < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span> /
-<span class="d">{{d | number: 1 | nullcheck}}</span>
-<span ng-if="d_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
-<span ng-if="d_divv < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span> /
-<span class="a">{{a | number: 1 | nullcheck}}</span>
-<span ng-if="a_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
-<span ng-if="a_diff < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span>
+<div>
+  <span class="k">{{k | number: 1 | nullcheck}}</span>
+  <span ng-if="k_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
+  <span ng-if="k_diff < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span> /
+  <span class="d">{{d | number: 1 | nullcheck}}</span>
+  <span ng-if="d_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
+  <span ng-if="d_divv < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span> /
+  <span class="a">{{a | number: 1 | nullcheck}}</span>
+  <span ng-if="a_diff > 0" class="diff inc"><i class="fa fa-arrow-up"></i></span>
+  <span ng-if="a_diff < 0" class="diff dec"><i class="fa fa-arrow-down"></i></span>
+</div>

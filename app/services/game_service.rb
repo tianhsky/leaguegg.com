@@ -188,7 +188,8 @@ module GameService
 
             begin
               # last match
-              last_match_json = match_list_json.try(:[],'matches').try(:first)
+              matches = match_list_json.try(:[],'matches') || []
+              last_match_json = matches.find{|m|m['champion'].try(:to_i) == champion_id.to_i}
               if last_match_json
                 last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
                 last_match_stats = last_match.find_match_stats_for_summoner(summoner_id)
