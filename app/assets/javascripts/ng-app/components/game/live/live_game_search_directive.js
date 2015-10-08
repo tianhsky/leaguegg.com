@@ -4,9 +4,9 @@ angular.module('leaguegg.game').directive('liveGameSearch', function() {
     templateUrl: 'static/game/live/search.html',
     scope: {},
     controller: [
-      '$scope', '$location', 'ConstsPlatform', 'LiveGameService',
-      function($scope, $location, ConstsPlatform, LiveGameService) {
-        $scope.platforms = ConstsPlatform.platforms;
+      '$scope', '$location', 'ConstsService', 'LiveGameService',
+      function($scope, $location, ConstsService, LiveGameService) {
+        $scope.platforms = ConstsService.platforms;
         $scope.query = LiveGameService.getSearchQuery();
 
         $scope.submitSearch = function() {

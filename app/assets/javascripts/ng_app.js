@@ -5,6 +5,7 @@
 //= require angular-ui-router
 //= require angular-truncate
 //= require angular-rails-templates
+//= require ngInflection
 
 // angular app
 //= require_tree ../templates

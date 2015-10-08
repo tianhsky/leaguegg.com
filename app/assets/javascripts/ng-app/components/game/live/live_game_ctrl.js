@@ -1,6 +1,8 @@
 angular.module('leaguegg.game').controller('LiveGameCtrl', [
   '$scope', '$stateParams', 'LiveGameService',
-  function($scope, $stateParams, LiveGameService) {
+  'ConstsService', '$filter',
+  function($scope, $stateParams, LiveGameService,
+    ConstsService, $filter) {
     $scope.loading = {
       game: {
         active: true,
@@ -12,7 +14,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
       region: $stateParams.region,
       summoner: $stateParams.summoner
     }
-
+    $scope.season = $filter('titleize')(ConstsService.season);
     $scope.game = null;
     $scope.error = null;
 

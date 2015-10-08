@@ -6,7 +6,7 @@
 
 angular.module('utils', [
   'templates', 'ui.router', 'ui.bootstrap',
-  'truncate', 'ngAnimate'
+  'truncate', 'ngAnimate', 'ngInflection'
 ]);
 
 angular.module('leaguegg.consts', []);

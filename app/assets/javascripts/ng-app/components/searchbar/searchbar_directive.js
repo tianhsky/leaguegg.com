@@ -3,9 +3,9 @@ angular.module('leaguegg.searchbar').directive('searchbar', function() {
     restrict: 'E',
     templateUrl: 'static/searchbar/index.html',
     scope: {},
-    controller: ['$scope', '$location', 'ConstsPlatform', 'SearchbarService',
-      function($scope, $location, ConstsPlatform, SearchbarService) {
-        $scope.platforms = ConstsPlatform.platforms;
+    controller: ['$scope', '$location', 'ConstsService', 'SearchbarService',
+      function($scope, $location, ConstsService, SearchbarService) {
+        $scope.platforms = ConstsService.platforms;
         $scope.query = SearchbarService.getSearchQuery();
         $scope.result = SearchbarService.getSearchResult();
 

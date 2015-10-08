@@ -1,21 +1,21 @@
 describe('SearchbarCtrl', function() {
 
-  var $rootScope, $scope, $url, ConstsPlatform, SearchbarService;
+  var $rootScope, $scope, $url, ConstsService, SearchbarService;
 
   beforeEach(module('leaguegg'));
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _$url_, _ConstsPlatform_, _SearchbarService_) {
+  beforeEach(inject(function(_$controller_, _$rootScope_, _$url_, _ConstsService_, _SearchbarService_) {
     var $controller = _$controller_;
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
     $url = _$url_;
-    ConstsPlatform = _ConstsPlatform_;
+    ConstsService = _ConstsService_;
     SearchbarService = _SearchbarService_;
 
     controller = $controller('SearchbarCtrl', {
       '$scope': $scope,
       '$url': $url,
-      'ConstsPlatform': ConstsPlatform,
+      'ConstsService': ConstsService,
       'SearchbarService': SearchbarService
     });
   }));

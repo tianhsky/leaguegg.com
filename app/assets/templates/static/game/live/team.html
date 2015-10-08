@@ -19,8 +19,8 @@
     </span>
   </div>
 </div>
-<div class="players five-cols col-md-12">
-  <div class="player col-md-1" ng-repeat="p in team.participants">
+<div class="players col-md-12" ng-class="{'five-cols':(team.participants.length==5)}">
+  <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
         {{p.summoner.name | oneline | characters:10}}
@@ -52,7 +52,7 @@
       </div>
       <div class="wl season">
         <div class="item-labels">
-          <span class="item-label">Season 2015</span>
+          <span class="item-label">{{season}}</span>
           <br>
           <span class="item-label">Champion W/L</span>
         </div>
@@ -60,7 +60,7 @@
       </div>
       <div class="kda season">
         <div class="item-labels">
-          <span class="item-label">Season 2015</span>
+          <span class="item-label">{{season}}</span>
           <br>
           <span class="item-label">Champion KDA</span>
         </div>

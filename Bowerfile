@@ -7,6 +7,7 @@ group :vendor do
   asset 'underscore', '1.8.3'
   asset 'fontawesome', '4.3.0'
   asset 'bootstrap-sass-official', '3.3.3'
+  asset 'inflection', 'latest'
   asset 'angular', '1.4.7'
   asset 'angular-animate', '1.4.7'
   asset 'angular-ui-router', '0.2.14'
@@ -14,6 +15,7 @@ group :vendor do
   asset 'angular-truncate', 'latest'
   asset 'angular-mocks', '1.4.6'
   asset 'angular-ui-router-anim-in-out', 'latest'
+  asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'
   asset 'md5', 'latest'
 

@@ -4,6 +4,7 @@
 //= require md5
 
 // browser
+//= require inflection
 //= require jquery
 //= require bowser
 //= //require browser_check
