@@ -6,6 +6,12 @@
   text-align: center;
   .team {
     margin-top: 10px;
+    &.right-border{
+      border-right: 1px solid white;
+      @media(max-width: 768px) {
+        border-right: none;
+      }
+    }
   }
   .team-bar {
     padding: 2px 2px;
