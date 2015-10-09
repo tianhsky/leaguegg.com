@@ -1,8 +1,8 @@
 angular.module('leaguegg').config([
   '$locationProvider', '$urlRouterProvider',
-  '$stateProvider', '$httpProvider',
+  '$stateProvider', '$httpProvider', 'AnalyticsProvider',
   function($locationProvider, $urlRouterProvider,
-    $stateProvider, $httpProvider) {
+    $stateProvider, $httpProvider, AnalyticsProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise("/404");
 
@@ -29,8 +29,20 @@ angular.module('leaguegg').config([
         templateUrl: "static/home/404.html"
       });
 
-
+    // Auth
     $httpProvider.interceptors.push('$authInjector');
+
+    // GA
+    AnalyticsProvider.setAccount('UA-61898295-2');
+    AnalyticsProvider.trackUrlParams(true);
+    AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+  }
+]);
+
+
+angular.module('leaguegg').run([
+  'Analytics',
+  function(Analytics) {
 
   }
 ]);

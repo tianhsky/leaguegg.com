@@ -5,6 +5,7 @@
 //= require angular-ui-router
 //= require angular-truncate
 //= require angular-rails-templates
+//= require angular-google-analytics
 //= require ngInflection
 
 // angular app
