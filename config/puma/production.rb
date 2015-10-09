@@ -3,7 +3,7 @@ app_path = File.expand_path("../../", Dir.pwd)
 
 environment env
 daemonize false
-workers 5
+workers 3
 threads 0, 20
 prune_bundler
 
