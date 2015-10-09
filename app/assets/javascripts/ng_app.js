@@ -18,4 +18,4 @@
 //= require_tree ./ng-app/directives
 //= require_tree ./ng-app/components
 
-//= require angular-mocks
+//= //require angular-mocks
