@@ -6,7 +6,7 @@ json.version do
     json.patch @version.patch
   end
   json.android do
-    json.full '0.9.4'
+    json.full '1.0.0'
     json.major 0
     json.minor 9
     json.patch 4
