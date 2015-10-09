@@ -44,6 +44,6 @@
     "commit": "b1a49b010243f0829adc8f1103ea4be9bea1cda2"
   },
   "_source": "git://github.com/revolunet/angular-google-analytics.git",
-  "_target": "*",
+  "_target": "1.1.1",
   "_originalSource": "angular-google-analytics"
 }

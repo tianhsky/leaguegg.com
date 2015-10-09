@@ -4,6 +4,7 @@
     "normalize.css": "3.0.2",
     "bowser": "latest",
     "underscore": "1.8.3",
+    "jquery": "1.11.3",
     "fontawesome": "4.3.0",
     "bootstrap-sass-official": "3.3.3",
     "inflection": "latest",
@@ -14,7 +15,7 @@
     "angular-truncate": "latest",
     "angular-mocks": "1.4.6",
     "angular-ui-router-anim-in-out": "latest",
-    "angular-google-analytics": "latestr",
+    "angular-google-analytics": "1.1.1",
     "ngInflection": "latest",
     "airbrake-js-client": "0.5.3",
     "md5": "latest"
