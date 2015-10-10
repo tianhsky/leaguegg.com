@@ -3,4 +3,5 @@ Airbrake.configure do |config|
   config.host    = 'errbit.leaguegg.com'
   config.port    = 80
   config.secure  = config.port == 443
+  config.development_environments = [] #default: development, test, cucumber 
 end

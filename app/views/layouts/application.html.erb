@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="leaguegg">
+<html>
 <head>
   <base href="/">
   <title><%= content_for?(:title) ? yield(:title)+'|LeagueGG' : 'LeagueGG' %></title>
@@ -11,14 +11,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render 'shared/ga' %>
   <%= render 'shared/consts' %>
-  <% #render 'shared/ga' %>
   <%= render 'shared/api_key' %>
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
   <% end %>
 
-  <div id="page">
+  <div id="page" ng-app="leaguegg">
     <div ui-view></div>
   </div>
   

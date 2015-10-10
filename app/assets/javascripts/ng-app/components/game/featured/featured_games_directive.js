@@ -3,8 +3,10 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
     restrict: 'E',
     templateUrl: 'static/game/featured/index.html',
     scope: {},
-    controller: ['$scope', '$interval', '_', 'FeaturedGamesService',
-      function($scope, $interval, _, FeaturedGamesService) {
+    controller: ['$scope', '$interval', '_',
+      'FeaturedGamesService', '$location', 'Analytics',
+      function($scope, $interval, _, FeaturedGamesService,
+        $location, Analytics) {
         var interval = null;
         $scope.featured_games = null;
         $scope.loading = {
@@ -66,6 +68,13 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
             selectNextGame();
             interval = $interval(selectNextGame, 5000);
           });
+
+        $scope.goToGame = function(game) {
+          var query = game.query;
+          var url = FeaturedGamesService.findUrlForGame(query);
+          $location.path(url).search({featured: 1});
+          Analytics.trackEvent('FeaturedGame', 'SearchBySummoner', query.summoner + '@' + query.region, 1);
+        }
 
         $scope.$on('$destroy', function() {
           $interval.cancel(interval);

@@ -172,7 +172,17 @@ module GameService
               summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
               champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
               participant.ranked_stat_by_champion = champ_status.try(:clone)
-            rescue
+            rescue => ex
+              begin
+                Airbrake.notify_or_ignore(ex,
+                parameters: {
+                  'action' => 'Generate summoner season stats',
+                  'summoner_stat' => summoner_stat.try(:as_json),
+                  'champ_status' => champ_status.try(:as_json),
+                  'participant' => participant.try(:as_json)
+                })
+              rescue
+              end
             end
 
             begin
@@ -183,7 +193,16 @@ module GameService
               player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
               summoner_stat.update_attributes({:player_roles => player_roles_json})
               participant.player_roles = summoner_stat.aggregate_player_roles
-            rescue
+            rescue => ex
+              begin
+                Airbrake.notify_or_ignore(ex,
+                parameters: {
+                  'action' => 'Generate player roles from match list',
+                  'summoner_stat' => summoner_stat.try(:as_json),
+                  'participant' => participant.try(:as_json)
+                })
+              rescue
+              end
             end
 
             begin
@@ -196,7 +215,17 @@ module GameService
                 match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_participants([last_match_stats])
                 participant.ranked_stat_by_recent_champion = match_stats_aggregation
               end
-            rescue
+            rescue => ex
+              begin
+                Airbrake.notify_or_ignore(ex,
+                parameters: {
+                  'action' => 'Generate recent stats form last match',
+                  'matches' => matches.try(:as_json),
+                  'last_match_json' => last_match_json.try(:as_json),
+                  'participant' => participant.try(:as_json)
+                })
+              rescue
+              end
             end
           end
 
