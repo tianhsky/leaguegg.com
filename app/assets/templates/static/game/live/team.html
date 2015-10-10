@@ -83,8 +83,8 @@
         <span class="me">
           {{p.ranked_stat_recent.avg_cs_at_10m | nullcheck: '-'}}
         </span> &nbsp;&nbsp;&nbsp;
-        <span class="counter">
-          {{p.ranked_stat_recent.avg_cs_diff_at_10m | nullcheck: '-'}}
+        <span class="counter" ng-class="{inc:p.ranked_stat_recent.avg_cs_at_10m>0,dec:p.ranked_stat_recent.avg_cs_diff_at_10m<0}">
+          <span ng-if="p.ranked_stat_recent.avg_cs_diff_at_10m>0">+</span>{{p.ranked_stat_recent.avg_cs_diff_at_10m | nullcheck: '-'}}
         </span>
       </div>
       <div class="jcs">
