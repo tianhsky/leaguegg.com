@@ -22,7 +22,11 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
       .then(function(resp) {
         $scope.loading.game.active = false;
         if (resp.data && resp.data.id == null) {
-          $scope.error = "Sorry, there was a problem";
+          if (resp.status == 404) {
+            $scope.error = resp.data.error;
+          } else {
+            $scope.error = "Sorry, there was a problem";
+          }
         } else {
           $scope.error = null;
           $scope.game = resp;

@@ -19,18 +19,20 @@ module SummonerStats
     before_validation :set_player_role
 
     def set_player_role
-      if self.role.include?('SUPPORT')
-        self.player_role = 'SUPPORT'
-      else
-        if self.lane == 'TOP'
-          self.player_role = 'TOP'
-        elsif self.lane == 'MID'
-          self.player_role = 'MID'
-        elsif self.lane == 'BOTTOM'
-          self.player_role = 'ADC'
-        elsif self.lane == 'JUNGLE'
-          self.player_role = 'JUNGLE'
+      if self.role
+        if self.role.include?('SUPPORT')
+          self.player_role = 'SUPPORT'
         else
+          if self.lane == 'TOP'
+            self.player_role = 'TOP'
+          elsif self.lane == 'MID'
+            self.player_role = 'MID'
+          elsif self.lane == 'BOTTOM'
+            self.player_role = 'ADC'
+          elsif self.lane == 'JUNGLE'
+            self.player_role = 'JUNGLE'
+          else
+          end
         end
       end
       self.player_role = 'NONE' if self.player_role.blank?
