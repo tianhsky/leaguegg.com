@@ -33,11 +33,12 @@
         <img ng-src="{{p.spell2.img}}" width="27">
       </div>
       <div class="tier">
-        {{p.league_entry.tier}}&nbsp;{{p.league_entry.division}}
+        {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
       </div>
       <div class="lp">
-        <span ng-if="p.league_entry.league_points">
-          {{p.league_entry.league_points}} LP
+        <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" />
+        <span>
+          {{p.league_entry.league_points || 0}} LP
         </span>
       </div>
     </div>

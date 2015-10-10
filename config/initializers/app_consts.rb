@@ -19,7 +19,7 @@ module AppConsts
   CCONTROL_FACTOR = 30
 
   puts 'Setting up limit'
-  RIOT_THROTTLE = Ratelimit.new('riot_api_throttle', {:bucket_interval=>1})
+  RIOT_THROTTLE = Ratelimit.new('riot_api_throttle')
   FETCH_GAME_MAX_SECONDS = 20 #seconds
 
   puts 'Loading static data from riot'
