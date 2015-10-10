@@ -183,7 +183,7 @@ module GameService
               player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
               summoner_stat.update_attributes({:player_roles => player_roles_json})
               participant.player_roles = summoner_stat.aggregate_player_roles
-            # rescue
+            rescue
             end
 
             begin
