@@ -66,6 +66,7 @@ module MatchService
           result << k
         end
       end
+      result.sort_by!{|r|-(r['games'].to_i)}
       result
     end
 

@@ -6,7 +6,7 @@
   text-align: center;
   .team {
     margin-top: 10px;
-    &.right-border{
+    &.right-border {
       border-right: 1px solid white;
       @media(max-width: 768px) {
         border-right: none;
@@ -56,7 +56,49 @@
         border-bottom: 4px solid $gray;
         padding: 15px 1px;
       }
-      // width: 130px;
+      .hr {
+        &.b1 {
+          border-top: 1px solid $gray;
+        }
+        &.b2 {
+          border-top: 2px solid $gray;
+        }
+      }
+      .slash {
+        padding: 0px 2px;
+      }
+      .inc {
+        color: #BAF4CF;
+      }
+      .dec {
+        color: #EB88B2;
+      }
+      .item-labels {
+        line-height: 0.7em;
+        .item-label {
+          font-size: 0.7em;
+          color: $color_label;
+        }
+      }
+      .badge-item {
+        .badge {
+          cursor: pointer;
+          margin-top: 3px;
+          min-width: 90px;
+          &.hot {
+            background: #A75151;
+          }
+          &.veteran {
+            background: #8A9939;
+          }
+          &.fresh {
+            background: #46A47D;
+          }
+          &.role{
+            background: #004E6D;
+          }
+        }
+      }
       .intro {
         .summoner-name {
           height: 45px;
@@ -81,39 +123,19 @@
           padding-top: 10px;
           min-height: 25px;
         }
-        .tier-img{
-            width: 28px;
-            height: 25px;
-          }
+        .tier-img {
+          width: 28px;
+          height: 25px;
+        }
         .lp {
           min-height: 25px;
         }
-      }
-      .hr {
-        &.b1 {
-          border-top: 1px solid $gray;
+        .main-role {
+          height: 50px;
+          padding: 10px 0px;
         }
-        &.b2 {
-          border-top: 2px solid $gray;
-        }
-      }
-      .slash{
-        padding: 0px 2px;
-      }
-      .inc{
-        color: #BAF4CF;
-      }
-      .dec{
-        color: #EB88B2;
       }
       .stats {
-        .item-labels {
-          line-height: 0.7em;
-          .item-label {
-            font-size: 0.7em;
-            color: $color_label;
-          }
-        }
         .champion-name {
           padding-top: 5px;
           color: $purple;
@@ -166,22 +188,6 @@
         .support {
           min-height: 40px;
           padding: 5px 0px;
-        }
-        .badge-item {
-          .badge {
-            cursor: pointer;
-            margin-top: 3px;
-            min-width: 90px;
-            &.hot {
-              background: #A75151;
-            }
-            &.veteran {
-              background: #8A9939;
-            }
-            &.fresh {
-              background: #46A47D;
-            }
-          }
         }
       }
     }
