@@ -8,6 +8,10 @@ module AppConsts
   LEAGUE_EXPIRES_THRESHOLD = 5.minutes
   SUMMONER_EXPIRES_THRESHOLD = 1.day
 
+  puts 'setting up versions'
+  version = SemVer.find
+  SERVER_VERSION = "#{version.major}.#{version.minor}.#{version.patch}"
+
   puts 'setting up keys'
   WEB_API_SALT = 'f9242bd8f2e520cdd67ac5fe7f691495'
   MOBILE_API_KEY = 'lolcaf-mobile-apikey'

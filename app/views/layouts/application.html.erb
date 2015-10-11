@@ -11,9 +11,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'shared/ga' %>
-  <%= render 'shared/consts' %>
-  <%= render 'shared/api_key' %>
+  <script type="text/javascript">
+    <%= render 'shared/js/ga.js' %>
+    <%= render 'shared/js/consts.js' %>
+    <%= render 'shared/js/server_version.js' %>
+    <%= render 'shared/js/api_key.js' %>
+  </script>
+  
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
   <% end %>

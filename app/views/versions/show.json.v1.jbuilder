@@ -1,9 +1,6 @@
 json.version do
   json.server do
-    json.full "#{@version.major}.#{@version.minor}.#{@version.patch}"
-    json.major @version.major
-    json.minor @version.minor
-    json.patch @version.patch
+    json.full AppConsts::SERVER_VERSION
   end
   json.android do
     json.full '1.0.0'

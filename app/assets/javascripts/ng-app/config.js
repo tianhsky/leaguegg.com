@@ -29,6 +29,9 @@ angular.module('leaguegg').config([
         templateUrl: "static/home/404.html"
       });
 
+    // Server Version Check
+    $httpProvider.interceptors.push('$serverVersionInjector');
+
     // Auth
     $httpProvider.interceptors.push('$authInjector');
 

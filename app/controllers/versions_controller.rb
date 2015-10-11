@@ -3,7 +3,7 @@ class VersionsController < ApplicationController
   skip_before_filter :set_nav
   
   def show
-    @version = SemVer.find
+    # @server_version is fetched from before_filter in application_controller
   end
 
 end
