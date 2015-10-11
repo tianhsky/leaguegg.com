@@ -49,16 +49,8 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
             nextID = 0;
           }
 
-          // deselect
-          for (var i = 0; i < $scope.featured_games.length; i++) {
-            var g = $scope.featured_games[i];
-            if (i != nextID) {
-              g.active = false;
-            }
-          }
-
-          // select
-          $scope.featured_games[nextID].active = true;
+          var nextGame = $scope.featured_games[nextID];
+          $scope.selectGame(nextGame);
         }
 
         FeaturedGamesService.getFeaturedGames()
@@ -69,10 +61,25 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
             interval = $interval(selectNextGame, 5000);
           });
 
+        $scope.selectGame = function(game) {
+          // deselect
+          for (var i = 0; i < $scope.featured_games.length; i++) {
+            var g = $scope.featured_games[i];
+            if (g != game) {
+              g.active = false;
+            }
+          }
+
+          // select
+          game.active = true;
+        }
+
         $scope.goToGame = function(game) {
           var query = game.query;
           var url = FeaturedGamesService.findUrlForGame(query);
-          $location.path(url).search({featured: 1});
+          $location.path(url).search({
+            featured: 1
+          });
           Analytics.trackEvent('FeaturedGame', 'SearchBySummoner', query.summoner + '@' + query.region, 1);
         }
 

@@ -12,7 +12,7 @@
       }
     }
     .search-game-container {
-      background-color: $gray_b_1;
+      background-color: $gray;
       display: inline-block;
       border-radius: 0px;
       .form-element {
@@ -33,7 +33,7 @@
         font-size: 1.1em;
         width: auto;
         &:focus {
-          background-color: $gray_b_1;
+          background-color: $gray;
           color: white;
         }
       }
@@ -68,7 +68,7 @@
       overflow: hidden;
       padding: 0px 10px;
       margin: 0px auto;
-      background-color: $gray_b_1;
+      background-color: $gray;
       @media(max-width: 991px) {
         width: 60%;
       }
@@ -83,9 +83,15 @@
         float: right;
         width: auto;
         margin: 10px 0px;
-        color: $gray;
+        color: $white_25;
         .active {
           color: white;
+        }
+        li{
+          cursor: pointer;
+          &:hover{
+            color: $white_50;
+          }
         }
       }
     }

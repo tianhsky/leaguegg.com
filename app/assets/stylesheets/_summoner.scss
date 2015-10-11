@@ -1,6 +1,6 @@
 .summoner-search-bar {
   vertical-align: middle;
-  background-color: $gray_b_1;
+  background-color: $gray;
   display: inline-block;
   border-radius: 0px;
   .form-element {
@@ -20,7 +20,7 @@
     width: auto;
     font-size: 9px;
     &:focus {
-      background-color: $gray_b_1;
+      background-color: $gray;
       color: white;
     }
   }

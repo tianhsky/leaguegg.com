@@ -1,7 +1,7 @@
 <div class="featured-header">
   <h4>Featured Games</h4>
   <ol class="game-indicators list-unstyled list-inline">
-    <li ng-repeat="game in featured_games" ng-class="{active:game.active}">
+    <li ng-repeat="game in featured_games" ng-class="{active:game.active}" ng-click="selectGame(game)">
       <i class="fa fa-circle"></i>
     </li>
   </ol>
