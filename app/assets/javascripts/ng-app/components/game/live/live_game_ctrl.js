@@ -29,6 +29,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           }
         } else {
           $scope.error = null;
+          LiveGameService.applyOPGGUrl(resp);
           $scope.game = resp;
         }
       });

@@ -1,6 +1,6 @@
 angular.module('leaguegg.game').service('LiveGameService', [
-  '$localStorage', '_', '$http', 'Analytics',
-  function($localStorage, _, $http, Analytics) {
+  '$localStorage', '_', '$http', 'Analytics', 'OPGG',
+  function($localStorage, _, $http, Analytics, OPGG) {
     var self = this;
 
     self.SetCacheQuery = function(query) {
@@ -48,6 +48,15 @@ angular.module('leaguegg.game').service('LiveGameService', [
         }, function(err) {
           return err;
         });
+    }
+
+    self.applyOPGGUrl = function(game) {
+      var region = game.region;
+      _.each(game.teams, function(team) {
+        _.each(team.participants, function(p) {
+          p.opgg_summoner_url = OPGG.getOPGGUrl(region, p.summoner.name);
+        });
+      });
     }
 
   }

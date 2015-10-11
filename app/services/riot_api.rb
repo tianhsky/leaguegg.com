@@ -33,7 +33,7 @@ module RiotAPI
     key = region.try(:downcase) || 'all'
     resp = nil
     
-    AppConsts::RIOT_THROTTLE.exec_within_threshold key, threshold: 3000, interval: 10 do
+    AppConsts::RIOT_THROTTLE.exec_within_threshold key, threshold: 2930, interval: 10 do
       resp = HTTParty.get(url, opts)
       AppConsts::RIOT_THROTTLE.add(key)
       Rails.logger.tagged('RIOT'){Rails.logger.info("[#{Time.now}] #{url}")}

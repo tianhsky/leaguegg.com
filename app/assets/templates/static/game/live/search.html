@@ -1,26 +1,12 @@
 <h3 class="title-message">
-  Find out how well your opponents farm, and how aggresive they play.
+  Find out how hard your opponents farm, which roles they main, and how aggresive they play.
 </h3>
 
 <div class="search-form">
-  <!-- large page form -->
-  <div class="hidden-xs" role="search">
+  <div role="search">
     <div class="search-game-container">
-      <!-- <input type="hidden" name="type" value="game"> -->
       <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search for summoner in game..." ng-model="query.summoner" ng-enter="submitSearch()">
       <select class="form-element input-lg input-region" ng-options="p for p in platforms track by p" ng-model="query.region"></select>
-      <button class=" form-element btn btn-default btn-lg btn-search" type="submit" ng-click="submitSearch()">
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- small page form -->
-  <div class="visible-xs-inline-block" role="search">
-    <div class="search-game-container">
-      <!-- <input type="hidden" name="type" value="game"> -->
-      <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search for summoner in game..." ng-model="query.summoner" ng-enter="submitSearch()">
-      <select class="form-element input-lg input-region" ng-options="p for p in platforms track by p" ng-model="query.region" ng-init="query.region=platforms[0]"></select>
       <button class=" form-element btn btn-default btn-lg btn-search" type="submit" ng-click="submitSearch()">
         <span class="glyphicon glyphicon-search"></span>
       </button>

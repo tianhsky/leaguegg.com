@@ -1,6 +1,7 @@
 
 json.id @game.game_id
 json.started_at @game.started_at
+json.region @game.region
 
 json.game_queue do
   json.partial! 'api/consts/game_queue', {game_queue_config_id: @game.game_queue_config_id}

@@ -3,8 +3,9 @@ angular.module('leaguegg.game').directive('gameTeam', function() {
     restrict: 'E',
     templateUrl: 'static/game/live/team.html',
     scope: {
-      team: '=',
-      season: '='
+      region: '=',
+      season: '=',
+      team: '='
     }
   }
 });

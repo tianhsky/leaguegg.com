@@ -165,11 +165,19 @@ module GameService
           summoner_id = participant.summoner_id
           champion_id = participant.champion_id
           summoner = summoners.find{|s|s.summoner_id==summoner_id}
-          participant.meta['twitch_channel'] = summoner.twitch_channel if summoner
+          participant.meta['twitch_channel'] = summoner.try(:twitch_channel)
           workers << Thread.new do
             begin
               # summoner season stats
               summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
+            rescue
+              # that means this summoner has not played ranked games
+            end
+
+            # if no rank stats, do not proceed
+            next if summoner_stat.blank?
+
+            begin
               champ_status = summoner_stat.ranked_stats_by_champion.select{|s|s.champion_id==champion_id}.first
               participant.ranked_stat_by_champion = champ_status.try(:clone)
             rescue => ex

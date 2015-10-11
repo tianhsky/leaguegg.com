@@ -1,7 +1,7 @@
 <div class="team-bar blue left-pane col-md-12" ng-if="team.id==100">
   <div class="bans">
     <span class="ban-item" ng-repeat="ban in team.banned_champions">
-      <img ng-src="{{ban.img}}">
+      <img ng-src="{{ban.img}}" err-src="/static/img/lolcaf-icon.png">
     </span> Bans
   </div>
   <div class="team-name">
@@ -15,7 +15,7 @@
   <div class="bans">
     Bans
     <span class="ban-item" ng-repeat="ban in team.banned_champions">
-      <img ng-src="{{ban.img}}">
+      <img ng-src="{{ban.img}}" err-src="/static/img/lolcaf-icon.png">
     </span>
   </div>
 </div>
@@ -23,20 +23,20 @@
   <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
-        {{p.summoner.name | oneline | characters:10}}
+        <a href="{{p.opgg_summoner_url}}" target="_blank">{{p.summoner.name | oneline | characters:10}}</a>
       </div>
       <div class="champion-icon">
-        <img ng-src="{{p.champion.img}}" width="59">
+        <img ng-src="{{p.champion.img}}" err-src="/static/img/lolcaf-icon.png">
       </div>
       <div class="skills">
-        <img ng-src="{{p.spell1.img}}" width="27">
-        <img ng-src="{{p.spell2.img}}" width="27">
+        <img ng-src="{{p.spell1.img}}" err-src="/static/img/lolcaf-icon.png">
+        <img ng-src="{{p.spell2.img}}" err-src="/static/img/lolcaf-icon.png">
       </div>
       <div class="tier">
         {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
       </div>
       <div class="lp">
-        <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" />
+        <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" err-src="/static/img/lolcaf-icon.png" />
         <span>
           {{p.league_entry.league_points || 0}} LP
         </span>

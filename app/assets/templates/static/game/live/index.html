@@ -10,6 +10,6 @@
     </div>
   </div>
   <div class="fade-in-anim" ng-if="!error && game">
-    <game-team class="team col-sm-6" team="team" season="season" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100}" />
+    <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100}" />
   </div>
 </div>
