@@ -21,7 +21,7 @@ class Game
   embeds_many :teams, class_name: 'Games::Team'
 
   # Indexes
-  index({ game_id: 1, region: 1 }, { unique: true })
+  index({ game_id: 1, region: 1 }, { unique: true, :drop_dups => true })
 
   # Validations
   validates :region, presence: true

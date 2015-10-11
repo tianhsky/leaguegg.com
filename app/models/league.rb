@@ -10,7 +10,7 @@ class League
   field :entries, type: Array
 
   # Indexes
-  index({ region: 1, tier: 1, queue: 1, name: 1 }, { unique: true })
+  index({ region: 1, tier: 1, queue: 1, name: 1 }, { unique: true, :drop_dups => true })
 
   # Validations
   validates :region, presence: true

@@ -22,7 +22,7 @@ class Match
   # Relations
 
   # Indexes
-  index({ match_id: 1, region: 1 }, { unique: true })
+  index({ match_id: 1, region: 1 }, { unique: true, :drop_dups => true })
   index({ 'teams.participants.summoner_id' => 1, 'region' => 1, 'riot_created_at' => -1 })
 
   # Validations

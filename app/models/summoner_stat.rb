@@ -17,7 +17,7 @@ class SummonerStat
   embeds_one :ranked_stat_summary, class_name: 'SummonerStats::RankedStatSummary'
 
   # Indexes
-  index({ summoner_id: 1, region: 1, season: 1 }, { unique: true })
+  index({ summoner_id: 1, region: 1, season: 1 }, { unique: true, :drop_dups => true })
 
   # Validations
   validates :season, presence: true

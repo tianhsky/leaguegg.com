@@ -21,8 +21,8 @@ class Summoner
   # has_many :summoner_stats
 
   # Indexes
-  index({ summoner_id: 1, region: 1 }, { unique: true })
-  index({ name_lowercase: 1, region: 1 }, { unique: true })
+  index({ summoner_id: 1, region: 1 }, { unique: true, :drop_dups => true })
+  index({ name_lowercase: 1, region: 1 }, { unique: true, :drop_dups => true })
 
   # Validations
   validates :region, presence: true
