@@ -8,13 +8,6 @@ gem 'rails', '4.1.4'
 gem 'execjs', '~> 2.5.2'
 gem 'therubyracer', '~> 0.12.2'
 
-# jquery
-# gem 'jquery-rails'
-# Boostrap
-# gem 'bootstrap-sass', '~> 3.3.4'
-# Fontawesome
-# gem 'font-awesome-rails', '~> 4.3.0.0'
-
 # Frontend js framework
 gem 'angular-rails-templates'
 # Manage frontend dependencies
@@ -68,7 +61,7 @@ end
 group :development, :test do
   # Test suite
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.5.0'
   gem 'factory_girl_rails'
   gem 'jasmine'
 end
