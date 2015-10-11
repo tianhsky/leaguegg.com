@@ -5,7 +5,7 @@
 <div class="search-form">
   <div role="search">
     <div class="search-game-container">
-      <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search for summoner in game..." ng-model="query.summoner" ng-enter="submitSearch()">
+      <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-lg input-search" name="summoner_name" placeholder="Search summoner in game..." ng-model="query.summoner" ng-enter="submitSearch()">
       <select class="form-element input-lg input-region" ng-options="p for p in platforms track by p" ng-model="query.region"></select>
       <button class=" form-element btn btn-default btn-lg btn-search" type="submit" ng-click="submitSearch()">
         <span class="glyphicon glyphicon-search"></span>
