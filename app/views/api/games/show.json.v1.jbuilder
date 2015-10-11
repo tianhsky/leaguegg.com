@@ -12,3 +12,4 @@ json.map do
 end
 
 json.teams @game.teams, partial: 'team', as: :team
+json.fetch_time_length = @game.fetch_time_length
