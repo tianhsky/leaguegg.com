@@ -79,10 +79,10 @@ module SummonerStatService
 
         ranked_stats_json = nil
         ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
-
         season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
+        stats.assign_attributes(season_stats_hash)
         stats.touch_synced_at
-        stats.update_attributes(season_stats_hash)
+        stats.save
       end
 
       stats

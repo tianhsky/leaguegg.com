@@ -195,7 +195,7 @@ module GameService
 
             begin
               # all matches
-              match_list_json = MatchService::Riot.find_match_list(summoner_id, region)
+              match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], nil, 0, 50)
 
               # player roles
               player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
@@ -239,9 +239,9 @@ module GameService
 
           workers << Thread.new do
             begin
-              league = LeagueService::Service.find_league_by_summoner_id(summoner_id, region)
-              league_entry = league.entries.find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
-              league_entry['tier'] = league.tier
+              league = LeagueService::Service.find_league_entry_by_summoner_id(summoner_id, region)
+              league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
+              league_entry['tier'] = league['tier']
               participant.league_entry = league_entry
             rescue
             end

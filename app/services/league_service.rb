@@ -12,6 +12,16 @@ module LeagueService
       end
     end
 
+    def self.find_league_entry_by_summoner_id(summoner_id, region)
+      region = region.downcase
+      url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.5/league/by-summoner/#{summoner_id}/entry"
+      begin
+        resp = RiotAPI.get(url, region).values.first
+      rescue Errors::NotFoundError => ex
+        raise Errors::LeagueNotFoundError.new
+      end
+    end
+
   end
 
   module Factory
@@ -46,6 +56,14 @@ module LeagueService
       })
       league.update_attributes(hash)
       league
+    end
+
+    def self.find_league_entry_by_summoner_id(summoner_id, region)
+      json = Riot.find_league_entry_by_summoner_id(summoner_id, region)
+      json = json[0]
+      return nil if json.blank?
+      hash = Factory.build_league_hash(json, region)
+      hash
     end
 
   end
