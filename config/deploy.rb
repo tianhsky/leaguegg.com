@@ -17,6 +17,9 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails eye}
 
 set :assets_roles, [:web]
 
+set :whenever_roles, :app
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
 namespace :deploy do
 
   before 'updated', 'bundle:install'

@@ -292,6 +292,14 @@ module GameService
       "featured?region=#{region.upcase}"
     end
 
+    def self.store_current_featured_games(region='NA')
+      featured = self.find_current_featured_games(region)
+      featured['game_list'].each do |fg|
+        summoner_name = fg['teams'][0]['participants'][0]['summoner_name']
+        self.find_game_by_summoner_name(summoner_name, region)
+      end
+    end
+
   end
 
   module Factory
