@@ -23,7 +23,7 @@
   <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
-        <a href="{{p.opgg_summoner_url}}" target="_blank">{{p.summoner.name | oneline | characters:10}}</a>
+        <a href="{{p.opgg_summoner_url}}" target="_blank">{{p.summoner.name | characters:16}}</a>
       </div>
       <div class="champion-icon">
         <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
