@@ -76,8 +76,14 @@ module GameService
 
           # save game
           game.fetch_time_length = (Time.now - start_time).to_i
-          game.save
-          Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
+
+          Thread.new do
+            begin
+              game.save
+              Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
+            rescue
+            end
+          end
         end
 
         # cache game for a short time
@@ -130,11 +136,13 @@ module GameService
       Rails.logger.tagged('GAME'){Rails.logger.debug("Store game #{game_id} #{game.nil? ? 'lock' : 'json'} to cache")}
       region.upcase!
       game_key = cache_key_for_game(game_id, region)
+      completed = !game.blank?
       hash = {
-        'fetch_completed' => !game.blank?,
+        'fetch_completed' => completed,
         'game' => game
       }
-      Rails.cache.write(game_key, hash, expires_in: $game_expires_threshold)
+      expire_threshold = completed ? $game_expires_threshold : 30.seconds
+      Rails.cache.write(game_key, hash, expires_in: expire_threshold)
       summoner_ids.each do |summoner_id|
         summoner_game_key = cache_key_for_summoner_game(summoner_id, region)
         summoner_game = {'game_id' => game_id}
@@ -217,7 +225,7 @@ module GameService
               # last match
               matches = match_list_json.try(:[],'matches') || []
               last_match_json = matches.find{|m|m['champion'].try(:to_i) == champion_id.to_i}
-              
+
               if last_match_json.blank?
                 champion_match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], champion_id.to_i, 0, 1)
                 last_match_json = champion_match_list_json[0]
@@ -275,10 +283,17 @@ module GameService
         }
         if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash['summoner_id']}).first
           if summoner.name != summoner_hash['summoner_name']
-            summoner.update_attributes(summoner_obj_hash)
+            summoner.assign_attributes(summoner_obj_hash)
           end
         else
-          summoner = Summoner.create(summoner_obj_hash)
+          summoner = Summoner.new(summoner_obj_hash)
+        end
+
+        Thread.new do
+          begin
+            summoner.save
+          rescue
+          end
         end
         summoners << summoner
       end

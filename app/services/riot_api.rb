@@ -29,6 +29,7 @@ module RiotAPI
     opts[:query].merge!(get_api_key_param)
     opts[:headers] ||= {}
     opts[:headers].merge!(HEADERS)
+    opts[:timeout] = 5
 
     key = region.try(:downcase) || 'all'
     resp = nil
