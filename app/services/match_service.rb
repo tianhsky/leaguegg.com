@@ -93,14 +93,19 @@ module MatchService
   module Service
 
     def self.find_match(match_id, region)
+      params = {match_id: match_id, region: region.upcase}
       # find in db first
-      match = Match.where(match_id: match_id, region: region.upcase).first
+      match = Match.where(params).first
       return match if match
 
       # if not found in db, find through api
       match_json = Riot.find_match(match_id, region)
       match_hash = Factory.build_match_hash(match_json)
-      match = Match.create(match_hash)
+      match = Match.find_or_create_by(params)
+      if match.new_record?
+        match.assign_attributes(match_hash)
+        match.save
+      end
 
       match
     end

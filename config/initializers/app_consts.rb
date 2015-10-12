@@ -24,7 +24,7 @@ module AppConsts
 
   puts 'Setting up limit'
   RIOT_THROTTLE = Ratelimit.new('riot_api_throttle')
-  FETCH_GAME_MAX_SECONDS = 20 #seconds
+  FETCH_GAME_MAX_SECONDS = 16 #seconds
 
   puts 'Loading static data from riot'
   Consts::Version.setup

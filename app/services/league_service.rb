@@ -60,9 +60,18 @@ module LeagueService
 
     def self.find_league_entry_by_summoner_id(summoner_id, region)
       json = Riot.find_league_entry_by_summoner_id(summoner_id, region)
-      json = json[0]
       return nil if json.blank?
-      hash = Factory.build_league_hash(json, region)
+      summoner_league_json = nil
+      json.each do |j|
+        j['entries'].each do |e|
+          if e['player_or_team_id'].to_i == summoner_id.to_i
+            summoner_league_json = j
+            break
+          end
+          break unless summoner_league_json.blank?
+        end
+      end
+      hash = Factory.build_league_hash(summoner_league_json, region)
       hash
     end
 
