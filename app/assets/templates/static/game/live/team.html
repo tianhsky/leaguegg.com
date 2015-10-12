@@ -36,7 +36,8 @@
         {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
       </div>
       <div class="lp">
-        <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" />
+        <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" ng-if="p.league_entry.tier" />
+        <img class="tier-img" src="/static/img/leaguegg-icon.png" ng-if="!p.league_entry.tier" />
         <span>
           {{p.league_entry.league_points || 0}} LP
         </span>
