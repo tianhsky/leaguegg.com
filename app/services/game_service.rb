@@ -195,7 +195,7 @@ module GameService
 
             begin
               # all matches
-              match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], nil, 0, 50)
+              match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], nil, 0, 60)
 
               # player roles
               player_roles_json = MatchService::Factory.build_player_roles(match_list_json)
@@ -217,6 +217,11 @@ module GameService
               # last match
               matches = match_list_json.try(:[],'matches') || []
               last_match_json = matches.find{|m|m['champion'].try(:to_i) == champion_id.to_i}
+              
+              if last_match_json.blank?
+                champion_match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], champion_id.to_i, 0, 1)
+                last_match_json = champion_match_list_json[0]
+              end
               if last_match_json
                 last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
                 last_match_stats = last_match.find_match_stats_for_summoner(summoner_id)

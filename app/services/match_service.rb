@@ -101,10 +101,14 @@ module MatchService
       # if not found in db, find through api
       match_json = Riot.find_match(match_id, region)
       match_hash = Factory.build_match_hash(match_json)
-      match = Match.find_or_create_by(params)
-      if match.new_record?
-        match.assign_attributes(match_hash)
-        match.save
+      match = Match.new(match_hash)
+      Thread.new do
+        begin
+          if match.new_record?
+            match.save
+          end
+        rescue
+        end
       end
 
       match
