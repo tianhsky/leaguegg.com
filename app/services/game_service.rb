@@ -257,6 +257,14 @@ module GameService
               league_entry['tier'] = league['tier']
               participant.league_entry = league_entry
             rescue
+              begin
+                Airbrake.notify_or_ignore(ex,
+                parameters: {
+                  'action' => 'Generate league entry',
+                  'league' => league.try(:as_json)
+                })
+              rescue
+              end
             end
           end
         end

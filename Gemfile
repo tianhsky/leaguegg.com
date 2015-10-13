@@ -52,6 +52,8 @@ gem 'whenever', require: false
 gem 'ratelimit'
 # Logger
 gem 'logstash-logger'
+# Profiling
+gem 'newrelic_rpm'
 
 group :development do
   # Debug tools

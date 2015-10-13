@@ -127,6 +127,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
+    newrelic_rpm (3.13.2.302)
     nio4r (1.1.0)
     origin (2.1.1)
     phantomjs (1.9.8.0)
@@ -263,6 +264,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   logstash-logger
   mongoid (~> 5.0.0)
+  newrelic_rpm
   puma
   rails (= 4.1.4)
   ratelimit
