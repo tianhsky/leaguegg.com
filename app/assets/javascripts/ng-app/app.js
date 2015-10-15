@@ -7,7 +7,7 @@
 angular.module('utils', [
   'templates', 'ui.router', 'ui.bootstrap',
   'truncate', 'ngAnimate', 'ngInflection',
-  'angular-google-analytics'
+  'angular-google-analytics', 'chart.js'
 ]);
 
 angular.module('leaguegg.consts', []);
@@ -34,7 +34,11 @@ angular.module('leaguegg.champion', [
   'utils'
 ]);
 
+angular.module('leaguegg.summoner', [
+  'utils'
+]);
+
 angular.module('leaguegg', [
   'leaguegg.home', 'leaguegg.game', 'leaguegg.searchbar', 'leaguegg.champion',
-  'leaguegg.layouts'
+  'leaguegg.layouts', 'leaguegg.summoner'
 ]);

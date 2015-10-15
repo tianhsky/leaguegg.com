@@ -5,3 +5,4 @@ json.level summoner.summoner_level
 json.profile_icon do
   json.partial! 'api/consts/profile_icon', {profile_icon_id: summoner.profile_icon_id}
 end
+json.league_entries summoner.league_entries

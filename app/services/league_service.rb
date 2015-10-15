@@ -12,7 +12,7 @@ module LeagueService
       end
     end
 
-    def self.find_league_entry_by_summoner_id(summoner_id, region)
+    def self.find_league_entries_by_summoner_id(summoner_id, region)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.5/league/by-summoner/#{summoner_id}/entry"
       begin
@@ -58,8 +58,8 @@ module LeagueService
       league
     end
 
-    def self.find_league_entry_by_summoner_id(summoner_id, region)
-      json = Riot.find_league_entry_by_summoner_id(summoner_id, region)
+    def self.entries_to_summoner_entry(summoner_id, region, league_entries)
+      json = league_entries
       return nil if json.blank?
       summoner_league_json = nil
       json.each do |j|
@@ -73,6 +73,11 @@ module LeagueService
       end
       hash = Factory.build_league_hash(summoner_league_json, region)
       hash
+    end
+
+    def self.find_league_entry_by_summoner_id(summoner_id, region)
+      json = Riot.find_league_entries_by_summoner_id(summoner_id, region)
+      entries_to_summoner_entry(summoner_id, region, json)
     end
 
   end

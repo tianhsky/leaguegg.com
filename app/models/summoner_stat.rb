@@ -10,9 +10,8 @@ class SummonerStat
   field :summoner_id, type: Integer
 
   # Relations
-  # belongs_to :summoner, foreign_key: 'app_summoner_id'
-  embeds_many :player_stats, class_name: 'SummonerStats::PlayerStat'
   embeds_many :player_roles, class_name: 'SummonerStats::PlayerRole'
+  embeds_many :player_stats, class_name: 'SummonerStats::PlayerStat'
   embeds_many :ranked_stats_by_champion, class_name: 'SummonerStats::RankedStatByChampion'
   embeds_one :ranked_stat_summary, class_name: 'SummonerStats::RankedStatSummary'
 
@@ -39,8 +38,9 @@ class SummonerStat
     Summoner.where({summoner_id: summoner_id, region: region}).first
   end
 
-  def sync_from_riot
-    player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
+  def sync_from_riot!
+    # player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
+    player_stats_json = nil
     ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
     season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
     self.update_attributes(season_stats_hash)
@@ -59,7 +59,7 @@ class SummonerStat
   end
 
   def outdated?
-    return false if self.new_record?
+    return false if self.new_record? || self.updated_at.blank?
     if time = Utils::Time.epunix_to_time(self.updated_at)
       return true if time < Time.now - AppConsts::CHAMPION_SEASON_STATS_EXPIRES_THRESHOLD
     end

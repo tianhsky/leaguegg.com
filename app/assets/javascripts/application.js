@@ -12,7 +12,7 @@
 //= require inflection
 //= require underscore
 //= require bootstrap-sass-official
-//= require chartjs
+//= require Chart.js/Chart.min.js
 
 // custom
 //= require initializers

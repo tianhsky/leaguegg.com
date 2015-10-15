@@ -88,6 +88,24 @@ module MatchService
       r
     end
 
+    def self.timeline_json_to_array(timeline_json)
+      return [] if timeline_json.blank?
+      arr = []
+      arr[0] = timeline_json['zero_to_ten'] || 0
+      arr[1] = timeline_json['ten_to_twenty'] || 0
+      arr[2] = timeline_json['twenty_to_thirty'] || 0
+      arr[3] = timeline_json['thirty_to_end'] || 0
+      arr
+    end
+
+    def self.plus_timeline_arr(sum_timeline_arr, timeline_arr)
+      4.times do |t|
+        sum_timeline_arr[t] ||= 0
+        sum_timeline_arr[t] += timeline_arr[t] || 0
+      end
+      sum_timeline_arr
+    end
+
   end
 
   module Service
@@ -116,7 +134,7 @@ module MatchService
 
     def self.get_matches_aggregation_for_matches(matches, summoner_id)
       participants = matches.map{|m|m.find_match_stats_for_summoner(summoner_id)}
-      get_matches_aggregation_for_participants(participants)
+      self.get_matches_aggregation_for_participants(participants)
     end
 
     def self.get_matches_aggregation_for_participants(participants)
@@ -148,16 +166,41 @@ module MatchService
           stats.sight_wards_bought += stat['sight_wards_bought_in_game']
         end
         if timeline = m['timeline']
-          stats.per_min_gold_at_10m += timeline.try(:[],'gold_per_min_deltas').try(:[],'zero_to_ten') || 0
-          stats.per_min_cs_at_10m += timeline.try(:[],'creeps_per_min_deltas').try(:[],'zero_to_ten') || 0
-          stats.per_min_cs_diff_at_10m += timeline.try(:[],'cs_diff_per_min_deltas').try(:[],'zero_to_ten') || 0
-          stats.per_min_dmg_taken_at_10m += timeline.try(:[],'damage_taken_per_min_deltas').try(:[],'zero_to_ten') || 0
-          stats.per_min_dmg_taken_diff_at_10m += timeline.try(:[],'damage_taken_diff_per_min_deltas').try(:[],'zero_to_ten') || 0
+          timeline_gold = timeline.try(:[],'gold_per_min_deltas')
+          timeline_cs = timeline.try(:[],'creeps_per_min_deltas')
+          timeline_csd = timeline.try(:[],'cs_diff_per_min_deltas')
+          timeline_xp = timeline.try(:[],'xp_per_min_deltas')
+          timeline_xpd = timeline.try(:[],'xp_diff_per_min_deltas')
+          timeline_dmgt = timeline.try(:[],'damage_taken_per_min_deltas')
+          timeline_dmgtd = timeline.try(:[],'damage_taken_diff_per_min_deltas')
+
+          timeline_gold_arr = Factory.timeline_json_to_array(timeline_gold)
+          timeline_cs_arr = Factory.timeline_json_to_array(timeline_cs)
+          timeline_csd_arr = Factory.timeline_json_to_array(timeline_csd)
+          timeline_xp_arr = Factory.timeline_json_to_array(timeline_xp)
+          timeline_xpd_arr = Factory.timeline_json_to_array(timeline_xpd)
+          timeline_dmgt_arr = Factory.timeline_json_to_array(timeline_dmgt)
+          timeline_dmgtd_arr = Factory.timeline_json_to_array(timeline_dmgtd)
+
+          Factory.plus_timeline_arr(stats.timeline_cs, timeline_cs_arr)
+          Factory.plus_timeline_arr(stats.timeline_csd, timeline_csd_arr)
+          Factory.plus_timeline_arr(stats.timeline_xp, timeline_xp_arr)
+          Factory.plus_timeline_arr(stats.timeline_xpd, timeline_xpd_arr)
+          Factory.plus_timeline_arr(stats.timeline_dmgt, timeline_dmgt_arr)
+          Factory.plus_timeline_arr(stats.timeline_dmgtd, timeline_dmgtd_arr)
+
+          stats.per_min_gold_at_10m += timeline_gold_arr[0]||0
+          stats.per_min_cs_at_10m += timeline_cs_arr[0]||0
+          stats.per_min_cs_diff_at_10m += timeline_csd_arr[0]||0
+          stats.per_min_dmg_taken_at_10m += timeline_dmgt_arr[0]||0
+          stats.per_min_dmg_taken_diff_at_10m += timeline_dmgtd_arr[0]||0
         end
       end
       stats.aggregate_stats
       stats
     end
+
+
 
     def self.find_recent_matches(summoner_id, region, reload)
       region = region.upcase
@@ -177,6 +220,40 @@ module MatchService
         matches = Match.where('teams.participants.summoner_id':summoner_id, 'region':region).order_by(['riot_created_at', -1]).limit(15)
       end
       matches
+    end
+
+    def self.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, x=3, prefetched_match_list=[])
+      begin
+        # last match
+        last_matches_json = prefetched_match_list.select{|m|m['champion'].try(:to_i) == champion_id.to_i}
+        last_x_matches = last_matches_json.take(x)
+
+        if last_x_matches.blank?
+          champion_match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], champion_id.to_i, 0, x)
+          last_x_matches = champion_match_list_json['matches'].try(:take, x)
+        end
+        if !last_x_matches.blank?
+          match_items = []
+          workers = []
+          last_x_matches.each do |match_list_item|
+            workers << Thread.new do
+              match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
+              match_items << match_item
+            end
+          end
+          workers.map(&:join)
+
+          return self.get_matches_aggregation_for_matches(match_items, summoner_id)
+        end
+        rescue => ex
+          begin
+            Airbrake.notify_or_ignore(ex,
+            parameters: {
+              'action' => 'Generate recent stats for matches'
+            })
+          rescue
+          end
+      end
     end
 
   end

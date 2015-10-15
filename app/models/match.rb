@@ -35,15 +35,13 @@ class Match
   before_validation :sanitize_attrs
 
   def find_match_stats_for_summoner(summoner_id)
-    r = nil
     self.teams.each do |team|
       team['participants'].each do |participant|
-        if participant['summoner_id'].to_s == summoner_id.to_s
-          r = participant
+        if participant['summoner_id'].to_i == summoner_id.to_i
+          return participant
         end
       end
     end
-    return r
   end
 
   def sanitize_attrs

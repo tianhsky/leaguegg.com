@@ -13,9 +13,9 @@ class Summoner
   field :summoner_level, type: Integer
   field :name, type: String
   field :name_lowercase, type: String # for searching
-  field :inquiries, type: Integer, default: 1
   field :twitch_channel, type: String
   field :highest_tier, type: String
+  field :league_entries, type: Array
 
   # Relations
   # has_many :summoner_stats
@@ -37,14 +37,38 @@ class Summoner
 
   # Functions
 
-  def inc_inquires(num=1)
-    self.inc(inquiries: num)
+  def self.search_by_name(name, region)
+    name_key = name.try(:downcase).try(:gsub, /\s+/, "")
+    region_key = region.try(:upcase)
+    self.where(:name_lowercase => name_key, :region => region_key).first
   end
 
-  def sync_from_riot
+  def sync_from_riot!
+    # basic info
     profile_json = Riot.find_summoner_by_summoner_id(summoner_id, region)
     profile_hash = Factory.build_summoner_hash(profile_json, region)
-    self.update_attributes(profile_hash)
+    self.assign_attributes(profile_hash)
+
+    # league entries
+    begin
+      league_entries = LeagueService::Riot.find_league_entries_by_summoner_id(summoner_id, region)
+      self.league_entries = league_entries
+    rescue
+    end
+
+    # touch
+    self.touch_synced_at
+
+    # persist
+    self.save
+  end
+
+  def outdated?
+    return true if self.new_record? || self.synced_at.blank?
+    if time = Utils::Time.epunix_to_time(self.synced_at)
+      return true if time < Time.now - AppConsts::SUMMONER_EXPIRES_THRESHOLD
+    end
+    false
   end
 
   def recent_matches(reload)
@@ -77,20 +101,6 @@ class Summoner
     self.recent_matches_updated_at = now
   end
 
-  def self.search_by_name(name, region)
-    name_key = name.try(:downcase).try(:gsub, /\s+/, "")
-    region_key = region.try(:upcase)
-    self.where(:name_lowercase => name_key, :region => region_key).first
-  end
-
-  def outdated?
-    return true if self.new_record?
-    if time = Utils::Time.epunix_to_time(self.synced_at)
-      return true if time < Time.now - AppConsts::SUMMONER_EXPIRES_THRESHOLD
-    end
-    false
-  end
-
   protected
 
   def sanitize_attrs
@@ -98,6 +108,5 @@ class Summoner
     self.highest_tier.try(:upcase!)
     self.region.try(:upcase!)
   end
-
 
 end

@@ -57,37 +57,39 @@ module GameService
         # check db
         game = Game.where('game_id' => game_id).first
         unless game # game not found in db
-          # fetch game
+          # fetch and new game
           game_hash = Factory.build_game_hash(json, region)
+          game = Game.new(game_hash)
+
+          # extract summoners info
           summoners_hash = game_hash['teams'].map{|t|t['participants']}.flatten
           summoner_ids = summoners_hash.map{|s|s['summoner_id']}
 
           # lock
           store_game_attrs_to_cache(game_id, nil, summoner_ids, region)
 
-          # store summoner in db if not exist
-          summoners = ensure_summoners_in_db(summoners_hash, region)
-
-          # create game
-          game = Game.new(game_hash)
+          # find or new summoners
+          summoners = SummonerService::Service.find_or_new_summoners(summoners_hash, region)
 
           # add summoners to game
           store_summoners_info_to_game(summoners, game, region)
 
-          # save game
-          game.fetch_time_length = (Time.now - start_time).to_i
+          # save summoners
+          SummonerService::Service.store_summoners_to_db(summoners)
 
+          # save game
           Thread.new do
-            begin
-              game.save
+            # begin
+              store_game_to_cache(game, region)
+
+              game.fetch_time_length = (Time.now - start_time).to_i
               Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
-            rescue
-            end
+              game.save
+            # rescue
+            # end
           end
         end
 
-        # cache game for a short time
-        store_game_to_cache(game, region)
       else # if game found
         game = find_game_from_cache_waiting(summoner_id, region, AppConsts::FETCH_GAME_MAX_SECONDS)
       end
@@ -98,24 +100,24 @@ module GameService
     def self.find_game_from_cache_waiting(summoner_id, region, wait_time)
       game = nil
       waited_time = 0
-      check_game_thread = Thread.new do
-        loop do
-          Rails.logger.tagged('GAME'){Rails.logger.info("Wait for fetch: #{waited_time} / #{wait_time}")}
-          game_in_cache = find_game_from_cache(summoner_id, region)
-          completed = game_in_cache['fetch_completed']
-          if completed # if fetch completed, done
-            game = game_in_cache['game']
-            break
-          else
-            sleep(2)
-            raise Errors::GameNotFoundError.new if waited_time > wait_time
-            waited_time += 2
-          end
-        end
 
-        raise Errors::GameNotFoundError.new if game.blank?
+      loop do
+        Rails.logger.tagged('GAME'){Rails.logger.info("Wait for fetch: #{waited_time} / #{wait_time}")}
+        game_in_cache = find_game_from_cache(summoner_id, region)
+        break if game_in_cache.blank?
+        completed = game_in_cache['fetch_completed']
+        if completed # if fetch completed, done
+          game = game_in_cache['game']
+          break
+        else
+          sleep(2)
+          raise Errors::GameNotFoundError.new if waited_time > wait_time
+          waited_time += 2
+        end
       end
-      check_game_thread.join
+
+      raise Errors::GameNotFoundError.new if game.blank?
+      
       game
     end
 
@@ -222,20 +224,10 @@ module GameService
             end
 
             begin
-              # last match
               matches = match_list_json.try(:[],'matches') || []
-              last_match_json = matches.find{|m|m['champion'].try(:to_i) == champion_id.to_i}
+              match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, 1, matches)
+              participant.ranked_stat_by_recent_champion = match_stats_aggregation
 
-              if last_match_json.blank?
-                champion_match_list_json = MatchService::Riot.find_match_list(summoner_id, region, ENV['CURRENT_SEASON'], champion_id.to_i, 0, 1)
-                last_match_json = champion_match_list_json[0]
-              end
-              if last_match_json
-                last_match = MatchService::Service.find_match(last_match_json['match_id'], region)
-                last_match_stats = last_match.find_match_stats_for_summoner(summoner_id)
-                match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_participants([last_match_stats])
-                participant.ranked_stat_by_recent_champion = match_stats_aggregation
-              end
             rescue => ex
               begin
                 Airbrake.notify_or_ignore(ex,
@@ -252,7 +244,11 @@ module GameService
 
           workers << Thread.new do
             begin
-              league = LeagueService::Service.find_league_entry_by_summoner_id(summoner_id, region)
+              league_entries = LeagueService::Riot.find_league_entries_by_summoner_id(summoner_id, region)
+              summoner.league_entries = league_entries
+              # summoner.touch_synced_at
+
+              league = LeagueService::Service.entries_to_summoner_entry(summoner_id, region, league_entries)
               league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
               league_entry['tier'] = league['tier']
               participant.league_entry = league_entry
@@ -261,7 +257,7 @@ module GameService
                 Airbrake.notify_or_ignore(ex,
                 parameters: {
                   'action' => 'Generate league entry',
-                  'league' => league.try(:as_json)
+                  'league' => league_entries.try(:as_json)
                 })
               rescue
               end
@@ -270,42 +266,6 @@ module GameService
         end
       end
       workers.map(&:join)
-    end
-
-    def self.update_summoners_tiers(summoner, recent_stats, region)
-      if stat = recent_stats.first
-        summoner.highest_tier = stat['highest_achieved_season_tier']
-        summoner.save
-      end
-    end
-
-    def self.ensure_summoners_in_db(summoners_hash, region)
-      Rails.logger.tagged('GAME'){Rails.logger.debug("Store summoners to db")}
-      summoners = []
-      summoners_hash.each do |summoner_hash|
-        summoner_obj_hash = {
-          'region' => region.upcase,
-          'summoner_id' => summoner_hash['summoner_id'],
-          'name' => summoner_hash['summoner_name'],
-          'profile_icon_id' => summoner_hash['profile_icon_id']
-        }
-        if summoner = Summoner.where({region: region.upcase, summoner_id: summoner_hash['summoner_id']}).first
-          if summoner.name != summoner_hash['summoner_name']
-            summoner.assign_attributes(summoner_obj_hash)
-          end
-        else
-          summoner = Summoner.new(summoner_obj_hash)
-        end
-
-        Thread.new do
-          begin
-            summoner.save
-          rescue
-          end
-        end
-        summoners << summoner
-      end
-      summoners
     end
 
     def self.cache_key_for_summoner_game(summoner_id, region)
