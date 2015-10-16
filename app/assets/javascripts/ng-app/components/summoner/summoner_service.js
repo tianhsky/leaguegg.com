@@ -1,6 +1,6 @@
 angular.module('leaguegg.summoner').service('SummonerService', [
-  '$http', '$q', '_',
-  function($http, $q, _) {
+  '$http', '$q', '_', 'Analytics',
+  function($http, $q, _, Analytics) {
     var self = this;
 
     var _data = {
@@ -22,6 +22,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       _data.query.region = region;
       _data.query.summoner = summoner_name;
       _data.result.season_stats = null;
+      Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name+'@'+region, 1);
       var url = '/api/summoner.json?summoner_name=' + summoner_name + '&region=' + region;
       return $http.get(url)
         .then(function(resp) {
@@ -50,6 +51,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
     }
 
     self.fetchSummonerSeasonStats = function(region, summoner_id) {
+      Analytics.trackEvent('Summoner', 'SearchSeasonStats', summoner_id+'@'+region, 1);
       var url = '/api/summoner/stats.json?season_stats=1&summoner_id=' + summoner_id + '&region=' + region;
       return $http.get(url)
         .then(function(resp) {
