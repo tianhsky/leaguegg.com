@@ -1,0 +1,29 @@
+<div class="profile-info">
+  <div class="p-icon">
+    <img ng-src="{{summoner.profile_icon.img}}">
+  </div>
+  <div class="p-info">
+    <div class="p-name">
+      {{summoner.name}}
+    </div>
+    <div class="p-from">
+      <span class="p-region label label-default">{{summoner.region}}</span>
+      <span class="p-level label label-default">Level {{summoner.level}}</span>
+    </div>
+  </div>
+</div>
+<div class="rank-info">
+  <div class="rank-item" ng-repeat="entry in summoner.league_entries">
+    <div class="r-icon">
+      <img ng-src="/static/img/riot/tier/lg/{{entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" ng-if="entry.tier">
+    </div>
+    <div class="r-detail">
+      <div class="r-tier">
+        {{entry.tier | titleize}} {{entry.entries[0].division}}
+      </div>
+      <div class="r-lp">
+        {{entry.entries[0].league_points || 0}} LP
+      </div>
+    </div>
+  </div>
+</div>

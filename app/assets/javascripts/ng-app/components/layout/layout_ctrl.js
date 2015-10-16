@@ -1,6 +1,9 @@
 angular.module('leaguegg.layouts').controller('LayoutCtrl', [
-  '$scope',
-  function($scope) {
-
+  '$scope', '$rootScope',
+  function($scope, $rootScope) {
+    $scope.fatHeader = true;
+    $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
+      $scope.fatHeader = newVal.fatHeader;
+    }, true);
   }
 ]);

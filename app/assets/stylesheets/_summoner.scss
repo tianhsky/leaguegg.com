@@ -1,5 +1,94 @@
-.summoner{
-  .cs-chart{
-    
+.page-summoner {
+  .summoner-profile {
+    .profile-info {
+      background-color: rgba(128, 128, 128, 0.33);
+      padding: 0px 8px;
+      .p-icon {
+        display: inline-block;
+        img {
+          width: 70px;
+          height: 70px;
+        }
+      }
+      .p-info {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px 8px;
+        .p-name {
+          font-size: 1.7em;
+          font-weight: bolder;
+        }
+        .p-from {
+          .p-region {}
+          .p-level {}
+        }
+      }
+    }
+    .rank-info {
+      .rank-item {
+        background-color: rgba(128, 128, 128, 0.12);
+        padding: 0px 8px;
+        border-bottom: 1px solid $gray;
+        .r-icon {
+          display: inline-block;
+          img {
+            width: 70px;
+            height: 70px;
+          }
+        }
+        .r-detail {
+          padding: 10px 8px;
+          display: inline-block;
+          vertical-align: middle;
+          .r-tier {
+            font-weight: bolder;
+          }
+          .r-lp {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+  .summoner-champions {
+    .champion-stats {
+      .title-label {
+        font-weight: bolder;
+        color: #8D8D8D;
+      }
+      .champion-item {
+        @media(max-width: 480px) {
+          font-size: 0.9em;
+          padding: 0px;
+        }
+        background-color: rgba(42, 42, 42, 0.5);
+        padding: 3px 4px;
+        margin: 3px;
+        &:hover,
+        &:focus {
+          background-color: rgba(54, 54, 54, 0.65);
+          cursor: pointer;
+        }
+        .c-icon {
+          @media(max-width: 480px) {
+            padding: 3px 0px;
+          }
+          border-left: 4px solid #C1E8FF;
+          img {
+            width: 65px;
+            height: 65px;
+          }
+        }
+        .c-item {
+          padding: 8px 0px;
+          @media(max-width: 480px) {
+            padding: auto;
+          }
+        }
+        .c-wl {}
+        .c-kda {}
+        .c-aggresive {}
+      }
+    }
   }
 }

@@ -2,5 +2,5 @@
   <span class="rate">{{rate | percentage: 0 | nullcheck}}</span>
 </div>
 <div>
-  <span class="w">{{w | number: 0 | nullcheck: 0}}</span><span class="splash">/</span><span class="l">{{l | number: 0 | nullcheck: 0}}</span>
+  <span class="w">{{w | number: 0 | nullcheck: 0}}</span><span class="splash">/</span><span class="l">{{l | number: 0 | nullcheck: 0}}</span> <span ng-if="showLabel">WL</span>
 </div>

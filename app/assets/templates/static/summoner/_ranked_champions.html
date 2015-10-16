@@ -1,0 +1,22 @@
+<div class="champion-stats">
+  <div>
+    <h4 class="">{{season}} 
+      <span class="pull-right">Performance</span>
+    </h4>
+  </div>
+  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion">
+    <div class="c-icon col-xs-3">
+      <img ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
+    </div>
+    <div class="c-item c-wl col-xs-3 text-center">
+      <wl class="wl" w="stat.won" l="stat.lost" rate="stat.win_rate" show-label="true" />
+    </div>
+    <div class="c-item c-kda col-xs-3 text-center">
+      <kda class="kda" k="stat.avg_kills" d="stat.avg_deaths" a="stat.avg_assists" rate="stat.kda_rate" />
+    </div>
+    <div class="c-item c-aggresive col-xs-3 text-center">
+      <div class="title-label">Aggresive</div>
+      <div>{{stat.aggresive_rate}}</div>
+    </div>
+  </div>
+</div>

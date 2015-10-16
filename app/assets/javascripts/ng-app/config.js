@@ -21,7 +21,7 @@ angular.module('leaguegg').config([
           },
           'body@index': {
             templateUrl: 'static/layout/body.html',
-          },
+          }
         },
       })
       .state('index.404', {

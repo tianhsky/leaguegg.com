@@ -5,7 +5,8 @@ angular.module('leaguegg.partials').directive('wl', function() {
     scope: {
       w: '=',
       l: '=',
-      rate: '='
+      rate: '=',
+      showLabel: '@'
     }
   }
 });

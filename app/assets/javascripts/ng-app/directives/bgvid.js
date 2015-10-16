@@ -5,8 +5,9 @@ angular.module('utils').directive('bgvid', [
       templateUrl: 'static/partials/bgvid.html',
       controller: ['$scope', '$rootScope',
         function($scope, $rootScope) {
-          $rootScope.$watch('showBGVideo', function(enable, wasEnabled) {
+          $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
             var vid = $('#bg-vid');
+            var enable = newVal.showBGVideo;
             if (enable) {
               var poster = 'static/img/home-bg.png';
               var src1 = $("<source>")
@@ -23,7 +24,7 @@ angular.module('utils').directive('bgvid', [
               vid.empty();
               vid.hide();
             }
-          });
+          }, true);
         }
       ]
     };

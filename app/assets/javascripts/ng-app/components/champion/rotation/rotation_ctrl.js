@@ -1,6 +1,10 @@
 angular.module('leaguegg.champion').controller('RotationCtrl', [
-  '$scope', '$rootScope', '$interval', 'RotationService', 'LayoutService',
-  function($scope, $rootScope, $interval, RotationService, LayoutService) {
+  '$scope', '$rootScope', '$interval', 'RotationService', 
+  'LayoutService',
+  function($scope, $rootScope, $interval, RotationService, 
+    LayoutService) {
+    LayoutService.setFatHeader(true);
+
     $scope.champions = null;
     var interval = null;
 

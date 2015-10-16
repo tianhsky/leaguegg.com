@@ -28,9 +28,42 @@ a {
       width: 160px;
     }
   }
-  .error-text{
+  .error-text {
     padding: 10px;
     font-size: 1.5em;
     font-weight: 900;
+  }
+}
+
+.wl {
+  height: 83px;
+  padding: 5px 0px;
+  .rate {
+    font-weight: 600;
+    font-size: 1.3em;
+  }
+  .w {
+    color: $color_win;
+  }
+  .l {
+    color: $color_lost;
+  }
+}
+
+.kda {
+  height: 83px;
+  padding: 5px 0px;
+  .rate {
+    font-weight: 600;
+    font-size: 1.3em;
+  }
+  .k {
+    color: $color_win;
+  }
+  .d {
+    color: $color_lost;
+  }
+  .a {
+    color: $color_assist;
   }
 }

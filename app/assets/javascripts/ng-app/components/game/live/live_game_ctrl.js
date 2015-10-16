@@ -1,8 +1,10 @@
 angular.module('leaguegg.game').controller('LiveGameCtrl', [
   '$scope', '$stateParams', 'LiveGameService',
-  'ConstsService', '$filter',
+  'ConstsService', '$filter', 'LayoutService',
   function($scope, $stateParams, LiveGameService,
-    ConstsService, $filter) {
+    ConstsService, $filter, LayoutService) {
+    LayoutService.setFatHeader(false);
+
     $scope.loading = {
       game: {
         active: true,
