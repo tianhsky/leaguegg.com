@@ -237,8 +237,11 @@ module MatchService
           workers = []
           last_x_matches.each do |match_list_item|
             workers << Thread.new do
-              match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
-              match_items << match_item
+              begin
+                match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
+                match_items << match_item
+              rescue
+              end
             end
           end
           workers.map(&:join)

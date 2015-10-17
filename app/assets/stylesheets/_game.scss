@@ -18,12 +18,6 @@
     height: 36px;
     position: relative;
     font-weight: bold;
-    &.blue {
-      background-color: $blue_team;
-    }
-    &.red {
-      background-color: $red_team;
-    }
     .team-name {
       position: absolute;
       bottom: 8px;
@@ -94,7 +88,7 @@
           &.fresh {
             background: #46A47D;
           }
-          &.role{
+          &.role {
             background: #004E6D;
           }
         }
@@ -131,12 +125,12 @@
         .lp {
           min-height: 25px;
         }
-        .rank-progress{
+        .rank-progress {
           min-height: 20px;
         }
-        .stats-links{
+        .stats-links {
           padding: 8px 0px;
-          a{
+          a {
             color: yellow;
             font-size: 0.8em;
           }
@@ -149,8 +143,8 @@
       .stats {
         .champion-name {
           padding-top: 5px;
-          color: $purple;
           font-weight: 500;
+          // color: $purple;
           // border-bottom: 1px solid $gray;
         }
         .performance {
@@ -203,15 +197,42 @@
       }
     }
   }
-
-  .error{
+  .blue-team {
+    .team-bar {
+      background-color: $blue_team;
+    }
+    .champion-icon {
+      img {
+        border: 2px solid $blue_team;
+      }
+    }
+    .champion-name,
+    .performance {
+      color: $blue_team;
+    }
+  }
+  .red-team {
+    .team-bar {
+      background-color: $red_team;
+    }
+    .champion-icon {
+      img {
+        border: 2px solid $red_team;
+      }
+    }
+    .champion-name,
+    .performance {
+      color: $red_team;
+    }
+  }
+  .error {
     margin-top: 50px;
-    a{
+    a {
       color: #9494FF;
       font-size: 1.3em;
     }
   }
-  .loading{
+  .loading {
     margin-top: 50px;
   }
 }
