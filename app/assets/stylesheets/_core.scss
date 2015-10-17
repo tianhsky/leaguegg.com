@@ -68,14 +68,24 @@ a {
   }
 }
 
-.mini-series{
-  .fa-check{
+.mini-series {
+  .fa-check {
     color: $color_win;
   }
-  .fa-times{
+  .fa-times {
     color: $color_lost;
   }
-  .fa-minus{
+  .fa-minus {
     color: $color_assist;
+  }
+}
+
+.tooltip {
+  .tooltip-arrow {
+    background-color: #75BAEB;
+  }
+  .tooltip-inner {
+    background-color: #75BAEB;
+    border-bottom-color: #75BAEB;
   }
 }

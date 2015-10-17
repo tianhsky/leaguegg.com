@@ -59,7 +59,7 @@
       </div>
       <div class="main-role">
         <div class="item-labels">
-          <span class="item-label">Mains</span>
+          <span class="item-label" data-tooltip="Most played roles based on last 60 games">Mains</span>
         </div>
         <roles roles="p.player_roles" />
       </div>
@@ -99,8 +99,8 @@
       </div>
       <div class="cs">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Average creep score at 10 minutes since game started">CS</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Average creep score difference compare with opponent at 10 minutes since game started">CSD</span>
+          <span class="item-label" data-tooltip="Average creep score at 10 minutes">CS</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Average creep score difference compare with opponent at 10 minutes">CSD</span>
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_cs_at_10m | nullcheck: '-'}}
@@ -123,7 +123,7 @@
       </div>
       <div class="support">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Average gold earned at 10 minutes since game started">Gold</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Average gold earned at 10 minutes">Gold</span> &nbsp;&nbsp;
           <span class="item-label" data-tooltip="Average wards placed">Wards</span>
         </div>
         <span class="gold">
