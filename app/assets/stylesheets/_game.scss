@@ -154,33 +154,10 @@
         .wl {
           height: 83px;
           padding: 5px 0px;
-          .rate {
-            font-weight: 600;
-            font-size: 1.3em;
-          }
-          .w {
-            color: $color_win;
-          }
-          .l {
-            color: $color_lost;
-          }
         }
         .kda {
           height: 83px;
           padding: 5px 0px;
-          .rate {
-            font-weight: 600;
-            font-size: 1.3em;
-          }
-          .k {
-            color: $color_win;
-          }
-          .d {
-            color: $color_lost;
-          }
-          .a {
-            color: $color_assist;
-          }
         }
         .cs {
           min-height: 40px;
@@ -191,6 +168,10 @@
           padding: 5px 0px;
         }
         .support {
+          min-height: 40px;
+          padding: 5px 0px;
+        }
+        .aggresive{
           min-height: 40px;
           padding: 5px 0px;
         }

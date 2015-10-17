@@ -91,7 +91,7 @@
       </div>
       <div class="kda recent">
         <div class="item-labels">
-          <span class="item-label">Last Match</span>
+          <span class="item-label">Recent Match</span>
           <br>
           <span class="item-label">Champion KDA</span>
         </div>
@@ -99,8 +99,8 @@
       </div>
       <div class="cs">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="CS at 10m">CS</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="CS difference at 10m">CSD</span>
+          <span class="item-label" data-tooltip="Average creep score at 10 minutes since game started">CS</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Average creep score difference compare with opponent at 10 minutes since game started">CSD</span>
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_cs_at_10m | nullcheck: '-'}}
@@ -111,8 +111,8 @@
       </div>
       <div class="jcs">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Jungle CS">JCS</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Enemy Jungle CS">CJCS</span>
+          <span class="item-label" data-tooltip="Average neutral minion kills at team jungle">JCS</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Average neutral minion kills at enemy jungle">CJCS</span>
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_team_jungle_kills | nullcheck: '-'}}
@@ -123,8 +123,8 @@
       </div>
       <div class="support">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Gold earned at 10 min">Gold</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Wards placed">Wards</span>
+          <span class="item-label" data-tooltip="Average gold earned at 10 minutes since game started">Gold</span> &nbsp;&nbsp;
+          <span class="item-label" data-tooltip="Average wards placed">Wards</span>
         </div>
         <span class="gold">
           {{p.ranked_stat_recent.avg_gold_at_10m | number2k: 1 | nullcheck: '-' }}
@@ -133,12 +133,12 @@
           {{p.ranked_stat_recent.avg_wards_placed | nullcheck: '-'}}
         </span>
       </div>
-      <div class="aggresive hide">
+      <div class="aggresive">
         <div class="item-labels">
-          <span class="item-label">Aggresive</span>
+          <span class="item-label" data-tooltip="The more penta kills, the higher number is, all penta, quadra, triple and double kills are used for calculations">Aggresive%</span>
         </div>
         <div>
-          {{p.ranked_stat_overall.aggresive_rate}}
+          {{p.ranked_stat_overall.aggresive_rate | percentage: 1 | nullcheck: '-'}}
         </div>
       </div>
       <div class="badges">
@@ -146,13 +146,13 @@
           <span class="item-label">Ranked Badges</span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_hot_streak">
-          <span class="badge hot">Hot Streak</span>
+          <span class="badge hot" data-tooltip="Win 3 or more games in a row">Hot Streak</span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_veteran">
-          <span class="badge veteran">Veteran</span>
+          <span class="badge veteran" data-tooltip="Played 100 games in the current league">Veteran</span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_fresh_blood">
-          <span class="badge fresh">Fresh Blood</span>
+          <span class="badge fresh" data-tooltip="Recently joined this league">Fresh Blood</span>
         </div>
       </div>
     </div>
