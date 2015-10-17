@@ -13,5 +13,8 @@ module ApiErrorRescuers
     rescue_from Errors::UnauthorizedError do |e|
       render json: {error: e.message, status: e.status}, status: e.status
     end
+    rescue_from Errors::StatsNotFoundError do |e|
+      render json: {error: e.message, status: e.status}, status: e.status
+    end
   end
 end

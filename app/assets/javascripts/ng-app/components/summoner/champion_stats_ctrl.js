@@ -10,11 +10,16 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
       summoner: null,
       summoner_stats: null,
       champion_stats: null,
-      season: $filter('titleize')(ConstsService.season)
+      season: $filter('titleize')(ConstsService.season),
+      error: {
+        summoner: null,
+        summoner_stats: null,
+        champion_stats: null
+      }
     }
 
     $scope.getChampionSeasonStats = function() {
-      if(!$scope.data.summoner_stats){
+      if (!$scope.data.summoner_stats) {
         return null;
       }
       var stats = $scope.data.summoner_stats.ranked_stats_by_champion;
@@ -36,12 +41,18 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
         SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
           .then(function(stats) {
             $scope.data.summoner_stats = stats;
+          }, function(err) {
+            $scope.data.error.summoner_stats = err;
           });
 
         SummonerService.fetchSummonerChampionStats($stateParams.region, $scope.data.summoner.id, $stateParams.champion)
           .then(function(stats) {
             $scope.data.champion_stats = stats;
+          }, function(err) {
+            $scope.data.error.champion_stats = err;
           });
+      }, function(err) {
+        $scope.data.error.summoner = err;
       });
 
     $scope.$on('$destroy', function() {

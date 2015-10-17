@@ -1,22 +1,25 @@
 angular.module('leaguegg.champion').service('RotationService', [
-  '$http', '_', 'Analytics',
-  function($http, _, Analytics) {
+  '$http', '$q', '_', 'Analytics',
+  function($http, $q, _, Analytics) {
     var self = this;
 
     self.getWeeklyChampions = function() {
       Analytics.trackEvent('FreeChampion', 'SearchByRegion', 'NA', 1);
       var url = "/api/rotation.json";
-      return $http.get(url)
-        .then(function(resp) {
-          var data = resp.data;
-          return data;
-        }, function(err) {
-          return err;
-        });
+
+      return $q(function(resolve, reject) {
+        $http.get(url)
+          .then(function(resp) {
+            var data = resp.data;
+            resolve(data);
+          }, function(err) {
+            reject(err);
+          });
+      });
     }
 
-    self.getChampionNames = function(champions){
-      var names = _.map(champions, function(c){
+    self.getChampionNames = function(champions) {
+      var names = _.map(champions, function(c) {
         return c.name;
       });
       return names;

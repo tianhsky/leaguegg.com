@@ -1,6 +1,6 @@
 angular.module('leaguegg.game').service('LiveGameService', [
-  '$localStorage', '_', '$http', 'Analytics', 'OPGG',
-  function($localStorage, _, $http, Analytics, OPGG) {
+  '$localStorage', '_', '$http', '$q', 'Analytics', 'OPGG',
+  function($localStorage, _, $http, $q, Analytics, OPGG) {
     var self = this;
 
     self.SetCacheQuery = function(query) {
@@ -42,12 +42,14 @@ angular.module('leaguegg.game').service('LiveGameService', [
       Analytics.trackEvent('Game', 'SearchByRegion', query.region, 1);
       Analytics.trackEvent('Game', 'SearchBySummoner', query.summoner + "@" + query.region, 1);
       var url = self.getSearchUrl('json', query);
-      return $http.get(url)
-        .then(function(resp) {
-          return resp.data;
-        }, function(err) {
-          return err;
-        });
+      return $q(function(resolve, reject) {
+        $http.get(url)
+          .then(function(resp) {
+            resolve(resp.data);
+          }, function(err) {
+            reject(err);
+          });
+      });
     }
 
     self.applyOPGGUrl = function(game) {

@@ -41,7 +41,7 @@
           }
         }
         .r-detail {
-          padding: 10px 15px;
+          padding: 10px 0px;
           display: inline-block;
           vertical-align: middle;
           .r-queue {
@@ -107,9 +107,9 @@
   }
   .summoner-champion-stat {
     .link-to-all-stats {
-      float: right;
-      padding: 10px 0px;
+      padding: 10px 5px;
       a {
+        float: right;
         font-size: 0.7em;
         color: yellow;
       }

@@ -1,7 +1,8 @@
 <div class="champion-stats">
   <div>
-    <h4 class="">{{season}} 
-      <span class="pull-right">Performance</span>
+    <h4 class="">
+      <span>Ranked Performance</span>
+      <span class="pull-right">{{season}}</span>
     </h4>
   </div>
   <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion" ng-click="viewChampionStats(stat.champion)">

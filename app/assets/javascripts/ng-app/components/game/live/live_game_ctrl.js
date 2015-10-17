@@ -23,20 +23,18 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     LiveGameService.getGameBySummoner($scope.query)
       .then(function(resp) {
         $scope.loading.game.active = false;
-        $scope.error = null;
         $scope.error_summoner_not_in_game = false;
-        if (resp.data && resp.data.id == null) {
-          if (resp.status == 404) {
-            $scope.error = resp.data.error;
-            if ($scope.error == 'Summoner is not currently in game') {
-              $scope.error_summoner_not_in_game = true;
-            }
-          } else {
-            $scope.error = "Sorry, there was a problem";
+        // LiveGameService.applyOPGGUrl(resp);
+        $scope.game = resp;
+      }, function(err) {
+        $scope.loading.game.active = false;
+        if (err.status == 404) {
+          $scope.error = err.data.error;
+          if ($scope.error == 'Summoner is not currently in game') {
+            $scope.error_summoner_not_in_game = true;
           }
         } else {
-          // LiveGameService.applyOPGGUrl(resp);
-          $scope.game = resp;
+          $scope.error = "Sorry, there was a problem";
         }
       });
 
