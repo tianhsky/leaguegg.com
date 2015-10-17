@@ -32,6 +32,18 @@
         <img ng-src="{{p.spell1.img}}" err-src="/static/img/leaguegg-icon.png">
         <img ng-src="{{p.spell2.img}}" err-src="/static/img/leaguegg-icon.png">
       </div>
+      <div class="stats-links">
+        <div>
+          <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">
+            <i class="fa fa-bar-chart"></i> Summoner
+          </a>
+        </div>
+        <div>
+          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">
+            <i class="fa fa-line-chart"></i> Champion
+          </a>
+        </div>
+      </div>
       <div class="tier">
         {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
       </div>
@@ -44,18 +56,6 @@
       </div>
       <div class="rank-progress">
         <mini-series sequence="p.league_entry.mini_series.progress"></mini-series>
-      </div>
-      <div class="stats-links">
-        <div>
-          <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">
-            <i class="fa fa-bar-chart"></i> Summoner
-          </a>
-        </div>
-        <div>
-          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">
-            <i class="fa fa-line-chart"></i> Champion
-          </a>
-        </div>
       </div>
       <div class="main-role">
         <div class="item-labels">
