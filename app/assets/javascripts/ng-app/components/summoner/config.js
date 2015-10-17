@@ -7,8 +7,8 @@ angular.module('leaguegg.summoner').config([
         controller: 'SummonerCtrl'
       })
       .state('index.summoner_stats_champion', {
-        url: "/summoner/:region/:summoner/champion/:champion/",
-        templateUrl: "static/summoner/stats/champion.html",
+        url: "/summoner/:region/:summoner/champion/:champion",
+        templateUrl: "static/summoner/ranked_champion.html",
         controller: 'SummonerChampionStatsCtrl'
       });;
   }

@@ -1,27 +1,26 @@
 <div class="row">
-  <div class="stat-charts col-md-4">
-    <div class="cs-chart">
-      <cs-line-chart name="CS" timeline="stats.avg_timeline_cs" />
+  <div class="stat-charts col-sm-4">
+    <div class="chart-item cs-chart">
+      <gg-line-chart name="CS" timeline="stats.avg_timeline_cs" />
     </div>
-    <div class="csd-chart">
-      <cs-line-chart name="CS DIFF" timeline="stats.avg_timeline_csd" />
-    </div>
-  </div>
-  <div class="stat-charts col-md-4">
-    <div class="xp-chart">
-      <cs-line-chart name="XP" timeline="stats.avg_timeline_xp" />
-    </div>
-    <div class="xpd-chart">
-      <cs-line-chart name="XP DIFF" timeline="stats.avg_timeline_xpd" />
+    <div class="chart-item csd-chart">
+      <gg-line-chart name="CS Diff" timeline="stats.avg_timeline_csd" />
     </div>
   </div>
-  <div class="stat-charts col-md-4">
-    <div class="dmgt-chart">
-      <cs-line-chart name="DAMAGE TAKEN" timeline="stats.avg_timeline_dmgt" />
+  <div class="stat-charts col-sm-4">
+    <div class="chart-item xp-chart">
+      <gg-line-chart name="XP" timeline="stats.avg_timeline_xp" />
     </div>
-    <div class="dmgtd-chart">
-      <cs-line-chart name="DAMAGE TAKEN DIFF" timeline="stats.avg_timeline_dmgtd" />
+    <div class="chart-item xpd-chart">
+      <gg-line-chart name="XP Diff" timeline="stats.avg_timeline_xpd" />
+    </div>
+  </div>
+  <div class="stat-charts col-sm-4">
+    <div class="chart-item dmgt-chart">
+      <gg-line-chart name="Damage Taken" timeline="stats.avg_timeline_dmgt" />
+    </div>
+    <div class="chart-item dmgtd-chart">
+      <gg-line-chart name="Damage Taken Diff" timeline="stats.avg_timeline_dmgtd" />
     </div>
   </div>
 </div>
-

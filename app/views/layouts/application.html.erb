@@ -2,9 +2,9 @@
 <html>
 <head>
   <base href="/">
-  <title><%= content_for?(:title) ? yield(:title)+'|LeagueGG' : 'LeagueGG · League of Legends Search and Stats' %></title>
-  <meta name="description" content="Find out how well your opponents farm, which roles they main, and how aggressive they play."></meta>
-  <meta name="keywords" content="leaguegg,lol gg,gg,league of legends live,lol live game, lol stats"></meta>
+  <title><%= AppConsts::SITE_TITLE %></title>
+  <meta name="description" content="<%= AppConsts::SITE_DESCRIPTION %>"></meta>
+  <meta name="keywords" content="<%= AppConsts::SITE_KEYWORDS.join(',') %>"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag 'application' %>

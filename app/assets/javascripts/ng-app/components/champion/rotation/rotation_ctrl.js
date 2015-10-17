@@ -1,22 +1,30 @@
 angular.module('leaguegg.champion').controller('RotationCtrl', [
-  '$scope', '$rootScope', '$interval', 'RotationService', 
-  'LayoutService',
-  function($scope, $rootScope, $interval, RotationService, 
-    LayoutService) {
+  '$scope', '$rootScope', '$interval', 'RotationService',
+  'LayoutService', 'MetaService',
+  function($scope, $rootScope, $interval, RotationService,
+    LayoutService, MetaService) {
     LayoutService.setFatHeader(true);
+    MetaService.setTitle('Free Champions');
 
     $scope.champions = null;
     var interval = null;
 
+    var setDescription = function() {
+      var names = RotationService.getChampionNames($scope.champions);
+      var desc = 'Weekly free champions: ' + names.join(',');
+      MetaService.setDescription(desc);
+    }
+
     RotationService.getWeeklyChampions()
       .then(function(resp) {
         $scope.champions = resp;
+        setDescription();
         var len = $scope.champions.length;
         var mid = len / 2;
         $scope.list1 = $scope.champions.slice(0, mid);
         $scope.list2 = $scope.champions.slice(mid, len);
         selectNextChampion();
-        interval = $interval(selectNextChampion, 5000);
+        interval = $interval(selectNextChampion, 4500);
       });
 
     $scope.selectChampion = function(champion) {
@@ -67,6 +75,7 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
     $scope.$on('$destroy', function() {
       $interval.cancel(interval);
       LayoutService.setBGImg(null);
+      MetaService.useDefault();
     });
 
   }

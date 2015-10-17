@@ -1,2 +1,17 @@
-<summoner-profile></summoner-profile>
-<summoner-ranked-champion-stats></summoner-ranked-champion-stats>
+<div class="page-summoner container">
+  <div class="summoner-profile col-md-4">
+    <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
+  </div>
+  <div class="summoner-champion-stat col-md-8">
+    <div class="link-to-all-stats">
+      <a href="/summoner/{{data.summoner.region}}/{{data.summoner.name}}">See {{data.summoner.name}}'s season performance for other champions</a>
+    </div>
+    <h3>{{getChampionSeasonStats().champion.name}} Performance</h3>
+    <summoner-champion-summary season="data.season" champion-season-stat="getChampionSeasonStats()" champion-recent-stat="data.champion_stats">
+    </summoner-champion-summary>
+    <hr>
+    <h3>{{getChampionSeasonStats().champion.name}}'s Recent Performance</h3>
+    <summoner-ranked-champion-stats season="data.season" summoner="data.summoner" stats="data.champion_stats">
+    </summoner-ranked-champion-stats>
+  </div>
+</div>

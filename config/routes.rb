@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'rotation' => 'home#show'
   get 'game/*region/*summoner_name' => 'home#show'
   get 'summoner/*region/*summoner_name' => 'home#show'
+  get 'summoner/*region/*summoner_name/champion/*champion_name' => 'home#show'
 
   root :to => 'home#show'
 

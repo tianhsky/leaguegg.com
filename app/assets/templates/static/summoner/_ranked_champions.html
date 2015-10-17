@@ -4,7 +4,7 @@
       <span class="pull-right">Performance</span>
     </h4>
   </div>
-  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion">
+  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion" ng-click="viewChampionStats(stat.champion)">
     <div class="c-icon col-xs-3">
       <img ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
     </div>
@@ -16,7 +16,7 @@
     </div>
     <div class="c-item c-aggresive col-xs-3 text-center">
       <div class="title-label">Aggresive</div>
-      <div>{{stat.aggresive_rate}}</div>
+      <div>{{stat.aggresive_rate | percentage: 0 | nullcheck}}</div>
     </div>
   </div>
 </div>

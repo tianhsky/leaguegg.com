@@ -131,6 +131,16 @@
         .lp {
           min-height: 25px;
         }
+        .rank-progress{
+          min-height: 20px;
+        }
+        .stats-links{
+          padding: 8px 0px;
+          a{
+            color: yellow;
+            font-size: 0.8em;
+          }
+        }
         .main-role {
           height: 50px;
           padding: 10px 0px;

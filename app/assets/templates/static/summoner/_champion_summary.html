@@ -1,0 +1,31 @@
+<div class="champion-summary row">
+  <div class="c-icon col-sm-3 text-center">
+    <img ng-src="{{championSeasonStat.champion.img_loading}}">
+  </div>
+  <div class="c-compare col-sm-9">
+    <table class="table">
+      <thead>
+        <th class="col-sm-3"></th>
+        <th class="col-sm-4">{{season | titleize}}</th>
+        <th class="col-sm-4">Recent</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>KDA</td>
+          <td>{{championSeasonStat.kda_rate | number: 1 | nullcheck}}</td>
+          <td>{{championRecentStat.kda_rate | number: 1 | nullcheck}}</td>
+        </tr>
+        <tr>
+          <td>Win%</td>
+          <td>{{championSeasonStat.win_rate | percentage: 0 | nullcheck}}</td>
+          <td>{{championRecentStat.win_rate | percentage: 0 | nullcheck}}</td>
+        </tr>
+        <tr>
+          <td>Aggresive</td>
+          <td>{{championSeasonStat.aggresive_rate | percentage: 0 | nullcheck}}</td>
+          <td>{{championRecentStat.aggresive_rate | percentage: 0 | nullcheck}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

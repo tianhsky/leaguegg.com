@@ -23,7 +23,7 @@
   <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
-        <a href="/summoner/{{region}}/{{p.summoner.name}}">{{p.summoner.name | characters:16}}</a>
+        <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">{{p.summoner.name | characters:16}}</a>
       </div>
       <div class="champion-icon">
         <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
@@ -41,6 +41,21 @@
         <span>
           {{p.league_entry.league_points || 0}} LP
         </span>
+      </div>
+      <div class="rank-progress">
+        <mini-series sequence="p.league_entry.mini_series.progress"></mini-series>
+      </div>
+      <div class="stats-links">
+        <div>
+          <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">
+            <i class="fa fa-bar-chart"></i> Summoner
+          </a>
+        </div>
+        <div>
+          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">
+            <i class="fa fa-line-chart"></i> Champion
+          </a>
+        </div>
       </div>
       <div class="main-role">
         <div class="item-labels">

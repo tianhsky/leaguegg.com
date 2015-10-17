@@ -10,12 +10,17 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       },
       result: {
         summoner: null,
-        season_stats: null
+        season_stats: null,
+        champion_stats: null
       }
     };
 
     var isQueryChanged = function(region, summoner_name) {
       return region != _data.query.region || summoner_name != _data.query.summoner
+    }
+
+    self.getQuery = function(){
+      return _data.query;
     }
 
     self.fetchSummonerInfo = function(region, summoner_name) {
@@ -55,7 +60,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       var url = '/api/summoner/stats.json?season_stats=1&summoner_id=' + summoner_id + '&region=' + region;
       return $http.get(url)
         .then(function(resp) {
-          _data.result.summoner_stats = resp.data;
+          _data.result.season_stats = resp.data;
           return resp.data;
         }, function(err) {
           return err;
@@ -76,10 +81,10 @@ angular.module('leaguegg.summoner').service('SummonerService', [
     }
 
     self.fetchSummonerChampionStats = function(region, summoner_id, champion_id) {
-      var url = '/api/summoner/stats.json?champion_stats=1&summoner_id=' + summoner_id + '&champion_id=' + champion_id + '&region=' + region;
+      var url = '/api/summoner/stats.json?recent_stats=1&summoner_id=' + summoner_id + '&champion_id=' + champion_id + '&region=' + region;
       return $http.get(url)
         .then(function(resp) {
-          _data.result.summoner_stats = resp.data;
+          _data.result.champion_stats = resp.data;
           return resp.data;
         }, function(err) {
           return err;

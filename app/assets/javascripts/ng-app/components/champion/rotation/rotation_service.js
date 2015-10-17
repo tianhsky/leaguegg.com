@@ -15,5 +15,12 @@ angular.module('leaguegg.champion').service('RotationService', [
         });
     }
 
+    self.getChampionNames = function(champions){
+      var names = _.map(champions, function(c){
+        return c.name;
+      });
+      return names;
+    }
+
   }
 ]);

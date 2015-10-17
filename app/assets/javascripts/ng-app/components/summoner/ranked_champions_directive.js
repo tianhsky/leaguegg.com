@@ -6,9 +6,13 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
       'stats': '=',
       'season': '='
     },
-    controller: ['$scope',
-      function($scope) {
-
+    controller: ['$scope', '$location', 'SummonerService',
+      function($scope, $location, SummonerService) {
+        $scope.viewChampionStats = function(champion) {
+          var query = SummonerService.getQuery();
+          var url = '/summoner/' + query.region + '/' + query.summoner + '/champion/' + champion.id;
+          $location.path(url);
+        }
       }
     ]
   }

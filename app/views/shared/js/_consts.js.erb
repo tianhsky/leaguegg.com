@@ -1,1 +1,7 @@
-window['S'+'E'+'A'+'S'+'O'+'N'] = "<%=ENV['CURRENT_SEASON']%>";
+window.CONSTS = {
+  REGIONS: <%=raw Consts::Platform.region_list.to_json%>,
+  SEASON: "<%=ENV['CURRENT_SEASON']%>",
+  SITE_TITLE: "<%=AppConsts::SITE_TITLE%>",
+  SITE_DESCRIPTION: "<%=AppConsts::SITE_DESCRIPTION%>",
+  SITE_KEYWORDS: <%=raw AppConsts::SITE_KEYWORDS.to_json%>
+}

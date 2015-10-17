@@ -1,10 +1,12 @@
 <div class="profile-info">
   <div class="p-icon">
-    <img ng-src="{{summoner.profile_icon.img}}">
+    <a href="/summoner/{{summoner.region}}/{{summoner.name}}">
+      <img ng-src="{{summoner.profile_icon.img}}">
+    </a>
   </div>
   <div class="p-info">
     <div class="p-name">
-      {{summoner.name}}
+      <a href="/summoner/{{summoner.region}}/{{summoner.name}}">{{summoner.name}}</a>
     </div>
     <div class="p-from">
       <span class="p-region label label-default">{{summoner.region}}</span>
@@ -19,10 +21,13 @@
     </div>
     <div class="r-detail">
       <div class="r-tier">
-        {{entry.tier | titleize}} {{entry.entries[0].division}}
+        <span>{{entry.tier | titleize}} {{entry.entries[0].division}}</span>
+        <span>·</span>
+        <span class="r-queue">{{entry.queue | titleize}}</span>
       </div>
       <div class="r-lp">
         {{entry.entries[0].league_points || 0}} LP
+        <mini-series sequence="entry.entries[0].mini_series.progress"></mini-series>
       </div>
     </div>
   </div>

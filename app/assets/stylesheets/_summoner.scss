@@ -2,12 +2,15 @@
   .summoner-profile {
     .profile-info {
       background-color: rgba(128, 128, 128, 0.33);
-      padding: 0px 8px;
+      padding-right: 8px;
       .p-icon {
         display: inline-block;
         img {
           width: 70px;
           height: 70px;
+          &:hover {
+            opacity: 0.7;
+          }
         }
       }
       .p-info {
@@ -17,6 +20,7 @@
         .p-name {
           font-size: 0.9em;
           font-weight: bolder;
+          padding-bottom: 8px;
         }
         .p-from {
           .p-region {}
@@ -37,14 +41,24 @@
           }
         }
         .r-detail {
-          padding: 10px 8px;
+          padding: 10px 15px;
           display: inline-block;
           vertical-align: middle;
+          .r-queue {
+            font-size: 0.7em;
+            font-style: italic;
+            color: $gray;
+          }
           .r-tier {
             font-weight: bolder;
           }
           .r-lp {
             font-size: 1em;
+            .mini-series {
+              display: inline-block;
+              margin-left: 15px;
+              font-style: 0.8em;
+            }
           }
         }
       }
@@ -88,6 +102,31 @@
         .c-wl {}
         .c-kda {}
         .c-aggresive {}
+      }
+    }
+  }
+  .summoner-champion-stat {
+    .link-to-all-stats {
+      float: right;
+      padding: 10px 0px;
+      a {
+        font-size: 0.7em;
+        color: yellow;
+      }
+    }
+    .champion-summary {
+      margin: 20px 0px;
+      .c-icon {
+        img {
+          border: 1px solid rgba(134, 255, 255, 0.36);
+          width: 140px;
+          height: 210px;
+        }
+      }
+      .c-compare {
+        // border: 1px solid rgba(134, 255, 255, 0.36);
+        vertical-align: top;
+        padding: 15px;
       }
     }
   }

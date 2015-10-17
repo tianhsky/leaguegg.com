@@ -23,11 +23,11 @@ angular.module('leaguegg.home', [
 ]);
 
 angular.module('leaguegg.game', [
-  'utils', 'leaguegg.consts', 'leaguegg.partials'
+  'utils'
 ]);
 
 angular.module('leaguegg.searchbar', [
-  'utils', 'leaguegg.consts'
+  'utils'
 ]);
 
 angular.module('leaguegg.champion', [
@@ -39,6 +39,7 @@ angular.module('leaguegg.summoner', [
 ]);
 
 angular.module('leaguegg', [
+  'leaguegg.consts', 'leaguegg.partials',
   'leaguegg.home', 'leaguegg.game', 'leaguegg.searchbar', 'leaguegg.champion',
   'leaguegg.layouts', 'leaguegg.summoner'
 ]);

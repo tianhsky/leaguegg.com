@@ -67,3 +67,15 @@ a {
     color: $color_assist;
   }
 }
+
+.mini-series{
+  .fa-check{
+    color: $color_win;
+  }
+  .fa-times{
+    color: $color_lost;
+  }
+  .fa-minus{
+    color: $color_assist;
+  }
+}

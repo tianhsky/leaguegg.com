@@ -1,4 +1,9 @@
 module AppConsts
+  puts 'Setting up profile'
+  SITE_TITLE = 'LeagueGG · League of Legends Search and Stats'
+  SITE_DESCRIPTION = 'Find out how well your opponents farm, which roles they main, and how aggressive they play'
+  SITE_KEYWORDS = ['leaguegg', 'lol gg', 'gg', 'league of legends live', 'lol live game', 'lol stats']
+
   puts 'Setting up preferences'
   GAME_EXPIRES_THRESHOLD = 4.minutes
   FREE_ROTATION_EXPIRES_THRESHOLD = 3.hours
@@ -8,11 +13,11 @@ module AppConsts
   LEAGUE_EXPIRES_THRESHOLD = 5.minutes
   SUMMONER_EXPIRES_THRESHOLD = 1.day
 
-  puts 'setting up versions'
+  puts 'Setting up versions'
   version = SemVer.find
   SERVER_VERSION = "#{version.major}.#{version.minor}.#{version.patch}"
 
-  puts 'setting up keys'
+  puts 'Setting up keys'
   WEB_API_SALT = 'f9242bd8f2e520cdd67ac5fe7f691495'
   MOBILE_API_KEY = 'lolcaf-mobile-apikey'
 
