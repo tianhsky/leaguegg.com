@@ -29,6 +29,7 @@ angular.module('leaguegg').config([
         templateUrl: "static/home/404.html"
       });
 
+
     // Server Version Check
     $httpProvider.interceptors.push('$serverVersionInjector');
 
@@ -39,13 +40,17 @@ angular.module('leaguegg').config([
     AnalyticsProvider.setAccount('UA-61898295-2');
     AnalyticsProvider.trackUrlParams(true);
     AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+
   }
 ]);
 
 
 angular.module('leaguegg').run([
-  'Analytics',
-  function(Analytics) {
-
+  '$alexa', '$rootScope',
+  function($alexa, $rootScope) {
+    $rootScope.$on("$locationChangeSuccess", function(event, next, current) {
+      // Alexa
+      $alexa.track();
+    });
   }
 ]);

@@ -1,4 +1,5 @@
 // error track
+//= require alexa
 //= require airbrake-js-client
 //= require error_track
 
