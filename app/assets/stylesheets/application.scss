@@ -9,13 +9,13 @@
 @import 'core';
 @import 'animation';
 @import 'loading';
-@import 'theme';
 @import 'err';
 @import 'tooltip';
 
 // pages
-@import 'home';
-@import 'app';
-@import 'game';
-@import 'summoner';
-@import 'rotation';
+@import 'leaguegg/theme';
+@import 'leaguegg/home';
+@import 'leaguegg/app';
+@import 'leaguegg/game';
+@import 'leaguegg/summoner';
+@import 'leaguegg/rotation';

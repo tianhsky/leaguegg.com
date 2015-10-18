@@ -8,11 +8,28 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
     },
     controller: ['$scope', '$location', 'SummonerService',
       function($scope, $location, SummonerService) {
+        $scope.searchFilter = {
+          field: 'win_rate',
+          order: 1,
+          expression: 'win_rate'
+        };
+        $scope.sortBy = function(field) {
+          var changed = (field != $scope.searchFilter.field);
+          if (changed) {
+            $scope.searchFilter.order = 1;
+          } else {
+            $scope.searchFilter.order *= -1;
+          }
+          $scope.searchFilter.field = field;
+
+          var exp_prefix = $scope.searchFilter.order == -1 ? '-' : '';
+          $scope.searchFilter.expression = exp_prefix + field;
+        }
         $scope.viewChampionStats = function(champion) {
           var query = SummonerService.getQuery();
           var url = '/summoner/' + query.region + '/' + query.summoner + '/champion/' + champion.id;
           $location.path(url);
-        }
+        };
       }
     ]
   }

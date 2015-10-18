@@ -1,13 +1,32 @@
 <div class="champion-stats">
-  <div>
-    <h4 class="">
+  <div class="champion-search">
+    <input class="c-search" placeholder="Search Champion" ng-model="searchSummonerInput.champion.name"></input>
+    <i class="fa fa-search c-search-icon"></i>
+  </div>
+  <div class="search-title">
+    <p>
       <span>Ranked Performance</span>
       <span class="pull-right">{{season}}</span>
-    </h4>
+    </p>
   </div>
-  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion" ng-click="viewChampionStats(stat.champion)">
+  <div class="search-result-header row">
+    <div class="col-xs-3 column-header" ng-click="sortBy('champion.name')">
+      <span>Champion</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='champion.name'"></i>
+    </div>
+    <div class="col-xs-3 text-center column-header" ng-click="sortBy('win_rate')">
+      <span>Win%</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='win_rate'"></i>
+    </div>
+    <div class="col-xs-3 text-center column-header" ng-click="sortBy('kda_rate')">
+      <span>KDA</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='kda_rate'"></i>
+    </div>
+    <div class="col-xs-3 text-center column-header" ng-click="sortBy('aggresive_rate')">
+      <span data-tooltip="The more penta kills, the higher number is, all penta, quadra, triple and double kills are used for calculations">Aggresive</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='aggresive_rate'"></i>
+    </div>
+  </div>
+  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression" ng-click="viewChampionStats(stat.champion)">
     <div class="c-icon col-xs-3">
       <img ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
+      <div class="c-name">{{stat.champion.name}}</div>
     </div>
     <div class="c-item c-wl col-xs-3 text-center">
       <wl class="wl" w="stat.won" l="stat.lost" rate="stat.win_rate" show-label="true" />
@@ -16,7 +35,6 @@
       <kda class="kda" k="stat.avg_kills" d="stat.avg_deaths" a="stat.avg_assists" rate="stat.kda_rate" />
     </div>
     <div class="c-item c-aggresive col-xs-3 text-center">
-      <div class="title-label">Aggresive</div>
       <div>{{stat.aggresive_rate | percentage: 0 | nullcheck}}</div>
     </div>
   </div>

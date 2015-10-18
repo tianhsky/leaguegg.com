@@ -1,4 +1,9 @@
-[data-tooltip]{
-  border-bottom: 1px dotted $gray;
-  cursor: pointer;
+.tooltip {
+  .tooltip-arrow {
+    background-color: #75BAEB;
+  }
+  .tooltip-inner {
+    background-color: #75BAEB;
+    border-bottom-color: #75BAEB;
+  }
 }
