@@ -79,18 +79,16 @@
   <h4>Timeline Breakdown</h4>
   <div class="row text-center">
     <div class="chart-item cs-chart col-sm-12">
-      <gg-timeline-chart name="CS" timeline="stats.avg_timeline_cs" timeline-diff="stats.avg_timeline_csd" series="['Self', 'Opponents']"></gg-timeline-chart>
-      <p>
-        Average CS Per Minute
-      </p>
+      <p>Average CS Per Minute</p>
+      <gg-timeline-chart name="CS" timeline="stats.avg_timeline_cs" timeline-diff="stats.avg_timeline_csd" series="['Self', 'Opponent']"></gg-timeline-chart>
     </div>
     <div class="chart-item xp-chart col-sm-12">
-      <gg-timeline-chart name="XP" timeline="stats.avg_timeline_xp" timeline-diff="stats.avg_timeline_xpd" series="['Self', 'Opponents']"></gg-timeline-chart>
       <p>Average XP Per Minute</p>
+      <gg-timeline-chart name="XP" timeline="stats.avg_timeline_xp" timeline-diff="stats.avg_timeline_xpd" series="['Self', 'Opponent']"></gg-timeline-chart>
     </div>
     <div class="chart-item dmgt-chart col-sm-12">
-      <gg-timeline-chart name="Damage Taken" timeline="stats.avg_timeline_dmgt" timeline-diff="stats.avg_timeline_dmgtd" series="['Self', 'Opponents']"></gg-timeline-chart>
       <p>Avg Damage Taken Per Minute</p>
+      <gg-timeline-chart name="Damage Taken" timeline="stats.avg_timeline_dmgt" timeline-diff="stats.avg_timeline_dmgtd" series="['Self', 'Opponent']"></gg-timeline-chart>
     </div>
   </div>
 </div>
