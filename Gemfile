@@ -54,6 +54,8 @@ gem 'ratelimit'
 gem 'logstash-logger'
 # Profiling
 gem 'newrelic_rpm'
+# Pagination
+gem 'kaminari'
 
 group :development do
   # Debug tools

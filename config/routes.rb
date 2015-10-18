@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
   resource :version, only: [:show]
 
+  namespace :pub do
+    resource :home, only: [:show]
+    resources :summoners, only: [:index]
+  end
+
   namespace :api do
     resource :featured, only: [:show]
     resource :game, only: [:show]

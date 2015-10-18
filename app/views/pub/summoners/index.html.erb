@@ -1,0 +1,10 @@
+<ul>
+  <% @summoners.each do |s| %>
+    <li>
+      <% url = "/summoner/#{s.region}/#{s.name}" %>
+      <a href="<%=url%>"><%=url%></a>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @summoners %>

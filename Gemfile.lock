@@ -105,6 +105,9 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     json (1.8.1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libv8 (3.16.14.7)
     logstash-event (1.2.02)
     logstash-logger (0.15.1)
@@ -262,6 +265,7 @@ DEPENDENCIES
   httparty
   jasmine
   jbuilder (~> 2.0)
+  kaminari
   logstash-logger
   mongoid (~> 5.0.0)
   newrelic_rpm
