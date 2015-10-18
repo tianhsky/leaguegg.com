@@ -166,7 +166,7 @@
         color: yellow;
       }
     }
-    .champion-summary {
+    .stats-summary {
       margin: 20px 0px;
       .c-icon {
         img {
@@ -179,6 +179,32 @@
         // border: 1px solid rgba(134, 255, 255, 0.36);
         vertical-align: top;
         padding: 15px;
+      }
+    }
+    .stats-breakdown {
+      .chart-item {
+        font-size: 0.8em;
+        color: #61A9D2;
+        max-width: 350px;
+        margin: 0px auto;
+      }
+      .stats-facts {
+        @media(max-width: 768px) {
+          text-align: center;
+        }
+        .fact-items {
+          .fact-item {
+            padding: 5px 0px;
+            .item-label {
+              font-size: 0.8em;
+              color: #61A9D2;
+            }
+            .item-value {
+              font-size: 1em;
+              // padding-left: 15px;
+            }
+          }
+        }
       }
     }
   }

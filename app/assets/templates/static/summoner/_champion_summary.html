@@ -1,4 +1,4 @@
-<div class="champion-summary row">
+<div class="row">
   <div class="c-icon col-sm-3 text-center">
     <img ng-src="{{championSeasonStat.champion.img_loading}}">
   </div>
@@ -7,7 +7,7 @@
       <thead>
         <th class="col-sm-3"></th>
         <th class="col-sm-4">{{season | titleize}}</th>
-        <th class="col-sm-4">Recent</th>
+        <th class="col-sm-4"><span data-tooltip="Based on most recent 5 ranked matches for this champion">Recent <i class="fa fa-question-circle"></i></span></th>
       </thead>
       <tbody>
         <tr>
@@ -21,7 +21,9 @@
           <td>{{championRecentStat.win_rate | percentage: 0 | nullcheck}}</td>
         </tr>
         <tr>
-          <td>Aggresive</td>
+          <td>
+            <span data-tooltip="The more penta kills, the higher number is, all penta, quadra, triple and double kills are used for calculations">Aggresive <i class="fa fa-question-circle"></i></span>
+          </td>
           <td>{{championSeasonStat.aggresive_rate | percentage: 1 | nullcheck}}</td>
           <td>{{championRecentStat.aggresive_rate | percentage: 1 | nullcheck}}</td>
         </tr>

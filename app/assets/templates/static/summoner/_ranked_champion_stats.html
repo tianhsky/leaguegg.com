@@ -1,26 +1,96 @@
-<div class="row">
-  <div class="stat-charts col-sm-4">
-    <div class="chart-item cs-chart">
-      <gg-line-chart name="CS" timeline="stats.avg_timeline_cs" />
+<div class="stats-facts col-sm-6">
+  <h4>Stats</h4>
+  <div class="fact-items">
+    <div class="fact-item">
+      <div class="item-label">
+        Minion Kills
+      </div>
+      <div class="item-value">
+        {{stats.avg_minion_kills}}
+      </div>
     </div>
-    <div class="chart-item csd-chart">
-      <gg-line-chart name="CS Diff" timeline="stats.avg_timeline_csd" />
+    <div class="fact-item">
+      <div class="item-label">
+        CS at team jungle
+      </div>
+      <div class="item-value">
+        {{stats.avg_team_jungle_kills}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        CS at enemy jungle
+      </div>
+      <div class="item-value">
+        {{stats.avg_enemy_jungle_kills}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        AD damage to champions
+      </div>
+      <div class="item-value">
+        {{stats.avg_physical_to_champion}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        AP damage to champions
+      </div>
+      <div class="item-value">
+        {{stats.avg_magic_to_champion}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        True damage to champions
+      </div>
+      <div class="item-value">
+        {{stats.avg_true_to_champion}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        Wards placed
+      </div>
+      <div class="item-value">
+        {{stats.avg_wards_placed}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        Wards killed
+      </div>
+      <div class="item-value">
+        {{stats.avg_wards_killed}}
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="item-label">
+        Sight wards bought
+      </div>
+      <div class="item-value">
+        {{stats.avg_sight_wards_bought}}
+      </div>
     </div>
   </div>
-  <div class="stat-charts col-sm-4">
-    <div class="chart-item xp-chart">
-      <gg-line-chart name="XP" timeline="stats.avg_timeline_xp" />
+</div>
+<div class="stats-charts col-sm-6">
+  <h4>Timeline Breakdown</h4>
+  <div class="row text-center">
+    <div class="chart-item cs-chart col-sm-12">
+      <gg-timeline-chart name="CS" timeline="stats.avg_timeline_cs" timeline-diff="stats.avg_timeline_csd" series="['Self', 'Opponents']"></gg-timeline-chart>
+      <p>
+        Average CS Per Minute
+      </p>
     </div>
-    <div class="chart-item xpd-chart">
-      <gg-line-chart name="XP Diff" timeline="stats.avg_timeline_xpd" />
+    <div class="chart-item xp-chart col-sm-12">
+      <gg-timeline-chart name="XP" timeline="stats.avg_timeline_xp" timeline-diff="stats.avg_timeline_xpd" series="['Self', 'Opponents']"></gg-timeline-chart>
+      <p>Average XP Per Minute</p>
     </div>
-  </div>
-  <div class="stat-charts col-sm-4">
-    <div class="chart-item dmgt-chart">
-      <gg-line-chart name="Damage Taken" timeline="stats.avg_timeline_dmgt" />
-    </div>
-    <div class="chart-item dmgtd-chart">
-      <gg-line-chart name="Damage Taken Diff" timeline="stats.avg_timeline_dmgtd" />
+    <div class="chart-item dmgt-chart col-sm-12">
+      <gg-timeline-chart name="Damage Taken" timeline="stats.avg_timeline_dmgt" timeline-diff="stats.avg_timeline_dmgtd" series="['Self', 'Opponents']"></gg-timeline-chart>
+      <p>Avg Damage Taken Per Minute</p>
     </div>
   </div>
 </div>
