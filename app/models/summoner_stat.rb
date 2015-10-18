@@ -59,7 +59,7 @@ class SummonerStat
   end
 
   def outdated?
-    return false if self.new_record? || self.updated_at.blank?
+    return true if self.new_record? || self.updated_at.blank?
     if time = Utils::Time.epunix_to_time(self.updated_at)
       return true if time < Time.now - AppConsts::CHAMPION_SEASON_STATS_EXPIRES_THRESHOLD
     end

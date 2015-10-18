@@ -18,6 +18,7 @@ group :vendor do
   asset 'angular-ui-router-anim-in-out', 'latest'
   asset 'angular-google-analytics', '1.1.1'
   asset 'angular-chart', '0.8.4', github: 'jtblin/angular-chart.js'
+  asset 'angular-moment', 'latest', github: 'urish/angular-moment'
   asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'
   asset 'md5', 'latest'

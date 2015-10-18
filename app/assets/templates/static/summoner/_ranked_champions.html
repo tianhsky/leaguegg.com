@@ -1,6 +1,6 @@
 <div class="champion-stats">
   <div class="champion-search">
-    <input class="c-search" placeholder="Search Champion" ng-model="searchSummonerInput.champion.name"></input>
+    <input autofocus class="c-search" placeholder="Search Champion" ng-model="searchSummonerInput.champion.name"></input>
     <i class="fa fa-search c-search-icon"></i>
   </div>
   <div class="search-title">
@@ -8,6 +8,17 @@
       <span>Ranked Performance</span>
       <span class="pull-right">{{season}}</span>
     </p>
+  </div>
+  <div class="update-option" ng-if="stats.outdated">
+    <button ng-disabled="summonerStatsLoading.active" ng-click="updateStats({reload_if_outdated:true})" class="btn btn-sm btn-info pull-right">
+      <span ng-if="stats.updated_at">
+        Updated <span am-time-ago="stats.updated_at" am-preprocess="unix"></span>
+      </span>
+      <span ng-if="!stats.updated-at">
+        Update
+      </span>
+      <i class="fa fa-refresh"></i>
+    </button>
   </div>
   <div class="search-result-header row">
     <div class="col-xs-3 column-header" ng-click="sortBy('champion.name')">

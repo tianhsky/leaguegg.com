@@ -23,12 +23,15 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       return _data.query;
     }
 
-    self.fetchSummonerInfo = function(region, summoner_name) {
+    self.fetchSummonerInfo = function(region, summoner_name, reload_if_outdated) {
       _data.query.region = region;
       _data.query.summoner = summoner_name;
       _data.result.season_stats = null;
       Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name + '@' + region, 1);
       var url = '/api/summoner.json?summoner_name=' + summoner_name + '&region=' + region;
+      if(reload_if_outdated){
+        url += '&reload=1';
+      }
       return $q(function(resolve, reject) {
         $http.get(url)
           .then(function(resp) {
@@ -40,16 +43,21 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       });
     }
 
-    self.getSummonerInfo = function(region, summoner_name) {
+    self.getSummonerInfo = function(region, summoner_name, reload_if_outdated) {
       var shouldFetch = false;
-      if (isQueryChanged(region, summoner_name)) {
+      if (reload_if_outdated) {
         shouldFetch = true;
       } else {
-        shouldFetch = _data.result.summoner ? false : true;
+        if (isQueryChanged(region, summoner_name)) {
+          shouldFetch = true;
+        } else {
+          shouldFetch = _data.result.summoner ? false : true;
+        }
+
       }
 
       if (shouldFetch) {
-        return self.fetchSummonerInfo(region, summoner_name);
+        return self.fetchSummonerInfo(region, summoner_name, reload_if_outdated);
       } else {
         return $q(function(resolve, reject) {
           resolve(_data.result.summoner);
@@ -57,9 +65,12 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       }
     }
 
-    self.fetchSummonerSeasonStats = function(region, summoner_id) {
+    self.fetchSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
       Analytics.trackEvent('Summoner', 'SearchSeasonStats', summoner_id + '@' + region, 1);
       var url = '/api/summoner/stats.json?season_stats=1&summoner_id=' + summoner_id + '&region=' + region;
+      if(reload_if_outdated){
+        url += '&reload=1';
+      }
       return $q(function(resolve, reject) {
         $http.get(url)
           .then(function(resp) {
@@ -71,11 +82,16 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       });
     }
 
-    self.getSummonerSeasonStats = function(region, summoner_id) {
+    self.getSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
       var shouldFetch = false;
-      shouldFetch = _data.result.season_stats ? false : true;
+      if(reload_if_outdated){
+        shouldFetch = true;
+      }
+      else{
+        shouldFetch = _data.result.season_stats ? false : true;
+      }
       if (shouldFetch) {
-        return self.fetchSummonerSeasonStats(region, summoner_id);
+        return self.fetchSummonerSeasonStats(region, summoner_id, reload_if_outdated);
       } else {
         return $q(function(resolve, reject) {
           resolve(_data.result.season_stats);

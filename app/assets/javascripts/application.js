@@ -12,6 +12,7 @@
 //= require md5
 //= require inflection
 //= require underscore
+//= require moment
 //= require bootstrap-sass-official
 //= require Chart.js/Chart.min.js
 

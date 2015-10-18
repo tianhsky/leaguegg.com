@@ -11,7 +11,7 @@
         {{data.season | titleize}} ranked stats could not be found for {{data.summoner.name}}
       </div>
       <div ng-if="!data.error.summoner_stats && data.summoner_stats">
-        <summoner-ranked-champions season="data.season" stats="data.summoner_stats"></summoner-ranked-champions>
+        <summoner-ranked-champions season="data.season" stats="data.summoner_stats" update-stats="updateStats(reload_if_outdated)" summoner-stats-loading="data.loading.summoner_stats"></summoner-ranked-champions>
       </div>
     </div>
   </div>

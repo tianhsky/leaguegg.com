@@ -7,7 +7,8 @@
 angular.module('utils', [
   'templates', 'ui.router', 'ui.bootstrap',
   'truncate', 'ngAnimate', 'ngInflection',
-  'angular-google-analytics', 'chart.js'
+  'angular-google-analytics', 'chart.js',
+  'angularMoment'
 ]);
 
 angular.module('leaguegg.consts', []);

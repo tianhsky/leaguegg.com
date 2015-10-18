@@ -4,7 +4,9 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
     templateUrl: 'static/summoner/_ranked_champions.html',
     scope: {
       'stats': '=',
-      'season': '='
+      'season': '=',
+      'updateStats': '&',
+      'summonerStatsLoading': '='
     },
     controller: ['$scope', '$location', 'SummonerService',
       function($scope, $location, SummonerService) {

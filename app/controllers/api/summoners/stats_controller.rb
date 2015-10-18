@@ -8,7 +8,7 @@ module Api
       end
 
       def season_stats
-        @season_stats = SummonerStatService::Service.find_summoner_season_stats(summoner_id, region)
+        @season_stats = SummonerStatService::Service.find_summoner_season_stats(summoner_id, region, reload?)
         render 'api/summoners/stats/season_stats'
         # respond_with :json => @season_stats
       end

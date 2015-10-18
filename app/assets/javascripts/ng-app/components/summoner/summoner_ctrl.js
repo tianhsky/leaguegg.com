@@ -24,29 +24,38 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
           active: true,
           text: 'Loading summoner stats ...',
           theme: 'taichi'
-        },
+        }
       }
     }
 
-    SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner)
-      .then(function(data) {
-        $scope.data.summoner = data;
-        $scope.data.loading.summoner.active = false;
-        MetaService.setTitle(data.name + ' · ' + data.region);
-        MetaService.setDescription("League of Legends Season Stats for " + data.name + ' at ' + data.region);
+    $scope.updateStats = function(reload_if_outdated) {
+      $scope.data.loading.summoner.active = false;
+      $scope.data.loading.summoner_stats.active = true;
 
-        SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
-          .then(function(stats) {
-            $scope.data.loading.summoner_stats.active = false;
-            $scope.data.summoner_stats = stats;
-          }, function(err) {
-            $scope.data.loading.summoner_stats.active = false;
-            $scope.data.error.summoner_stats = err;
-          })
-      }, function(err) {
-        $scope.data.loading.summoner.active = false;
-        $scope.data.error.summoner = err;
-      });
+      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, reload_if_outdated)
+        .then(function(data) {
+          $scope.data.summoner = data;
+          $scope.data.loading.summoner.active = false;
+          MetaService.setTitle(data.name + ' · ' + data.region);
+          MetaService.setDescription("League of Legends Season Stats for " + data.name + ' at ' + data.region);
+
+          SummonerService.getSummonerSeasonStats($stateParams.region, data.id, reload_if_outdated)
+            .then(function(stats) {
+              $scope.data.loading.summoner_stats.active = false;
+              $scope.data.summoner_stats = stats;
+            }, function(err) {
+              $scope.data.loading.summoner_stats.active = false;
+              $scope.data.error.summoner_stats = err;
+            })
+        }, function(err) {
+          $scope.data.loading.summoner.active = false;
+          $scope.data.error.summoner = err;
+        });
+
+    }
+
+    $scope.updateStats(false);
+
 
     $scope.$on('$destroy', function() {
       MetaService.useDefault();

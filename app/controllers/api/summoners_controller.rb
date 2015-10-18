@@ -31,11 +31,11 @@ module Api
         @summoner = Summoner::Service.find_summoner_by_summoner_id(summoner_id, region)
       end
 
-      # if @summoner && reload?
+      if @summoner && reload?
         if @summoner.outdated?
           @summoner.sync_from_riot!
         end
-      # end
+      end
     end
 
     def summoner_id

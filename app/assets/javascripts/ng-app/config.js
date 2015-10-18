@@ -44,7 +44,6 @@ angular.module('leaguegg').config([
   }
 ]);
 
-
 angular.module('leaguegg').run([
   '$alexa', '$rootScope',
   function($alexa, $rootScope) {
