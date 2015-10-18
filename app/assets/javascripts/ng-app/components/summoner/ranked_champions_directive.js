@@ -9,9 +9,9 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
     controller: ['$scope', '$location', 'SummonerService',
       function($scope, $location, SummonerService) {
         $scope.searchFilter = {
-          field: 'win_rate',
+          field: 'kda_rate',
           order: -1,
-          expression: 'win_rate'
+          expression: '-kda_rate'
         };
         $scope.sortBy = function(field) {
           var changed = (field != $scope.searchFilter.field);
