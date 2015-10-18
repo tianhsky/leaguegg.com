@@ -10,7 +10,7 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
       function($scope, $location, SummonerService) {
         $scope.searchFilter = {
           field: 'win_rate',
-          order: 1,
+          order: -1,
           expression: 'win_rate'
         };
         $scope.sortBy = function(field) {
