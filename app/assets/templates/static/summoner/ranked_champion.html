@@ -14,11 +14,11 @@
         Ranked champion stats could not be found for {{data.summoner.name}}
       </div>
       <div ng-if="!data.error.champion_stats && data.champion_stats">
-        <h3>{{getChampionSeasonStats().champion.name}} Performance</h3>
+        <h4>Performance Summary</h4>
         <summoner-champion-summary season="data.season" champion-season-stat="getChampionSeasonStats()" champion-recent-stat="data.champion_stats">
         </summoner-champion-summary>
         <hr>
-        <h3>{{getChampionSeasonStats().champion.name}}'s Recent Performance</h3>
+        <h4>Recent Performance Breakdown</h4>
         <summoner-ranked-champion-stats season="data.season" summoner="data.summoner" stats="data.champion_stats">
         </summoner-ranked-champion-stats>
       </div>
