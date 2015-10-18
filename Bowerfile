@@ -22,6 +22,7 @@ group :vendor do
   asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'
   asset 'md5', 'latest'
+  asset 'urijs', 'latest'
 
   resolution "angular", "1.4.7"
   resolution "angular-animate", "1.4.7"

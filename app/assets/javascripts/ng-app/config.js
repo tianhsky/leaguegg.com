@@ -45,11 +45,21 @@ angular.module('leaguegg').config([
 ]);
 
 angular.module('leaguegg').run([
-  '$alexa', '$rootScope',
-  function($alexa, $rootScope) {
+  '$urijs', '$alexa', '$rootScope', 'Analytics',
+  function($urijs, $alexa, $rootScope, Analytics) {
     $rootScope.$on("$locationChangeSuccess", function(event, next, current) {
+      // path
+      var uri = $urijs(next);
+      var query = uri.query();
+
       // Alexa
       $alexa.track();
+
+      // TB
+      if (query.indexOf('tb=') != -1) {
+        var path = uri.path();
+        Analytics.trackEvent('TB', 'Click', path, 1);
+      }
     });
   }
 ]);

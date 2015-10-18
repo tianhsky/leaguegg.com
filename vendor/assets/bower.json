@@ -20,7 +20,8 @@
     "angular-moment": "git://github.com/urish/angular-moment",
     "ngInflection": "latest",
     "airbrake-js-client": "0.5.3",
-    "md5": "latest"
+    "md5": "latest",
+    "urijs": "latest"
   },
   "resolutions": {
     "angular": "1.4.7",

@@ -9,6 +9,7 @@
 //= require browser_check
 
 // libs
+//= require urijs
 //= require md5
 //= require inflection
 //= require underscore
