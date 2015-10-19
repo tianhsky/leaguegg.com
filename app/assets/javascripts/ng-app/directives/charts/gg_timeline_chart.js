@@ -22,10 +22,10 @@ angular.module('leaguegg.partials').directive('ggTimelineChart', function() {
           if ($scope.timeline) {
             t1 = $scope.timeline;
             if ($scope.timelineDiff) {
-              t2[0] = t1[0] + $scope.timelineDiff[0];
-              t2[1] = t1[1] + $scope.timelineDiff[1];
-              t2[2] = t1[2] + $scope.timelineDiff[2];
-              t2[3] = t1[3] + $scope.timelineDiff[3];
+              t2[0] = t1[0] - $scope.timelineDiff[0];
+              t2[1] = t1[1] - $scope.timelineDiff[1];
+              t2[2] = t1[2] - $scope.timelineDiff[2];
+              t2[3] = t1[3] - $scope.timelineDiff[3];
             }
           }
           return [t1, t2]
