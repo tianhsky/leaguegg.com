@@ -6,7 +6,6 @@
 //= require angular-truncate
 //= require angular-rails-templates
 //= require angular-chart
-//= require angular-moment
 //= require angular-google-analytics
 //= require ngInflection
 
