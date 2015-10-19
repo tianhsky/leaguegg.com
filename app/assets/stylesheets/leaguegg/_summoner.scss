@@ -97,7 +97,7 @@
       .search-title {
         margin-bottom: 20px;
       }
-      .update-option{
+      .update-option {
         min-height: 40px;
       }
       .search-result-header {
@@ -190,13 +190,18 @@
         color: #61A9D2;
         max-width: 350px;
         margin: 0px auto;
-        padding: 15px 0px;
+        border: 1px solid rgba(68, 164, 210, 0.21);
+        padding: 10px;
       }
       .stats-facts {
         @media(max-width: 768px) {
           text-align: center;
         }
         .fact-items {
+          .fact-item-group {
+            border: 1px solid rgba(68, 164, 210, 0.21);
+            padding: 10px;
+          }
           .fact-item {
             padding: 5px 0px;
             .item-label {

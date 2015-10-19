@@ -1,76 +1,82 @@
 <div class="stats-facts col-sm-6">
   <h4>Stats (Average)</h4>
   <div class="fact-items">
-    <div class="fact-item">
-      <div class="item-label">
-        Minion Kills
+    <div class="fact-item-group">
+      <div class="fact-item">
+        <div class="item-label">
+          Minion Kills
+        </div>
+        <div class="item-value">
+          {{stats.avg_minion_kills}}
+        </div>
       </div>
-      <div class="item-value">
-        {{stats.avg_minion_kills}}
+      <div class="fact-item">
+        <div class="item-label">
+          CS at team jungle
+        </div>
+        <div class="item-value">
+          {{stats.avg_team_jungle_kills}}
+        </div>
       </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        CS at team jungle
-      </div>
-      <div class="item-value">
-        {{stats.avg_team_jungle_kills}}
-      </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        CS at enemy jungle
-      </div>
-      <div class="item-value">
-        {{stats.avg_enemy_jungle_kills}}
-      </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        AD damage to champions
-      </div>
-      <div class="item-value">
-        {{stats.avg_physical_to_champion}}
+      <div class="fact-item">
+        <div class="item-label">
+          CS at enemy jungle
+        </div>
+        <div class="item-value">
+          {{stats.avg_enemy_jungle_kills}}
+        </div>
       </div>
     </div>
-    <div class="fact-item">
-      <div class="item-label">
-        AP damage to champions
+    <div class="fact-item-group">
+      <div class="fact-item">
+        <div class="item-label">
+          AD damage to champions
+        </div>
+        <div class="item-value">
+          {{stats.avg_physical_to_champion}}
+        </div>
       </div>
-      <div class="item-value">
-        {{stats.avg_magic_to_champion}}
+      <div class="fact-item">
+        <div class="item-label">
+          AP damage to champions
+        </div>
+        <div class="item-value">
+          {{stats.avg_magic_to_champion}}
+        </div>
       </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        True damage to champions
-      </div>
-      <div class="item-value">
-        {{stats.avg_true_to_champion}}
-      </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        Wards placed
-      </div>
-      <div class="item-value">
-        {{stats.avg_wards_placed}}
-      </div>
-    </div>
-    <div class="fact-item">
-      <div class="item-label">
-        Wards killed
-      </div>
-      <div class="item-value">
-        {{stats.avg_wards_killed}}
+      <div class="fact-item">
+        <div class="item-label">
+          True damage to champions
+        </div>
+        <div class="item-value">
+          {{stats.avg_true_to_champion}}
+        </div>
       </div>
     </div>
-    <div class="fact-item">
-      <div class="item-label">
-        Sight wards bought
+    <div class="fact-item-group">
+      <div class="fact-item">
+        <div class="item-label">
+          Wards placed
+        </div>
+        <div class="item-value">
+          {{stats.avg_wards_placed}}
+        </div>
       </div>
-      <div class="item-value">
-        {{stats.avg_sight_wards_bought}}
+      <div class="fact-item">
+        <div class="item-label">
+          Wards killed
+        </div>
+        <div class="item-value">
+          {{stats.avg_wards_killed}}
+        </div>
+      </div>
+      <div class="fact-item">
+        <div class="item-label">
+          Sight wards bought
+        </div>
+        <div class="item-value">
+          {{stats.avg_sight_wards_bought}}
+        </div>
       </div>
     </div>
   </div>
