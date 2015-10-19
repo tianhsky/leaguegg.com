@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/LivingLogic/dynamic_sitemaps_with_mongoid
+  revision: 7eb4df8134866bf19fc8056e67f2a328a6b257ed
+  specs:
+    dynamic_sitemaps (2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -258,6 +264,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0.3)
   database_cleaner (~> 1.5.0)
   dotenv-rails
+  dynamic_sitemaps!
   execjs (~> 2.5.2)
   eye
   factory_girl_rails

@@ -18,6 +18,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 # User mongoid as documented store
 gem 'mongoid', '~> 5.0.0'
+# gem 'mysql2', '~> 0.3.18'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -56,6 +57,8 @@ gem 'logstash-logger'
 gem 'newrelic_rpm'
 # Pagination
 gem 'kaminari'
+# Sitemap
+gem 'dynamic_sitemaps', :git => 'https://github.com/LivingLogic/dynamic_sitemaps_with_mongoid'
 
 group :development do
   # Debug tools

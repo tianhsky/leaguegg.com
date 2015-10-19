@@ -3,3 +3,7 @@ set :output, File.join(File.expand_path(File.dirname(__FILE__)), '..', 'log', 'w
 every 8.minutes do
   rake "games:featured:fetch"
 end
+
+every 1.day, :at => '0:59 am' do
+  rake "sitemap:generate"
+end

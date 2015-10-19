@@ -5,4 +5,5 @@
 *.DS_Store*
 .sass-cache
 public/assets
+public/pub_sitemaps
 tmp

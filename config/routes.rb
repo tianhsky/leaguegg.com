@@ -16,11 +16,11 @@ Rails.application.routes.draw do
     resource :rotation, only: [:show]
   end
 
-  get 'app' => 'home#show'
-  get 'rotation' => 'home#show'
-  get 'game/*region/*summoner_name' => 'home#show'
-  get 'summoner/*region/*summoner_name' => 'home#show'
-  get 'summoner/*region/*summoner_name/champion/*champion_name' => 'home#show'
+  get 'app' => 'home#show', as: :mobile
+  get 'rotation' => 'home#show', as: :rotation
+  get 'game/*region/*summoner_name' => 'home#show', as: :game_search
+  get 'summoner/*region/*summoner_name' => 'home#show', as: :summoner_search
+  get 'summoner/*region/*summoner_name/champion/*champion_name' => 'home#show', as: :summoner_champion_search
 
   root :to => 'home#show'
 

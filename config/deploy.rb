@@ -7,7 +7,7 @@ set :scm, :git
 set :format, :pretty
 set :log_level, :info
 set :keep_releases, 10
-set :linked_dirs, %w{log tmp}
+set :linked_dirs, %w{log tmp public/pub_sitemaps}
 set :linked_files, %w{.env}
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
