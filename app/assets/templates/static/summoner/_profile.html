@@ -20,6 +20,9 @@
       <img ng-src="/static/img/riot/tier/lg/{{entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" ng-if="entry.tier">
     </div>
     <div class="r-detail">
+      <div class="r-team-name">
+        {{entry.entries[0].player_or_team_name}}
+      </div>
       <div class="r-tier">
         <span>{{entry.tier | titleize}} {{entry.entries[0].division}}</span>
         <span>·</span>

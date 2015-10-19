@@ -44,16 +44,18 @@
           padding: 10px 0px;
           display: inline-block;
           vertical-align: middle;
+          font-size: 0.9em;
           .r-queue {
             font-size: 0.7em;
             font-style: italic;
             color: $gray;
           }
+          .r-team-name{
+          }
           .r-tier {
             font-weight: 400;
           }
           .r-lp {
-            font-size: 1em;
             .mini-series {
               display: inline-block;
               margin-left: 15px;
