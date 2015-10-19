@@ -51,14 +51,41 @@ module Consts
       @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
+
         r["#{value['id']}".to_i] = {
           "id" => value['id'],
           "name" => value['name'],
           "description" => value['description'],
+          "category" => find_category(@json['tree'], value['id']),
           "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/mastery/#{value['id']}.png"
         }
       end
       r
+    end
+
+    def self.find_category(tree, mastery_id)
+      search_id = mastery_id.try(:to_i)
+      tree['defense'].each do |d|
+        d['mastery_tree_items'].each do |m|
+          if m
+            return 'Defense' if m['mastery_id'] == search_id
+          end
+        end
+      end
+      tree['offense'].each do |d|
+        d['mastery_tree_items'].each do |m|
+          if m
+            return 'Offense' if m['mastery_id'] == search_id
+          end
+        end
+      end
+      tree['utility'].each do |d|
+        d['mastery_tree_items'].each do |m|
+          if m
+            return 'Utility' if m['mastery_id'] == search_id
+          end
+        end
+      end
     end
 
   end

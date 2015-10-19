@@ -13,7 +13,7 @@ module StaticDataService
     end
 
     def self.fetch_masteries(region='na')
-      url = "https://global.api.pvp.net/api/lol/static-data/#{region.downcase}/v1.2/mastery"
+      url = "https://global.api.pvp.net/api/lol/static-data/#{region.downcase}/v1.2/mastery?masteryListData=all"
       resp = RiotAPI.get(url, region)
     end
 

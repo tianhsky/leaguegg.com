@@ -1,6 +1,6 @@
 angular.module('leaguegg.game').service('LiveGameService', [
-  '$localStorage', '_', '$http', '$q', 'Analytics', 'OPGG',
-  function($localStorage, _, $http, $q, Analytics, OPGG) {
+  '$localStorage', '_', '$http', '$q', 'Analytics', 'OPGG', '$sce',
+  function($localStorage, _, $http, $q, Analytics, OPGG, $sce) {
     var self = this;
 
     self.SetCacheQuery = function(query) {
@@ -61,5 +61,40 @@ angular.module('leaguegg.game').service('LiveGameService', [
       });
     }
 
+    self.groupMasteries = function(masteries) {
+      var grouped = _.groupBy(masteries, function(m) {
+        return m.category;
+      });
+      var result = {
+        offense: grouped['Offense'] ? grouped['Offense'].length : 0,
+        defense: grouped['Defense'] ? grouped['Defense'].length : 0,
+        utility: grouped['Utility'] ? grouped['Utility'].length : 0
+      };
+      return result;
+    }
+
+    self.applyGroupMasteries = function(game) {
+      _.each(game.teams, function(team) {
+        _.each(team.participants, function(p) {
+          p.masteries_grouped = self.groupMasteries(p.masteries);
+          var tooltip_html = "<div>Offense: " + p.masteries_grouped.offense + "</div>";
+          tooltip_html += "<div>Defense: " + p.masteries_grouped.defense + "</div>";
+          tooltip_html += "<div>Utility: " + p.masteries_grouped.utility + "</div>";
+          p.masteries_tooltip_html = $sce.trustAsHtml(tooltip_html);
+        });
+      });
+    }
+
+    self.applyRunesTooltip = function(game) {
+      _.each(game.teams, function(team) {
+        _.each(team.participants, function(p) {
+          var tooltip_html = "";
+          _.each(p.runes, function(r) {
+            tooltip_html += "<div style='text-align:left;'>" + r.count + " x " + r.description + "" + "</div>";
+          });
+          p.runes_tooltip_html = $sce.trustAsHtml(tooltip_html);
+        });
+      });
+    }
   }
 ]);
