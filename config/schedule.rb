@@ -4,9 +4,9 @@ every 8.minutes do
   rake "games:featured:fetch"
 end
 
-every 1.day, :at => '0:59 am' do
-  rake "sitemap:generate"
-end
+# every 1.day, :at => '0:59 am' do
+#   rake "sitemap:generate"
+# end
 
 every :tuesday, :at => '2:00 am' do
   rake "summoners:masters:fetch"
