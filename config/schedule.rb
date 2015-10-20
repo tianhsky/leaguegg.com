@@ -7,3 +7,15 @@ end
 every 1.day, :at => '0:59 am' do
   rake "sitemap:generate"
 end
+
+every :tuesday, :at => '2:00 am' do
+  rake "summoners:masters:fetch"
+end
+
+every :tuesday, :at => '3:00 am' do
+  rake "summoners:challengers:fetch"
+end
+
+every :wednesday, :at => '2:00 am' do
+  rake "summoners:all:sync"
+end
