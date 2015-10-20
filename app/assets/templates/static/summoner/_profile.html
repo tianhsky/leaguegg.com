@@ -1,7 +1,7 @@
 <div class="profile-info">
   <div class="p-icon">
     <a href="/summoner/{{summoner.region}}/{{summoner.name}}">
-      <img ng-src="{{summoner.profile_icon.img}}">
+      <img alt="{{summoner.name}}'s profile icon" ng-src="{{summoner.profile_icon.img}}">
     </a>
   </div>
   <div class="p-info">
@@ -17,7 +17,7 @@
 <div class="rank-info">
   <div class="rank-item" ng-repeat="entry in summoner.league_entries">
     <div class="r-icon">
-      <img ng-src="/static/img/riot/tier/lg/{{entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" ng-if="entry.tier">
+      <img ng-src="/static/img/riot/tier/lg/{{entry.tier|lowercase}}.png" alt="{{summoner.name}}'s tier icon - {{entry.tier|lowercase}}" err-src="/static/img/leaguegg-icon.png" ng-if="entry.tier">
     </div>
     <div class="r-detail">
       <div class="r-team-name">

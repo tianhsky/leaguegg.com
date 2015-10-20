@@ -36,7 +36,7 @@
   </div>
   <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression" ng-click="viewChampionStats(stat.champion)">
     <div class="c-icon col-xs-3">
-      <img ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
+      <img alt="{{stat.champion.name}}'s icon" ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
       <div class="c-name">{{stat.champion.name}}</div>
     </div>
     <div class="c-item c-wl col-xs-3 text-center">
