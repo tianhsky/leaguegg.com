@@ -37,8 +37,8 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
           $scope.data.summoner = data;
           $scope.data.loading.summoner.active = false;
           MetaService.setTitle(data.name + ' · ' + data.region);
-          MetaService.setDescription("League of Legends Season Stats for " + data.name + ' at ' + data.region);
-
+          MetaService.setDescription(data.meta_description);
+          
           SummonerService.getSummonerSeasonStats($stateParams.region, data.id, reload_if_outdated)
             .then(function(stats) {
               $scope.data.loading.summoner_stats.active = false;

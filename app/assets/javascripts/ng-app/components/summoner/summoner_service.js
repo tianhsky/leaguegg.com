@@ -1,6 +1,6 @@
 angular.module('leaguegg.summoner').service('SummonerService', [
-  '$http', '$q', '_', 'Analytics',
-  function($http, $q, _, Analytics) {
+  '$http', '$q', '_', 'Analytics', 'ConstsService',
+  function($http, $q, _, Analytics, ConstsService) {
     var self = this;
 
     var _data = {
@@ -29,14 +29,16 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       _data.result.season_stats = null;
       Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name + '@' + region, 1);
       var url = '/api/summoner.json?summoner_name=' + summoner_name + '&region=' + region;
-      if(reload_if_outdated){
+      if (reload_if_outdated) {
         url += '&reload=1';
       }
       return $q(function(resolve, reject) {
         $http.get(url)
           .then(function(resp) {
-            _data.result.summoner = resp.data;
-            resolve(resp.data);
+            var summoner = resp.data;
+            self.generateMetaDescription(summoner);
+            _data.result.summoner = summoner;
+            resolve(summoner);
           }, function(err) {
             reject(err);
           });
@@ -68,7 +70,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
     self.fetchSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
       Analytics.trackEvent('Summoner', 'SearchSeasonStats', summoner_id + '@' + region, 1);
       var url = '/api/summoner/stats.json?season_stats=1&summoner_id=' + summoner_id + '&region=' + region;
-      if(reload_if_outdated){
+      if (reload_if_outdated) {
         url += '&reload=1';
       }
       return $q(function(resolve, reject) {
@@ -84,10 +86,9 @@ angular.module('leaguegg.summoner').service('SummonerService', [
 
     self.getSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
       var shouldFetch = false;
-      if(reload_if_outdated){
+      if (reload_if_outdated) {
         shouldFetch = true;
-      }
-      else{
+      } else {
         shouldFetch = _data.result.season_stats ? false : true;
       }
       if (shouldFetch) {
@@ -112,6 +113,34 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       });
     }
 
+    self.generateMetaDescription = function(summoner) {
+      var intro = "";
+      var level_info = "";
+      var region_info = "";
+      var tier_info = "";
+      try {
+        intro = summoner.name + "'s League of Legends Stats,";
+      } catch (err) {}
+      try {
+        level_info = "Level " + summoner.level + ",";
+      } catch (err) {}
+      try {
+        region_info = "Region " + summoner.region + ",";
+      } catch (err) {}
+
+      try {
+        if (summoner.league_entries) {
+          var e = summoner.league_entries[0];
+          if (e) {
+            tier_info = e.tier + ' in League ' + e.name;
+          }
+        }
+        if (_.isEmpty(tier_info)) {
+          tier_info = "Not in leagues";
+        }
+      } catch (err) {}
+      summoner.meta_description = intro + " " + level_info + " " + region_info + " " + tier_info;
+    }
 
   }
 ]);
