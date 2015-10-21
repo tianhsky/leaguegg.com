@@ -1,5 +1,5 @@
 module Api
-  class RotationsController < ApiController
+  class RotationsController < Api::BaseController
 
     def show
       @rotation = ChampionService::Service.find_free_champions

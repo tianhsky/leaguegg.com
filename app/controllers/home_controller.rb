@@ -1,13 +1,11 @@
-class HomeController < ApplicationController
+class HomeController < BaseController
 
   def show
-    # @featured = Game::Service.find_current_featured_games('NA')
-  end
-
-  protected
-
-  def set_nav
-    @nav = 'game'
+    if is_crawler?
+      @featured = Game::Service.find_current_featured_games('NA')
+    else
+      render 'angular/wrapper'
+    end
   end
 
 end

@@ -1,4 +1,4 @@
-module ServerVersionChecker
+module ServerVersionStamp
   extend ActiveSupport::Concern
   included do
     before_filter :check_server_version

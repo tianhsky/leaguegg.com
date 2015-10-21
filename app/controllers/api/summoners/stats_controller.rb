@@ -1,6 +1,6 @@
 module Api
   module Summoners
-    class StatsController < ApiController
+    class StatsController < Api::BaseController
 
       def show
         return season_stats if season_stats?

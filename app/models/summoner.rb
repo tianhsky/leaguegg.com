@@ -101,6 +101,23 @@ class Summoner
     self.recent_matches_updated_at = now
   end
 
+  def primary_league
+    if self.league_entries
+      if league = self.league_entries[0]
+        r = {}
+        r['tier'] = league['tier']
+        r['division'] = league.try(:[], 'entries').try(:first).try(:[],'division')
+        r['name'] = league['name']
+        return r
+      end
+    end
+    nil
+  end
+
+  def region_name
+    Consts::Platform.find_by_region(self.region)['name']
+  end
+
   protected
 
   def sanitize_attrs

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title)+ ' | '+AppConsts::SITE_TITLE : AppConsts::SITE_TITLE %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : AppConsts::SITE_DESCRIPTION %>"></meta>
+  <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) : AppConsts::SITE_KEYWORDS.join(',') %>"></meta>
+</head>
+<body>
+  <script type="text/javascript">
+    <%= render 'shared/js/ga.js' %>
+  </script>
+  <%= render 'shared/alexa_raw' %>
+  <%= yield %>
+</body>
+</html>

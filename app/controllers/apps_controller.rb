@@ -1,13 +1,11 @@
-class AppsController < ApplicationController
+class AppsController < BaseController
 
   def show
-    
-  end
-
-  protected
-
-  def set_nav
-    @nav = 'app'
+    if is_crawler?
+      # default page
+    else
+      render 'angular/wrapper'
+    end
   end
 
 end

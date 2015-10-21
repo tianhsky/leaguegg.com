@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/">
   <title><%= AppConsts::SITE_TITLE %></title>
   <meta name="description" content="<%= AppConsts::SITE_DESCRIPTION %>"></meta>
   <meta name="keywords" content="<%= AppConsts::SITE_KEYWORDS.join(',') %>"></meta>
   <meta name="alexaVerifyID" content="NJGDtlu8vJ68ghA42Fs8cAAjkk"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="fragment" content="!">
+  <base href="/">
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -18,7 +19,8 @@
     <%= render 'shared/js/server_version.js' %>
     <%= render 'shared/js/api_key.js' %>
   </script>
-  <%= render 'shared/js/alexa' %>
+  <%= render 'shared/error_browser' %>
+  <%= render 'shared/alexa_error_browser' %>
   
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
@@ -27,8 +29,6 @@
   <div id="page" ng-app="leaguegg">
     <div ui-view></div>
   </div>
-  
-  <%= render 'shared/error_browser' %>
   
   <% if content_for?(:js) %>
     <%= yield(:js) %>

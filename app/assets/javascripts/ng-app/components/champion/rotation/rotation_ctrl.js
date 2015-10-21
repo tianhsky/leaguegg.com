@@ -4,7 +4,7 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
   function($scope, $rootScope, $interval, RotationService,
     LayoutService, MetaService) {
     LayoutService.setFatHeader(true);
-    MetaService.setTitle('Free Champions');
+    MetaService.setTitle('Free Champions for the Week');
 
     $scope.champions = null;
     var interval = null;

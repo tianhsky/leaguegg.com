@@ -1,33 +1,18 @@
-<div id="featured-games-carousel" class="carousel slide" data-ride="carousel">
-  <div class="featured-header">
-    <h4>Featured Games</h4>
-    <ol class="carousel-indicators">
-      <% @featured['game_list'].count.times do |id| %>
-        <li data-target="#featured-games-carousel" data-slide-to="<%=id%>" <%if id==0%>class="active"<%end%>></li>
-      <% end %>
-    </ol>
-  </div>
-  <div class="carousel-inner" role="listbox">
-    <% @featured['game_list'].each_with_index do |game, i| %>
-      <div class="item <%if i==0%>active<%end%>">
-        <div class="featured-team left">
-          <%= render partial: 'featured_team', locals: {team: game['teams'][0]} %>
-          <div class="team-banner">
-            <%= render partial: 'team_banner', locals: {team: game['teams'][0]} %>
-          </div>
-        </div>
-        <div class="featured-team right">
-          <%= render partial: 'featured_team', locals: {team: game['teams'][1]} %>
-          <div class="team-banner">
-            <%= render partial: 'team_banner', locals: {team: game['teams'][1]} %>
-          </div>
-        </div>
-        <div class="play-mask">
-          <a class="play" href="<%=search_path({:type=>'game',:region=>'na',:summoner_name=>game['teams'][0]['participants'][0]['summoner_name']})%>">
-            <i class="glyphicon glyphicon-play-circle"></i>
-          </a>
-        </div>
+<% @featured['game_list'].each_with_index do |game, i| %>
+  <div class="item <%if i==0%>active<%end%>">
+    <div class="featured-team left">
+      <%= render partial: 'featured_team', locals: {team: game['teams'][0]} %>
+      <div class="team-banner">
+        <%= render partial: 'team_banner', locals: {team: game['teams'][0]} %>
       </div>
-    <% end %>
+    </div>
+    <div class="featured-team right">
+      <%= render partial: 'featured_team', locals: {team: game['teams'][1]} %>
+      <div class="team-banner">
+        <%= render partial: 'team_banner', locals: {team: game['teams'][1]} %>
+      </div>
+    </div>
+    <div class="play-mask">
+    </div>
   </div>
-</div>
+<% end %>

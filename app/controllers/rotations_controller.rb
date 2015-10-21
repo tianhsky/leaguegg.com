@@ -1,13 +1,11 @@
-class RotationsController < ApplicationController
+class RotationsController < BaseController
 
   def show
-    @rotation = ChampionService::Service.find_free_champions
-  end
-
-  protected
-
-  def set_nav
-    @nav = 'rotation'
+    if is_crawler?
+      @rotation = ChampionService::Service.find_free_champions
+    else
+      render 'angular/wrapper'
+    end
   end
 
 end

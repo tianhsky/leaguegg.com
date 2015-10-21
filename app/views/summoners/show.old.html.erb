@@ -1,0 +1,32 @@
+<% if @error %>
+  <br> <br>
+  <%= render partial: 'shared/error', locals: {error: @error} %>
+<% else %>
+  <% content_for :js do %>
+    <%= javascript_include_tag 'summoner' %>
+    <script type="text/javascript">
+      window.data = {};
+      window.data.recent_stats = <%= raw @recent_stats.to_json %>;
+    </script>
+  <% end %>
+
+  <div class="summoner">
+    <%= render partial: 'profile', locals: {} %>
+    
+    <% if @recent_matches.blank? %>
+      <%= render partial: 'shared/error', locals: {message: 'There is no game record in our database! Please click the Update button!'} %>
+    <% else %>
+
+      <div class="left-panel col-md-3">
+        <%= render partial: 'recent_stats', locals: {} %> 
+      </div>
+      <div class="right-panel col-md-9">
+        <div class="matches">
+          <% @recent_matches.each do |match| %>
+            <%= render partial: 'summoner_match', locals: {match: match} %> 
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

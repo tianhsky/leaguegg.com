@@ -1,5 +1,5 @@
 module Api
-  class GamesController < ApiController
+  class GamesController < Api::BaseController
 
     def show
       find_game

@@ -1,5 +1,5 @@
 module Api
-  class SummonersController < ApiController
+  class SummonersController < Api::BaseController
 
     def show
       find_summoner

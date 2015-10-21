@@ -1,25 +1,17 @@
-<% content_for :js do %>
-  <%= javascript_include_tag 'rotation' %>
-<% end %>
+<% content_for :title do %>Free Champions for the Week<% end %>
+<% content_for :description do %>Weekly free champions:<%=@rotation.map{|c|c['name']}.join(',')%><% end %>
 
 <div class="free-champions">
-    <% if !@rotation.blank? %>
-      <ul>
-        <% @rotation[0..4].each do |champion| %>
-          <%= render partial: 'champion_item', locals: {champion: champion} %>
-        <% end %>
-      </ul>
-      <ul>
-        <% @rotation[5..9].each do |champion| %>
-          <%= render partial: 'champion_item', locals: {champion: champion} %>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <div class="champion-info">
-      <div class="champion-name">
-      </div>
-      <div class="champion-title">
-      </div>
-    </div>
+  <% if !@rotation.blank? %>
+    <ul>
+      <% @rotation[0..4].each do |champion| %>
+        <%= render partial: 'champion_item', locals: {champion: champion} %>
+      <% end %>
+    </ul>
+    <ul>
+      <% @rotation[5..9].each do |champion| %>
+        <%= render partial: 'champion_item', locals: {champion: champion} %>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

@@ -4,7 +4,7 @@ angular.module('leaguegg.home').controller('AppCtrl', [
     LayoutService.setFatHeader(true);
     LayoutService.setBGVideoVisible(true);
     MetaService.setTitle('Mobile App');
-    MetaService.setDescription('Android IOS app for LeagueGG.');
+    MetaService.setDescription('Mobile application Android and IOS for LeagueGG');
 
     $scope.$on('$destroy', function() {
       LayoutService.setBGVideoVisible(false);
