@@ -36,7 +36,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
         .then(function(data) {
           $scope.data.summoner = data;
           $scope.data.loading.summoner.active = false;
-          MetaService.setTitle(data.name + ' · ' + data.region);
+          MetaService.setTitle(data.name + ' · ' + data.region_name);
           MetaService.setDescription(data.meta_description);
           
           SummonerService.getSummonerSeasonStats($stateParams.region, data.id, reload_if_outdated)

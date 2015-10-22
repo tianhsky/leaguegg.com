@@ -1,7 +1,6 @@
 class Summoner
   include Mongoid::Document
   include TimeTrackable
-  include SummonerService
 
   # Fields
   field :riot_updated_at, type: Integer
@@ -45,8 +44,8 @@ class Summoner
 
   def sync_from_riot!
     # basic info
-    profile_json = Riot.find_summoner_by_summoner_id(summoner_id, region)
-    profile_hash = Factory.build_summoner_hash(profile_json, region)
+    profile_json = SummonerService::Riot.find_summoner_by_summoner_id(summoner_id, region)
+    profile_hash = SummonerService::Factory.build_summoner_hash(profile_json, region)
     self.assign_attributes(profile_hash)
 
     # league entries

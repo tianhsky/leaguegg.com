@@ -26,9 +26,9 @@ module Api
 
     def find_summoner
       if summoner_name.present?
-        @summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
+        @summoner = SummonerService::Service.find_summoner_by_summoner_name(summoner_name, region)
       elsif summoner_id.present?
-        @summoner = Summoner::Service.find_summoner_by_summoner_id(summoner_id, region)
+        @summoner = SummonerService::Service.find_summoner_by_summoner_id(summoner_id, region)
       end
 
       if @summoner && reload?

@@ -1,14 +1,5 @@
 module ChampionService
 
-  module Riot
-
-    def self.find_free_champions(region='na')
-      url = "https://#{region.downcase}.api.pvp.net/api/lol/#{region.downcase}/v1.2/champion?freeToPlay=true"
-      resp = RiotAPI.get(url, region)
-    end
-
-  end
-
   module Service
 
     def self.find_free_champions(region='na')
@@ -26,18 +17,6 @@ module ChampionService
 
     def self.cache_key_for_free_rotation(region='na')
       "free_rotation?region=#{region.upcase}"
-    end
-
-  end
-
-  module Factory
-
-    def self.build_champions_hash(json)
-      champions = json.map do |c|
-        champ = Consts::Champion.find_by_id(c['id'])
-        c.merge!(champ)
-      end
-      champions
     end
 
   end

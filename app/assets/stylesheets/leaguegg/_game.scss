@@ -98,16 +98,22 @@
           height: 45px;
           font-weight: 500;
           word-wrap: break-word;
+          text-decoration: underline;
         }
         .champion-icon {
-          // height: 75px;
           img {
-            width: 72px;
-            height: 72px;
+            width: 75px;
+            height: 73px;
+          }
+          .champion-name {
+            a {
+              font-size: 0.8em;
+              font-weight: 600;
+              text-decoration: underline;
+            }
           }
         }
         .skills {
-          // height: 40px;
           img {
             margin: 3px 1px;
             width: 35px;
@@ -141,16 +147,6 @@
         }
       }
       .stats {
-        .champion-name {
-          padding-top: 5px;
-          font-weight: 500;
-          // color: $purple;
-          // border-bottom: 1px solid $gray;
-        }
-        .performance {
-          font-size: 0.8em;
-          padding: 0px 4px;
-        }
         .wl {
           height: 83px;
           padding: 5px 0px;
@@ -187,8 +183,7 @@
         border: 2px solid $blue_team;
       }
     }
-    .champion-name,
-    .performance {
+    .champion-name > a {
       color: $blue_team;
     }
   }
@@ -201,8 +196,7 @@
         border: 2px solid $red_team;
       }
     }
-    .champion-name,
-    .performance {
+    .champion-name > a {
       color: $red_team;
     }
   }

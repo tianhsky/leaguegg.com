@@ -27,22 +27,13 @@
       </div>
       <div class="champion-icon">
         <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
+        <div class="champion-name">
+          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">{{p.champion.name | characters:10}}</a>
+        </div>
       </div>
       <div class="skills">
         <img ng-src="{{p.spell1.img}}" err-src="/static/img/leaguegg-icon.png">
         <img ng-src="{{p.spell2.img}}" err-src="/static/img/leaguegg-icon.png">
-      </div>
-      <div class="stats-links">
-        <div>
-          <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">
-            <i class="fa fa-bar-chart"></i> Summoner
-          </a>
-        </div>
-        <div>
-          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">
-            <i class="fa fa-line-chart"></i> Champion
-          </a>
-        </div>
       </div>
       <div class="tier">
         {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
@@ -70,13 +61,6 @@
     </div>
     <div class="hr b2 hidden-sm hidden-xs"></div>
     <div class="stats">
-      <div class="champion-name">
-        {{p.champion.name | oneline}}
-      </div>
-      <div class="performance">
-        Performance
-        <div class="hr b1 hidden-sm hidden-xs"></div>
-      </div>
       <div class="wl season">
         <div class="item-labels">
           <span class="item-label">{{season}}</span>

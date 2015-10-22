@@ -36,7 +36,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
         $http.get(url)
           .then(function(resp) {
             var summoner = resp.data;
-            self.generateMetaDescription(summoner);
+            // self.generateMetaDescription(summoner);
             _data.result.summoner = summoner;
             resolve(summoner);
           }, function(err) {

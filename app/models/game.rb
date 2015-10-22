@@ -1,7 +1,6 @@
 class Game
   include Mongoid::Document
   include TimeTrackable
-  include GameService
 
   # Fields
   field :fetch_time_length, type: Integer

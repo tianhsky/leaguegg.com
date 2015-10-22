@@ -5,5 +5,6 @@ class ApplicationController < ActionController::Base
 
   include BotDetector
   include ServerVersionStamp
+  include ErrorRescuers
 
 end

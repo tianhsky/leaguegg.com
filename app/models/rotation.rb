@@ -1,7 +1,6 @@
 class Rotation
   include Mongoid::Document
   include TimeTrackable
-  include ChampionService
 
   # Fields
   field :champions, type: Array

@@ -1,26 +1,6 @@
 # Services related to current game, fetch live game status from riot or cache
 module GameService
 
-  module Riot
-
-    def self.find_game_by_summoner_id(summoner_id, region)
-      Rails.logger.tagged('GAME'){Rails.logger.info("Find by summoner id")}
-      platform_id = Consts::Platform.find_by_region(region)['platform']
-      url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/#{platform_id}/#{summoner_id}"
-      begin
-        resp = RiotAPI.get(url, region)
-      rescue Errors::NotFoundError => ex
-        raise Errors::GameNotFoundError.new
-      end
-    end
-
-    def self.find_current_featured_game(region)
-      url = "https://#{region.downcase}.api.pvp.net/observer-mode/rest/featured"
-      resp = RiotAPI.get(url, region)
-    end
-
-  end
-
   module Service
 
     def self.find_current_featured_games(region)
@@ -36,7 +16,7 @@ module GameService
 
     def self.find_game_by_summoner_name(summoner_name, region)
       raise Errors::SummonerNotFoundError.new if summoner_name.blank? || region.blank?
-      summoner = Summoner::Service.find_summoner_by_summoner_name(summoner_name, region)
+      summoner = SummonerService::Service.find_summoner_by_summoner_name(summoner_name, region)
       find_game_by_summoner_id(summoner.summoner_id, region)
     end
 
@@ -179,7 +159,7 @@ module GameService
           workers << Thread.new do
             begin
               # summoner season stats
-              summoner_stat = SummonerStat::Service.find_summoner_season_stats(summoner_id, region)
+              summoner_stat = SummonerStatService::Service.find_summoner_season_stats(summoner_id, region)
             rescue
               # that means this summoner has not played ranked games
             end
@@ -287,36 +267,6 @@ module GameService
         self.find_game_by_summoner_name(summoner_name, region)
       end
     end
-
-  end
-
-  module Factory
-
-    def self.build_game_hash(game, region)
-      region.upcase!
-      teams = game['participants'].group_by{|x|x['team_id']}
-      r = Utils::JsonParser.clone_to([
-        'game_id', 'map_id', 'game_mode', 'game_type', 'game_queue_config_id',
-        'platform_id', 'game_length'
-      ],game,{})
-      r['region'] = region
-      r['observer_encryption_key'] = game['observers'] ? game['observers']['encryption_key'] : nil,
-      r['started_at'] = game['game_start_time']
-      r['teams'] = teams.map{|k,v|build_team_hash(k,v,(game['banned_champions']||[]).select{|x|x['team_id']==k})}
-      r
-    end
-
-    def self.build_team_hash(team_id, participants, bans)
-      bans.each{|b|b.delete('team_id')}
-      participants.each{|p|p.delete('team_id')}
-
-      {
-        'team_id' => team_id,
-        'banned_champions' => bans,
-        'participants' => participants
-      }
-    end
-
 
   end
 

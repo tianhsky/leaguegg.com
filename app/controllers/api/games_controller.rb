@@ -9,7 +9,7 @@ module Api
 
     def find_game
       # return @game = Game.last # todo remove
-      @game = Game::Service.find_game_by_summoner_name(summoner_name, region)
+      @game = GameService::Service.find_game_by_summoner_name(summoner_name, region)
     end
 
     def summoner_id

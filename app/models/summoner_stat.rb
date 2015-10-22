@@ -2,7 +2,6 @@
 class SummonerStat
   include Mongoid::Document
   include TimeTrackable
-  include SummonerStatService
 
   # Fields
   field :season, type: String
@@ -41,8 +40,8 @@ class SummonerStat
   def sync_from_riot!
     # player_stats_json = Riot.find_summoner_player_stats(summoner_id, region, season)
     player_stats_json = nil
-    ranked_stats_json = Riot.find_summoner_ranked_stats(summoner_id, region, season)
-    season_stats_hash = Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
+    ranked_stats_json = SummonerStatService::Riot.find_summoner_ranked_stats(summoner_id, region, season)
+    season_stats_hash = SummonerStatService::Factory.build_season_stat_hash(ranked_stats_json, player_stats_json, summoner_id, season, region)
     self.update_attributes(season_stats_hash)
   end
 
