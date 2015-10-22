@@ -18,7 +18,9 @@ module SummonerService
       unless summoner
         summoner_json = Riot.find_summoner_by_summoner_name(summoner_name, region)
         summoner_hash = Factory.build_summoner_hash(summoner_json, region)
-        summoner = Summoner.new(summoner_hash)
+        summoner = Summoner.where({id: summoner_hash['summoner_id'], region: region.upcase}).first
+        summoner ||= Summoner.new
+        summoner.assign_attributes(summoner_hash)
         summoner.save
       end
       summoner
