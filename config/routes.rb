@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get 'app' => 'apps#show', as: :mobile
   get 'rotation' => 'rotations#show', as: :rotation
   get 'game/*region/*summoner_name' => 'games#show', as: :game_search
-  get 'summoner/*region/*summoner_name' => 'summoners#show', as: :summoner_search
-  get 'summoner/*region/*summoner_name/champion/*champion_name' => 'summoners/champions#show', as: :summoner_champion_search
+  get 'summoner/*region/*summoner_id_or_name' => 'summoners#show', as: :summoner_search
+  get 'summoner/*region/*summoner_id_or_name/champion/*champion_id' => 'summoners/champions#show', as: :summoner_champion_search
 
   root :to => 'home#show'
 

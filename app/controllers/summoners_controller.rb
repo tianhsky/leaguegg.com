@@ -11,10 +11,10 @@ class SummonersController < BaseController
   protected
 
   def find_summoner
-    if summoner_name.present?
-      @summoner = SummonerService::Service.find_summoner_by_summoner_name(summoner_name, region)
-    elsif summoner_id.present?
+    if summoner_id.present?
       @summoner = SummonerService::Service.find_summoner_by_summoner_id(summoner_id, region)
+    elsif summoner_name.present?
+      @summoner = SummonerService::Service.find_summoner_by_summoner_name(summoner_name, region)
     end
 
     if @summoner && reload?
@@ -25,11 +25,27 @@ class SummonersController < BaseController
   end
 
   def summoner_id
-    params['summoner_id']
+    tokens = summoner_id_or_name.split('-')
+    if tokens.length == 2
+      return tokens[0]
+    end
+    nil
   end
 
   def summoner_name
-    params['summoner_name']
+    tokens = summoner_id_or_name.split('-')
+    if tokens.length == 1
+      return tokens[0]
+    else
+      if tokens.length == 2
+        return tokens[1]
+      end
+    end
+    nil
+  end
+
+  def summoner_id_or_name
+    params['summoner_id_or_name']
   end
 
   def region

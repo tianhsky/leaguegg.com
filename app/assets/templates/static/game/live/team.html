@@ -23,12 +23,12 @@
   <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
-        <a href="/summoner/{{region}}/{{p.summoner.name}}" target="_blank">{{p.summoner.name | characters:16}}</a>
+        <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}" target="_blank">{{p.summoner.name | characters:16}}</a>
       </div>
       <div class="champion-icon">
         <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
         <div class="champion-name">
-          <a href="/summoner/{{region}}/{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">{{p.champion.name | characters:10}}</a>
+          <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank">{{p.champion.name | characters:10}}</a>
         </div>
       </div>
       <div class="skills">

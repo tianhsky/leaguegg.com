@@ -3,7 +3,7 @@ module SummonerService
   module Service
 
     def self.find_summoner_by_summoner_id(summoner_id, region)
-      summoner = Summoner.where({id: summoner_id, region: region.upcase}).first
+      summoner = Summoner.where({summoner_id: summoner_id, region: region.upcase}).first
       unless summoner
         summoner_json = Riot.find_summoner_by_summoner_ids([summoner_id], region).values.first
         summoner_hash = Factory.build_summoner_hash(summoner_json, region)
@@ -18,7 +18,7 @@ module SummonerService
       result = []
 
       # find from db first
-      summoners = Summoner.where({:id.in => summoner_ids, :region => region.upcase})
+      summoners = Summoner.where({:summoner_id.in => summoner_ids, :region => region.upcase})
       result = summoners.to_a
       
       # fetch missing ones
@@ -42,7 +42,7 @@ module SummonerService
       unless summoner
         summoner_json = Riot.find_summoner_by_summoner_names([summoner_name], region).values.first
         summoner_hash = Factory.build_summoner_hash(summoner_json, region)
-        summoner = Summoner.where({id: summoner_hash['summoner_id'], region: region.upcase}).first
+        summoner = Summoner.where({summoner_id: summoner_hash['summoner_id'], region: region.upcase}).first
         summoner ||= Summoner.new
         summoner.assign_attributes(summoner_hash)
         summoner.save

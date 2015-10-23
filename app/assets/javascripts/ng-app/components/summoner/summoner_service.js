@@ -28,7 +28,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
       _data.query.summoner = summoner_name;
       _data.result.season_stats = null;
       Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name + '@' + region, 1);
-      var url = '/api/summoner.json?summoner_name=' + summoner_name + '&region=' + region;
+      var url = '/api/summoner.json?summoner_id_or_name=' + summoner_name + '&region=' + region;
       if (reload_if_outdated) {
         url += '&reload=1';
       }

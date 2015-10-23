@@ -7,7 +7,7 @@ sitemap :site do
 end
 
 sitemap_for Summoner, name: :summoners do |summoner|
-  url summoner_search_url(summoner.region, summoner.name), last_mod: Time.now #last_mod: summoner.updated_at_time #, priority: 0.5
+  url summoner_search_url(summoner.region, "#{summoner.summoner_id}-#{summoner.name}"), last_mod: Time.now #last_mod: summoner.updated_at_time #, priority: 0.5
 end
 
 ping_with "http://#{host}/pub_sitemaps/index.xml"
