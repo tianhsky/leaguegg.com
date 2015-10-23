@@ -10,7 +10,7 @@
     </p>
   </div>
   <div class="update-option" ng-if="stats.outdated">
-    <button ng-disabled="summonerStatsLoading.active" ng-click="updateStats({reload_if_outdated:true})" class="btn btn-sm btn-info pull-right">
+    <button ng-disabled="summonerStatsLoading.active" ng-click="updateClicked()" class="btn btn-sm btn-info pull-right">
       <span ng-if="stats.updated_at">
         Updated {{stats.updated_at | time_from_now:'unix'}}
       </span>

@@ -1,8 +1,8 @@
 angular.module('leaguegg.summoner').controller('SummonerCtrl', [
   '$scope', '$stateParams', '$filter', 'LayoutService',
-  'SummonerService', 'ConstsService', 'MetaService',
+  'SummonerService', 'ConstsService', 'MetaService', 'Analytics',
   function($scope, $stateParams, $filter, LayoutService,
-    SummonerService, ConstsService, MetaService) {
+    SummonerService, ConstsService, MetaService, Analytics) {
     LayoutService.setFatHeader(false);
     MetaService.setTitle($stateParams.summoner + ' · ' + $stateParams.region);
 
@@ -28,7 +28,12 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
       }
     }
 
-    $scope.updateStats = function(reload_if_outdated) {
+    $scope.updateClicked = function(){
+      updateStats(true);
+      Analytics.trackEvent('Summoner', 'UpdateInfo', $stateParams.summoner + '@' + $stateParams.region, 1);
+    }
+
+    var updateStats = function(reload_if_outdated) {
       $scope.data.loading.summoner.active = false;
       $scope.data.loading.summoner_stats.active = true;
 
@@ -54,7 +59,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
 
     }
 
-    $scope.updateStats(false);
+    updateStats(false);
 
 
     $scope.$on('$destroy', function() {

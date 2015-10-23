@@ -5,7 +5,7 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampions', functio
     scope: {
       'stats': '=',
       'season': '=',
-      'updateStats': '&',
+      'updateClicked': '&',
       'summonerStatsLoading': '='
     },
     controller: ['$scope', '$location', 'SummonerService',
