@@ -47,6 +47,7 @@ angular.module('leaguegg').config([
 angular.module('leaguegg').run([
   '$urijs', '$alexa', '$rootScope', 'Analytics',
   function($urijs, $alexa, $rootScope, Analytics) {
+    Chart.defaults.global.colours = ["#46BFBD", "#F7464A", "#DCDCDC", "#949FB1", "#FDB45C", "#97BBCD", "#4D5360"];
     $rootScope.$on("$locationChangeSuccess", function(event, next, current) {
       // path
       var uri = $urijs(next);
