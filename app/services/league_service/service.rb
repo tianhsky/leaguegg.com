@@ -35,7 +35,7 @@ module LeagueService
     end
 
     def self.find_league_entry_by_summoner_id(summoner_id, region)
-      json = Riot.find_league_entries_by_summoner_id(summoner_id, region)
+      json = Riot.find_league_entries_by_summoner_ids([summoner_id], region).values.first
       entries_to_summoner_entry(summoner_id, region, json)
     end
 

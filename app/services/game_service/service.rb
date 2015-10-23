@@ -49,7 +49,8 @@ module GameService
           store_game_attrs_to_cache(game_id, nil, summoner_ids, region)
 
           # find or new summoners
-          summoners = SummonerService::Service.find_or_new_summoners(summoners_hash, region)
+          # summoners = SummonerService::Service.find_or_new_summoners(summoners_hash, region)
+          summoners = SummonerService::Service.find_summoner_by_summoner_ids(summoner_ids, region, false)
 
           # add summoners to game
           store_summoners_info_to_game(summoners, game, region)
@@ -60,11 +61,11 @@ module GameService
           # save game
           Thread.new do
             # begin
-              store_game_to_cache(game, region)
+            store_game_to_cache(game, region)
 
-              game.fetch_time_length = (Time.now - start_time).to_i
-              Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
-              game.save
+            game.fetch_time_length = (Time.now - start_time).to_i
+            Rails.logger.tagged('GAME'){Rails.logger.info("Fetch took #{game.fetch_time_length} seconds")}
+            game.save
             # rescue
             # end
           end
@@ -97,7 +98,7 @@ module GameService
       end
 
       raise Errors::GameNotFoundError.new if game.blank?
-      
+
       game
     end
 
@@ -150,6 +151,10 @@ module GameService
 
     def self.store_summoners_info_to_game(summoners, game, region)
       workers = []
+
+      summoner_ids = summoners.map{|x|x.summoner_id}
+      league_entries = LeagueService::Riot.find_league_entries_by_summoner_ids(summoner_ids, region)
+
       game.teams.each do |team|
         team.participants.each do |participant|
           summoner_id = participant.summoner_id
@@ -224,20 +229,18 @@ module GameService
 
           workers << Thread.new do
             begin
-              league_entries = LeagueService::Riot.find_league_entries_by_summoner_id(summoner_id, region)
-              summoner.league_entries = league_entries
+              summoner_league_entries = league_entries[summoner_id.to_s]
               # summoner.touch_synced_at
-
-              league = LeagueService::Service.entries_to_summoner_entry(summoner_id, region, league_entries)
-              league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
-              league_entry['tier'] = league['tier']
-              participant.league_entry = league_entry
+              league = LeagueService::Service.entries_to_summoner_entry(summoner_id, region, summoner_league_entries)
+              summoner_league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
+              summoner_league_entry['tier'] = league['tier']
+              participant.league_entry = summoner_league_entry
             rescue
               begin
                 Airbrake.notify_or_ignore(ex,
                 parameters: {
                   'action' => 'Generate league entry',
-                  'league' => league_entries.try(:as_json)
+                  'summoner_id' => summoner_id
                 })
               rescue
               end
@@ -245,6 +248,7 @@ module GameService
           end
         end
       end
+
       workers.map(&:join)
     end
 

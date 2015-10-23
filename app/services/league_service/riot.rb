@@ -12,11 +12,12 @@ module LeagueService
       end
     end
 
-    def self.find_league_entries_by_summoner_id(summoner_id, region)
+    def self.find_league_entries_by_summoner_ids(summoner_ids, region)
+      summoner_ids_str = summoner_ids.join(',')
       region = region.downcase
-      url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.5/league/by-summoner/#{summoner_id}/entry"
+      url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.5/league/by-summoner/#{summoner_ids_str}/entry"
       begin
-        resp = RiotAPI.get(url, region).values.first
+        resp = RiotAPI.get(url, region)
       rescue Errors::NotFoundError => ex
         raise Errors::LeagueNotFoundError.new
       end

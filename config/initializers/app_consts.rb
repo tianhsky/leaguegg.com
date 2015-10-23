@@ -1,8 +1,8 @@
 module AppConsts
   puts 'Setting up profile'
   SITE_TITLE = 'LeagueGG · League of Legends Search and Stats'
-  SITE_DESCRIPTION = 'LeagueGG · Find out how well your opponents farm, which roles they main, and how aggressive they play'
-  SITE_KEYWORDS = ['leaguegg', 'league gg', 'lol gg', 'gg', 'league of legends live', 'lol live game', 'lol stats']
+  SITE_DESCRIPTION = 'League GG · Find out how well your opponents farm, which roles they main, and how aggressive they play'
+  SITE_KEYWORDS = ['leaguegg', 'league gg', 'lol gg', 'gg', 'good game', 'league of legends live', 'lol live game', 'lol stats']
 
   puts 'Setting up preferences'
   GAME_EXPIRES_THRESHOLD = 4.minutes

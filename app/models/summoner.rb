@@ -44,13 +44,13 @@ class Summoner
 
   def sync_from_riot!
     # basic info
-    profile_json = SummonerService::Riot.find_summoner_by_summoner_id(summoner_id, region)
+    profile_json = SummonerService::Riot.find_summoner_by_summoner_ids([summoner_id], region).values.first
     profile_hash = SummonerService::Factory.build_summoner_hash(profile_json, region)
     self.assign_attributes(profile_hash)
 
     # league entries
     begin
-      league_entries = LeagueService::Riot.find_league_entries_by_summoner_id(summoner_id, region)
+      league_entries = LeagueService::Riot.find_league_entries_by_summoner_ids([summoner_id], region).values.first
       self.league_entries = league_entries
     rescue
     end
