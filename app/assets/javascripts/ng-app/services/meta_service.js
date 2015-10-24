@@ -16,7 +16,7 @@ angular.module('utils').service('MetaService', [
       var dom = $('title');
       var text = TITLE;
       if (title) {
-        text = title + ' | ' + TITLE
+        text = title;
       }
       dom.text(text);
     }
@@ -25,7 +25,7 @@ angular.module('utils').service('MetaService', [
       var dom = $('meta[name=description]');
       var text = DESCRIPTION;
       if (description) {
-        text = description + ' | ' + text;
+        text = description;
       }
       dom.attr('content', text);
     }

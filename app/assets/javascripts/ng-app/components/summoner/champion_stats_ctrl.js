@@ -4,8 +4,7 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
   function($scope, $stateParams, $filter, _, LayoutService,
     SummonerService, ConstsService, MetaService) {
     LayoutService.setFatHeader(false);
-    MetaService.setTitle($stateParams.summoner + ' · ' + $stateParams.region);
-
+    MetaService.setTitle($stateParams.summoner + ' - ' + $stateParams.region + ' - Summoners - League of Legends');
     $scope.data = {
       summoner: null,
       summoner_stats: null,
@@ -35,8 +34,8 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
     SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner)
       .then(function(data) {
         $scope.data.summoner = data;
-        MetaService.setTitle(data.name + ' · ' + data.region);
-        MetaService.setDescription("League of Legends Season Stats for " + data.name + ' at ' + data.region);
+        MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
+        MetaService.setDescription(data.meta_description);
 
         SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
           .then(function(stats) {

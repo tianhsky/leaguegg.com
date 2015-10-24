@@ -4,14 +4,14 @@ angular.module('leaguegg.champion').controller('RotationCtrl', [
   function($scope, $rootScope, $interval, RotationService,
     LayoutService, MetaService) {
     LayoutService.setFatHeader(true);
-    MetaService.setTitle('Free Champions for the Week');
+    MetaService.setTitle('Free Champions - League of Legends');
 
     $scope.champions = null;
     var interval = null;
 
     var setDescription = function() {
       var names = RotationService.getChampionNames($scope.champions);
-      var desc = 'Weekly free champions: ' + names.join(',');
+      var desc = 'Free champions of the week: ' + names.join(', ');
       MetaService.setDescription(desc);
     }
 
