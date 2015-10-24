@@ -11,18 +11,18 @@
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-</head>
-<body>
   <script type="text/javascript">
     <%= render 'shared/js/ga.js' %>
     <%= render 'shared/js/consts.js' %>
     <%= render 'shared/js/server_version.js' %>
     <%= render 'shared/js/api_key.js' %>
+    <%= render 'shared/js/double_click.js' %>
   </script>
   <%= render 'shared/sitelink' %>
+</head>
+<body>
   <%= render 'shared/error_browser' %>
   <%= render 'shared/alexa_error_browser' %>
-  
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
   <% end %>
