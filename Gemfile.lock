@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/LivingLogic/dynamic_sitemaps_with_mongoid
+  remote: https://github.com/tianhsky/dynamic_sitemaps_with_mongoid
   revision: 7eb4df8134866bf19fc8056e67f2a328a6b257ed
   specs:
     dynamic_sitemaps (2.0.0)
@@ -54,6 +54,8 @@ GEM
     bower-rails (0.9.2)
     bson (3.2.4)
     builder (3.2.2)
+    canonical-rails (0.0.11)
+      rails (>= 3.1, < 5.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -259,6 +261,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bower-rails (~> 0.9.2)
+  canonical-rails
   capistrano (~> 3.4.0)
   capistrano-rails (~> 1.1)
   capistrano-rbenv (~> 2.0.3)

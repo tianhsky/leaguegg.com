@@ -16,4 +16,9 @@ module ApplicationHelper
     end
   end
 
+  def canonical_link(path)
+    url = "#{CanonicalRails.protocol}#{CanonicalRails.host}#{path}"
+    raw "<link href='#{url}' rel='canonical' />"
+  end
+
 end

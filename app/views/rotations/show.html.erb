@@ -1,5 +1,5 @@
-<% content_for :title do %>Free Champions for the Week<% end %>
-<% content_for :description do %>Weekly free champions:<%=@rotation.map{|c|c['name']}.join(',')%><% end %>
+<% content_for :title do %>Free Champions - League of Legends <% end %>
+<% content_for :description do %>Free champions of the week: <%=@rotation.map{|c|c['name']}.join(', ')%><% end %>
 
 <div class="free-champions">
   <% if !@rotation.blank? %>

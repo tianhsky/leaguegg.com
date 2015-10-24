@@ -57,8 +57,9 @@ gem 'logstash-logger'
 gem 'newrelic_rpm'
 # Pagination
 gem 'kaminari'
-# Sitemap
-gem 'dynamic_sitemaps', :git => 'https://github.com/LivingLogic/dynamic_sitemaps_with_mongoid'
+# SEO Sitemap
+gem 'dynamic_sitemaps', :git => 'https://github.com/tianhsky/dynamic_sitemaps_with_mongoid'
+gem 'canonical-rails'
 
 group :development do
   # Debug tools

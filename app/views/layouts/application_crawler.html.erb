@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? yield(:title)+ ' | '+AppConsts::SITE_TITLE : AppConsts::SITE_TITLE %></title>
+  <title><%= content_for?(:title) ? yield(:title) : AppConsts::SITE_TITLE %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : AppConsts::SITE_DESCRIPTION %>"></meta>
   <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) : AppConsts::SITE_KEYWORDS.join(',') %>"></meta>
+  <% if content_for?(:canonical) %>
+    <%= yield(:canonical) %>
+  <% else %>
+    <%= canonical_tag -%>
+  <% end %>
 </head>
 <body>
   <script type="text/javascript">

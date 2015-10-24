@@ -1,5 +1,12 @@
-<% content_for :title do %><%=@summoner.name%> - <%= @summoner.region_name %> - Summoners<% end %>
-<% content_for :description do %><%= SummonerService::SEO.meta_description(@summoner) %><% end %>
+<% content_for(:canonical) do
+  canonical_link(summoner_search_path(@summoner.region, "#{@summoner.summoner_id}-#{@summoner.name}"))
+end %>
+<% content_for :title do
+  "#{@summoner.name} - #{@summoner.region_name} - Summoners - League of Legends"
+end %>
+<% content_for :description do
+  SummonerService::SEO.meta_description(@summoner)
+end %>
 
 <h1><%= @summoner.name %></h1>
 <h2><%= @summoner.region_name %></h2>
