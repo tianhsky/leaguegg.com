@@ -74,25 +74,6 @@
           color: $color_label;
         }
       }
-      .badge-item {
-        .badge {
-          cursor: pointer;
-          margin-top: 3px;
-          min-width: 90px;
-          &.hot {
-            background: #A75151;
-          }
-          &.veteran {
-            background: #8A9939;
-          }
-          &.fresh {
-            background: #46A47D;
-          }
-          &.role {
-            background: #004E6D;
-          }
-        }
-      }
       .intro {
         .summoner-name {
           height: 45px;
@@ -148,11 +129,11 @@
       }
       .stats {
         .wl {
-          height: 83px;
+          height: 70px;
           padding: 5px 0px;
         }
         .kda {
-          height: 83px;
+          height: 70px;
           padding: 5px 0px;
         }
         .cs {
@@ -170,6 +151,28 @@
         .aggresive {
           min-height: 40px;
           padding: 5px 0px;
+        }
+        .badges {
+          padding: 5px 0px;
+          .badge-item {
+            .badge {
+              cursor: pointer;
+              margin-top: 3px;
+              min-width: 90px;
+              &.hot {
+                background: #A75151;
+              }
+              &.veteran {
+                background: #8A9939;
+              }
+              &.fresh {
+                background: #46A47D;
+              }
+              &.role {
+                background: #004E6D;
+              }
+            }
+          }
         }
       }
     }

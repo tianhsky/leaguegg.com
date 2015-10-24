@@ -63,25 +63,19 @@
     <div class="stats">
       <div class="wl season">
         <div class="item-labels">
-          <span class="item-label">{{season}}</span>
-          <br>
-          <span class="item-label">Champion W/L</span>
+          <span class="item-label" data-tooltip="{{p.summoner.name}}'s win% on {{p.champion.name}} for current season">Season W/L</span>
         </div>
         <wl w="p.ranked_stat_overall.won" l="p.ranked_stat_overall.lost" rate="p.ranked_stat_overall.win_rate" />
       </div>
       <div class="kda season">
         <div class="item-labels">
-          <span class="item-label">{{season}}</span>
-          <br>
-          <span class="item-label">Champion KDA</span>
+          <span class="item-label" data-tooltip="{{p.summoner.name}}'s KDA on {{p.champion.name}} for current season">Season KDA</span>
         </div>
         <kda k="p.ranked_stat_overall.avg_kills" d="p.ranked_stat_overall.avg_deaths" a="p.ranked_stat_overall.avg_assists" rate="p.ranked_stat_overall.kda_rate" />
       </div>
       <div class="kda recent">
         <div class="item-labels">
-          <span class="item-label">Recent Match</span>
-          <br>
-          <span class="item-label">Champion KDA</span>
+          <span class="item-label" data-tooltip="{{p.summoner.name}}'s Recent KDA on {{p.champion.name}}">Recent KDA</span>
         </div>
         <kda k="p.ranked_stat_recent.avg_kills" d="p.ranked_stat_recent.avg_deaths" a="p.ranked_stat_recent.avg_assists" rate="p.ranked_stat_recent.kda_rate" />
       </div>
