@@ -4,7 +4,7 @@ app_path = File.expand_path("../../", Dir.pwd)
 environment env
 daemonize false
 workers 3
-threads 0, 20
+threads 0, 50
 prune_bundler
 
 bind  "unix://#{app_path}/shared/tmp/sockets/puma.sock"
