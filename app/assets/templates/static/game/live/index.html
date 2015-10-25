@@ -11,7 +11,7 @@
       </a>
     </div>
   </div>
-  <div class="fade-in-anim" ng-if="!error && game">
+  <div class="fade-in-anim row" ng-if="!error && game">
     <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
   </div>
   <div class="ads">
