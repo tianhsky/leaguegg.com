@@ -69,7 +69,7 @@ angular.module('angular-send-feedback').directive('angularFeedback', [ function(
                         var _html2canvas = false;
                         if (supportedBrowser) {
                             if(isFeedbackButtonNative) {
-                                $('body').append('<button class="feedback-btn btn btn-xs btn-info"><i class="fa fa-comment"></i> ' + settings.initButtonText + '</button>');
+                                $('body').append('<button class="feedback-btn btn btn-xs btn-warning"><i class="fa fa-comment"></i> ' + settings.initButtonText + '</button>');
                             }
                             $(document).on('click', settings.feedbackButton, function(){
                                 if(isFeedbackButtonNative) {

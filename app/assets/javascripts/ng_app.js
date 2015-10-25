@@ -8,6 +8,7 @@
 //= require angular-chart
 //= require angular-send-feedback/dist/angular-send-feedback.js
 //= require angular-google-analytics
+//= require angularjs-socialshare
 //= require ngInflection
 
 // angular app

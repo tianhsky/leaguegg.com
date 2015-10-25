@@ -8,7 +8,7 @@ angular.module('utils', [
   'templates', 'ui.router', 'ui.bootstrap',
   'truncate', 'ngAnimate', 'ngInflection',
   'angular-google-analytics', 'chart.js',
-  'angular-send-feedback'
+  'angular-send-feedback', '720kb.socialshare'
 ]);
 
 angular.module('leaguegg.consts', []);

@@ -1,16 +1,16 @@
 .feedback-btn {
   position: fixed;
-  right: 20px;
+  right: 10px;
   bottom: -3px;
   width: auto;
   font-size: 14px;
 }
 
-@media(max-width: 668px) {
+/*@media(max-width: 668px) {
   .feedback-btn {
     display: none !important;
   }
-}
+}*/
 
 #feedback-module p {
   font-size: 13px;

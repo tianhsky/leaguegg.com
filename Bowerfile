@@ -19,12 +19,14 @@ group :vendor do
   asset 'angular-ui-router-anim-in-out', 'latest'
   asset 'angular-google-analytics', '1.1.1'
   asset 'angular-chart', '0.8.4', github: 'jtblin/angular-chart.js'
-  asset 'angular-send-feedback', 'latest'
+  asset 'angular-send-feedback', '1.0.2'
+  asset 'angularjs-socialshare', '0.1.14'
   asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'
   asset 'md5', 'latest'
   asset 'urijs', 'latest'
   asset 'html2canvas', 'latest'
+  asset 'share-button', '1.0.2'
 
   resolution "angular", "1.4.7"
   resolution "angular-animate", "1.4.7"

@@ -18,13 +18,14 @@
     "angular-ui-router-anim-in-out": "latest",
     "angular-google-analytics": "1.1.1",
     "angular-chart": "git://github.com/jtblin/angular-chart.js#0.8.4",
-    "angular-send-feedback": "latest",
-    "ng-feedback": "latest",
+    "angular-send-feedback": "1.0.2",
+    "angularjs-socialshare": "0.1.14",
     "ngInflection": "latest",
     "airbrake-js-client": "0.5.3",
     "md5": "latest",
     "urijs": "latest",
-    "html2canvas": "latest"
+    "html2canvas": "latest",
+    "share-button": "1.0.2"
   },
   "resolutions": {
     "angular": "1.4.7",

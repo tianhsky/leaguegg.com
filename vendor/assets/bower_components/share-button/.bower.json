@@ -1,0 +1,27 @@
+{
+  "name": "share-button",
+  "homepage": "http://sharebutton.co",
+  "authors": [
+    "Jeff Escalante <hello@jenius.me>"
+  ],
+  "description": "fast, beautiful, and painless social shares.",
+  "main": "build/share.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "share",
+    "social"
+  ],
+  "license": "MIT",
+  "version": "1.0.2",
+  "_release": "1.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.2",
+    "commit": "4eec0a22f2d1a33f2581695c2ba82edd5086732d"
+  },
+  "_source": "git://github.com/carrot/share-button.git",
+  "_target": "1.0.2",
+  "_originalSource": "share-button"
+}

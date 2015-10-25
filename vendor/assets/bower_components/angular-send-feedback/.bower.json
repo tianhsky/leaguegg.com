@@ -1,7 +1,7 @@
 {
   "name": "angular-send-feedback",
   "version": "1.0.2",
-  "main": "./dist/angular-send-feedback.js",
+  "main": "./dist/angular-send-feedback.min.js",
   "description": "Angular feedback directive similar to Google Feedback",
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
     "commit": "29020c07c41c9c1e0b4dd6ccd462a2c080f172f4"
   },
   "_source": "git://github.com/jacobscarter/angular-feedback.git",
-  "_target": "*",
+  "_target": "1.0.2",
   "_originalSource": "angular-send-feedback"
 }
