@@ -1,9 +1,15 @@
 .feedback-btn {
   position: fixed;
-  right: 60px;
+  right: 20px;
   bottom: -3px;
   width: auto;
   font-size: 14px;
+}
+
+@media(max-width: 668px) {
+  .feedback-btn {
+    display: none !important;
+  }
 }
 
 #feedback-module p {
@@ -46,7 +52,7 @@
   font-size: 16px;
   font-weight: normal;
   line-height: 32px;
-  background: url(icons.png) 0px 0px no-repeat;
+  background: url(/static/img/feedback-icons.png) 0px 0px no-repeat;
 }
 
 .feedback-next-btn {
@@ -100,7 +106,7 @@
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: url(icons.png) 0px -64px;
+  background: url(/static/img/feedback-icons.png) 0px -64px;
 }
 
 .feedback-wizard-close {
@@ -110,7 +116,7 @@
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: url(icons.png) 0px -34px;
+  background: url(/static/img/feedback-icons.png) 0px -34px;
   opacity: 0.65;
 }
 
@@ -138,15 +144,14 @@
   bottom: 100px;
   display: none;
   width: 540px;
-  height: 275px;
 }
 
 #feedback-overview {
   position: fixed;
   top: 10%;
-  left: 50%;
+  left: 65%;
   display: none;
-  width: 840px!important;
+  /*width: 840px!important;*/
   height: auto;
   margin-left: -420px;
 }
@@ -164,11 +169,11 @@
 
 .feedback-btn {
   z-index: 40000;
-  padding: 10px;
+  /*padding: 10px;*/
   outline: 0;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   background-clip: padding-box;
 }
 
@@ -225,7 +230,7 @@
 #feedback-submit-success,
 #feedback-submit-error {
   z-index: 40000;
-  width: 540px;
+  width: 450px;
   padding: 30px 42px;
   font-family: Arial, sans-serif;
   background: #fff;
@@ -233,11 +238,11 @@
   outline: 0;
   -webkit-transform: translateZ();
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   background-clip: padding-box;
 }
 
@@ -265,12 +270,12 @@
   border: 1px solid #dcdcdc;
   border: 1px solid rgba(0, 0, 0, 0.1);
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
   outline: 0;
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .feedback-setblackout {
@@ -283,7 +288,7 @@
   width: 16px;
   height: 16px;
   margin-top: 7px;
-  background: url(icons.png) 0px -94px;
+  background: url(/static/img/feedback-icons.png) 0px -94px;
 }
 
 .feedback-setblackout div {
@@ -291,7 +296,7 @@
   width: 16px;
   height: 16px;
   margin-top: 7px;
-  background: url(icons.png) -16px -94px;
+  background: url(/static/img/feedback-icons.png) -16px -94px;
 }
 
 .feedback-sethighlight:hover,
@@ -305,8 +310,8 @@
   background-image: linear-gradient(top, #f8f8f8, #f1f1f1);
   border: 1px solid #c6c6c6;
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .feedback-active {
@@ -319,8 +324,8 @@
   background-image: linear-gradient(top, #eeeeee, #e0e0e0);
   border: 1px solid #ccc;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #feedback-highlighter label {
@@ -352,11 +357,11 @@
 }
 
 #feedback-overview-description {
-  float: left;
+  /*float: left;*/
 }
 
 #feedback-overview-note {
-  width: 314px;
+  width: 360px;
   height: 90px;
   padding: 4px;
   font-family: Arial, sans-serif;
@@ -364,11 +369,12 @@
 }
 
 #feedback-overview-screenshot {
-  float: right;
+  /*float: right;*/
 }
 
 .feedback-screenshot {
-  max-width: 396px;
+  width: 360px;
+  max-height: 160px;
   padding: 1px;
   border: 1px solid #adadad;
 }
@@ -379,7 +385,7 @@
   margin-left: 26px;
   font-size: 14px;
   color: #666;
-  background: url(icons.png) -30px -34px no-repeat;
+  background: url(/static/img/feedback-icons.png) -30px -34px no-repeat;
 }
 
 #feedback-browser-info,

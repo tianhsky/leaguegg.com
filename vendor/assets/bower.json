@@ -19,6 +19,7 @@
     "angular-google-analytics": "1.1.1",
     "angular-chart": "git://github.com/jtblin/angular-chart.js#0.8.4",
     "angular-send-feedback": "latest",
+    "ng-feedback": "latest",
     "ngInflection": "latest",
     "airbrake-js-client": "0.5.3",
     "md5": "latest",
