@@ -65,10 +65,13 @@ angular.module('leaguegg.game').service('LiveGameService', [
       var grouped = _.groupBy(masteries, function(m) {
         return m.category;
       });
+      var offenses = _.reduce(grouped['Offense'],function(memo,o){return memo+o.rank},0);
+      var defenses = _.reduce(grouped['Defense'],function(memo,o){return memo+o.rank},0);
+      var utilities = _.reduce(grouped['Utility'],function(memo,o){return memo+o.rank},0);
       var result = {
-        offense: grouped['Offense'] ? grouped['Offense'].length : 0,
-        defense: grouped['Defense'] ? grouped['Defense'].length : 0,
-        utility: grouped['Utility'] ? grouped['Utility'].length : 0
+        offense: offenses,
+        defense: defenses,
+        utility: utilities
       };
       return result;
     }
