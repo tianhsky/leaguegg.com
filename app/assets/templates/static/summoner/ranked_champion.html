@@ -2,7 +2,7 @@
   <div ng-if="data.error.summoner">
     {{data.error.summoner.data.error}}
   </div>
-  <div ng-if="!data.error.summoner && data.summoner">
+  <div ng-if="!data.error.summoner && data.summoner" class="row">
     <div class="summoner-profile col-md-4">
       <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
     </div>
@@ -22,9 +22,17 @@
         <hr>
         <div class="stats-breakdown">
           <summoner-ranked-champion-stats season="data.season" summoner="data.summoner" stats="data.champion_stats">
+          </summoner-ranked-champion-stats>
         </div>
-        </summoner-ranked-champion-stats>
       </div>
+    </div>
+  </div>
+  <div class="ads text-center">
+    <div class="ad wide">
+      <iframe src="http://yllix.com/banner_show.php?section=General&amp;pub=747545&amp;format=728x90&amp;ga=g" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe>
+    </div>
+    <div class="ad narrow">
+      <iframe src="http://yllix.com/banner_show.php?section=General&amp;pub=747545&amp;format=300x250&amp;ga=g" frameborder="0" scrolling="no" width="300" height="250" marginwidth="0" marginheight="0"></iframe>
     </div>
   </div>
 </div>

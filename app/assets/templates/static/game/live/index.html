@@ -2,11 +2,8 @@
   <loading status="loading.game">
   </loading>
   <div class="error" ng-if="error">
-    <div class="error-img janna">
-      <img src="/static/gif/janna-applogize.gif" />
-    </div>
     <div class="error-text">
-      {{ error }}
+      <h2>{{ error }}</h2>
     </div>
     <div class="error-champion" ng-if="error_summoner_not_in_game">
       <a href="/summoner/{{query.region}}/{{query.summoner}}">
@@ -18,6 +15,11 @@
     <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
   </div>
   <div class="ads">
-    
+    <div class="ad wide">
+      <iframe src="http://yllix.com/banner_show.php?section=General&amp;pub=747545&amp;format=728x90&amp;ga=g" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe>
+    </div>
+    <div class="ad narrow">
+      <iframe src="http://yllix.com/banner_show.php?section=General&amp;pub=747545&amp;format=300x250&amp;ga=g" frameborder="0" scrolling="no" width="300" height="250" marginwidth="0" marginheight="0"></iframe>
+    </div>
   </div>
 </div>
