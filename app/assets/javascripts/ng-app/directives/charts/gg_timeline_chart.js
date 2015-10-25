@@ -5,7 +5,8 @@ angular.module('leaguegg.partials').directive('ggTimelineChart', function() {
     scope: {
       'timeline': '=',
       'timelineDiff': '=',
-      'series': '='
+      'series': '=',
+      'title': '='
     },
     controller: ['$scope',
       function($scope) {

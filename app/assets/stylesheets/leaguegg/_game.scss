@@ -4,7 +4,7 @@
     font-size: 1em;
   }
   text-align: center;
-  .live-game-wrapper{
+  .live-game-wrapper {
     min-height: 150px;
   }
   .team {
@@ -118,8 +118,8 @@
         .rank-progress {
           min-height: 22px;
         }
-        .mas-runes{
-          .label{
+        .mas-runes {
+          .label {
             padding: 2px;
           }
         }
@@ -145,8 +145,25 @@
           padding: 5px 0px;
         }
         .cs {
+          position: relative;
           min-height: 40px;
           padding: 5px 0px;
+          .cs-chart {
+            display: none;
+            position: absolute;
+            top: 100%;
+            max-width: 230px;
+            background-color: #2E484A;
+            z-index: 10;
+            padding: 5px;
+            border-radius: 10px;
+          }
+          &:hover,
+          &:active {
+            .cs-chart {
+              display: block;
+            }
+          }
         }
         .jcs {
           min-height: 40px;
@@ -197,6 +214,9 @@
     .champion-name > a {
       color: $blue_team;
     }
+    .cs-chart{
+      left: 10%;
+    }
   }
   .red-team {
     .team-bar {
@@ -209,6 +229,9 @@
     }
     .champion-name > a {
       color: $red_team;
+    }
+    .cs-chart{
+      right: 10%;
     }
   }
   .error {

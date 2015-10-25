@@ -22,6 +22,9 @@ json.avg_cs_diff_at_10m rstat.avg_cs_diff_at_10m
 json.avg_per_min_dmg_taken_at_10m rstat.avg_per_min_dmg_taken_at_10m
 json.avg_per_min_dmg_taken_diff_at_10m rstat.avg_per_min_dmg_taken_diff_at_10m
 
+json.avg_timeline_cs rstat.avg_timeline_cs
+json.avg_timeline_csd rstat.avg_timeline_csd
+
 json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate
 json.kda_rate rstat.kda_rate

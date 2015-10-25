@@ -84,12 +84,17 @@
           <span class="item-label" data-tooltip="Average creep score at 10 minutes">CS</span> &nbsp;&nbsp;
           <span class="item-label" data-tooltip="Average creep score difference compare with opponent at 10 minutes">CSD</span>
         </div>
-        <span class="me">
-          {{p.ranked_stat_recent.avg_cs_at_10m | nullcheck: '-'}}
-        </span> &nbsp;&nbsp;&nbsp;
-        <span class="counter" ng-class="{inc:p.ranked_stat_recent.avg_cs_at_10m>0,dec:p.ranked_stat_recent.avg_cs_diff_at_10m<0}">
-          <span ng-if="p.ranked_stat_recent.avg_cs_diff_at_10m>0">+</span>{{p.ranked_stat_recent.avg_cs_diff_at_10m | nullcheck: '-'}}
-        </span>
+        <div>
+          <span class="me">
+            {{p.ranked_stat_recent.avg_cs_at_10m | nullcheck: '-'}}
+          </span> &nbsp;&nbsp;&nbsp;
+          <span class="counter" ng-class="{inc:p.ranked_stat_recent.avg_cs_at_10m>0,dec:p.ranked_stat_recent.avg_cs_diff_at_10m<0}">
+            <span ng-if="p.ranked_stat_recent.avg_cs_diff_at_10m>0">+</span>{{p.ranked_stat_recent.avg_cs_diff_at_10m | nullcheck: '-'}}
+          </span>
+        </div>
+        <div class="cs-chart">
+          <gg-timeline-chart name="CS" timeline="p.ranked_stat_recent.avg_timeline_cs" timeline-diff="p.ranked_stat_recent.avg_timeline_csd" series="[p.summoner.name, 'Opponent']" title="'Average CS Per Minute'"></gg-timeline-chart>
+        </div>
       </div>
       <div class="jcs">
         <div class="item-labels">
