@@ -2,6 +2,7 @@
 //*= require bootstrap-sass-official
 //*= require fontawesome
 //*= require angular-chart
+//*= require angular-send-feedback/dist/angular-send-feedback.css
 
 // cores
 @import 'cols';
@@ -11,6 +12,7 @@
 @import 'loading';
 @import 'err';
 @import 'tooltip';
+@import 'feedback';
 
 // pages
 @import 'leaguegg/theme';

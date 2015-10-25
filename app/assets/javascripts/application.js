@@ -8,6 +8,7 @@
 //= require browser_check
 
 // libs
+//= require html2canvas
 //= require moment
 //= require urijs
 //= require md5

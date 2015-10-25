@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resource :stats, only: [:show], controller: 'summoners/stats'
     end
     resource :rotation, only: [:show]
+    resources :feedbacks, only: [:create]
   end
 
   get 'app' => 'apps#show', as: :mobile
