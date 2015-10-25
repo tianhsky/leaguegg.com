@@ -59,7 +59,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
 
     }
 
-    updateStats(false);
+    updateStats(true);
 
 
     $scope.$on('$destroy', function() {
