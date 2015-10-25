@@ -2,7 +2,7 @@
   <div class="text-center" ng-if="data.error.summoner">
     {{data.error.summoner.data.error}}
   </div>
-  <div ng-if="!data.error.summoner && data.summoner" class="row">
+  <div class="summoner-info-wrapper row" ng-if="!data.error.summoner && data.summoner">
     <div class="summoner-profile col-md-4">
       <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
     </div>
@@ -15,7 +15,8 @@
       </div>
     </div>
   </div>
-  <div class="ads text-center">
+  <hr>
+  <div class="ads text-center with-container">
     <div class="ad wide">
       <iframe src="http://yllix.com/banner_show.php?section=General&amp;pub=747545&amp;format=728x90&amp;ga=g" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe>
     </div>

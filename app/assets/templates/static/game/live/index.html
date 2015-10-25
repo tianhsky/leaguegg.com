@@ -3,17 +3,22 @@
     <loading status="loading.game">
     </loading>
   </div>
-  <div class="error row" ng-if="error">
-    <div class="error-text">
-      <h2>{{ error }}</h2>
+  <div class="live-game-wrapper row">
+    <div class="error" ng-if="error">
+      <div class="error-text">
+        <h2>{{ error }}</h2>
+      </div>
+      <div class="error-champion" ng-if="error_summoner_not_in_game">
+        <a href="/summoner/{{query.region}}/{{query.summoner}}">
+          See {{query.summoner}}'s history stats
+        </a>
+      </div>
     </div>
-    <div class="error-champion" ng-if="error_summoner_not_in_game">
-      <a href="/summoner/{{query.region}}/{{query.summoner}}">
-        See {{query.summoner}}'s history stats
-      </a>
+    <div class="fade-in-anim" ng-if="!error && game">
+      <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
     </div>
   </div>
-  <div class="fade-in-anim row" ng-if="!error && game">
-    <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
+  <div class="ads row">
+    cccc
   </div>
 </div>

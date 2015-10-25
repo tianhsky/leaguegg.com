@@ -81,7 +81,12 @@ a {
 }
 
 .ads {
-  padding: 30px 0px 10px 0px;
+  &.with-container{
+    // background-color: rgba(84, 84, 84, 0.28);
+    // border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  margin: 10px 0px;
+  padding: 10px 0px;
   .ad {
     padding: 5px 0px;
     &.narrow {
