@@ -37,7 +37,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
       $scope.data.loading.summoner.active = false;
       $scope.data.loading.summoner_stats.active = true;
 
-      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, reload_if_outdated)
+      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, true)
         .then(function(data) {
           $scope.data.summoner = data;
           $scope.data.loading.summoner.active = false;
@@ -59,7 +59,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
 
     }
 
-    updateStats(true);
+    updateStats(false);
 
 
     $scope.$on('$destroy', function() {

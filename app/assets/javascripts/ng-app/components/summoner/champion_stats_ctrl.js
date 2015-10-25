@@ -31,7 +31,7 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
       }
     }
 
-    SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner)
+    SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, false)
       .then(function(data) {
         $scope.data.summoner = data;
         MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
