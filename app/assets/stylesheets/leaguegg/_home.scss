@@ -10,6 +10,9 @@
       @media(max-width: 991px) {
         padding: 0px 30px 20px 30px;
       }
+      @media(max-width: 767px) {
+        font-size: 1.0em;
+      }
     }
     .search-game-container {
       background-color: $gray;
@@ -48,7 +51,7 @@
       @media(max-width: 500px) {
         .input-search {
           font-size: 0.8em;
-          width: 55%;
+          width: 50%;
         }
         .input-region {
           font-size: 0.9em;
@@ -74,9 +77,11 @@
         width: 60%;
       }
       @media(max-width: 767px) {
+        font-size: 0.9em;
         width: 90%;
       }
-      h4 {
+      .featured-title{
+        margin: 10px 0px;
         float: left;
       }
       .game-indicators {

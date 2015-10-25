@@ -1,7 +1,7 @@
 angular.module('leaguegg.game').controller('LiveGameCtrl', [
-  '$scope', '$stateParams', 'LiveGameService',
+  '$scope', '$stateParams', '$location', 'LiveGameService',
   'ConstsService', '$filter', 'LayoutService',
-  function($scope, $stateParams, LiveGameService,
+  function($scope, $stateParams, $location, LiveGameService,
     ConstsService, $filter, LayoutService) {
     LayoutService.setFatHeader(false);
 
@@ -34,6 +34,8 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           $scope.error = err.data.error;
           if ($scope.error == 'Summoner is not currently in game') {
             $scope.error_summoner_not_in_game = true;
+            var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner;
+            $location.path(url);
           }
         } else {
           $scope.error = "Sorry, there was a problem";
