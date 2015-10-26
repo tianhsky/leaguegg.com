@@ -10,6 +10,6 @@ angular.module('leaguegg.summoner').config([
         url: "/summoner/:region/:summoner/champion/:champion",
         templateUrl: "static/summoner/ranked_champion.html",
         controller: 'SummonerChampionStatsCtrl'
-      });;
+      });
   }
 ]);

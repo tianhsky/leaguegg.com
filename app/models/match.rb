@@ -18,6 +18,7 @@ class Match
   field :match_version, type: String
 
   field :teams, type: Array
+  field :timeline, type: Hash
 
   # Relations
 

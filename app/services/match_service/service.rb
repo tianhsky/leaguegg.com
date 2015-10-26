@@ -2,14 +2,14 @@ module MatchService
 
   module Service
 
-    def self.find_match(match_id, region)
+    def self.find_match(match_id, region, include_timeline=false)
       params = {match_id: match_id, region: region.upcase}
       # find in db first
       match = Match.where(params).first
       return match if match
 
       # if not found in db, find through api
-      match_json = Riot.find_match(match_id, region)
+      match_json = Riot.find_match(match_id, region, include_timeline)
       match_hash = Factory.build_match_hash(match_json)
       match = Match.new(match_hash)
       Thread.new do

@@ -2,9 +2,12 @@ module MatchService
 
   module Riot
 
-    def self.find_match(match_id, region)
+    def self.find_match(match_id, region, include_timeline=false)
       region = region.downcase
       url = "https://#{region}.api.pvp.net/api/lol/#{region}/v2.2/match/#{match_id}"
+      if(include_timeline)
+        url += '?includeTimeline=true'
+      end
       resp = ::RiotAPI.get(url, region)
     end
 

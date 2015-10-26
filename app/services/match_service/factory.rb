@@ -9,7 +9,7 @@ module MatchService
       r = Utils::JsonParser.clone_to([
         'match_id', 'season', 'region', 'platform_id', 'match_mode',
         'match_type', 'riot_created_at', 'match_duration', 'map_id',
-        'match_version', 'queue_type', 'teams'
+        'match_version', 'queue_type', 'teams', 'timeline'
       ], match_json, {})
       r
     end
