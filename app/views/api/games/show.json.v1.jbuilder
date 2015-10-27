@@ -1,4 +1,3 @@
-
 json.id @game.game_id
 json.started_at @game.started_at
 json.region @game.region

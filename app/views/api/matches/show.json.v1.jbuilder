@@ -9,7 +9,7 @@ json.match_duration @match.match_duration
 json.match_version @match.match_version
 json.created_at @match.riot_created_at
 
-json.teams @match.teams, partial: 'api/games/team', as: :team
+json.teams @match.teams, partial: 'api/matches/team', as: :team
 
 json.timeline @match.timeline
 
