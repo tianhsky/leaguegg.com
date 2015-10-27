@@ -21,6 +21,7 @@ class Match
   field :timeline, type: Hash
 
   # Relations
+  # embeds_many :teams, class_name: 'Games::Team'
 
   # Indexes
   index({ match_id: 1, region: 1 }, { unique: true, :drop_dups => true })

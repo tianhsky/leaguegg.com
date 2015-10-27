@@ -19,25 +19,30 @@ module SummonerStats
     before_validation :set_player_role
 
     def set_player_role
-      if self.role
-        if self.role.include?('SUPPORT')
-          self.player_role = 'SUPPORT'
+      self.player_role = self.class.get_player_role(self.role, self.lane)
+    end
+
+    def self.get_player_role(role, lane)
+      player_role = nil
+      if role
+        if role.include?('SUPPORT')
+          player_role = 'SUPPORT'
         else
-          if self.lane == 'TOP'
-            self.player_role = 'TOP'
-          elsif self.lane == 'MID'
-            self.player_role = 'MID'
-          elsif self.lane == 'BOTTOM'
-            self.player_role = 'ADC'
-          elsif self.lane == 'JUNGLE'
-            self.player_role = 'JUNGLE'
+          if lane == 'TOP'
+            player_role = 'TOP'
+          elsif lane == 'MID'
+            player_role = 'MID'
+          elsif lane == 'BOTTOM'
+            player_role = 'ADC'
+          elsif lane == 'JUNGLE'
+            player_role = 'JUNGLE'
           else
           end
         end
       end
-      self.player_role = 'NONE' if self.player_role.blank?
+      player_role = 'NONE' if player_role.blank?
+      player_role
     end
-
 
     def sanitize_attrs
       self.lane.try(:upcase!)

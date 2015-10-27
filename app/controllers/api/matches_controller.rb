@@ -3,7 +3,7 @@ module Api
 
     def show
       @match = MatchService::Service.find_match(match_id, region, include_timeline)
-      render :json => @match
+      # render :json => @match
     end
 
     protected

@@ -27,6 +27,8 @@ module MatchService
           end
         end
         team = match_json['teams'].find{|t|t['team_id'].to_s == team_id.to_s}
+        team['banned_champions'] = team['bans']
+        team.delete('bans')
         team['participants'] = participants
       end
       nil

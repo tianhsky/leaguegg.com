@@ -1,0 +1,1 @@
+json.player_role SummonerStats::PlayerRole.get_player_role(timeline['role'], timeline['lane'])

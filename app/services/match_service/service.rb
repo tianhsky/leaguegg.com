@@ -6,7 +6,13 @@ module MatchService
       params = {match_id: match_id, region: region.upcase}
       # find in db first
       match = Match.where(params).first
-      return match if match
+      if match
+        if include_timeline && match.timeline.blank?
+          # continue fetch
+        else
+          return match
+        end
+      end
 
       # if not found in db, find through api
       match_json = Riot.find_match(match_id, region, include_timeline)

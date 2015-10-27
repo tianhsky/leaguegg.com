@@ -3,34 +3,40 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
   'MatchService', 'ConstsService', 'MetaService', 'Analytics',
   function($scope, $stateParams, $filter, LayoutService,
     MatchService, ConstsService, MetaService, Analytics) {
-    alert(1);
     LayoutService.setFatHeader(false);
-    MetaService.setTitle($stateParams.region + ' - Match - League of Legends');
+    MetaService.setTitle('Match - League of Legends');
 
-    // $scope.data = {
-    //   summoner: null,
-    //   summoner_stats: null,
-    //   season: $filter('titleize')(ConstsService.season),
-    //   error: {
-    //     summoner: null,
-    //     summoner_stats: null
-    //   },
-    //   loading: {
-    //     summoner: {
-    //       active: true,
-    //       text: 'Loading summoner ...',
-    //       theme: 'taichi'
-    //     },
-    //     summoner_stats: {
-    //       active: true,
-    //       text: 'Loading summoner stats ...',
-    //       theme: 'taichi'
-    //     }
-    //   }
-    // }
+    $scope.data = {
+      match: null,
+      error: {
+        match: null
+      },
+      loading: {
+        match: {
+          active: true,
+          text: 'Loading match ...',
+          theme: 'taichi'
+        }
+      }
+    }
 
-    $scope.$on('$destroy', function() {
-      MetaService.useDefault();
-    });
+    var loadMatch = function() {
+      $scope.data.loading.match.active = false;
+      MatchService.getMatchInfo($stateParams.region, $stateParams.match_id, true)
+        .then(function(data) {
+          $scope.data.match = data;
+          $scope.data.loading.match.active = false;
+        }, function(err) {
+          $scope.data.loading.match.active = false;
+          $scope.data.error.match = err;
+        });
+
+      $scope.$on('$destroy', function() {
+        MetaService.useDefault();
+      });
+    }
+
+    loadMatch();
+
   }
 ]);

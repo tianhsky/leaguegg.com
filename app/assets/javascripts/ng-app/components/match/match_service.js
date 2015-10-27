@@ -50,8 +50,39 @@ angular.module('leaguegg.match').service('MatchService', [
       }
     }
 
+    var sortParticipantsByRole = function(match){
+      match.teams[0].participants = _.sortBy(match.teams[0].participants, function(p){ return p.player_role; });
+      match.teams[1].participants = _.sortBy(match.teams[1].participants, function(p){ return p.player_role; });
+    }
+
+    var generatePerFrameStats = function(match){
+      var timeline = match.timeline;
+      var frames = timeline.frames;
+      _.each(frames, function(f){
+
+      });
+    }
+
+    var generateFrameStats = function(){
+      var s = {
+        kills: 0,
+        deaths: 0,
+        assists: 0,
+        gold_current: 0,
+        gold_total: 0,
+        xp: 0,
+        level: 1,
+        cs: 0,
+        jcs: 0,
+        items: [
+        ]
+      };
+      return s;
+    }
+
     var generateMatchTimeline = function(match) {
-      
+      sortParticipantsByRole(match);
+
     }
 
   }
