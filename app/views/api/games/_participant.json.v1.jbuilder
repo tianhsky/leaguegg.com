@@ -48,7 +48,9 @@ if participant['stats']
   end
 end
 
-json.player_role SummonerStats::PlayerRole.get_player_role(participant['timeline']['role'], participant['timeline']['lane'])
+if participant['timeline']
+  json.player_role SummonerStats::PlayerRole.get_player_role(participant['timeline']['role'], participant['timeline']['lane'])
+end
 
 json.league_entry participant['league_entry']
 
