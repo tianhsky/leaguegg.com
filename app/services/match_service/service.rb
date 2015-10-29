@@ -142,7 +142,7 @@ module MatchService
               begin
                 match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
                 match_items << match_item
-              # rescue
+              rescue
               end
             end
           end
@@ -150,14 +150,14 @@ module MatchService
 
           return self.get_matches_aggregation_for_matches(match_items, summoner_id)
         end
-        # rescue => ex
-        #   begin
-        #     Airbrake.notify_or_ignore(ex,
-        #     parameters: {
-        #       'action' => 'Generate recent stats for matches'
-        #     })
-        #   rescue
-        #   end
+        rescue => ex
+          begin
+            Airbrake.notify_or_ignore(ex,
+            parameters: {
+              'action' => 'Generate recent stats for matches'
+            })
+          rescue
+          end
       end
     end
 
