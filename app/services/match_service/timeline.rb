@@ -63,7 +63,7 @@ module MatchService
             if et == 'ELITE_MONSTER_KILL'
               self._aggregate_elite_monster_kills(ev, frame_stats_by_participant, frame_stats_by_team)
             end
-            if ['ITEM_PURCHASED', 'ITEM_SOLD', 'ITEM_UNDO'].include?(et)
+            if ['ITEM_PURCHASED', 'ITEM_SOLD', 'ITEM_DESTROYED', 'ITEM_UNDO'].include?(et)
               self._aggregate_item_inventories(ev, frame_stats_by_participant, frame_stats_by_team)
             end
           end
@@ -129,16 +129,19 @@ module MatchService
       end
     end
 
-    # ITEM_PURCHASED, ITEM_SOLD, ITEM_UNDO
+    # ITEM_PURCHASED, ITEM_SOLD, ITEM_DESTROYED, ITEM_UNDO
     def self._aggregate_item_inventories(ev, frame_stats_p, frame_stats_t)
       purchase_type = ev['event_type']
       if purchase_type == 'ITEM_PURCHASED'
         item_id = ev['item_id']
         frame_stats_p["#{ev['participant_id']}"]['items'] << item_id
-      elsif purchase_type == 'ITEM_SOLD'
+      elsif ['ITEM_SOLD', 'ITEM_DESTROYED'].include?(purchase_type)
         item_id = ev['item_id']
-        index = frame_stats_p["#{ev['participant_id']}"]['items'].find_index(item_id)
-        frame_stats_p["#{ev['participant_id']}"]['items'].delete_at(index)
+        if ev['participant_id'] != 0
+          if index = frame_stats_p["#{ev['participant_id']}"]['items'].find_index(item_id)
+            frame_stats_p["#{ev['participant_id']}"]['items'].delete_at(index)
+          end
+        end
       elsif purchase_type == 'ITEM_UNDO'
         from_item_id = ev['item_before']
         to_item_id = ev['item_after']

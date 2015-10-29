@@ -92,4 +92,27 @@
     }
     .timeline-player-row {}
   }
+  .timeline-player-row {
+    .player-bar {
+      position: relative;
+      border: 1px solid #333;
+      background: #242329;
+      height: 31px;
+      width: 100%;
+      margin: 8px;
+      .player-display {
+        height: 30px;
+        position: absolute;
+        width: 100%;
+        .player-progress {
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: #686868;
+          height: 30px;
+          width: 0px;
+        }
+      }
+    }
+  }
 }
