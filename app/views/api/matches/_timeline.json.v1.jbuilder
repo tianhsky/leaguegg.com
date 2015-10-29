@@ -1,0 +1,1 @@
+json.frames timeline['frames'], partial: 'api/matches/frame', as: :frame

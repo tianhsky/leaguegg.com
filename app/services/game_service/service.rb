@@ -213,17 +213,17 @@ module GameService
               match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, 1, matches)
               participant.ranked_stat_by_recent_champion = match_stats_aggregation
 
-            rescue => ex
-              begin
-                Airbrake.notify_or_ignore(ex,
-                parameters: {
-                  'action' => 'Generate recent stats form last match',
-                  'matches' => matches.try(:as_json),
-                  'last_match_json' => last_match_json.try(:as_json),
-                  'participant' => participant.try(:as_json)
-                })
-              rescue
-              end
+            # rescue => ex
+            #   begin
+            #     Airbrake.notify_or_ignore(ex,
+            #     parameters: {
+            #       'action' => 'Generate recent stats form last match',
+            #       'matches' => matches.try(:as_json),
+            #       'last_match_json' => last_match_json.try(:as_json),
+            #       'participant' => participant.try(:as_json)
+            #     })
+            #   rescue
+            #   end
             end
           end
 

@@ -1,5 +1,4 @@
 json.spell1 do
-raise
   json.partial! 'api/consts/spell', {spell_id: participant['spell1_id']}
 end
 
@@ -32,6 +31,8 @@ if participant['stats']
     json.partial! 'api/matches/participant_stats', {stat: participant['stats']}
   end
 end
+
+json.participant_id participant['participant_id']
 
 if participant['timeline']
   json.player_role SummonerStats::PlayerRole.get_player_role(participant['timeline']['role'], participant['timeline']['lane'])

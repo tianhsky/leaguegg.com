@@ -1,4 +1,5 @@
 json.id team['team_id']
+json.winner team['winner']
 
 json.banned_champions team['banned_champions'] do |c|
   json.partial! 'api/consts/champion', {champion_id: c['champion_id']}

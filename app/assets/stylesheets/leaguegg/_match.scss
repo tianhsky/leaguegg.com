@@ -1,19 +1,95 @@
-.page-match{
-  .match-table{
-    .head-row{
-
+.page-match {
+  .match-player {
+    width: 1165px;
+    text-align: center;
+  }
+  .match-table {
+    text-align: left;
+    width: 46%;
+    margin: 0px -2px;
+    display: inline-table;
+    .head-row {
+      display: table-row;
     }
-    .summary-row{
-
+    .summary-row {
+      display: table-row;
     }
-    .icons-row{
-
+    .icons-row {
+      display: table-row;
     }
-    .champions-section{
-
+    .champions-section {
+      display: table;
+      border-collapse: collapse;
+      // width: 100%;
+      .champion-row {
+        display: table-row;
+        background-color: #2F2F37;
+        border: 1px solid #222;
+        .champion-icon {
+          display: table-cell;
+          vertical-align: middle;
+          width: 55px;
+          img {
+            width: 55px;
+            height: 55px;
+          }
+        }
+        .champion-spells {
+          display: table-cell;
+          vertical-align: middle;
+          width: 25px;
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+        .summoner-name-role {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0px 8px;
+          width: 140px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          .name {}
+          .role {}
+        }
+        .game-items {
+          display: table-cell;
+          padding: 0px 8px;
+          width: 110px;
+          vertical-align: middle;
+          .game-item {
+            padding: 0px;
+            margin: 0px;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+        .match-kda {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          padding: 0px 8px;
+          width: 70px;
+        }
+        .cs {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0px 8px;
+          width: 50px;
+          text-align: center;
+        }
+        .gold {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0px 8px;
+          width: 93px;
+        }
+      }
     }
-    .timeline-player-row{
-
-    }
+    .timeline-player-row {}
   }
 }

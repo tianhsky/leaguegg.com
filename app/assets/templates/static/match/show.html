@@ -1,56 +1,14 @@
 <div class="page-match">
-  <div class="match-table">
-    <div class="head-row">
-    </div>
-    <div class="summary-row">
-    </div>
-    <div class="icon-row">
-    </div>
-    <div class="champions-selection">
-      <div class="team-champions">
-        <div class="champion-row" ng-repeat="p in data.match.teams[0].participants">
-          <div class="champion-icon">
-            <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
-          </div>
-          <div class="champion-spells">
-            <img ng-src="{{p.spell1.img}}" alt="{{p.spell1.name}}">
-            <img ng-src="{{p.spell2.img}}" alt="{{p.spell2.name}}">
-          </div>
-          <div class="summoner-name-role">
-            <div class="name">
-              {{p.summoner.name}}
-            </div>
-            <div class="role">
-              {{p.player_role}}
-            </div>
-          </div>
-          <div class="game-items">
-            <img ng-src="{{p.stats.item0.img}}" alt="{{p.stats.item0.name}}">
-            <img ng-src="{{p.stats.item1.img}}" alt="{{p.stats.item1.name}}">
-            <img ng-src="{{p.stats.item2.img}}" alt="{{p.stats.item2.name}}">
-            <img ng-src="{{p.stats.item3.img}}" alt="{{p.stats.item3.name}}">
-            <img ng-src="{{p.stats.item4.img}}" alt="{{p.stats.item4.name}}">
-            <img ng-src="{{p.stats.item5.img}}" alt="{{p.stats.item5.name}}">
-            <img ng-src="{{p.stats.item6.img}}" alt="{{p.stats.item6.name}}">
-          </div>
-          <div class="kda">
-            <span class="k"></span>
-          </div>
-          <div class="cs"></div>
-          <div class="jcs"></div>
-          <div class="gold"></div>
-          {{p.summoner.name}}
-          {{p.player_role}}
-        </div>
+  <div class="match-player">
+    <div class="row">
+      <div class="match-table">
+        <match-team team="data.match.teams[0]" frame="data.match.timeline.frames[data.current_frame]"></match-team>
       </div>
-      <div class="team-champions">
-        <div class="champion-row" ng-repeat="p in data.match.teams[1].participants">
-          {{p.summoner.name}}
-          {{p.player_role}}
-        </div>
+      <div class="match-table">
+        <match-team team="data.match.teams[1]" frame="data.match.timeline.frames[data.current_frame]"></match-team>
       </div>
     </div>
     <div class="timeline-player-row">
-    </div>
+  </div>
   </div>
 </div>

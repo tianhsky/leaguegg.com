@@ -6,23 +6,27 @@ module MatchService
       params = {match_id: match_id, region: region.upcase}
       # find in db first
       match = Match.where(params).first
+      should_refetch = true
       if match
         if include_timeline && match.timeline.blank?
-          # continue fetch
+          should_refetch = true
         else
-          return match
+          should_refetch = false
         end
       end
 
-      # if not found in db, find through api
-      match_json = Riot.find_match(match_id, region, include_timeline)
-      match_hash = Factory.build_match_hash(match_json)
-      match = Match.new(match_hash)
+      if should_refetch
+        # if not found in db, find through api
+        match_json = Riot.find_match(match_id, region, include_timeline)
+        match_hash = Factory.build_match_hash(match_json)
+        match ||= Match.new
+        match.assign_attributes(match_hash)
+      end
+
+      Timeline.aggregate(match)
       Thread.new do
         begin
-          if match.new_record?
-            match.save
-          end
+          match.save
         rescue
         end
       end
@@ -138,7 +142,7 @@ module MatchService
               begin
                 match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
                 match_items << match_item
-              rescue
+              # rescue
               end
             end
           end
@@ -146,14 +150,14 @@ module MatchService
 
           return self.get_matches_aggregation_for_matches(match_items, summoner_id)
         end
-        rescue => ex
-          begin
-            Airbrake.notify_or_ignore(ex,
-            parameters: {
-              'action' => 'Generate recent stats for matches'
-            })
-          rescue
-          end
+        # rescue => ex
+        #   begin
+        #     Airbrake.notify_or_ignore(ex,
+        #     parameters: {
+        #       'action' => 'Generate recent stats for matches'
+        #     })
+        #   rescue
+        #   end
       end
     end
 

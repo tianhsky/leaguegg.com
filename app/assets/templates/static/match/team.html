@@ -1,0 +1,51 @@
+<div class="head-row">
+  <span ng-if="team.winner==true">Victory</span>
+  <span ng-if="team.winner==false">Defeat</span>
+</div>
+<div class="summary-row">
+</div>
+<div class="icon-row">
+</div>
+<div class="champions-section">
+  <div class="champion-row" ng-repeat="p in team.participants">
+    <div class="champion-icon">
+      <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
+    </div>
+    <div class="champion-spells">
+      <img ng-src="{{p.spell1.img}}" alt="{{p.spell1.name}}">
+      <br>
+      <img ng-src="{{p.spell2.img}}" alt="{{p.spell2.name}}">
+    </div>
+    <div class="summoner-name-role">
+      <div class="name">
+        {{p.summoner.name}}
+      </div>
+      <div class="role">
+        {{p.player_role}}
+      </div>
+    </div>
+    <div class="game-items">
+      <span class="game-item" ng-repeat="it in frame.participant_frames[p.participant_id].items">
+        <img ng-src="{{getItemImgUrlByID(it)}}" alt="item" />
+      </span>
+    </div>
+    <div class="match-kda">
+      <span class="k">
+          {{frame.participant_frames[p.participant_id].kills}}
+        </span>
+      <span class="d">
+          {{frame.participant_frames[p.participant_id].deaths}}
+        </span>
+      <span class="a">
+          {{frame.participant_frames[p.participant_id].assists}}
+        </span>
+    </div>
+    <div class="cs">
+      {{frame.participant_frames[p.participant_id].minions_killed}}
+      <!-- {{frame.participant_frames[p.participant_id].jungle_minions_killed}} -->
+    </div>
+    <div class="gold">
+      {{frame.participant_frames[p.participant_id].current_gold}} {{frame.participant_frames[p.participant_id].total_gold}}
+    </div>
+  </div>
+</div>
