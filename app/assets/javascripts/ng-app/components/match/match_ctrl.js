@@ -46,7 +46,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
       if(!_playInteval){
         $interval(function(){
           var totalFrames = $scope.data.match.timeline.frames.length;
-          if($scope.data.current_frame < totalFrames){
+          if($scope.data.current_frame < totalFrames-1){
             $scope.data.current_frame += 1;
           }
           else{

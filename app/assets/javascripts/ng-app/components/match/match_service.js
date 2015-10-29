@@ -29,7 +29,7 @@ angular.module('leaguegg.match').service('MatchService', [
         $http.get(url)
           .then(function(resp) {
             var match = resp.data;
-            generateMatchTimeline(match);
+            combineParticipantFrameItems(match);
             _data.result.match = match;
             resolve(match);
           }, function(err) {
@@ -50,39 +50,17 @@ angular.module('leaguegg.match').service('MatchService', [
       }
     }
 
-    var sortParticipantsByRole = function(match){
-      match.teams[0].participants = _.sortBy(match.teams[0].participants, function(p){ return p.player_role; });
-      match.teams[1].participants = _.sortBy(match.teams[1].participants, function(p){ return p.player_role; });
-    }
-
-    var generatePerFrameStats = function(match){
-      var timeline = match.timeline;
-      var frames = timeline.frames;
-      _.each(frames, function(f){
-
+    var combineParticipantFrameItems = function(match) {
+      _.each(match.timeline.frames, function(f) {
+        var pfs = f.participant_frames;
+        if (pfs) {
+          _.each(pfs, function(pf) {
+            if (pf.items) {
+              pf.items = _.uniq(pf.items);
+            }
+          })
+        }
       });
-    }
-
-    var generateFrameStats = function(){
-      var s = {
-        kills: 0,
-        deaths: 0,
-        assists: 0,
-        gold_current: 0,
-        gold_total: 0,
-        xp: 0,
-        level: 1,
-        cs: 0,
-        jcs: 0,
-        items: [
-        ]
-      };
-      return s;
-    }
-
-    var generateMatchTimeline = function(match) {
-      sortParticipantsByRole(match);
-
     }
 
   }

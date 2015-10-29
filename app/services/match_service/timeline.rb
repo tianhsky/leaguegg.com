@@ -73,7 +73,7 @@ module MatchService
           participant_frames.each do |pf_arr|
             pf_key = pf_arr[0]
             pf = pf_arr[1]
-            pf.merge!(frame_stats_by_participant["#{pf_key}"])
+            pf.merge!(frame_stats_by_participant["#{pf_key}"].deep_dup)
           end
         end
       end
@@ -134,17 +134,20 @@ module MatchService
       purchase_type = ev['event_type']
       if purchase_type == 'ITEM_PURCHASED'
         item_id = ev['item_id']
-        frame_stats_p["#{ev['participant_id']}"]['items'] |= [item_id]
+        frame_stats_p["#{ev['participant_id']}"]['items'] << item_id
       elsif purchase_type == 'ITEM_SOLD'
         item_id = ev['item_id']
-        frame_stats_p["#{ev['participant_id']}"]['items'].delete(item_id)
+        index = frame_stats_p["#{ev['participant_id']}"]['items'].find_index(item_id)
+        frame_stats_p["#{ev['participant_id']}"]['items'].delete_at(index)
       elsif purchase_type == 'ITEM_UNDO'
         from_item_id = ev['item_before']
         to_item_id = ev['item_after']
-        frame_stats_p["#{ev['participant_id']}"]['items'].delete(from_item_id)
-        if to_item_id == 0
-        else
-          frame_stats_p["#{ev['participant_id']}"]['items'] |= [to_item_id]
+        if from_item_id != 0
+          index = frame_stats_p["#{ev['participant_id']}"]['items'].find_index(from_item_id)
+          frame_stats_p["#{ev['participant_id']}"]['items'].delete_at(index)
+        end
+        if to_item_id != 0
+          frame_stats_p["#{ev['participant_id']}"]['items'] << to_item_id
         end
       else
       end

@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="game-items">
-      <span class="game-item" ng-repeat="it in frame.participant_frames[p.participant_id].items">
+      <span class="game-item" ng-repeat="it in frame.participant_frames[p.participant_id].items track by $index">
         <img ng-src="{{getItemImgUrlByID(it)}}" alt="item" />
       </span>
     </div>
