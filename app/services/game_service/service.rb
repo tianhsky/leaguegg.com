@@ -231,10 +231,11 @@ module GameService
             begin
               summoner_league_entries = league_entries[summoner_id.to_s]
               # summoner.touch_synced_at
-              league = LeagueService::Service.entries_to_summoner_entry(summoner_id, region, summoner_league_entries)
-              summoner_league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
-              summoner_league_entry['tier'] = league['tier']
-              participant.league_entry = summoner_league_entry
+              if league = LeagueService::Service.entries_to_summoner_entry(summoner_id, region, summoner_league_entries)
+                summoner_league_entry = league['entries'].find{|l| l['player_or_team_id'].to_i == summoner_id.to_i}
+                summoner_league_entry['tier'] = league['tier']
+                participant.league_entry = summoner_league_entry
+              end
             rescue
               begin
                 Airbrake.notify_or_ignore(ex,

@@ -43,7 +43,7 @@ module RiotAPI
     status_code = resp.response.code.to_i
     raise Errors::RateLimitError.new if status_code == 429
     raise Errors::NotFoundError.new if status_code == 404
-    raise Errors::ServiceUnavailableError.new if status_code == 503
+    # raise Errors::ServiceUnavailableError.new if status_code == 503
 
     json = JSON.parse resp.body
     Utils::JsonParser.underscoreize(json)
