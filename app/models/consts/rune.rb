@@ -51,7 +51,7 @@ module Consts
       @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
-        img_file_name = "#{value['image']['full']}"
+        img_file_name = "#{value['image'].try(:[],'full')}"
         r["#{value['id']}".to_i] = {
           "id" => value['id'],
           "name" => value['name'],
