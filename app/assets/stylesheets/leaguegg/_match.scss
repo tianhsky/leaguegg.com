@@ -3,19 +3,67 @@
     width: 1165px;
     text-align: center;
   }
+  .match-tables{
+    margin: 0px auto;
+  }
   .match-table {
-    text-align: left;
-    width: 46%;
-    margin: 0px -2px;
     display: inline-table;
+    img.riot-icon {
+      border-radius: 100%;
+    }
     .head-row {
-      display: table-row;
+      background-color: rgba(47, 47, 55, 0.73);
+      border: 2px solid #222;
+      padding: 10px 0px;
     }
     .summary-row {
-      display: table-row;
+      font-size: 1.2em;
+      font-weight: 900;
+      .baron-kills,
+      .dragon-kills,
+      .building-kills {
+        display: table-cell;
+        width: 90px;
+        padding: 15px 0px;
+      }
+      .team-kda {
+        display: table-cell;
+        width: 140px;
+      }
+      .team-gold {
+        display: table-cell;
+        width: 140px;
+        .current-gold {}
+        .total-gold {
+          font-size: 0.5em;
+          text-align: right;
+          margin-right: 25px;
+        }
+      }
     }
     .icons-row {
-      display: table-row;
+      background-color: rgba(47, 47, 55, 0.73);
+      border: 2px solid #222;
+      .summoner {
+        display: table-cell;
+        width: 215px;
+      }
+      .items {
+        display: table-cell;
+        width: 110px;
+      }
+      .kills {
+        display: table-cell;
+        width: 80px;
+      }
+      .minions {
+        display: table-cell;
+        width: 50px;
+      }
+      .gold {
+        display: table-cell;
+        width: 95px;
+      }
     }
     .champions-section {
       display: table;
@@ -24,7 +72,7 @@
       .champion-row {
         display: table-row;
         background-color: #2F2F37;
-        border: 1px solid #222;
+        border: 2px solid #222;
         .champion-icon {
           display: table-cell;
           vertical-align: middle;
@@ -45,19 +93,25 @@
         }
         .summoner-name-role {
           display: table-cell;
+          text-align: left;
           vertical-align: middle;
           padding: 0px 8px;
-          width: 140px;
+          width: 135px;
+          font-size: 0.9em;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           .name {}
-          .role {}
+          .role {
+            color: gray;
+            font-weight: 600;
+          }
         }
         .game-items {
           display: table-cell;
           padding: 0px 8px;
           width: 110px;
+          text-align: left;
           vertical-align: middle;
           .game-item {
             padding: 0px;
@@ -73,7 +127,7 @@
           vertical-align: middle;
           text-align: center;
           padding: 0px 8px;
-          width: 70px;
+          width: 80px;
         }
         .cs {
           display: table-cell;
@@ -86,20 +140,42 @@
           display: table-cell;
           vertical-align: middle;
           padding: 0px 8px;
-          width: 93px;
+          width: 95px;
+          .total-gold {
+            font-size: 0.7em;
+            margin-left: 3px;
+          }
         }
       }
     }
-    .timeline-player-row {}
   }
   .timeline-player-row {
+    position: relative;
+    margin: 8px auto;
+    width: 1110px;
+    .player-control{
+      display: inline-block;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      .play-btn, .pause-btn, .stop-btn{
+        display: inline-block;
+        width: 24px;
+        font-size: 1.4em;
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+    }
     .player-bar {
+      display: inline-block;
       position: relative;
+      margin-left: 60px;
       border: 1px solid #333;
       background: #242329;
       height: 31px;
-      width: 100%;
-      margin: 8px;
+      width: 1050px;
       .player-display {
         height: 30px;
         position: absolute;
@@ -108,9 +184,14 @@
           position: absolute;
           left: 0;
           top: 0;
-          background: #686868;
+          background: rgba(128, 113, 210, 0.22);
           height: 30px;
           width: 0px;
+        }
+        .frame-number {
+          position: absolute;
+          left: 47%;
+          top: 5px;
         }
       }
     }

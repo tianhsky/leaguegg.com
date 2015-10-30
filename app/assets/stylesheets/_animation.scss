@@ -72,3 +72,8 @@
     opacity: 0;
   }
 }
+
+.grow {
+  transform: scale(1.5);
+  transition: all .3s ease-in-out;
+}

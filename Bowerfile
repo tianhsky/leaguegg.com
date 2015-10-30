@@ -20,6 +20,7 @@ group :vendor do
   asset 'angular-google-analytics', '1.1.1'
   asset 'angular-chart', '0.8.4', github: 'jtblin/angular-chart.js'
   asset 'angular-send-feedback', '1.0.2'
+  asset 'angular-animate-change', '1.0.2'
   asset 'angularjs-socialshare', '0.1.14'
   asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'

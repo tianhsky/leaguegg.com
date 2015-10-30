@@ -4,7 +4,12 @@ angular.module('leaguegg.match').directive('playerBar', function() {
     templateUrl: 'static/match/player_bar.html',
     scope: {
       'currentFrame': '=',
-      'totalFrames': '='
+      'totalFrames': '=',
+      'status': '=',
+      'seek': '&',
+      'play': '&',
+      'pause': '&',
+      'stop': '&'
     },
     controller: [
       '$scope',
@@ -23,12 +28,10 @@ angular.module('leaguegg.match').directive('playerBar', function() {
           });
         }
 
-        $scope.$watch('currentFrame', function(ov, nv) {
-          if(nv){
-            var percent = nv / $scope.totalFrames;
-            var val = (percent * 100) + "%";
-            $('.player-progress').width(val);
-          }
+        $scope.$watch('currentFrame', function(nv, ov) {
+          var percent = nv / ($scope.totalFrames-1);
+          var val = (percent * 100) + "%";
+          $('.player-progress').width(val);
         });
 
       }

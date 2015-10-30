@@ -9,6 +9,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
     $scope.data = {
       match: null,
       current_frame: 0,
+      player_status: 'stopped',
       error: {
         match: null
       },
@@ -41,10 +42,10 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
     loadMatch();
 
     var _playInteval = null;
-    var perFrame = 2000;
+    var perFrame = 300;
     $scope.play = function(){
       if(!_playInteval){
-        $interval(function(){
+        _playInteval = $interval(function(){
           var totalFrames = $scope.data.match.timeline.frames.length;
           if($scope.data.current_frame < totalFrames-1){
             $scope.data.current_frame += 1;
@@ -54,16 +55,19 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
           }
         }, perFrame);
       }
+      $scope.data.player_status = 'playing';
     }
 
     $scope.pause = function(){
       $interval.cancel(_playInteval);
       _playInteval = null;
+      $scope.data.player_status = 'paused';
     }
 
     $scope.stop = function(){
       $scope.pause();
       $scope.data.current_frame = 0;
+      $scope.data.player_status = 'stopped';
     }
 
   }

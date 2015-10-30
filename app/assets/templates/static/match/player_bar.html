@@ -1,5 +1,11 @@
+<div class="player-control">
+  <div class="play-btn" ng-if="status=='paused' || status=='stopped'" ng-click="play()"><i class="fa fa-play"></i></div>
+  <div class="pause-btn" ng-if="status=='playing'" ng-click="pause()"><i class="fa fa-pause"></i></div>
+  <div class="stop-btn" ng-click="stop()"><i class="fa fa-stop"></i></div>
+</div>
 <div class='player-bar'>
   <div class='player-display'>
     <div class="player-progress"></div>
+    <div class="frame-number">{{currentFrame}} / {{totalFrames-1}}</div>
   </div>
 </div>

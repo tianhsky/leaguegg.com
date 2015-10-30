@@ -1,0 +1,37 @@
+{
+  "name": "angular-animate-change",
+  "version": "1.0.2",
+  "homepage": "https://github.com/bendrucker/angular-animate-change",
+  "authors": [
+    "Ben Drucker <bvdrucker@gmail.com>"
+  ],
+  "description": "Animate an element when a value changes",
+  "main": "./release/angular-animate-change.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "animation",
+    "change"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.2",
+    "commit": "3105c79078de6c21a889443a661b86fe415ebd86"
+  },
+  "_source": "git://github.com/bendrucker/angular-animate-change.git",
+  "_target": "1.0.2",
+  "_originalSource": "angular-animate-change"
+}

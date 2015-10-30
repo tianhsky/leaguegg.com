@@ -1,0 +1,21 @@
+<div class="baron-kills">
+  <img class="riot-icon" src="/static/img/riot/match/baron.png">
+  <span animate-change="data.baron_kills" change-class="grow">{{data.baron_kills}}</span>
+</div>
+<div class="dragon-kills">
+  <img class="riot-icon" src="/static/img/riot/match/dragon.png">
+  <span animate-change="data.dragon_kills" change-class="grow">{{data.dragon_kills}}</span>
+</div>
+<div class="building-kills">
+  <img class="riot-icon" src="/static/img/riot/match/building.png">
+  <span animate-change="data.building_kills" change-class="grow">{{data.building_kills}}</span>
+</div>
+<div class="team-kda">
+  <img class="riot-icon" src="/static/img/riot/match/kill.png">
+  <span class="k" animate-change="data.kills" change-class="grow">{{data.kills}}</span>/<span class="d" animate-change="data.deaths" change-class="grow">{{data.deaths}}</span>/<span class="a" animate-change="data.assists" change-class="grow">{{data.assists}}</span>
+</div>
+<div class="team-gold">
+  <img class="riot-icon" src="/static/img/riot/match/gold.png">
+  <span class="current-gold">{{data.current_gold}}</span>
+  <div class="total-gold">/ {{data.total_gold}}</div>
+</div>

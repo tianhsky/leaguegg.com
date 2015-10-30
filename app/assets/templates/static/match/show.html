@@ -1,6 +1,6 @@
 <div class="page-match">
   <div class="match-player">
-    <div class="row">
+    <div class="match-tables">
       <div class="match-table">
         <match-team team="data.match.teams[0]" frame="data.match.timeline.frames[data.current_frame]"></match-team>
       </div>
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="timeline-player-row">
-      <player-bar total-frames="data.match.timeline.frames.length" current-frame="data.current_frame"></player-bar>
+      <player-bar total-frames="data.match.timeline.frames.length" current-frame="data.current_frame" status="data.player_status" play="play()" pause="pause()" stop="stop()"></player-bar>
     </div>
   </div>
 </div>
