@@ -102,8 +102,17 @@
       .search-title {
         margin-bottom: 20px;
       }
-      .update-option {
-        min-height: 40px;
+      .update-btn-wrapper {
+        min-height: 35px;
+        position: relative;
+        .update-btn{
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+      }
+      .instruction{
+        color: yellow;
       }
       .search-result-header {
         margin: 10px 0px;

@@ -9,8 +9,8 @@
       <span class="pull-right">{{season}}</span>
     </p>
   </div>
-  <div class="update-option" ng-if="stats.outdated">
-    <button ng-disabled="summonerStatsLoading.active" ng-click="updateClicked()" class="btn btn-sm btn-info pull-right">
+  <div class="update-btn-wrapper">
+    <button ng-disabled="summonerStatsLoading.active" ng-click="updateClicked()" class="btn btn-sm btn-info update-btn" ng-if="stats.outdated">
       <span ng-if="stats.updated_at">
         Updated {{stats.updated_at | time_from_now:'unix'}}
       </span>
@@ -19,6 +19,9 @@
       </span>
       <i class="fa fa-refresh"></i>
     </button>
+  </div>
+  <div class="instruction">
+    <div><i class="fa fa-arrow-down"></i> Click on the champion below to see detail stats</div>
   </div>
   <div class="search-result-header row">
     <div class="col-xs-3 column-header" ng-click="sortBy('champion.name')">
