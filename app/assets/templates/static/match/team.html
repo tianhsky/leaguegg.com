@@ -1,6 +1,10 @@
 <div class="head-row">
-  <span ng-if="team.winner==true">Victory</span>
-  <span ng-if="team.winner==false">Defeat</span>
+  <div class="win" ng-if="team.winner==true">Victory</div>
+  <div class="lost" ng-if="team.winner==false">Defeat</div>
+  <div class="bans">
+    <div class="ban-text">Bans</div>
+    <img class="ban-item" ng-src="{{c.img}}" ng-repeat="c in team.banned_champions"></img>
+  </div>
 </div>
 <div class="summary-row">
   <player-team-summary current-frame="frame" team-id="team.id"></player-team-summary>

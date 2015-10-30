@@ -2,19 +2,45 @@
   .match-player {
     width: 1165px;
     text-align: center;
-  }
-  .match-tables{
     margin: 0px auto;
   }
+  .match-tables {}
   .match-table {
     display: inline-table;
     img.riot-icon {
       border-radius: 100%;
     }
     .head-row {
+      position: relative;
       background-color: rgba(47, 47, 55, 0.73);
       border: 2px solid #222;
-      padding: 10px 0px;
+      min-height: 40px;
+      .win,
+      .lost {
+        padding: 5px;
+        width: 110px;
+        font-size: 1.2em;
+        font-weight: 900;
+      }
+      .win {
+        background-color: $color_win;
+      }
+      .lost {
+        background-color: $color_lost;
+      }
+      .bans{
+        position: absolute;
+        right: 0px;
+        bottom: 3px;
+        .ban-text{
+          display: inline-block;
+          font-weight: 800;
+        }
+        .ban-item{
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
     .summary-row {
       font-size: 1.2em;
@@ -36,8 +62,7 @@
         .current-gold {}
         .total-gold {
           font-size: 0.5em;
-          text-align: right;
-          margin-right: 25px;
+          margin-left: 18px;
         }
       }
     }
@@ -153,17 +178,20 @@
     position: relative;
     margin: 8px auto;
     width: 1110px;
-    .player-control{
+    .player-control {
       display: inline-block;
       position: absolute;
       left: 0px;
       top: 0px;
-      .play-btn, .pause-btn, .stop-btn{
+      .play-btn,
+      .replay-btn,
+      .pause-btn,
+      .stop-btn {
         display: inline-block;
         width: 24px;
         font-size: 1.4em;
         cursor: pointer;
-        &:hover{
+        &:hover {
           opacity: 0.8;
         }
       }

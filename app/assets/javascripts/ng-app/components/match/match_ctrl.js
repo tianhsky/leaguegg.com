@@ -28,7 +28,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
         .then(function(data) {
           $scope.data.match = data;
           $scope.data.loading.match.active = false;
-          $scope.play();
+          // $scope.play();
         }, function(err) {
           $scope.data.loading.match.active = false;
           $scope.data.error.match = err;
@@ -42,7 +42,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
     loadMatch();
 
     var _playInteval = null;
-    var perFrame = 300;
+    var perFrame = 800;
     $scope.play = function(){
       if(!_playInteval){
         _playInteval = $interval(function(){
@@ -52,6 +52,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
           }
           else{
             $scope.pause();
+            $scope.data.player_status = 'finished';
           }
         }, perFrame);
       }

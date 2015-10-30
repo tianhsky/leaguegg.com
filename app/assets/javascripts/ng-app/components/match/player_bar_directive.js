@@ -34,6 +34,11 @@ angular.module('leaguegg.match').directive('playerBar', function() {
           $('.player-progress').width(val);
         });
 
+        $scope.replay = function(){
+          $scope.stop();
+          $scope.play();
+        }
+
       }
     ]
   }
