@@ -30,7 +30,7 @@ module SummonerStats
         else
           if lane == 'TOP'
             player_role = 'TOP'
-          elsif lane == 'MID'
+          elsif lane == 'MID' || lane == 'MIDDLE'
             player_role = 'MID'
           elsif lane == 'BOTTOM'
             player_role = 'ADC'

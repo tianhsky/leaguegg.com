@@ -1,0 +1,78 @@
+<div>
+  <div class="stats-title">
+  </div>
+  <div class="champions-roster row-stat row-alt">
+    <div class="head-desc">
+      Match Statistics
+    </div>
+    <div class="champion-item" ng-repeat="p in participants">
+      <img ng-src="{{p.champion.img}}">
+    </div>
+  </div>
+  <div class="kda-rate-row row-stat">
+    <div class="head-desc">
+      KDA
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      {{p.stats_aggretated.kda_rate | number: 1 | nullcheck}}
+    </div>
+  </div>
+  <div class="max-killing-spree-row row-stat row-alt">
+    <div class="head-desc">
+      Max Killing Spree
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      {{p.stats.largest_killing_spree}}
+    </div>
+  </div>
+  <div class="kill-participation-row row-stat">
+    <div class="head-desc">
+      Kill%
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      <uib-progressbar max="1" value="p.stats_aggretated.kill_rate||0" type="success">
+        <p class="progress-text">{{p.stats_aggretated.kill_rate | percentage: 1 | nullcheck: '-'}}</p>
+      </uib-progressbar>
+    </div>
+  </div>
+  <div class="death-participation-row row-stat row-alt">
+    <div class="head-desc">
+      Death%
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      <uib-progressbar max="1" value="p.stats_aggretated.death_rate||0" type="danger">
+        <p class="progress-text">{{p.stats_aggretated.death_rate | percentage: 1 | nullcheck: '-'}}</p>
+      </uib-progressbar>
+    </div>
+  </div>
+  <div class="assist-participation-row row-stat">
+    <div class="head-desc">
+      Assists%
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      <uib-progressbar max="1" value="p.stats_aggretated.assist_rate||0" type="warning">
+        <p class="progress-text">{{p.stats_aggretated.assist_rate | percentage: 1 | nullcheck: '-'}}</p>
+      </uib-progressbar>
+    </div>
+  </div>
+  <div class="dmg-ratio-row row-stat row-alt row-alt">
+    <div class="head-desc">
+      Damage%
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      <uib-progressbar max="1" value="p.stats_aggretated.dmg_rate||0" type="danger">
+        <p class="progress-text">{{p.stats_aggretated.dmg_rate | percentage: 1 | nullcheck: '-'}}</p>
+      </uib-progressbar>
+    </div>
+  </div>
+  <div class="wards-placed-ratio-row row-stat">
+    <div class="head-desc">
+      Wards Placed%
+    </div>
+    <div class="cell-item" ng-repeat="p in participants">
+      <uib-progressbar max="1" value="p.stats_aggretated.wards_placed_rate||0" type="info">
+        <p class="progress-text">{{p.stats_aggretated.wards_placed_rate | percentage: 1 | nullcheck: '-'}}({{p.stats.wards_placed}})</p>
+      </uib-progressbar>
+    </div>
+  </div>
+</div>

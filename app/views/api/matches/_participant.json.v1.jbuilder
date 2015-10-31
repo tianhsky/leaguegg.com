@@ -32,6 +32,10 @@ if participant['stats']
   end
 end
 
+if participant['stats_aggretated']
+  json.stats_aggretated participant['stats_aggretated']
+end
+
 json.participant_id participant['participant_id']
 
 if participant['timeline']

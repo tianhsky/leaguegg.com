@@ -1,11 +1,31 @@
 .page-match {
+  min-height: 550px;
+  padding-bottom: 100px;
+  width: 1165px;
+  margin: 0px auto;
+  text-align: center;
+  .info{
+    margin: 0px auto;
+    width: 1110px;
+    text-align: left;
+    padding-bottom:  20px;
+    .match-type{
+      margin-bottom: 0px;
+    }
+    .duration{
+      font-weight: 900;
+      font-size: 1.5em;
+    }
+    .created_at{
+      font-weight: 300;
+      font-size: 1.3em;
+    }
+  }
   .match-player {
-    width: 1165px;
-    text-align: center;
     margin: 0px auto;
   }
-  .match-tables {}
   .match-table {
+    // width: 554px;
     display: inline-table;
     img.riot-icon {
       border-radius: 100%;
@@ -28,15 +48,15 @@
       .lost {
         background-color: $color_lost;
       }
-      .bans{
+      .bans {
         position: absolute;
         right: 0px;
         bottom: 3px;
-        .ban-text{
+        .ban-text {
           display: inline-block;
           font-weight: 800;
         }
-        .ban-item{
+        .ban-item {
           width: 30px;
           height: 30px;
         }
@@ -178,6 +198,7 @@
     position: relative;
     margin: 8px auto;
     width: 1110px;
+    background-color: rgba(73, 140, 151, 0.61);
     .player-control {
       display: inline-block;
       position: absolute;
@@ -199,9 +220,10 @@
     .player-bar {
       display: inline-block;
       position: relative;
+      cursor: col-resize;
       margin-left: 60px;
       border: 1px solid #333;
-      background: #242329;
+      background: rgba(36, 35, 41, 0.49);
       height: 31px;
       width: 1050px;
       .player-display {
@@ -212,16 +234,79 @@
           position: absolute;
           left: 0;
           top: 0;
-          background: rgba(128, 113, 210, 0.22);
+          background: rgba(20, 45, 53, 0.75);
           height: 30px;
           width: 0px;
         }
         .frame-number {
           position: absolute;
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          -webkit-user-select: none;
+          -o-user-select: none;
           left: 47%;
           top: 5px;
         }
       }
+    }
+  }
+  .match-stats {
+    display: table;
+    margin: 50px auto 10px auto;
+    border-collapse: collapse;
+    width: 1110px;
+    .row-stat {
+      position: relative;
+      display: table-row;
+      border: 2px solid #222;
+      background-color: rgba(64, 64, 93, 0.35);
+      &.row-alt {
+        background-color: rgba(64, 64, 93, 0.2)
+      }
+    }
+    .head-desc {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: left;
+      font-size: 1.1em;
+      font-weight: 900;
+      padding: 9px 0px 9px 15px;
+    }
+    .cell-item {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0px 5px;
+    }
+    .champions-roster {
+      .head-desc {
+        font-size: 1.5em;
+        padding: 18px 0px 18px 5px;
+      }
+      .champion-item {
+        display: table-cell;
+        vertical-align: middle;
+        width: 85px;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    .kda-rate-row,
+    .kill-participation-row,
+    .death-participation-row,
+    .assist-participation-row,
+    .max-killing-spree-row,
+    .dmg-ratio-row,
+    .wards-placed-ratio-row {}
+
+    .progress{
+      margin-bottom: 0px;
+    }
+    .progress-text{
+      color: #333;
+      font-weight: 400;
+      width: 75px;
     }
   }
 }

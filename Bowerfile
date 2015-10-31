@@ -13,7 +13,7 @@ group :vendor do
   asset 'angular', '1.4.7'
   asset 'angular-animate', '1.4.7'
   asset 'angular-ui-router', '0.2.14'
-  asset 'angular-bootstrap', '0.13.4'
+  asset 'angular-bootstrap', '0.14.3'
   asset 'angular-truncate', 'latest'
   asset 'angular-mocks', '1.4.6'
   asset 'angular-ui-router-anim-in-out', 'latest'

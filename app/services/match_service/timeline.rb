@@ -2,15 +2,30 @@ module MatchService
 
   module Timeline
 
+    PARSER_VERSION = 2
+
     def self.aggregate(match)
+      return if self._updated?(match)
+      
       self._gen_player_role(match)
 
       self._gen_frames(match)
 
       self._sort_participants_by_role(match)
+
+      self._stamp_version(match)
     end
 
     private
+
+    def self._stamp_version(match)
+      match.timeline['parser_version'] = PARSER_VERSION
+    end
+
+    def self._updated?(match)
+      return true if match.timeline['parser_version'].to_i == PARSER_VERSION
+      false
+    end
 
     def self._gen_player_role(match)
       match.teams.each do |team|
@@ -32,12 +47,6 @@ module MatchService
 
     def self._gen_frames(match)
       return if match.timeline.blank?
-
-      # current version
-      parser_version = 2
-
-      # check version
-      return if match.timeline['parser_version'].to_i == parser_version
 
       # aggregated stats
       frame_stats_by_participant = {}
@@ -77,9 +86,6 @@ module MatchService
           end
         end
       end
-
-      # stamp version
-      match.timeline['parser_version'] = parser_version
     end
 
     # CHAMPION_KILL

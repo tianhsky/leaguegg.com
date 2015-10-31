@@ -21,7 +21,7 @@ angular.module('leaguegg.match').service('MatchService', [
       _data.query.region = region;
       _data.query.match_id = match_id;
       _data.result.match = null;
-      var url = '/api/match.json?match_id=' + match_id + '&region=' + region;
+      var url = '/api/matches/'+match_id+'.json?&region=' + region;
       if (include_timeline) {
         url += '&include_timeline=1';
       }

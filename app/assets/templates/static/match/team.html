@@ -1,68 +1,70 @@
-<div class="head-row">
-  <div class="win" ng-if="team.winner==true">Victory</div>
-  <div class="lost" ng-if="team.winner==false">Defeat</div>
-  <div class="bans">
-    <div class="ban-text">Bans</div>
-    <img class="ban-item" ng-src="{{c.img}}" ng-repeat="c in team.banned_champions"></img>
+<div>
+  <div class="head-row">
+    <div class="win" ng-if="team.winner==true">Victory</div>
+    <div class="lost" ng-if="team.winner==false">Defeat</div>
+    <div class="bans">
+      <div class="ban-text">Bans</div>
+      <img class="ban-item" ng-src="{{c.img}}" ng-repeat="c in team.banned_champions"></img>
+    </div>
   </div>
-</div>
-<div class="summary-row">
-  <player-team-summary current-frame="frame" team-id="team.id"></player-team-summary>
-</div>
-<div class="icons-row">
-  <div class="summoner">
-    &nbsp;
+  <div class="summary-row">
+    <player-team-summary current-frame="frame" team-id="team.id"></player-team-summary>
   </div>
-  <div class="items">
-    <img class="riot-icon" src="/static/img/riot/match/item.png">
+  <div class="icons-row">
+    <div class="summoner">
+      &nbsp;
+    </div>
+    <div class="items">
+      <img class="riot-icon" src="/static/img/riot/match/item.png">
+    </div>
+    <div class="kills">
+      <img class="riot-icon" src="/static/img/riot/match/kill.png">
+    </div>
+    <div class="minions">
+      <img class="riot-icon" src="/static/img/riot/match/minion.png">
+    </div>
+    <div class="gold">
+      <img class="riot-icon" src="/static/img/riot/match/gold.png">
+    </div>
   </div>
-  <div class="kills">
-    <img class="riot-icon" src="/static/img/riot/match/kill.png">
-  </div>
-  <div class="minions">
-    <img class="riot-icon" src="/static/img/riot/match/minion.png">
-  </div>
-  <div class="gold">
-    <img class="riot-icon" src="/static/img/riot/match/gold.png">
-  </div>
-</div>
-<div class="champions-section-row">
-  <div class="champions-section">
-    <div class="champion-row" ng-repeat="p in team.participants">
-      <div class="champion-icon">
-        <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
-      </div>
-      <div class="champion-spells">
-        <img ng-src="{{p.spell1.img}}" alt="{{p.spell1.name}}">
-        <br>
-        <img ng-src="{{p.spell2.img}}" alt="{{p.spell2.name}}">
-      </div>
-      <div class="summoner-name-role">
-        <div class="name">
-          {{p.summoner.name}}
+  <div class="champions-section-row">
+    <div class="champions-section">
+      <div class="champion-row" ng-repeat="p in team.participants">
+        <div class="champion-icon">
+          <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
         </div>
-        <div class="role">
-          {{p.player_role}}
+        <div class="champion-spells">
+          <img ng-src="{{p.spell1.img}}" alt="{{p.spell1.name}}">
+          <br>
+          <img ng-src="{{p.spell2.img}}" alt="{{p.spell2.name}}">
         </div>
-      </div>
-      <div class="game-items">
-        <span class="game-item" ng-repeat="it in frame.participant_frames[p.participant_id].items track by $index">
+        <div class="summoner-name-role">
+          <div class="name">
+            {{p.summoner.name}}
+          </div>
+          <div class="role">
+            {{p.player_role}}
+          </div>
+        </div>
+        <div class="game-items">
+          <span class="game-item" ng-repeat="it in frame.participant_frames[p.participant_id].items track by $index">
           <img ng-src="{{getItemImgUrlByID(it)}}" alt="item" />
         </span>
-      </div>
-      <div class="match-kda">
-        <span class="k" animate-change="frame.participant_frames[p.participant_id].kills" change-class="grow">{{frame.participant_frames[p.participant_id].kills}}</span>/<span class="d" animate-change="frame.participant_frames[p.participant_id].deaths" change-class="grow">{{frame.participant_frames[p.participant_id].deaths}}</span>/<span class="a" animate-change="frame.participant_frames[p.participant_id].assists" change-class="grow">{{frame.participant_frames[p.participant_id].assists}}</span>
-      </div>
-      <div class="cs">
-        {{frame.participant_frames[p.participant_id].minions_killed}}
-        <!-- {{frame.participant_frames[p.participant_id].jungle_minions_killed}} -->
-      </div>
-      <div class="gold">
-        <div class="current-gold">
-          {{frame.participant_frames[p.participant_id].current_gold}}
         </div>
-        <div class="total-gold">
-          / {{frame.participant_frames[p.participant_id].total_gold}}
+        <div class="match-kda">
+          <span class="k" animate-change="frame.participant_frames[p.participant_id].kills" change-class="grow">{{frame.participant_frames[p.participant_id].kills}}</span>/<span class="d" animate-change="frame.participant_frames[p.participant_id].deaths" change-class="grow">{{frame.participant_frames[p.participant_id].deaths}}</span>/<span class="a" animate-change="frame.participant_frames[p.participant_id].assists" change-class="grow">{{frame.participant_frames[p.participant_id].assists}}</span>
+        </div>
+        <div class="cs">
+          {{frame.participant_frames[p.participant_id].minions_killed}}
+          <!-- {{frame.participant_frames[p.participant_id].jungle_minions_killed}} -->
+        </div>
+        <div class="gold">
+          <div class="current-gold">
+            {{frame.participant_frames[p.participant_id].current_gold}}
+          </div>
+          <div class="total-gold">
+            / {{frame.participant_frames[p.participant_id].total_gold}}
+          </div>
         </div>
       </div>
     </div>

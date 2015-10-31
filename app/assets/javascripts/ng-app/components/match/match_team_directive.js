@@ -1,6 +1,7 @@
 angular.module('leaguegg.match').directive('matchTeam', function() {
   return {
-    restrict: 'E',
+    restrict: 'AE',
+    replace: true,
     templateUrl: 'static/match/team.html',
     scope: {
       'team': '=',

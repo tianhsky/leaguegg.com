@@ -23,10 +23,11 @@ module MatchService
         match.assign_attributes(match_hash)
       end
 
+      Stats.aggregate(match)
       Timeline.aggregate(match)
       Thread.new do
         begin
-          match.save
+          match.save if match.changed?
         rescue
         end
       end
@@ -101,8 +102,6 @@ module MatchService
       stats.aggregate_stats
       stats
     end
-
-
 
     def self.find_recent_matches(summoner_id, region, reload)
       region = region.upcase

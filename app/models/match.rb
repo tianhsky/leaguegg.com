@@ -19,6 +19,7 @@ class Match
 
   field :teams, type: Array
   field :timeline, type: Hash
+  field :stats_parser_version, type: Integer
 
   # Relations
   # embeds_many :teams, class_name: 'Games::Team'
