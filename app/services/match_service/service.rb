@@ -39,7 +39,7 @@ module MatchService
     end
 
     def self.get_matches_aggregation_for_participants(participants)
-      return nil if participants.empty?
+      return nil if participants.blank?
       stats = SummonerStats::RankedStatByRecentChampion.new
       stats.games = participants.count
       participants.each do |m|
@@ -142,7 +142,7 @@ module MatchService
           last_x_matches.each do |match_list_item|
             workers << Thread.new do
               begin
-                match_item = MatchService::Service.find_match(match_list_item['match_id'], region)
+                match_item = MatchService::Service.find_match(match_list_item['match_id'], match_list_item['region'])
                 match_items << match_item
               rescue
               end

@@ -26,9 +26,11 @@
         <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}" target="_blank" ng-click="summonerClicked(p.summoner)">{{p.summoner.name | characters:16}}</a>
       </div>
       <div class="champion-icon">
-        <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
-        <div class="champion-name">
-          <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank" ng-click="championClicked(p.summoner, p.champion)">{{p.champion.name | characters:10}}</a>
+        <div class="champ-icon-inner">
+          <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
+          <div class="champion-name">
+            <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank" ng-click="championClicked(p.summoner, p.champion)">{{p.champion.name | characters:10}}</a>
+          </div>
         </div>
       </div>
       <div class="skills">

@@ -16,6 +16,7 @@ module Api
       def recent_stats
         @recent_stats = MatchService::Service.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, 5, [])
         # respond_with :json  => @recent_stats
+        raise Errors::StatsNotFoundError.new if @recent_stats.blank?
         render 'api/summoners/stats/recent_stats'
       end
 

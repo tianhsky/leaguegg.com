@@ -43,6 +43,9 @@
             right: 10px;
             bottom: 0px;
             font-size: 1.2em;
+            a{
+              color: yellow;
+            }
             &:hover {
               transform: scale(1.5);
               transition: all .3s ease-in-out;

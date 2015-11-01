@@ -79,21 +79,42 @@
       }
       .intro {
         .summoner-name {
-          height: 45px;
+          height: 38px;
           font-weight: 500;
           word-wrap: break-word;
           text-decoration: underline;
+          a {
+            color: yellow;
+            font-size: 0.8em;
+            &:hover {
+              color: $white;
+            }
+          }
         }
         .champion-icon {
-          img {
+          position: relative;
+          .champ-icon-inner {
+            position: relative;
+            margin: 0 auto;
             width: 75px;
-            height: 73px;
-          }
-          .champion-name {
-            a {
-              font-size: 0.8em;
-              font-weight: 600;
-              text-decoration: underline;
+            height: 74px;
+            img {
+              width: 75px;
+              height: 74px;
+            }
+            .champion-name {
+              position: absolute;
+              left: 0px;
+              bottom: 0px;
+              width: 100%;
+              a {
+                font-size: 0.8em;
+                font-weight: 600;
+                text-decoration: underline;
+                &:hover {
+                  color: yellow;
+                }
+              }
             }
           }
         }
@@ -148,7 +169,7 @@
           position: relative;
           min-height: 40px;
           padding: 5px 0px;
-          .cs-stats-icon{
+          .cs-stats-icon {
             color: yellow;
           }
           .cs-chart {
@@ -180,11 +201,13 @@
           min-height: 40px;
           padding: 5px 0px;
         }
-        .kill-rate{
+        .kill-rate {
           min-height: 40px;
           padding: 5px 0px;
-          .rate-chart{
+          .rate-chart {
             padding: 6px 5px;
+            max-width: 200px;
+            margin: 0 auto;
           }
         }
         .badges {
@@ -221,10 +244,10 @@
         border: 2px solid $blue_team;
       }
     }
-    .champion-name > a {
-      color: $blue_team;
+    .champion-name {
+      background-color: rgba(66, 141, 185, 0.38);
     }
-    .cs-chart{
+    .cs-chart {
       left: 10%;
     }
   }
@@ -237,10 +260,10 @@
         border: 2px solid $red_team;
       }
     }
-    .champion-name > a {
-      color: $red_team;
+    .champion-name {
+      background-color: rgba(172, 39, 39, 0.42);
     }
-    .cs-chart{
+    .cs-chart {
       right: 10%;
     }
   }

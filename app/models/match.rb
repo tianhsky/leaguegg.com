@@ -47,6 +47,7 @@ class Match
         end
       end
     end
+    nil
   end
 
   def sanitize_attrs

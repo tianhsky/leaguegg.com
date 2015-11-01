@@ -1,17 +1,21 @@
-.loading{
-  margin: 0px auto;
+.loading {
+  margin: 0 auto;
   padding: 10px;
   margin: 10px;
-  .loading-img{
-    &.taichi{
-      img{
+  .loading-img {
+    &.taichi {
+      img {
         width: 100px;
         height: 100px;
       }
     }
-
+    &.default {
+      img {
+        max-width: 300px;
+      }
+    }
   }
-  .loading-text{
+  .loading-text {
     font-size: 1.5em;
     color: $gray;
     margin: 10px;
