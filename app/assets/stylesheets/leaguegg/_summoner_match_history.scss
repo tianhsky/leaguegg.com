@@ -1,0 +1,130 @@
+.page-summoner {
+  .summoner-match-history {
+    .match-list {
+      .match-row {
+        background-color: rgba(49, 68, 90, 0.82);
+        margin: 5px 0px;
+        .title-row {
+          position: relative;
+          background-color: rgb(46, 54, 63);
+          margin-bottom: 5px;
+          font-size: 0.9em;
+          font-weight: 900;
+          .match-type {
+            padding: 3px;
+          }
+          .wol {
+            position: absolute;
+            right: 3px;
+            top: 0px;
+          }
+        }
+        .body-row {
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+        .footer-row {
+          position: relative;
+          background-color: rgb(46, 54, 63);
+          margin-top: 5px;
+          font-size: 0.9em;
+          font-weight: 900;
+          .match-time {
+            padding: 3px;
+          }
+          .match-duration {
+            position: absolute;
+            right: 40px;
+            bottom: 0px;
+            font-size: 1.2em;
+          }
+          .match-replay {
+            position: absolute;
+            right: 10px;
+            bottom: 0px;
+            font-size: 1.2em;
+            &:hover {
+              transform: scale(1.5);
+              transition: all .3s ease-in-out;
+            }
+          }
+        }
+        .champion-info {
+          .champion-icon {
+            display: table-cell;
+            vertical-align: middle;
+            img {
+              width: 60px;
+              height: 60px;
+            }
+          }
+          .spells {
+            display: table-cell;
+            vertical-align: middle;
+            img {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+        .kill-info {}
+        .combat-info {
+          .level {
+            padding: 5px 0px;
+          }
+          .cs {
+            padding: 5px 0px;
+          }
+          .ckill {
+            padding: 5px 0px;
+            .progress {
+              max-width: 200px;
+            }
+          }
+        }
+        .items {
+          text-align: center;
+          img {
+            width: 25px;
+            height: 25px;
+          }
+          .items-inner {
+            padding: 10px 0px;
+          }
+          @media(max-width: 991px) {
+            text-align: left;
+          }
+        }
+        .players {
+          text-align: left;
+          .mteam {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 0.65em;
+            min-width: 110px;
+            .mtplayer {
+              .mtp-icon {
+                display: table-cell;
+                vertical-align: middle;
+                img {
+                  width: 21px;
+                  height: 21px;
+                }
+              }
+              .mtp-name {
+                display: table-cell;
+                vertical-align: middle;
+                .text {
+                  width: 62px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,10 @@
       <div class="link-to-all-stats row">
         <a href="/summoner/{{data.summoner.region}}/{{data.summoner.id}}-{{data.summoner.name}}">See {{data.summoner.name}}'s performance for other champions</a>
       </div>
+
+      <loading status="data.loading.champion_stats">
+      </loading>
+
       <div class="text-center" ng-if="data.error.champion_stats">
         Ranked champion stats could not be found for {{data.summoner.name}}
       </div>

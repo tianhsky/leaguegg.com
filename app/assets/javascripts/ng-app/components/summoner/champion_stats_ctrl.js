@@ -10,6 +10,23 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
       summoner_stats: null,
       champion_stats: null,
       season: $filter('titleize')(ConstsService.season),
+      loading: {
+        summoner: {
+          active: true,
+          text: null,
+          theme: 'default'
+        },
+        summoner_stats: {
+          active: true,
+          text: null,
+          theme: 'default'
+        },
+        champion_stats: {
+          active: true,
+          text: null,
+          theme: 'default'
+        }
+      },
       error: {
         summoner: null,
         summoner_stats: null,
@@ -31,28 +48,42 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
       }
     }
 
-    SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, false)
-      .then(function(data) {
-        $scope.data.summoner = data;
-        MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
-        MetaService.setDescription(data.meta_description);
+    var loadData = function() {
+      $scope.data.loading.summoner.active = false;
+      $scope.data.loading.summoner_stats.active = true;
+      $scope.data.loading.champion_stats.active = true;
 
-        SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
-          .then(function(stats) {
-            $scope.data.summoner_stats = stats;
-          }, function(err) {
-            $scope.data.error.summoner_stats = err;
-          });
+      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, false)
+        .then(function(data) {
+          $scope.data.loading.summoner.active = false;
+          $scope.data.summoner = data;
+          MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
+          MetaService.setDescription(data.meta_description);
 
-        SummonerService.fetchSummonerChampionStats($stateParams.region, $scope.data.summoner.id, $stateParams.champion)
-          .then(function(stats) {
-            $scope.data.champion_stats = stats;
-          }, function(err) {
-            $scope.data.error.champion_stats = err;
-          });
-      }, function(err) {
-        $scope.data.error.summoner = err;
-      });
+          SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
+            .then(function(stats) {
+              $scope.data.loading.summoner_stats.active = false;
+              $scope.data.summoner_stats = stats;
+            }, function(err) {
+              $scope.data.loading.summoner_stats.active = false;
+              $scope.data.error.summoner_stats = err;
+            });
+
+          SummonerService.fetchSummonerChampionStats($stateParams.region, $scope.data.summoner.id, $stateParams.champion)
+            .then(function(stats) {
+              $scope.data.loading.champion_stats.active = false;
+              $scope.data.champion_stats = stats;
+            }, function(err) {
+              $scope.data.loading.champion_stats.active = false;
+              $scope.data.error.champion_stats = err;
+            });
+        }, function(err) {
+          $scope.data.loading.summoner.active = false;
+          $scope.data.error.summoner = err;
+        });
+    }
+
+    loadData();
 
     $scope.$on('$destroy', function() {
       MetaService.useDefault();

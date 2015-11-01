@@ -122,11 +122,11 @@
       </div>
       <div class="kill-rate">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Kill participation%">Kill %</span>
+          <span class="item-label" data-tooltip="Kill contribution%">Kill %</span>
         </div>
         <div class="rate-chart">
-          <uib-progressbar max="1" value="p.ranked_stat_recent.kill_rate||0" type="{{p.ranked_stat_recent.kill_rate > 0.35 ? 'danger' : 'info'}}">
-            <p class="progress-text">{{p.ranked_stat_recent.kill_rate | percentage: 1 | nullcheck: '-'}}</p>
+          <uib-progressbar max="1" value="p.ranked_stat_recent.killc_rate||0" type="{{p.ranked_stat_recent.killc_rate > 0.5 ? 'danger' : 'info'}}">
+            <p class="progress-text">{{p.ranked_stat_recent.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
       </div>

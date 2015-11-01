@@ -4,19 +4,25 @@
   width: 1165px;
   margin: 0px auto;
   text-align: center;
-  .info{
+  .nav-btn {
+    float: right;
+    a {
+      color: yellow;
+    }
+  }
+  .info {
     margin: 0px auto;
     width: 1110px;
     text-align: left;
-    padding-bottom:  20px;
-    .match-type{
+    padding-bottom: 20px;
+    .match-type {
       margin-bottom: 0px;
     }
-    .duration{
+    .duration {
       font-weight: 900;
       font-size: 1.5em;
     }
-    .created_at{
+    .created_at {
       font-weight: 300;
       font-size: 1.3em;
     }

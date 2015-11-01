@@ -1,0 +1,69 @@
+<div>
+  <div class="match-row row" ng-repeat="m in matches">
+    <div class="title-row">
+      <div class="match-type">
+        {{m.queue_type | titleize}}
+      </div>
+      <div class="wol">
+        <span class="label" ng-class="{'label-success':m.cp.stats.winner, 'label-danger':!m.cp.stats.winner}">{{m.cp.stats.winner ? 'Victory' : 'Defeat'}}</span>
+      </div>
+    </div>
+    <div class="body-row row">
+      <div class="champion-info col-md-2">
+        <div class="champion-icon">
+          <img ng-src="{{m.cp.champion.img}}" alt="{{m.cp.champion.name}}">
+        </div>
+        <div class="spells">
+          <img ng-src="{{m.cp.spell1.img}}" alt="{{m.cp.spell1.name}}">
+          <img ng-src="{{m.cp.spell2.img}}" alt="{{m.cp.spell2.name}}">
+        </div>
+      </div>
+      <div class="kill-info col-md-2">
+        <div class="kda">
+          <kda k="m.cp.stats.kills" d="m.cp.stats.deaths" a="m.cp.stats.assists" rate="m.cp.stats_aggretated.kda_rate" />
+        </div>
+      </div>
+      <div class="combat-info col-md-2">
+        <div class="level">
+          LV {{m.cp.stats.champ_level}}
+        </div>
+        <div class="cs">
+          CS {{m.cp.stats.minions_killed}}
+        </div>
+        <div class="ckill" data-tooltip="Kill Contribution">
+          <uib-progressbar max="1" value="m.cp.stats_aggretated.killc_rate||0" type="{{m.cp.stats_aggretated.killc_rate > 0.5 ? 'danger' : 'info'}}">
+            <p class="progress-text">C/Kill {{m.cp.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
+        </div>
+      </div>
+      <div class="items col-md-2">
+        <div class="items-inner">
+          <img ng-src="{{m.cp.stats.item0.img}}" alt="{{m.cp.stats.item0.name}}">
+          <img ng-src="{{m.cp.stats.item1.img}}" alt="{{m.cp.stats.item1.name}}">
+          <img ng-src="{{m.cp.stats.item2.img}}" alt="{{m.cp.stats.item2.name}}">
+          <img ng-src="{{m.cp.stats.item3.img}}" alt="{{m.cp.stats.item3.name}}">
+          <img ng-src="{{m.cp.stats.item4.img}}" alt="{{m.cp.stats.item4.name}}">
+          <img ng-src="{{m.cp.stats.item5.img}}" alt="{{m.cp.stats.item5.name}}">
+          <img ng-src="{{m.cp.stats.item6.img}}" alt="{{m.cp.stats.item6.name}}">
+        </div>
+      </div>
+      <div class="players col-sm-4">
+        <div match-team-simple class="mteam" team="m.teams[0]">
+        </div>
+        <div match-team-simple class="mteam" team="m.teams[1]">
+        </div>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="match-time">
+        {{m.created_at | time_from_now:'unix'}}
+      </div>
+      <div class="match-duration">
+        {{m.match_duration | duration:'sec'}}
+      </div>
+      <div class="match-replay">
+        <a href="{{match_play_url_prefix}}{{m.id}}"><i class="fa fa-play-circle-o"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

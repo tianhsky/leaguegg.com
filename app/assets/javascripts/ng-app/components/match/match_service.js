@@ -40,7 +40,7 @@ angular.module('leaguegg.match').service('MatchService', [
 
     self.getMatchInfo = function(region, match_id, include_timeline) {
       var shouldFetch = false;
-      shouldFetch = _data.result.match ? false : true;
+      shouldFetch = true;
       if (shouldFetch) {
         return self.fetchMatchInfo(region, match_id, include_timeline);
       } else {

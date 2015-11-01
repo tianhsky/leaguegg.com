@@ -37,6 +37,7 @@ module MatchService
             'kill_rate' => (stat['kills'].to_f / total_kills).round(3),
             'death_rate' => (stat['deaths'].to_f / total_deaths).round(3),
             'assist_rate' => (stat['assists'].to_f / total_assists).round(3),
+            'killc_rate' => ((stat['kills']+stat['assists']).to_f / total_kills).round(3),
             'dmg_rate' => (stat['total_damage_dealt'].to_f / total_dmg).round(3),
             'wards_placed_rate' => (stat['wards_placed'].to_f / total_wards_placed).round(3)
           }

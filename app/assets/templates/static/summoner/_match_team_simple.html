@@ -1,0 +1,14 @@
+<div>
+  <div class="mtplayer" ng-repeat="p in team.participants">
+    <div class="mtp-icon">
+      <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
+    </div>
+    <div class="mtp-name">
+      <div class="text">
+        <a href="{{p.url}}">
+          {{p.summoner.name}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

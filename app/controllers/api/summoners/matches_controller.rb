@@ -3,7 +3,12 @@ module Api
     class MatchesController < Api::BaseController
 
       def index
-        @matches = MatchService::Service.find_recent_matches(summoner_id, region, reload?)
+        if sid = summoner_id
+        else
+          find_summoner
+          sid = @summoner.summoner_id
+        end
+        @matches = MatchService::Service.find_recent_matches(sid, region, reload?)
         @exclude_timeline = true
         @exclude_runes = true
         @exclude_masteries = true
@@ -12,20 +17,36 @@ module Api
 
       protected
 
+      def find_summoner
+        if summoner_id.present?
+          @summoner = SummonerService::Service.find_summoner_by_summoner_id(summoner_id, region)
+        else summoner_name.present?
+          @summoner = SummonerService::Service.find_summoner_by_summoner_name(summoner_name, region)
+        end
+      end
+
       def summoner_id
-        params['summoner_id']
+        tokens = summoner_id_or_name.split('-')
+        if tokens.length == 2
+          return tokens[0]
+        end
+        nil
       end
 
       def summoner_name
-        params['summoner_name']
+        tokens = summoner_id_or_name.split('-')
+        if tokens.length == 1
+          return tokens[0]
+        else
+          if tokens.length == 2
+            return tokens[1]
+          end
+        end
+        nil
       end
 
-      def champion_id
-        params['champion_id']
-      end
-
-      def champion_name
-        params['champion_name']
+      def summoner_id_or_name
+        params['summoner_id_or_name']
       end
 
       def region

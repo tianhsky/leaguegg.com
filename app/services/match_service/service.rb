@@ -6,20 +6,17 @@ module MatchService
       params = {match_id: match_id, region: region.upcase}
       # find in db first
       match = Match.where(params).first
-      should_refetch = true
+
       if match
         if include_timeline && match.timeline.blank?
-          should_refetch = true
-        else
-          should_refetch = false
+          match_json = Riot.find_match(match_id, region, include_timeline)
+          match_hash = Factory.build_match_hash(match_json)
+          match.timeline = match_hash['timeline']
         end
-      end
-
-      if should_refetch
-        # if not found in db, find through api
+      else
         match_json = Riot.find_match(match_id, region, include_timeline)
         match_hash = Factory.build_match_hash(match_json)
-        match ||= Match.new
+        match = Match.new
         match.assign_attributes(match_hash)
       end
 
@@ -49,7 +46,7 @@ module MatchService
         next if m.blank?
         stats.champion_id = m['champion_id']
         if ag = m['stats_aggretated']
-          stats.total_kill_rate += ag['kill_rate']
+          stats.total_killc_rate += ag['killc_rate']
         end
         if stat = m['stats']
           stats.won += 1 if stat['winner']
@@ -188,19 +185,23 @@ module MatchService
 
         if summoner_name_missing
           begin
-            summoners = SummonerService::Service.find_summoner_by_summoner_ids(fellow_summoner_ids, match.region)
-            if summoners
-              match.teams.each do |team|
-                team['participants'].each do |p|
-                  if p['summoner_id']
-                    if s = summoners.find{|x|x.summoner_id == p['summoner_id']}
-                      p['summoner_name'] = s.name
+            t1_champion_ids = match.teams[0]['participants'].flat_map{|x|x['champion_id']}
+            t2_champion_ids = match.teams[1]['participants'].flat_map{|x|x['champion_id']}
+            if t1_champion_ids.uniq.length == t1_champion_ids.length && t2_champion_ids.uniq.length == t2_champion_ids.length
+              summoners = SummonerService::Service.find_summoner_by_summoner_ids(fellow_summoner_ids, match.region)
+              if summoners
+                match.teams.each do |team|
+                  team['participants'].each do |p|
+                    if p['summoner_id']
+                      if s = summoners.find{|x|x.summoner_id == p['summoner_id']}
+                        p['summoner_name'] = s.name
+                      end
                     end
                   end
                 end
               end
             end
-          # rescue
+            rescue
           end
         end
       end

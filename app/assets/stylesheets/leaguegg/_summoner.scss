@@ -1,5 +1,5 @@
 .page-summoner {
-  .summoner-info-wrapper{
+  .summoner-info-wrapper {
     min-height: 500px;
   }
   .summoner-profile {
@@ -53,8 +53,7 @@
             font-style: italic;
             color: $gray;
           }
-          .r-team-name{
-          }
+          .r-team-name {}
           .r-tier {
             font-weight: 400;
           }
@@ -69,165 +68,25 @@
       }
     }
   }
-  .summoner-champions {
-    .champion-stats {
-      .title-label {
-        font-weight: bolder;
-        color: #8D8D8D;
+  .summoner-tabs {
+    width: 100%;
+    display: table;
+    text-align: center;
+    margin: 5px 0px 20px 0px;
+    .tab {
+      width: 50%;
+      cursor: pointer;
+      display: table-cell;
+      border: 1px solid rgba(82, 77, 67, 0.75);
+      font-size: 1.2em;
+      font-weight: 900;
+      padding: 5px;
+      background: rgba(57, 73, 89, 0.53);
+      &:hover{
+        background-color: #344B65;
       }
-      .champion-search {
-        position: relative;
-        .c-search {
-          width: 100%;
-          border: none;
-          font-size: 1.5em;
-          height: 45px;
-          background: transparent;
-          border-bottom: 1px solid gray;
-          &:focus {
-            outline: 0px !important;
-            -webkit-appearance: none;
-          }
-        }
-        .c-search-icon {
-          position: absolute;
-          display: inline;
-          right: 10px;
-          bottom: 0px;
-          padding: 5px;
-          font-size: 1.6em;
-          color: rgba(128, 128, 128, 0.55);
-        }
-      }
-      .search-title {
-        margin-bottom: 20px;
-      }
-      .update-btn-wrapper {
-        min-height: 35px;
-        position: relative;
-        .update-btn{
-          position: absolute;
-          top: 0px;
-          right: 0px;
-        }
-      }
-      .instruction{
-        color: yellow;
-      }
-      .search-result-header {
-        margin: 10px 0px;
-        .column-header {
-          @media(max-width: 480px) {
-            font-size: 0.6em;
-          }
-          background-color: $gray;
-          cursor: pointer;
-          font-size: 0.9em;
-          &:hover {
-            background-color: #787878;
-          }
-        }
-      }
-      .champion-item {
-        @media(max-width: 480px) {
-          font-size: 0.9em;
-          padding: 0px;
-        }
-        background-color: rgba(42, 42, 42, 0.5);
-        padding: 3px 4px;
-        margin: 3px;
-        &:hover,
-        &:focus {
-          background-color: rgba(54, 54, 54, 0.65);
-          cursor: pointer;
-        }
-        .c-icon {
-          position: relative;
-          @media(max-width: 480px) {
-            padding: 3px 0px;
-          }
-          border-left: 4px solid #C1E8FF;
-          img {
-            width: 65px;
-            height: 65px;
-          }
-          .c-name {
-            font-size: 0.7em;
-            width: 65px;
-            position: absolute;
-            bottom: 0px;
-            background-color: rgba(42, 79, 161, 0.66);
-            text-overflow: ellipsis;
-            overflow: hidden;
-            text-align: center;
-          }
-        }
-        .c-item {
-          padding: 8px 0px;
-          @media(max-width: 480px) {
-            padding: auto;
-          }
-        }
-        .c-wl {}
-        .c-kda {}
-        .c-aggresive {}
-      }
-    }
-  }
-  .summoner-champion-stat {
-    .link-to-all-stats {
-      padding: 3px 15px;
-      a {
-        float: right;
-        font-size: 0.7em;
-        color: yellow;
-      }
-    }
-    .stats-summary {
-      margin: 20px 0px;
-      .c-icon {
-        img {
-          border: 1px solid rgba(134, 255, 255, 0.36);
-          width: 140px;
-          height: 210px;
-        }
-      }
-      .c-compare {
-        // border: 1px solid rgba(134, 255, 255, 0.36);
-        vertical-align: top;
-        padding: 15px;
-      }
-    }
-    .stats-breakdown {
-      .chart-item {
-        font-size: 0.8em;
-        color: #61A9D2;
-        max-width: 350px;
-        margin: 0px auto;
-        border: 1px solid rgba(68, 164, 210, 0.21);
-        padding: 10px;
-      }
-      .stats-facts {
-        @media(max-width: 768px) {
-          text-align: center;
-        }
-        .fact-items {
-          .fact-item-group {
-            border: 1px solid rgba(68, 164, 210, 0.21);
-            padding: 10px;
-          }
-          .fact-item {
-            padding: 5px 0px;
-            .item-label {
-              font-size: 0.8em;
-              color: #61A9D2;
-            }
-            .item-value {
-              font-size: 1em;
-              // padding-left: 15px;
-            }
-          }
-        }
+      &.active{
+        background-color: rgba(52, 75, 101, 0.83);
       }
     }
   }

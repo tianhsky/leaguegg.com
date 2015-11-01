@@ -8,8 +8,8 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     $scope.loading = {
       game: {
         active: true,
-        text: 'Loading game stats from RIOT ...',
-        theme: 'taichi'
+        text: 'Loading Game ...',
+        theme: 'default'
       }
     };
     $scope.query = {

@@ -26,6 +26,9 @@ end
 json.kills stat['kills']
 json.deaths stat['deaths']
 json.assists stat['assists']
+json.minions_killed stat['minions_killed']
+json.wards_placed stat['wards_placed']
+json.first_blood_kill stat['first_blood_kill']
 
 if !@exclude_detail_stats
   json.double_kills stat['double_kills']
@@ -39,7 +42,6 @@ if !@exclude_detail_stats
   json.total_damage_taken stat['total_damage_taken']
   json.largest_critical_strike stat['largest_critical_strike']
   json.total_heal stat['total_heal']
-  json.minions_killed stat['minions_killed']
   json.neutral_minions_killed stat['neutral_minions_killed']
   json.neutral_minions_killed_team_jungle stat['neutral_minions_killed_team_jungle']
   json.neutral_minions_killed_enemy_jungle stat['neutral_minions_killed_enemy_jungle']
@@ -60,7 +62,6 @@ if !@exclude_detail_stats
   json.magic_damage_taken stat['magic_damage_taken']
   json.physical_damage_taken stat['physical_damage_taken']
   json.true_damage_taken stat['true_damage_taken']
-  json.first_blood_kill stat['first_blood_kill']
   json.first_blood_assist stat['first_blood_assist']
   json.first_tower_kill stat['first_tower_kill']
   json.first_tower_assist stat['first_tower_assist']
@@ -68,7 +69,6 @@ if !@exclude_detail_stats
   json.first_inhibitor_assist stat['first_inhibitor_assist']
   json.inhibitor_kills stat['inhibitor_kills']
   json.tower_kills stat['tower_kills']
-  json.wards_placed stat['wards_placed']
   json.wards_killed stat['wards_killed']
   json.largest_multi_kill stat['largest_multi_kill']
   json.killing_sprees stat['killing_sprees']

@@ -1,19 +1,29 @@
 <div class="page-match">
-  <div class="info">
-    <h2 class="match-type">{{data.match.queue_type | titleize}}</h2>
-    <div>
-      <span class="duration">{{data.match.match_duration | duration:'sec'}}</span>
-      &nbsp;&nbsp;&nbsp;
-      <span class="created_at">{{data.match.created_at | time_from_now:'unix'}}</span>
+
+  <loading status="data.loading.match">
+  </loading>
+
+  <div ng-if="data.match">
+    <div class="nav-btn">
+      <a href="/summoner/{{data.summoner.region}}/{{data.summoner.id}}-{{data.summoner.name}}/matches/">See {{data.summoner.name}}'s recent matches</a>
+    </div>
+    <div class="info">
+      <h2 class="match-type">{{data.match.queue_type | titleize}}</h2>
+      <div>
+        <span class="duration">{{data.match.match_duration | duration:'sec'}}</span>
+        &nbsp;&nbsp;&nbsp;
+        <span class="created_at">{{data.match.created_at | time_from_now:'unix'}}</span>
+      </div>
+    </div>
+    <div class="match-player">
+      <div class="match-tables">
+        <div match-team class="match-table" team="data.match.teams[0]" frame="data.match.timeline.frames[data.current_frame]"></div>
+        <div match-team class="match-table" team="data.match.teams[1]" frame="data.match.timeline.frames[data.current_frame]"></div>
+      </div>
+      <div class="timeline-player-row" player-bar total-frames="data.match.timeline.frames.length" current-frame="data.current_frame" status="data.player_status" play="play()" pause="pause()" stop="stop()"></div>
+    </div>
+    <div match-stats class="match-stats" match="data.match">
     </div>
   </div>
-  <div class="match-player">
-    <div class="match-tables">
-      <div match-team class="match-table" team="data.match.teams[0]" frame="data.match.timeline.frames[data.current_frame]"></div>
-      <div match-team class="match-table" team="data.match.teams[1]" frame="data.match.timeline.frames[data.current_frame]"></div>
-    </div>
-    <div class="timeline-player-row" player-bar total-frames="data.match.timeline.frames.length" current-frame="data.current_frame" status="data.player_status" play="play()" pause="pause()" stop="stop()"></div>
-  </div>
-  <div match-stats class="match-stats" match="data.match">
-  </div>
+  
 </div>

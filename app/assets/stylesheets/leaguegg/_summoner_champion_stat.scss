@@ -1,0 +1,59 @@
+.page-summoner {
+  .summoner-champion-stat {
+    .link-to-all-stats {
+      padding: 3px 15px;
+      a {
+        float: right;
+        font-size: 0.7em;
+        color: yellow;
+      }
+    }
+    .stats-summary {
+      margin: 20px 0px;
+      .c-icon {
+        img {
+          border: 1px solid rgba(134, 255, 255, 0.36);
+          width: 140px;
+          height: 210px;
+        }
+      }
+      .c-compare {
+        // border: 1px solid rgba(134, 255, 255, 0.36);
+        vertical-align: top;
+        padding: 15px;
+      }
+    }
+    .stats-breakdown {
+      .chart-item {
+        font-size: 0.8em;
+        color: #61A9D2;
+        max-width: 350px;
+        margin: 0px auto;
+        border: 1px solid rgba(68, 164, 210, 0.21);
+        padding: 10px;
+      }
+      .stats-facts {
+        @media(max-width: 768px) {
+          text-align: center;
+        }
+        .fact-items {
+          .fact-item-group {
+            border: 1px solid rgba(68, 164, 210, 0.21);
+            padding: 10px;
+          }
+          .fact-item {
+            padding: 5px 0px;
+            .item-label {
+              font-size: 0.8em;
+              color: #61A9D2;
+            }
+            .item-value {
+              font-size: 1em;
+              // padding-left: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

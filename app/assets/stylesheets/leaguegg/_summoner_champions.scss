@@ -1,0 +1,107 @@
+.page-summoner {
+  .summoner-champions {
+    .champion-stats {
+      .title-label {
+        font-weight: bolder;
+        color: #8D8D8D;
+      }
+      .champion-search {
+        position: relative;
+        .c-search {
+          width: 100%;
+          border: none;
+          font-size: 1.5em;
+          height: 45px;
+          background: transparent;
+          border-bottom: 1px solid gray;
+          &:focus {
+            outline: 0px !important;
+            -webkit-appearance: none;
+          }
+        }
+        .c-search-icon {
+          position: absolute;
+          display: inline;
+          right: 10px;
+          bottom: 0px;
+          padding: 5px;
+          font-size: 1.6em;
+          color: rgba(128, 128, 128, 0.55);
+        }
+      }
+      .search-title {
+        margin-bottom: 20px;
+      }
+      .update-btn-wrapper {
+        min-height: 35px;
+        position: relative;
+        .update-btn {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+      }
+      .instruction {
+        color: yellow;
+      }
+      .search-result-header {
+        margin: 10px 0px;
+        .column-header {
+          @media(max-width: 480px) {
+            font-size: 0.6em;
+          }
+          background-color: $gray;
+          cursor: pointer;
+          font-size: 0.9em;
+          &:hover {
+            background-color: #787878;
+          }
+        }
+      }
+      .champion-item {
+        @media(max-width: 480px) {
+          font-size: 0.9em;
+          padding: 0px;
+        }
+        background-color: rgba(42, 42, 42, 0.5);
+        padding: 3px 4px;
+        margin: 3px;
+        &:hover,
+        &:focus {
+          background-color: rgba(54, 54, 54, 0.65);
+          cursor: pointer;
+        }
+        .c-icon {
+          position: relative;
+          @media(max-width: 480px) {
+            padding: 3px 0px;
+          }
+          border-left: 4px solid #C1E8FF;
+          img {
+            width: 65px;
+            height: 65px;
+          }
+          .c-name {
+            font-size: 0.7em;
+            width: 65px;
+            position: absolute;
+            bottom: 0px;
+            background-color: rgba(42, 79, 161, 0.66);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+          }
+        }
+        .c-item {
+          padding: 8px 0px;
+          @media(max-width: 480px) {
+            padding: auto;
+          }
+        }
+        .c-wl {}
+        .c-kda {}
+        .c-aggresive {}
+      }
+    }
+  }
+}

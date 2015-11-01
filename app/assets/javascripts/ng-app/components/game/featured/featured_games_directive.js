@@ -13,7 +13,7 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
           featured: {
             active: true,
             text: null,
-            theme: 'taichi'
+            theme: 'default'
           }
         };
 

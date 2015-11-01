@@ -7,6 +7,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
     MetaService.setTitle($stateParams.summoner + ' - ' + $stateParams.region + ' - Summoners - League of Legends');
 
     $scope.data = {
+      tab: 'performance',
       summoner: null,
       summoner_stats: null,
       season: $filter('titleize')(ConstsService.season),
@@ -17,13 +18,13 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
       loading: {
         summoner: {
           active: true,
-          text: 'Loading summoner ...',
-          theme: 'taichi'
+          text: null,
+          theme: 'default'
         },
         summoner_stats: {
           active: true,
-          text: 'Loading summoner stats ...',
-          theme: 'taichi'
+          text: null,
+          theme: 'default'
         }
       }
     }
@@ -39,8 +40,8 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
 
       SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, true)
         .then(function(data) {
-          $scope.data.summoner = data;
           $scope.data.loading.summoner.active = false;
+          $scope.data.summoner = data;
           MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
           MetaService.setDescription(data.meta_description);
           
@@ -59,7 +60,7 @@ angular.module('leaguegg.summoner').controller('SummonerCtrl', [
 
     }
 
-    updateStats(false);
+    updateStats(true);
 
 
     $scope.$on('$destroy', function() {

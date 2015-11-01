@@ -10,7 +10,7 @@ json.match_version match.match_version
 json.created_at match.riot_created_at
 
 json.teams match.teams, partial: 'api/matches/team', as: :team
-json.summoner_ids match.summoner_ids
+#json.summoner_ids match.summoner_ids
 
 if !@exclude_timeline
   if match.timeline
