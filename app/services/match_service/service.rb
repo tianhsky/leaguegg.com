@@ -123,7 +123,7 @@ module MatchService
       else
         matches = Match.where('summoner_ids':summoner_id, 'region':region).order_by(['riot_created_at', -1]).limit(20)
       end
-      matches
+      return matches.sort_by{|x|-x.riot_created_at}
     end
 
     def self.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, x=3, prefetched_match_list=[])

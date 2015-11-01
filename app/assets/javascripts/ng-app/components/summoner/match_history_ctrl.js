@@ -57,7 +57,7 @@ angular.module('leaguegg.summoner').controller('SummonerMatchHistoryCtrl', [
 
     }
 
-    updateHistory(true);
+    updateHistory(false);
 
 
     $scope.$on('$destroy', function() {

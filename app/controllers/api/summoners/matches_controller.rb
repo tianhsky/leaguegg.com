@@ -3,16 +3,19 @@ module Api
     class MatchesController < Api::BaseController
 
       def index
-        if sid = summoner_id
-        else
-          find_summoner
-          sid = @summoner.summoner_id
-        end
-        @matches = MatchService::Service.find_recent_matches(sid, region, reload?)
+        find_summoner
         @exclude_timeline = true
         @exclude_runes = true
         @exclude_masteries = true
         @exclude_detail_stats = true
+
+        should_reload = false
+        if reload?
+          should_reload = true
+        else
+          should_reload = true if @summoner.recent_matches_update_expired?
+        end
+        @matches = @summoner.recent_matches(should_reload)
       end
 
       protected
@@ -54,6 +57,7 @@ module Api
       end
 
       def reload?
+        return true
         params[:reload].blank? ? false : true
       end
 

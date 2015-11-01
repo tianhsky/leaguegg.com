@@ -53,14 +53,14 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
       $scope.data.loading.summoner_stats.active = true;
       $scope.data.loading.champion_stats.active = true;
 
-      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, false)
+      SummonerService.getSummonerInfo($stateParams.region, $stateParams.summoner, true)
         .then(function(data) {
           $scope.data.loading.summoner.active = false;
           $scope.data.summoner = data;
           MetaService.setTitle(data.name + ' - ' + data.region_name + ' - Summoners - League of Legends');
           MetaService.setDescription(data.meta_description);
 
-          SummonerService.getSummonerSeasonStats($stateParams.region, data.id)
+          SummonerService.getSummonerSeasonStats($stateParams.region, data.id, true)
             .then(function(stats) {
               $scope.data.loading.summoner_stats.active = false;
               $scope.data.summoner_stats = stats;

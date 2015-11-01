@@ -1,0 +1,22 @@
+<div ng-repeat="p in team.participants">
+  <div class="mtp-icon">
+    <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
+  </div>
+  <div class="mtp-name">
+    <div class="text">
+      <a href="{{p.url}}">
+          {{p.summoner.name}}
+        </a>
+    </div>
+  </div>
+  <div class="mtp-kda">
+    {{p.stats_aggretated.kda_rate | number: 1 | nullcheck}}
+    <img class="riot-icon" src="/static/img/riot/match/kill.png">
+    {{p.stats.kills}}/{{p.stats.deaths}}/{{p.stats.assists}}
+  </div>
+  <div class="mtp-ckill">
+    <uib-progressbar max="1" value="p.stats_aggretated.killc_rate||0" type="{{p.stats_aggretated.killc_rate > 0.5 ? 'danger' : 'info'}}">
+      <p class="progress-text">C/Kill {{p.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+    </uib-progressbar>
+  </div>
+</div>

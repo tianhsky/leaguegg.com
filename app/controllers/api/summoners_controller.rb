@@ -5,22 +5,22 @@ module Api
       find_summoner
     end
 
-    def recent_matches
-      begin
-        find_summoner
-      rescue Exception => ex
-        if reload?
-          should_reload = reload?
-        else
-          should_reload = true if @summoner.recent_matches_update_expired?
-        end
-        @recent_matches = @summoner.recent_matches(should_reload)
-        @recent_stats = Match.aggretate_stats(@recent_matches)
+    # def recent_matches
+    #   begin
+    #     find_summoner
+    #   rescue Exception => ex
+    #     if reload?
+    #       should_reload = reload?
+    #     else
+    #       should_reload = true if @summoner.recent_matches_update_expired?
+    #     end
+    #     @recent_matches = @summoner.recent_matches(should_reload)
+    #     @recent_stats = Match.aggretate_stats(@recent_matches)
 
-      rescue Exception => ex
-        @error = ex
-      end
-    end
+    #   rescue Exception => ex
+    #     @error = ex
+    #   end
+    # end
 
     protected
 

@@ -3,7 +3,7 @@
     .match-list {
       .match-row {
         background-color: rgba(49, 68, 90, 0.82);
-        margin: 5px 0px;
+        margin: 10px 0px;
         .title-row {
           position: relative;
           background-color: rgb(46, 54, 63);
@@ -11,6 +11,7 @@
           font-size: 0.9em;
           font-weight: 900;
           .match-type {
+            display: inline-block;
             padding: 3px;
           }
           .wol {
@@ -30,29 +31,25 @@
           font-size: 0.9em;
           font-weight: 900;
           .match-time {
+            display: inline-block;
             padding: 3px;
           }
-          .match-duration {
-            position: absolute;
-            right: 40px;
-            bottom: 0px;
-            font-size: 1.2em;
-          }
-          .match-replay {
+          .detail-expand-btn {
             position: absolute;
             right: 10px;
             bottom: 0px;
             font-size: 1.2em;
-            a{
-              color: yellow;
-            }
+            cursor: pointer;
             &:hover {
-              transform: scale(1.5);
-              transition: all .3s ease-in-out;
+              transform: scale(1.2);
             }
           }
         }
         .champion-info {
+          max-width: 150px;
+          .champion-info-inner {
+            margin: 2px 0px 10px 0px;
+          }
           .champion-icon {
             display: table-cell;
             vertical-align: middle;
@@ -67,6 +64,14 @@
             img {
               width: 28px;
               height: 28px;
+            }
+          }
+          .match-label {
+            display: block;
+            font-size: 1.0em;
+            padding: 2px 2px;
+            &:hover {
+              transform: scale(1.1);
             }
           }
         }
@@ -105,27 +110,46 @@
             vertical-align: middle;
             font-size: 0.65em;
             min-width: 110px;
-            .mtplayer {
-              .mtp-icon {
-                display: table-cell;
-                vertical-align: middle;
-                img {
-                  width: 21px;
-                  height: 21px;
-                }
-              }
-              .mtp-name {
-                display: table-cell;
-                vertical-align: middle;
-                .text {
-                  width: 62px;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
-                }
-              }
-            }
+            .mtplayer {}
           }
+        }
+        .match-detail-row {
+          font-size: 0.8em;
+          margin: 3px 0px;
+          background-color: rgb(42, 72, 109);
+        }
+        .mtp-icon {
+          display: table-cell;
+          vertical-align: middle;
+          img {
+            width: 21px;
+            height: 21px;
+          }
+        }
+        .mtp-name {
+          display: table-cell;
+          vertical-align: middle;
+          .text {
+            width: 62px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        .mtp-kda {
+          display: table-cell;
+          vertical-align: middle;
+          width: 125px;
+          padding: 0px 6px;
+          .riot-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+          }
+        }
+        .mtp-ckill {
+          display: table-cell;
+          vertical-align: middle;
         }
       }
     }

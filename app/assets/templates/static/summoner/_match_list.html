@@ -10,12 +10,22 @@
     </div>
     <div class="body-row row">
       <div class="champion-info col-md-2">
-        <div class="champion-icon">
-          <img ng-src="{{m.cp.champion.img}}" alt="{{m.cp.champion.name}}">
+        <div class="champion-info-inner">
+          <div class="champion-icon">
+            <img ng-src="{{m.cp.champion.img}}" alt="{{m.cp.champion.name}}">
+          </div>
+          <div class="spells">
+            <img ng-src="{{m.cp.spell1.img}}" alt="{{m.cp.spell1.name}}">
+            <img ng-src="{{m.cp.spell2.img}}" alt="{{m.cp.spell2.name}}">
+          </div>
         </div>
-        <div class="spells">
-          <img ng-src="{{m.cp.spell1.img}}" alt="{{m.cp.spell1.name}}">
-          <img ng-src="{{m.cp.spell2.img}}" alt="{{m.cp.spell2.name}}">
+        <div class="match-label label label-warning">
+          <span class="match-duration">
+            <a href="{{match_play_url_prefix}}{{m.id}}">
+              {{m.match_duration | duration:'sec'}}
+              <i class="fa fa-play-circle-o"></i>
+            </a>
+          </span>
         </div>
       </div>
       <div class="kill-info col-md-2">
@@ -56,14 +66,15 @@
     </div>
     <div class="footer-row">
       <div class="match-time">
-        {{m.created_at | time_from_now:'unix'}}
+        <i class="fa fa-clock-o"></i> {{m.created_at | time_from_now:'unix'}}
       </div>
-      <div class="match-duration">
-        {{m.match_duration | duration:'sec'}}
+      <div class="detail-expand-btn" ng-click="m.active = !m.active">
+        <i class="fa fa-caret-down" ng-class="{'fa-caret-down':!m.active, 'fa-caret-up':m.active}"></i>
       </div>
-      <div class="match-replay">
-        <a href="{{match_play_url_prefix}}{{m.id}}"><i class="fa fa-play-circle-o"></i></a>
-      </div>
+    </div>
+    <div class="match-detail-row row" ng-show="m.active">
+      <div match-team-detail-simple team="m.teams[0]" class="match-team col-md-6"></div>
+      <div match-team-detail-simple team="m.teams[1]" class="match-team col-md-6"></div>
     </div>
   </div>
 </div>
