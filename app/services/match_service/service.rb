@@ -2,7 +2,7 @@ module MatchService
 
   module Service
 
-    def self.find_match(match_id, region, include_timeline=false)
+    def self.find_match(match_id, region, include_timeline=false, match_players=nil)
       params = {match_id: match_id, region: region.upcase}
       # find in db first
       match = Match.where(params).first
@@ -23,11 +23,12 @@ module MatchService
         match.assign_attributes(match_hash)
       end
 
+      self.map_summoners_info(match, match_players)
       Stats.aggregate(match)
       Timeline.aggregate(match)
       Thread.new do
         begin
-          match.save if match.changed?
+          match.save
         rescue
         end
       end
@@ -47,6 +48,9 @@ module MatchService
       participants.each do |m|
         next if m.blank?
         stats.champion_id = m['champion_id']
+        if ag = m['stats_aggretated']
+          stats.total_kill_rate += ag['kill_rate']
+        end
         if stat = m['stats']
           stats.won += 1 if stat['winner']
           stats.lost +=1 unless stat['winner']
@@ -104,21 +108,23 @@ module MatchService
     end
 
     def self.find_recent_matches(summoner_id, region, reload)
+      summoner_id = summoner_id.to_i
       region = region.upcase
       if reload
         matches = []
         workers = []
-        workers << Thread.new do
-          matches_json = Riot.find_recent_matches(summoner_id, region)
-          matches_json['games'].each do |match_json|
+        matches_json = Riot.find_recent_matches(summoner_id, region)
+        matches_json['games'].each do |match_json|
+          workers << Thread.new do
             match_id = match_json['game_id']
-            match = Service.find_match(match_id, region)
+            Factory::build_match_players_json(match_json, summoner_id)
+            match = Service.find_match(match_id, region, false, match_json['fellow_players'])
             matches << match if match
           end
         end
         workers.map(&:join)
       else
-        matches = Match.where('teams.participants.summoner_id':summoner_id, 'region':region).order_by(['riot_created_at', -1]).limit(15)
+        matches = Match.where('summoner_ids':summoner_id, 'region':region).order_by(['riot_created_at', -1]).limit(20)
       end
       matches
     end
@@ -149,15 +155,66 @@ module MatchService
 
           return self.get_matches_aggregation_for_matches(match_items, summoner_id)
         end
-        rescue => ex
-          begin
-            Airbrake.notify_or_ignore(ex,
-            parameters: {
-              'action' => 'Generate recent stats for matches'
-            })
-          rescue
-          end
+      rescue => ex
+        begin
+          Airbrake.notify_or_ignore(ex,
+          parameters: {
+            'action' => 'Generate recent stats for matches'
+          })
+        rescue
+        end
       end
+    end
+
+    private
+
+    def self.map_summoners_info(match, match_players=nil)
+      match.summoner_ids ||= []
+
+      if fps = match_players
+        fellow_summoner_ids = match_players.map{|p|p['summoner_id']}
+
+        summoner_name_missing = false
+        match.teams.each do |team|
+          team['participants'].each do |p|
+            if pl = fps.find{|fp| fp['team_id']==team['team_id'] && fp['champion_id']==p['champion_id']}
+              p['summoner_id'] ||= pl['summoner_id']
+              if p['summoner_name'].blank?
+                summoner_name_missing = true
+              end
+            end
+          end
+        end
+
+        if summoner_name_missing
+          begin
+            summoners = SummonerService::Service.find_summoner_by_summoner_ids(fellow_summoner_ids, match.region)
+            if summoners
+              match.teams.each do |team|
+                team['participants'].each do |p|
+                  if p['summoner_id']
+                    if s = summoners.find{|x|x.summoner_id == p['summoner_id']}
+                      p['summoner_name'] = s.name
+                    end
+                  end
+                end
+              end
+            end
+          # rescue
+          end
+        end
+      end
+
+      sum_ids = match.teams.flat_map{|t|t['participants']}.flat_map{|p|p['summoner_id']}.compact
+      sum_ids = sum_ids.map{|x|x.try(:to_i)}
+      sum_ids |= fellow_summoner_ids||[]
+      match.summoner_ids |= sum_ids
+      match.summoner_ids.uniq!
+
+      # if (match.summoner_ids - sum_ids).blank? && (sum_ids-match.summoner_ids).blank?
+      # else
+      #   match.summoner_ids |= summoner_ids
+      # end
     end
 
   end

@@ -21,12 +21,14 @@ class Match
   field :timeline, type: Hash
   field :stats_parser_version, type: Integer
 
+  field :summoner_ids, type: Array, default: []
+
   # Relations
   # embeds_many :teams, class_name: 'Games::Team'
 
   # Indexes
   index({ match_id: 1, region: 1 }, { unique: true, :drop_dups => true })
-  index({ 'teams.participants.summoner_id' => 1, 'region' => 1, 'riot_created_at' => -1 })
+  index({ 'summoner_ids' => 1, 'region' => 1, 'riot_created_at' => -1 })
 
   # Validations
   validates :season, presence: true

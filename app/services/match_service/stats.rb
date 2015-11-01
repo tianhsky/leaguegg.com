@@ -2,10 +2,10 @@ module MatchService
 
   module Stats
 
-    PARSER_VERSION = 1
+    PARSER_VERSION = 2
 
     def self.aggregate(match)
-      # return if self._updated?(match)
+      return if self._updated?(match)
 
       self._gen_player_stats(match)
 
@@ -33,7 +33,7 @@ module MatchService
         team['participants'].each do |p|
           stat = p['stats']
           p['stats_aggretated'] = {
-            'kda_rate' => ((stat['kills']+stat['assists']).to_f / stat['deaths']).round(3),
+            'kda_rate' => ((stat['kills']+stat['assists']).to_f / (stat['deaths']==0?1:stat['deaths'])).round(3),
             'kill_rate' => (stat['kills'].to_f / total_kills).round(3),
             'death_rate' => (stat['deaths'].to_f / total_deaths).round(3),
             'assist_rate' => (stat['assists'].to_f / total_assists).round(3),

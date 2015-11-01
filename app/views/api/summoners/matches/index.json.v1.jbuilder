@@ -1,0 +1,1 @@
+json.matches @matches, partial: 'api/matches/info', as: :match

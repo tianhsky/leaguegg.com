@@ -47,16 +47,16 @@ angular.module('leaguegg.summoner').service('SummonerService', [
 
     self.getSummonerInfo = function(region, summoner_name, reload_if_outdated) {
       var shouldFetch = false;
-      if (reload_if_outdated) {
+      // if (reload_if_outdated) {
+      //   shouldFetch = true;
+      // } else {
+      if (isQueryChanged(region, summoner_name)) {
         shouldFetch = true;
       } else {
-        if (isQueryChanged(region, summoner_name)) {
-          shouldFetch = true;
-        } else {
-          shouldFetch = _data.result.summoner ? false : true;
-        }
-
+        shouldFetch = _data.result.summoner ? false : true;
       }
+
+      // }
 
       if (shouldFetch) {
         return self.fetchSummonerInfo(region, summoner_name, reload_if_outdated);
@@ -86,11 +86,11 @@ angular.module('leaguegg.summoner').service('SummonerService', [
 
     self.getSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
       var shouldFetch = false;
-      if (reload_if_outdated) {
-        shouldFetch = true;
-      } else {
-        shouldFetch = _data.result.season_stats ? false : true;
-      }
+      // if (reload_if_outdated) {
+      //   shouldFetch = true;
+      // } else {
+      shouldFetch = _data.result.season_stats ? false : true;
+      // }
       if (shouldFetch) {
         return self.fetchSummonerSeasonStats(region, summoner_id, reload_if_outdated);
       } else {

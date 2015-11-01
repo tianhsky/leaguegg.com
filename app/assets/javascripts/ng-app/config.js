@@ -30,6 +30,22 @@ angular.module('leaguegg').config([
       });
 
 
+    $urlRouterProvider.rule(function($injector, $location) {
+      var path = $location.path(),
+        search = $location.search();
+      if (path[path.length - 1] !== '/') {
+        if (search === {}) {
+          return path + '/';
+        } else {
+          var params = [];
+          angular.forEach(search, function(v, k) {
+            params.push(k + '=' + v);
+          });
+          return path + '/?' + params.join('&');
+        }
+      }
+    });
+
     // Server Version Check
     $httpProvider.interceptors.push('$serverVersionInjector');
 
@@ -40,7 +56,6 @@ angular.module('leaguegg').config([
     AnalyticsProvider.setAccount('UA-61898295-2');
     AnalyticsProvider.trackUrlParams(true);
     AnalyticsProvider.setPageEvent('$stateChangeSuccess');
-
   }
 ]);
 
@@ -60,10 +75,10 @@ angular.module('leaguegg').run([
       $quantcast.track();
 
       // TB
-      if (query.indexOf('tb=') != -1) {
-        var path = uri.path();
-        Analytics.trackEvent('TB', 'Click', path, 1);
-      }
+      // if (query.indexOf('tb=') != -1) {
+      //   var path = uri.path();
+      //   Analytics.trackEvent('TB', 'Click', path, 1);
+      // }
     });
   }
 ]);

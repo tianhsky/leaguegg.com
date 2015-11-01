@@ -120,12 +120,14 @@
           {{p.ranked_stat_recent.avg_wards_placed | nullcheck: '-'}}
         </span>
       </div>
-      <div class="aggresive">
+      <div class="kill-rate">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="The more penta kills, the higher number is, all penta, quadra, triple and double kills are used for calculations">Aggresive%</span>
+          <span class="item-label" data-tooltip="Kill participation%">Kill %</span>
         </div>
-        <div>
-          {{p.ranked_stat_overall.aggresive_rate | percentage: 1 | nullcheck: '-'}}
+        <div class="rate-chart">
+          <uib-progressbar max="1" value="p.ranked_stat_recent.kill_rate||0" type="{{p.ranked_stat_recent.kill_rate > 0.35 ? 'danger' : 'info'}}">
+            <p class="progress-text">{{p.ranked_stat_recent.kill_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
         </div>
       </div>
       <div class="badges">

@@ -7,7 +7,7 @@ angular.module('leaguegg.partials').directive('feedback', function() {
       function($scope, _) {
         $scope.options = {
           html2canvasURL: null,
-          initButtonText: 'Feedback',
+          initButtonText: '',
           ajaxURL: '/api/feedbacks'
         };
       }

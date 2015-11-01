@@ -5,6 +5,7 @@ module MatchService
     PARSER_VERSION = 2
 
     def self.aggregate(match)
+      return if match.timeline.blank?
       return if self._updated?(match)
       
       self._gen_player_role(match)
@@ -46,8 +47,6 @@ module MatchService
     end
 
     def self._gen_frames(match)
-      return if match.timeline.blank?
-
       # aggregated stats
       frame_stats_by_participant = {}
       frame_stats_by_team = {}

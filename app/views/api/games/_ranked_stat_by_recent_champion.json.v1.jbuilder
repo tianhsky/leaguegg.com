@@ -28,3 +28,4 @@ json.avg_timeline_csd rstat.avg_timeline_csd
 json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate
 json.kda_rate rstat.kda_rate
+json.kill_rate rstat.avg_kill_rate

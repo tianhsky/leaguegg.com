@@ -1,0 +1,22 @@
+<div class="page-summoner container">
+  <div ng-if="data.error.summoner">
+    {{data.error.summoner.data.error}}
+  </div>
+  <div class="summoner-info-wrapper row" ng-if="!data.error.summoner && data.summoner">
+    <div class="summoner-profile col-md-4">
+      <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
+    </div>
+    <div class="summoner-match-history col-md-8">
+      <div class="link-to-all-matches row">
+        <a href="/summoner/{{data.summoner.region}}/{{data.summoner.id}}-{{data.summoner.name}}/matches">See {{data.summoner.name}}'s match history</a>
+      </div>
+      <div class="text-center" ng-if="data.error.match_history">
+        Match history could not be found for {{data.summoner.name}}
+      </div>
+      <div ng-if="!data.error.match_history && data.match_history">
+        <h4>Match History</h4>
+        
+      </div>
+    </div>
+  </div>
+</div>

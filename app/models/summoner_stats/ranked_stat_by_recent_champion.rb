@@ -37,6 +37,7 @@ module SummonerStats
     field :timeline_xpd, type: Array, default: []
     field :timeline_dmgt, type: Array, default: []
     field :timeline_dmgtd, type: Array, default: []
+    field :total_kill_rate, type: Float, default: 0
 
     # Aggregated stats
     field :avg_team_jungle_kills, type: Float
@@ -64,6 +65,7 @@ module SummonerStats
     field :avg_timeline_xpd, type: Array, default: []
     field :avg_timeline_dmgt, type: Array, default: []
     field :avg_timeline_dmgtd, type: Array, default: []
+    field :avg_kill_rate, type: Float
 
     # Rates
     field :aggresive_rate, type: Float
@@ -112,7 +114,8 @@ module SummonerStats
       self.avg_cs_diff_at_10m = ((per_min_cs_diff_at_10m*10).to_f / games).round(3)
       self.avg_per_min_dmg_taken_at_10m = (per_min_dmg_taken_at_10m.to_f / games).round(3)
       self.avg_per_min_dmg_taken_diff_at_10m = (per_min_dmg_taken_diff_at_10m.to_f / games).round(3)
-    
+      self.avg_kill_rate = (total_kill_rate / games).round(3)
+
       ['timeline_cs', 'timeline_csd', 'timeline_xp', 'timeline_xpd', 'timeline_dmgt', 'timeline_dmgtd'].each do |obj|
         self[obj].each_with_index do |v, index|
           self["avg_#{obj}"][index] = (v.to_f / games).round(3)

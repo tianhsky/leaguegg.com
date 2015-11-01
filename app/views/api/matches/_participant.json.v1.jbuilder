@@ -17,13 +17,17 @@ end
 
 json.meta participant['meta']
 
-json.runes participant['runes'] do |r|
-  json.partial! 'api/consts/rune', {rune_id: r['rune_id']}
-  json.count r['count']
+if !@exclude_runes
+  json.runes participant['runes'] do |r|
+    json.partial! 'api/consts/rune', {rune_id: r['rune_id']}
+    json.count r['count']
+  end
 end
 
-json.masteries participant['masteries'] do |m|
-  json.partial! 'api/consts/mastery', {mastery_id: m['mastery_id'], rank: m['rank']}
+if !@exclude_masteries
+  json.masteries participant['masteries'] do |m|
+    json.partial! 'api/consts/mastery', {mastery_id: m['mastery_id'], rank: m['rank']}
+  end
 end
 
 if participant['stats']

@@ -180,6 +180,13 @@
           min-height: 40px;
           padding: 5px 0px;
         }
+        .kill-rate{
+          min-height: 40px;
+          padding: 5px 0px;
+          .rate-chart{
+            padding: 6px 5px;
+          }
+        }
         .badges {
           padding: 5px 0px;
           .badge-item {
@@ -249,6 +256,6 @@
   }
   [data-tooltip] {
     border-bottom: 1px dotted $gray;
-    cursor: pointer;
+    cursor: help;
   }
 }

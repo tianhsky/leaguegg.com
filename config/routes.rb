@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resource :game, only: [:show]
     resource :summoner, only: [:show] do
       resource :stats, only: [:show], controller: 'summoners/stats'
+      resources :matches, only: [:index], controller: 'summoners/matches'
     end
     resource :rotation, only: [:show]
     resources :matches, only: [:index, :show]

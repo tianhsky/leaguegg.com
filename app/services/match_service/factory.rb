@@ -84,6 +84,18 @@ module MatchService
       sum_timeline_arr
     end
 
+    def self.build_match_players_json(recent_match, summoner_id)
+      return unless recent_match
+      summoner_id = summoner_id.to_i
+      current_summoner = {
+        'summoner_id' => summoner_id,
+        'champion_id' => recent_match['champion_id'],
+        'team_id' => recent_match['team_id']
+      }
+      recent_match['fellow_players'] |= [current_summoner]
+      recent_match['fellow_players']
+    end
+
   end
 
 end
