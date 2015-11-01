@@ -15,7 +15,17 @@
       </div>
     </div>
     <div class="fade-in-anim" ng-if="!error && game">
-      <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
+      <div class="intro-ad purple">
+        <a href="/summoner/{{query.region}}/{{query.summoner}}/matches/">
+          <span class="label label-info"><i class="fa fa-play-circle-o"></i>Replay</span> feature is available now, see how everyone did in your recent matches
+        </a>
+      </div>
+      <div class="intro-ad blue">
+        <i class="fa fa-info-circle"></i> Hover over CS to see performance timeline chart
+      </div>
+      <div>
+        <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in game.teams" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
+      </div>
     </div>
   </div>
 </div>

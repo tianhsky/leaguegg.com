@@ -7,6 +7,18 @@
   .live-game-wrapper {
     min-height: 150px;
   }
+  .intro-ad {
+    font-size: 1.1em;
+    font-weight: 900;
+    padding: 7px;
+    margin: 3px 0px;
+    &.purple {
+      background-color: #7850AE;
+    }
+    &.blue {
+      background-color: #7473BA;
+    }
+  }
   .team {
     margin-top: 10px;
     &.right-border {
