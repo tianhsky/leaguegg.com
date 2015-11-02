@@ -6,7 +6,7 @@ $(function() {
       if (version <= 9) {
         $('#page').empty();
         $('#error-browser-not-support').show();
-        location.href = "/browser_error";
+        location.href = "/browser_error.html";
       }
     }
   }
