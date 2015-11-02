@@ -14,6 +14,12 @@
         &nbsp;&nbsp;&nbsp;
         <span class="created_at">{{data.match.created_at | time_from_now:'unix'}}</span>
       </div>
+      <div class="social">
+          <span class="s-text">Share Match On</span>
+          <span socialshare socialshare-provider="twitter" socialshare-hashtags="LeagueGG, LeagueGG.com, LoL Match Replay" socialshare-text="Checkout {{data.summoner.name}}'s LoL Match @ LeagueGG.com" class="s-item fa fa-twitter-square"></span>
+          <span socialshare socialshare-provider="reddit" socialshare-subreddit="leagueoflegends" socialshare-text="Checkout {{data.summoner.name}}'s LoL Match @ LeagueGG.com" class="s-item fa fa-reddit-square"></span>
+          <span socialshare socialshare-provider="facebook" class="s-item fa fa-facebook-square"></span>
+      </div>
     </div>
     <div class="match-player">
       <div class="match-tables">

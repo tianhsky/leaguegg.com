@@ -69,7 +69,7 @@
   .featured-panel {
     min-height: 420px;
     .featured-header {
-      overflow: hidden;
+      position: relative;
       padding: 0px 10px;
       margin: 0px auto;
       background-color: $gray;
@@ -80,22 +80,24 @@
         font-size: 0.9em;
         width: 90%;
       }
-      .featured-title{
-        margin: 10px 0px;
-        float: left;
+      .featured-title {
+        padding: 10px 0px 10px 0px;
+        text-align: left;
+        font-size: 1.1em;
+        font-weight: 800;
       }
       .game-indicators {
-        position: static;
-        float: right;
+        position: absolute;
+        right: 0px;
+        top: 10px;
         width: auto;
-        margin: 10px 0px;
         color: $white_25;
         .active {
           color: white;
         }
-        li{
+        li {
           cursor: pointer;
-          &:hover{
+          &:hover {
             color: $white_50;
           }
         }
@@ -104,25 +106,27 @@
     .featured-games {
       top: 15px;
       position: relative;
+      .game-item {
+        position: relative;
+        margin: 0px;
+      }
       .featured-team {
         width: 50%;
         overflow: hidden;
         .player {
-          margin: 10px 5px;
+          height: 60px;
+          margin: 0px;
           .summoner-name {
-            display: inline;
-            vertical-align: middle;
-            font-size: 12px;
+            display: table-cell;
             text-overflow: ellipsis;
-            @media(max-width: 351px) {
-              display: block;
-              clear: both;
-              font-size: 9px;
-            }
+            font-size: 0.8em;
           }
           .champion-img {
-            display: inline;
-            width: 40px;
+            display: table-cell;
+            img {
+              width: 50px;
+              height: 50px;
+            }
           }
         }
         .team-banner {
@@ -153,14 +157,19 @@
         &.left {
           float: left;
           text-align: right;
-          padding-right: 15px;
+          padding-right: 10px;
           border-right: 1px solid white;
           .player {
+            position: relative;
             .summoner-name {
-              margin-right: 5px;
+              position: absolute;
+              right: 62px;
+              bottom: 20px;
             }
             .champion-img {
-              float: right;
+              position: absolute;
+              right: 5px;
+              bottom: 5px;
             }
           }
           .team-banner {
@@ -174,13 +183,18 @@
         &.right {
           float: right;
           text-align: left;
-          padding-left: 15px;
+          padding-left: 10px;
           .player {
+            position: relative;
             .summoner-name {
-              margin-left: 5px;
+              position: absolute;
+              left: 62px;
+              bottom: 20px;
             }
             .champion-img {
-              float: left;
+              position: absolute;
+              left: 5px;
+              bottom: 5px;
             }
           }
           .team-banner {
@@ -195,7 +209,7 @@
         }
       }
       .play-mask {
-        position: static;
+        position: absolute;
         width: 100%;
         height: 100%;
         .play {

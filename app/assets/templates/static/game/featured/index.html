@@ -9,7 +9,7 @@
 <loading class="fade-in-anim" status="loading.featured">
 </loading>
 <div class="featured-games" ng-if="featured_games">
-  <div class="item fade-out-anim fade-with-show" ng-repeat="game in featured_games" ng-show="game.active">
+  <div class="game-item row fade-with-show" ng-repeat="game in featured_games" ng-show="game.active">
     <div class="featured-team left">
       <featured-team team="game.teams[0]" />
     </div>

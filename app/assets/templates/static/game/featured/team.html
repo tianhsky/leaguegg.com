@@ -1,6 +1,10 @@
-<div class="player row" ng-repeat="p in team.participants">
-  <img class="champion-img" ng-src="{{p.champion.img}}">
-  <p class="summoner-name">{{p.summoner.name | characters:13}}</p>
+<div class="player" ng-repeat="p in team.participants">
+  <div class="champion-img">
+    <img ng-src="{{p.champion.img}}" alt="p.champion.name">
+  </div>
+  <div class="summoner-name">
+    {{p.summoner.name}}
+  </div>
 </div>
 <div class="team-banner">
   <div class="bans">
