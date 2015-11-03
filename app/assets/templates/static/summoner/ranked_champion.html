@@ -7,6 +7,9 @@
       <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
     </div>
     <div class="summoner-champion-stat col-md-8">
+      <div summoner-tabs class="summoner-tabs" tab-code="data.tab">
+      </div>
+      
       <div class="link-to-all-stats row">
         <a href="/summoner/{{data.summoner.region}}/{{data.summoner.id}}-{{data.summoner.name}}">See {{data.summoner.name}}'s performance for other champions</a>
       </div>

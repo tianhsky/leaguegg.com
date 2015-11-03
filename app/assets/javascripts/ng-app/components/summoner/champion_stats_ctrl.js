@@ -6,6 +6,7 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
     LayoutService.setFatHeader(false);
     MetaService.setTitle($stateParams.summoner + ' - ' + $stateParams.region + ' - Summoners - League of Legends');
     $scope.data = {
+      tab: 'performance',
       summoner: null,
       summoner_stats: null,
       champion_stats: null,
