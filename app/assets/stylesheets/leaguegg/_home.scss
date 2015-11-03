@@ -209,12 +209,14 @@
         }
       }
       .play-mask {
-        position: absolute;
+        position: relative;
         width: 100%;
         height: 100%;
         .play {
-          margin-left: -50px;
+          position: absolute;
           top: 100px;
+          left: 50%;
+          margin-left: -50px;
           opacity: 0.0;
           cursor: pointer;
           i {
