@@ -75,18 +75,21 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
         }, perFrame);
       }
       $scope.data.player_status = 'playing';
+      Analytics.trackEvent('Match', 'Play', 'Click', 1);
     }
 
     $scope.pause = function() {
       $interval.cancel(_playInteval);
       _playInteval = null;
       $scope.data.player_status = 'paused';
+      Analytics.trackEvent('Match', 'Pause', 'Click', 1);
     }
 
     $scope.stop = function() {
       $scope.pause();
       $scope.data.current_frame = 0;
       $scope.data.player_status = 'stopped';
+      Analytics.trackEvent('Match', 'Stop', 'Click', 1);
     }
 
     $scope.$on('$destroy', function() {

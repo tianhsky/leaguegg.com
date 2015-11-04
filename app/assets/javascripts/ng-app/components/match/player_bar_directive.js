@@ -12,8 +12,8 @@ angular.module('leaguegg.match').directive('playerBar', function() {
       'stop': '&'
     },
     controller: [
-      '$scope',
-      function($scope) {
+      '$scope', 'Analytics',
+      function($scope, Analytics) {
         var regObserver = function() {
           $('.player-bar').bind('click', function(ev) {
             var target = $(ev.target);
@@ -50,6 +50,7 @@ angular.module('leaguegg.match').directive('playerBar', function() {
         });
 
         $scope.replay = function() {
+          Analytics.trackEvent('Match', 'Replay', 'Click', 1);
           $scope.stop();
           $scope.play();
         }
