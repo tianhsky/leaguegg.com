@@ -1,5 +1,5 @@
 <div>
-  <div class="mtplayer" ng-repeat="p in team.participants">
+  <div class="mtplayer" ng-repeat="p in team.participants track by $index">
     <div class="mtp-icon">
       <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
     </div>

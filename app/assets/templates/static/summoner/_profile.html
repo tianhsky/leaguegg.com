@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="rank-info">
-  <div class="rank-item" ng-repeat="entry in summoner.league_entries">
+  <div class="rank-item" ng-repeat="entry in summoner.league_entries track by $index">
     <div class="r-icon">
       <img ng-src="/static/img/riot/tier/lg/{{entry.tier|lowercase}}.png" alt="{{summoner.name}}'s tier icon - {{entry.tier|lowercase}}" err-src="/static/img/leaguegg-icon.png" ng-if="entry.tier">
     </div>

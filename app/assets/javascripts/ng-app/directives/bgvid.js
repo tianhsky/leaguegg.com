@@ -5,7 +5,8 @@ angular.module('utils').directive('bgvid', [
       templateUrl: 'static/partials/bgvid.html',
       controller: ['$scope', '$rootScope',
         function($scope, $rootScope) {
-          $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
+
+          var unbindWatcher = $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
             var vid = $('#bg-vid');
             var enable = newVal.showBGVideo;
             if (enable) {
@@ -25,6 +26,11 @@ angular.module('utils').directive('bgvid', [
               vid.hide();
             }
           }, true);
+
+          $scope.$on('$destroy', function() {
+            unbindWatcher();
+          });
+          
         }
       ]
     };

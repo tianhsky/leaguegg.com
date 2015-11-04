@@ -1,7 +1,7 @@
 <div class="featured-header">
   <div class="featured-title">Featured Games</div>
   <ol class="game-indicators list-unstyled list-inline">
-    <li ng-repeat="game in featured_games" ng-class="{active:game.active}" ng-click="selectGame(game)">
+    <li ng-repeat="game in featured_games track by $index" ng-class="{active:game.active}" ng-click="selectGame(game)">
       <i class="fa fa-circle"></i>
     </li>
   </ol>
@@ -9,7 +9,7 @@
 <loading class="fade-in-anim" status="loading.featured">
 </loading>
 <div class="featured-games" ng-if="featured_games">
-  <div class="game-item row fade-with-show" ng-repeat="game in featured_games" ng-show="game.active">
+  <div class="game-item row fade-with-show" ng-repeat="game in featured_games track by $index" ng-show="game.active">
     <div class="featured-team left">
       <featured-team team="game.teams[0]" />
     </div>

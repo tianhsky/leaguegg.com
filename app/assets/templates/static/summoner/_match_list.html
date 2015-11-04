@@ -1,5 +1,5 @@
 <div>
-  <div class="match-row row" ng-repeat="m in matches">
+  <div class="match-row row" ng-repeat="m in matches track by $index">
     <div class="title-row">
       <div class="match-type">
         {{m.queue_type | titleize}}

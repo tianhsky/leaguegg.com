@@ -5,7 +5,8 @@ angular.module('utils').directive('bgimg', [
       templateUrl: 'static/partials/bgimg.html',
       controller: ['$scope', '$rootScope', '_',
         function($scope, $rootScope, _) {
-          $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
+
+          var unbindWatcher = $rootScope.$watch('layoutProperties', function(newVal, oldVal) {
             var img_url = newVal.bgImg;
             var img = $('#bg-img');
             if (!_.isEmpty(img_url)) {
@@ -14,6 +15,11 @@ angular.module('utils').directive('bgimg', [
               img.attr('style', 'display:"none"; background-image:"none"');
             }
           }, true);
+
+          $scope.$on('$destroy', function() {
+            unbindWatcher();
+          });
+          
         }
       ]
     };

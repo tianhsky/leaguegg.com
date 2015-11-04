@@ -1,11 +1,11 @@
 <div class="free-champions">
   <ul>
-    <li ng-repeat="champion in list1" ng-class="{active:champion.selected}">
+    <li ng-repeat="champion in list1 track by $index" ng-class="{active:champion.selected}">
       <img ng-src="{{champion.img}}" ng-click="selectChampion(champion)">
     </li>
   </ul>
   <ul>
-    <li ng-repeat="champion in list2" ng-class="{active:champion.selected}">
+    <li ng-repeat="champion in list2 track by $index" ng-class="{active:champion.selected}">
       <img ng-src="{{champion.img}}" ng-click="selectChampion(champion)">
     </li>
   </ul>

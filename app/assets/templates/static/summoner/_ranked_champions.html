@@ -37,7 +37,7 @@
       <span>KDA</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='kda_rate'"></i>
     </div>
   </div>
-  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression" ng-click="viewChampionStats(stat.champion)">
+  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression track by $index" ng-click="viewChampionStats(stat.champion)">
     <div class="c-icon col-xs-3">
       <img alt="{{stat.champion.name}}'s icon" ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
       <div class="c-name">{{stat.champion.name}}</div>

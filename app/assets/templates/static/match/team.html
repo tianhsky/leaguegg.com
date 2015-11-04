@@ -4,7 +4,7 @@
     <div class="lost" ng-if="team.winner==false">Defeat</div>
     <div class="bans">
       <div class="ban-text">Bans</div>
-      <img class="ban-item" ng-src="{{c.img}}" ng-repeat="c in team.banned_champions"></img>
+      <img class="ban-item" ng-src="{{c.img}}" ng-repeat="c in team.banned_champions track by $index"></img>
     </div>
   </div>
   <div class="summary-row">
@@ -29,7 +29,7 @@
   </div>
   <div class="champions-section-row">
     <div class="champions-section">
-      <div class="champion-row" ng-repeat="p in team.participants">
+      <div class="champion-row" ng-repeat="p in team.participants track by $index">
         <div class="champion-icon">
           <img ng-src="{{p.champion.img}}" alt="{{p.champion.name}}">
         </div>
