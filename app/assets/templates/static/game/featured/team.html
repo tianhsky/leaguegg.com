@@ -1,16 +1,16 @@
-<div class="player" ng-repeat="p in team.participants track by $index">
-  <div class="champion-img">
-    <img ng-src="{{p.champion.img}}" alt="p.champion.name">
-  </div>
-  <div class="summoner-name">
-    {{p.summoner.name}}
-  </div>
-</div>
 <div class="team-banner">
   <div class="bans">
     <div class="ban-item" ng-repeat="c in team.banned_champions track by $index">
       <img class="champion-img" ng-src="{{c.img}}">
       <i class="champion-ban-icon glyphicon glyphicon-ban-circle"></i>
     </div>
+  </div>
+</div>
+<div class="player" ng-repeat="p in team.participants track by $index">
+  <div class="champion-img">
+    <img ng-src="{{p.champion.img}}" alt="p.champion.name">
+  </div>
+  <div class="summoner-name">
+    {{p.summoner.name}}
   </div>
 </div>

@@ -110,6 +110,17 @@
         position: relative;
         margin: 0px;
       }
+      .game-timer {
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        margin-left: -42px;
+        width: 84px;
+        font-size: 1.2em;
+        font-weight: 900;
+        border: 2px solid white;
+        background-color: #2D3448;
+      }
       .featured-team {
         width: 50%;
         overflow: hidden;
@@ -174,8 +185,9 @@
           }
           .team-banner {
             .bans {
-              position: static;
-              float: right;
+              position: absolute;
+              right: 40px;
+              bottom: 5px;
               color: $blue_team;
             }
           }
@@ -199,10 +211,9 @@
           }
           .team-banner {
             .bans {
-              position: static;
-              left: 0px;
-              bottom: 0px;
-              float: left;
+              position: absolute;
+              left: 40px;
+              bottom: 5px;
               color: $red_team;
             }
           }

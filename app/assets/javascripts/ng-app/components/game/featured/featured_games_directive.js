@@ -58,7 +58,7 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
             $scope.loading.featured.active = false;
             $scope.featured_games = resp.featured_games;
             selectNextGame();
-            interval = $interval(selectNextGame, 5000);
+            interval = $interval(selectNextGame, 10000);
           });
 
         $scope.selectGame = function(game) {

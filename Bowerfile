@@ -22,6 +22,7 @@ group :vendor do
   asset 'angular-send-feedback', '1.0.2'
   asset 'angular-animate-change', '1.0.2'
   asset 'angularjs-socialshare', '0.1.14'
+  asset 'angular-timer', '1.3.3'
   asset 'ngInflection', 'latest'
   asset 'airbrake-js-client', '0.5.3'
   asset 'md5', 'latest'

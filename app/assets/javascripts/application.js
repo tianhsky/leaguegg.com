@@ -10,6 +10,7 @@
 // libs
 //= require html2canvas
 //= require moment
+//= require humanize-duration
 //= require urijs
 //= require md5
 //= require inflection

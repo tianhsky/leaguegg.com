@@ -8,6 +8,7 @@
     min-height: 150px;
   }
   .intro-ad {
+    position: relative;
     font-size: 1.1em;
     font-weight: 900;
     padding: 7px;
@@ -17,6 +18,20 @@
     }
     &.blue {
       background-color: #7473BA;
+    }
+    &.game-info {
+      background-color: rgb(33, 33, 33);
+      .game-time {
+        font-size: 1.5em;
+        padding-left: 5px;
+      }
+      .game-type {
+        position: absolute;
+        font-size: 0.7em;
+        bottom: -2px;
+        left: 50%;
+        margin-left: -60px;
+      }
     }
   }
   .team {

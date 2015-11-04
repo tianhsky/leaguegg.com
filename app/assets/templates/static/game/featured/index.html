@@ -10,6 +10,8 @@
 </loading>
 <div class="featured-games" ng-if="featured_games">
   <div class="game-item row fade-with-show" ng-repeat="game in featured_games track by $index" ng-show="game.active">
+    <timer class="game-timer" start-time="game.started_at">{{hours}}:{{minutes}}:{{seconds}}</timer>
+
     <div class="featured-team left">
       <featured-team team="game.teams[0]" />
     </div>

@@ -9,7 +9,7 @@ angular.module('utils', [
   'truncate', 'ngAnimate', 'ngInflection',
   'angular-google-analytics', 'chart.js',
   'angular-send-feedback', '720kb.socialshare',
-  'animate-change'
+  'animate-change', 'timer'
 ]);
 
 angular.module('leaguegg.consts', []);
