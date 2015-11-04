@@ -39,8 +39,8 @@ angular.module('leaguegg.game').service('LiveGameService', [
     }
 
     self.getGameBySummoner = function(query) {
-      Analytics.trackEvent('Game', 'SearchByRegion', query.region, 1);
-      Analytics.trackEvent('Game', 'SearchBySummoner', query.summoner + "@" + query.region, 1);
+      // Analytics.trackEvent('Game', 'SearchByRegion', query.region, 1);
+      // Analytics.trackEvent('Game', 'SearchBySummoner', query.summoner + "@" + query.region, 1);
       var url = self.getSearchUrl('json', query);
       return $q(function(resolve, reject) {
         $http.get(url)

@@ -4,7 +4,7 @@ angular.module('leaguegg.game').service('FeaturedGamesService', [
     var self = this;
 
     self.getFeaturedGames = function() {
-      Analytics.trackEvent('FeaturedGame', 'SearchByRegion', 'NA', 1);
+      // Analytics.trackEvent('FeaturedGame', 'SearchByRegion', 'NA', 1);
       var url = "/api/featured.json";
       return $q(function(resolve, reject) {
         $http.get(url)

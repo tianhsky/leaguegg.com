@@ -19,11 +19,10 @@
             <img ng-src="{{m.cp.spell2.img}}" alt="{{m.cp.spell2.name}}">
           </div>
         </div>
-        <div class="match-label label label-warning">
+        <div class="match-label label label-info" ng-mouseenter="matchReplayHovered()" ng-click="matchReplayClicked()">
           <span class="match-duration">
             <a href="{{match_play_url_prefix}}{{m.id}}">
-              {{m.match_duration | duration:'sec'}}
-              <i class="fa fa-play-circle-o"></i>
+              <i class="fa fa-play-circle-o"></i> Replay
             </a>
           </span>
         </div>
@@ -66,9 +65,11 @@
     </div>
     <div class="footer-row">
       <div class="match-time">
-        <i class="fa fa-clock-o"></i> {{m.created_at | time_from_now:'unix'}}
+        <i class="fa fa-clock-o"></i>
+        {{m.created_at | time_from_now:'unix'}}
+        - {{m.match_duration | duration:'sec'}}
       </div>
-      <div class="detail-expand-btn" ng-click="m.active = !m.active">
+      <div class="detail-expand-btn" ng-click="matchDetailClicked(m)" ng-mouseenter="matchDetailHovered()">
         <i class="fa fa-caret-down" ng-class="{'fa-caret-down':!m.active, 'fa-caret-up':m.active}"></i>
       </div>
     </div>

@@ -1,8 +1,8 @@
 angular.module('leaguegg.game').controller('LiveGameCtrl', [
   '$scope', '$stateParams', '$location', 'LiveGameService',
-  'ConstsService', '$filter', 'LayoutService',
+  'ConstsService', '$filter', 'LayoutService', 'Analytics',
   function($scope, $stateParams, $location, LiveGameService,
-    ConstsService, $filter, LayoutService) {
+    ConstsService, $filter, LayoutService, Analytics) {
     LayoutService.setFatHeader(false);
 
     $scope.loading = {
@@ -41,6 +41,14 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           $scope.error = "Sorry, there was a problem";
         }
       });
+
+    $scope.matchHistoryAdHovered = function() {
+      Analytics.trackEvent('Game', 'ADMatches', 'Hover', 1);
+    }
+
+    $scope.matchHistoryAdClicked = function() {
+      Analytics.trackEvent('Game', 'ADMatches', 'Click', 1);
+    }
 
   }
 ]);

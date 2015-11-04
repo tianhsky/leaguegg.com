@@ -80,7 +80,11 @@ angular.module('leaguegg.game').directive('featuredGames', function() {
           $location.path(url).search({
             featured: 1
           });
-          Analytics.trackEvent('FeaturedGame', 'SearchBySummoner', query.summoner + '@' + query.region, 1);
+          // Analytics.trackEvent('FeaturedGame', 'SearchBySummoner', query.summoner + '@' + query.region, 1);
+        }
+
+        $scope.featureHovered = function() {
+          Analytics.trackEvent('Game', 'Featured', 'Hover', 1);
         }
 
         $scope.$on('$destroy', function() {

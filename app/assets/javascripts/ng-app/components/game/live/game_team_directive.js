@@ -10,12 +10,17 @@ angular.module('leaguegg.game').directive('gameTeam', function() {
     controller: ['$scope', 'Analytics',
       function($scope, Analytics) {
         $scope.summonerClicked = function(summoner) {
-          Analytics.trackEvent('Summoner', 'SearchFromGame', summoner.name + '@' + summoner.region, 1);
+          Analytics.trackEvent('Game', 'Summoner', 'Click', 1);
         }
 
         $scope.championClicked = function(summoner, champion) {
-          Analytics.trackEvent('SummonerChampion', 'SearchFromGame', summoner.name + '@' + summoner.region + '-' + champion.name, 1);
+          Analytics.trackEvent('Game', 'SummonerChampion', 'Click', 1);
         }
+
+        $scope.csHovered = function(){
+          Analytics.trackEvent('Game', 'CS', 'Hover', 1);
+        }
+
       }
     ]
   }

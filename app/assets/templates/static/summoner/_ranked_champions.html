@@ -21,7 +21,7 @@
     </button>
   </div>
   <div class="instruction">
-    <div>Click <i class="fa fa-arrow-down"></i> to see detail stats</div>
+    <div>Click to see details <i class="fa fa-arrow-down"></i></div>
   </div>
   <div class="search-result-header row">
     <div class="col-xs-3 column-header" ng-click="sortBy('champion.name')">
@@ -37,7 +37,7 @@
       <span>KDA</span><i class="fa" ng-class="{'fa-arrow-up':searchFilter.order==1, 'fa-arrow-down':searchFilter.order==-1}" ng-if="searchFilter.field=='kda_rate'"></i>
     </div>
   </div>
-  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression track by $index" ng-click="viewChampionStats(stat.champion)">
+  <div class="champion-item row" ng-repeat="stat in stats.ranked_stats_by_champion | filter:searchSummonerInput:strict | orderBy:searchFilter.expression track by $index" ng-click="viewChampionStats(stat.champion)" ng-mouseenter="summonerChampionHovered()">
     <div class="c-icon col-xs-3">
       <img alt="{{stat.champion.name}}'s icon" ng-src="{{stat.champion.img}}" err-src="/static/img/leaguegg-icon.png">
       <div class="c-name">{{stat.champion.name}}</div>

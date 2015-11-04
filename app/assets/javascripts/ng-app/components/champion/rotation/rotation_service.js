@@ -4,7 +4,7 @@ angular.module('leaguegg.champion').service('RotationService', [
     var self = this;
 
     self.getWeeklyChampions = function() {
-      Analytics.trackEvent('FreeChampion', 'SearchByRegion', 'NA', 1);
+      // Analytics.trackEvent('FreeChampion', 'SearchByRegion', 'NA', 1);
       var url = "/api/rotation.json";
 
       return $q(function(resolve, reject) {

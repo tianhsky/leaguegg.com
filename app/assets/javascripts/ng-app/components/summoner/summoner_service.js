@@ -41,7 +41,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
     self.fetchSummonerInfo = function(region, summoner_name, reload_if_outdated) {
       self.setQuery(region, summoner_name);
       _data.result.season_stats = null;
-      Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name + '@' + region, 1);
+      // Analytics.trackEvent('Summoner', 'SearchInfo', summoner_name + '@' + region, 1);
       var url = '/api/summoner.json?summoner_id_or_name=' + summoner_name + '&region=' + region;
       if (reload_if_outdated) {
         url += '&reload=1';
@@ -82,7 +82,7 @@ angular.module('leaguegg.summoner').service('SummonerService', [
     }
 
     self.fetchSummonerSeasonStats = function(region, summoner_id, reload_if_outdated) {
-      Analytics.trackEvent('Summoner', 'SearchSeasonStats', summoner_id + '@' + region, 1);
+      // Analytics.trackEvent('Summoner', 'SearchSeasonStats', summoner_id + '@' + region, 1);
       var url = '/api/summoner/stats.json?season_stats=1&summoner_id=' + summoner_id + '&region=' + region;
       if (reload_if_outdated) {
         url += '&reload=1';
