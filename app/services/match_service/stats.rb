@@ -25,11 +25,11 @@ module MatchService
 
     def self._gen_player_stats(match)
       match.teams.each do |team|
-        total_kills = team['participants'].sum{|p|p['stats']['kills']}
-        total_deaths = team['participants'].sum{|p|p['stats']['deaths']}
-        total_assists = team['participants'].sum{|p|p['stats']['assists']}
-        total_dmg = team['participants'].sum{|p|p['stats']['total_damage_dealt']}
-        total_wards_placed = team['participants'].sum{|p|p['stats']['wards_placed']}
+        total_kills = team['participants'].sum{|p|p['stats']['kills']||0}
+        total_deaths = team['participants'].sum{|p|p['stats']['deaths']||0}
+        total_assists = team['participants'].sum{|p|p['stats']['assists']||0}
+        total_dmg = team['participants'].sum{|p|p['stats']['total_damage_dealt']||0}
+        total_wards_placed = team['participants'].sum{|p|p['stats']['wards_placed']||0}
         team['participants'].each do |p|
           stat = p['stats']
           p['stats_aggretated'] = {
