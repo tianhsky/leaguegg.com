@@ -51,12 +51,15 @@
         <mini-series sequence="p.league_entry.mini_series.progress"></mini-series>
       </div>
       <div class="mas-runes">
-        <span class="label label-default" tooltip-html="p.runes_tooltip_html">Runes</span>
-        <span class="label label-default" tooltip-html="p.masteries_tooltip_html">{{p.masteries_grouped.offense}}/{{p.masteries_grouped.defense}}/{{p.masteries_grouped.utility}}</span>
+        <rune-tooltip runes="p.runes"></rune-tooltip>
+        <mastery-tooltip masteries="p.masteries"></mastery-tooltip>
       </div>
       <div class="main-role">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Most played roles based on last 60 games">Mains</span>
+          <span class="item-label item-tooltip">
+            Mains
+            <div class="hover-detail">Most played roles based on last 60 games</div>
+          </span>
         </div>
         <roles roles="p.player_roles" />
       </div>
@@ -65,26 +68,50 @@
     <div class="stats">
       <div class="wl season">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="{{p.summoner.name}}'s win% on {{p.champion.name}} for current season">Season W/L</span>
+          <span class="item-label item-tooltip">
+            Season W/L
+            <div class="hover-detail">
+              {{p.summoner.name}}'s win% on {{p.champion.name}} for current season
+            </div>
+          </span>
         </div>
         <wl w="p.ranked_stat_overall.won" l="p.ranked_stat_overall.lost" rate="p.ranked_stat_overall.win_rate" />
       </div>
       <div class="kda season">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="{{p.summoner.name}}'s KDA on {{p.champion.name}} for current season">Season KDA</span>
+          <span class="item-label item-tooltip">Season KDA
+            <div class="hover-detail">
+              {{p.summoner.name}}'s KDA on {{p.champion.name}} for current season
+            </div>
+          </span>
         </div>
         <kda k="p.ranked_stat_overall.avg_kills" d="p.ranked_stat_overall.avg_deaths" a="p.ranked_stat_overall.avg_assists" rate="p.ranked_stat_overall.kda_rate" />
       </div>
       <div class="kda recent">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="{{p.summoner.name}}'s Recent KDA on {{p.champion.name}}">Recent KDA</span>
+          <span class="item-label item-tooltip">
+            Recent KDA
+            <div class="hover-detail">
+              {{p.summoner.name}}'s Recent KDA on {{p.champion.name}}
+            </div>
+          </span>
         </div>
         <kda k="p.ranked_stat_recent.avg_kills" d="p.ranked_stat_recent.avg_deaths" a="p.ranked_stat_recent.avg_assists" rate="p.ranked_stat_recent.kda_rate" />
       </div>
       <div class="cs" ng-mouseenter="csHovered()">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Average creep score at 10 minutes"><i class="fa fa-line-chart cs-stats-icon"></i> CS</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Average creep score difference compare with opponent at 10 minutes">CSD</span>
+          <span class="item-label item-tooltip">
+            <i class="fa fa-line-chart cs-stats-icon"></i> CS
+            <div class="hover-detail">
+              CS at 10 minutes
+            </div>
+          </span> &nbsp;&nbsp;
+          <span class="item-label item-tooltip">
+            CSD
+            <div class="hover-detail">
+              CS difference compare with opponent at 10 minutes
+            </div>
+          </span>
         </div>
         <div>
           <span class="me">
@@ -100,8 +127,18 @@
       </div>
       <div class="jcs">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Average neutral minion kills at team jungle">JCS</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Average neutral minion kills at enemy jungle">CJCS</span>
+          <span class="item-label item-tooltip">
+            JCS
+            <div class="hover-detail">
+              Average neutral minion kills at team jungle
+            </div>
+          </span> &nbsp;&nbsp;
+          <span class="item-label item-tooltip">
+            CJCS
+            <div class="hover-detail">
+              Average neutral minion kills at enemy jungle
+            </div>
+          </span>
         </div>
         <span class="me">
           {{p.ranked_stat_recent.avg_team_jungle_kills | nullcheck: '-'}}
@@ -112,8 +149,18 @@
       </div>
       <div class="support">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Average gold earned at 10 minutes">Gold</span> &nbsp;&nbsp;
-          <span class="item-label" data-tooltip="Average wards placed">Wards</span>
+          <span class="item-label item-tooltip">
+            Gold
+            <div class="hover-detail">
+              Average gold earned at 10 minutes
+            </div>
+          </span> &nbsp;&nbsp;
+          <span class="item-label item-tooltip">
+            Wards
+            <div class="hover-detail">
+              Average wards placed
+            </div>
+          </span>
         </div>
         <span class="gold">
           {{p.ranked_stat_recent.avg_gold_at_10m | number2k: 1 | nullcheck: '-' }}
@@ -124,7 +171,12 @@
       </div>
       <div class="kill-rate">
         <div class="item-labels">
-          <span class="item-label" data-tooltip="Kill contribution%">Kill/C %</span>
+          <span class="item-label item-tooltip">
+            Kill Contrib %
+            <div class="hover-detail">
+              Average kill contribution / participation
+            </div>
+          </span>
         </div>
         <div class="rate-chart">
           <uib-progressbar max="1" value="p.ranked_stat_recent.killc_rate||0" type="{{p.ranked_stat_recent.killc_rate > 0.5 ? 'danger' : 'info'}}">
@@ -137,13 +189,28 @@
           <span class="item-label">Ranked Badges</span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_hot_streak">
-          <span class="badge hot" data-tooltip="Win 3 or more games in a row">Hot Streak</span>
+          <span class="badge hot item-tooltip">
+            Hot Streak
+            <div class="hover-detail">
+              Win 3 or more games in a row
+            </div>
+          </span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_veteran">
-          <span class="badge veteran" data-tooltip="Played 100 games in the current league">Veteran</span>
+          <span class="badge veteran item-tooltip">
+            Veteran
+            <div class="hover-detail">
+              Played 100 games in the current league
+            </div>
+          </span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_fresh_blood">
-          <span class="badge fresh" data-tooltip="Recently joined this league">Fresh Blood</span>
+          <span class="badge fresh item-tooltip">
+            Fresh Blood
+            <div class="hover-detail">
+              Recently joined this league
+            </div>
+          </span>
         </div>
       </div>
     </div>

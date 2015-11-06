@@ -1,9 +1,4 @@
-.tooltip {
-  .tooltip-arrow {
-    // background-color: #75BAEB;
-  }
-  .tooltip-inner {
-    // background-color: #75BAEB;
-    // border-bottom-color: #75BAEB;
-  }
+.item-tooltip {
+  border-bottom: 1px dotted $gray;
+  cursor: help;
 }

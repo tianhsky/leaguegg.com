@@ -1,2 +1,6 @@
-<span class="label label-default" popover-template="'static/partials/rune_tooltip_template.html'" popover-placement="bottom">Runes</span>
-
+<span class="runes label label-default">
+  Runes
+  <div class="hover-detail">
+    <div style='text-align:left;' ng-repeat="r in runes track by $index"> {{r.count}} x {{r.description}}</div>
+  </div>
+</span>

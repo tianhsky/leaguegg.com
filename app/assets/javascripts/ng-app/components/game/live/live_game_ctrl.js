@@ -24,9 +24,6 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
       .then(function(resp) {
         $scope.loading.game.active = false;
         $scope.error_summoner_not_in_game = false;
-        LiveGameService.applyGroupMasteries(resp);
-        LiveGameService.applyRunesTooltip(resp);
-        // console.log(resp);
         $scope.game = resp;
       }, function(err) {
         $scope.loading.game.active = false;

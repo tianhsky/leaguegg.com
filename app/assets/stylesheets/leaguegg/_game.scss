@@ -98,8 +98,9 @@
         color: #EB88B2;
       }
       .item-labels {
-        line-height: 0.7em;
+        position: relative;
         .item-label {
+          position: relative;
           font-size: 0.7em;
           color: $color_label;
         }
@@ -168,7 +169,11 @@
         }
         .mas-runes {
           .label {
-            padding: 2px;
+            position: relative;
+            cursor: help;
+            margin: 1px;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
         }
         .stats-links {
@@ -304,8 +309,25 @@
   .loading {
     margin-top: 50px;
   }
-  [data-tooltip] {
-    border-bottom: 1px dotted $gray;
-    cursor: help;
+  .item-tooltip,
+  .runes,
+  .masteries {
+    .hover-detail {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      min-width: 100px;
+      background-color: #2E484A;
+      z-index: 10;
+      padding: 5px;
+      border-radius: 10px;
+    }
+    &:hover,
+    &:active {
+      .hover-detail {
+        display: block;
+      }
+    }
   }
 }
