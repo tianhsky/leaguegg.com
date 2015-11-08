@@ -31,7 +31,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           $scope.error = err.data.error;
           if ($scope.error == 'Summoner is not currently in game') {
             $scope.error_summoner_not_in_game = true;
-            var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner;
+            var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner + '/matches';
             $location.path(url);
           }
         } else {
