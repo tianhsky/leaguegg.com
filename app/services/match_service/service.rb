@@ -168,7 +168,8 @@ module MatchService
     def self.map_summoners_info(match, match_players=nil)
       match.summoner_ids ||= []
 
-      if fps = match_players
+      if !match_players.blank? && match_players.is_a?(Array)
+        fps = match_players
         fellow_summoner_ids = match_players.map{|p|p['summoner_id']}
 
         summoner_name_missing = false
@@ -206,11 +207,14 @@ module MatchService
         end
       end
 
-      sum_ids = match.teams.flat_map{|t|t['participants']}.flat_map{|p|p['summoner_id']}.compact
-      sum_ids = sum_ids.map{|x|x.try(:to_i)}
-      sum_ids |= fellow_summoner_ids||[]
-      match.summoner_ids |= sum_ids
-      match.summoner_ids.uniq!
+      begin
+        sum_ids = match.teams.flat_map{|t|t['participants']}.flat_map{|p|p['summoner_id']}.compact
+        sum_ids = sum_ids.map{|x|x.try(:to_i)}
+        sum_ids |= fellow_summoner_ids||[]
+        match.summoner_ids |= sum_ids
+        match.summoner_ids.uniq!
+      rescue
+      end
 
       # if (match.summoner_ids - sum_ids).blank? && (sum_ids-match.summoner_ids).blank?
       # else

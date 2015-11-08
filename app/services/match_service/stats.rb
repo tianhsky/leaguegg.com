@@ -25,6 +25,7 @@ module MatchService
 
     def self._gen_player_stats(match)
       match.teams.each do |team|
+        next if team['participants'].blank?
         total_kills = team['participants'].sum{|p|p['stats']['kills']||0}
         total_deaths = team['participants'].sum{|p|p['stats']['deaths']||0}
         total_assists = team['participants'].sum{|p|p['stats']['assists']||0}
