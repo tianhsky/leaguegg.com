@@ -9,12 +9,14 @@ module MatchService
 
       if match
         if include_timeline && match.timeline.blank?
-          match_json = Riot.find_match(match_id, region, include_timeline)
-          match_hash = Factory.build_match_hash(match_json)
-          match.timeline = match_hash['timeline']
+          if match_json = Riot.find_match(match_id, region, include_timeline)
+            match_hash = Factory.build_match_hash(match_json)
+            match.timeline = match_hash['timeline']
+          end
         end
       else
         match_json = Riot.find_match(match_id, region, include_timeline)
+        return nil if match_json.blank?
         match_hash = Factory.build_match_hash(match_json)
         match = Match.new
         match.assign_attributes(match_hash)
@@ -143,7 +145,7 @@ module MatchService
             workers << Thread.new do
               begin
                 match_item = MatchService::Service.find_match(match_list_item['match_id'], match_list_item['region'])
-                match_items << match_item
+                match_items << match_item if match_item
               rescue
               end
             end

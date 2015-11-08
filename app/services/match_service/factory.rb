@@ -15,6 +15,7 @@ module MatchService
     end
 
     def self.build_teams_hash(match_json)
+      return nil if match_json['participants'].blank?
       grouped_participants = match_json['participants'].group_by{|p| p['team_id']}
       grouped_participants.each do |team_id, participants|
         participants.each do |par|

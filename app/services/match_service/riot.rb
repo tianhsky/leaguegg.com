@@ -8,7 +8,12 @@ module MatchService
       if(include_timeline)
         url += '?includeTimeline=true'
       end
-      resp = ::RiotAPI.get(url, region)
+      begin
+        resp = ::RiotAPI.get(url, region)
+      rescue Exception => ex
+        resp = nil
+      end
+      resp
     end
 
     def self.find_match_list(summoner_id, region, season=ENV['CURRENT_SEASON'], champion_id=nil, begin_index=nil, end_index=nil)
