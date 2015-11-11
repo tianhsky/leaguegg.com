@@ -31,6 +31,10 @@ module AppConsts
   RIOT_THROTTLE = Ratelimit.new('riot_api_throttle')
   FETCH_GAME_MAX_SECONDS = 16 #seconds
 
+  puts 'Setting up default account'
+  ADMIN_USER = 'admin'
+  ADMIN_PASS = 'leagueggrocks'
+
   puts 'Loading static data from riot'
   Consts::Version.setup
   Consts::Champion.setup
