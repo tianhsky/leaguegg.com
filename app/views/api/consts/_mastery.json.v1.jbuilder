@@ -6,6 +6,6 @@ json.category mastery['category']
 json.img mastery['img']
 
 if rank
-  json.description mastery['description'][rank-1]
+  json.description mastery['description'].try(:[],(rank-1))
   json.rank rank
 end
