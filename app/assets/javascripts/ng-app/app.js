@@ -40,6 +40,10 @@ angular.module('leaguegg.summoner', [
   'utils'
 ]);
 
+angular.module('leaguegg.feedback', [
+  'utils'
+]);
+
 angular.module('leaguegg.match', [
   'utils'
 ]);
@@ -47,5 +51,5 @@ angular.module('leaguegg.match', [
 angular.module('leaguegg', [
   'leaguegg.consts', 'leaguegg.partials',
   'leaguegg.home', 'leaguegg.game', 'leaguegg.searchbar', 'leaguegg.champion',
-  'leaguegg.layouts', 'leaguegg.summoner', 'leaguegg.match'
+  'leaguegg.layouts', 'leaguegg.summoner', 'leaguegg.match', 'leaguegg.feedback'
 ]);

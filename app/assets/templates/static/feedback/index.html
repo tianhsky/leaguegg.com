@@ -1,0 +1,17 @@
+<div class="feedbacks">
+  <div class="fb-item container" ng-repeat="fb in data.feedbacks track by $index">
+    <div class="fb-img col-md-4">
+      <div class="fb-time">
+        <span class="text label label-default">
+        {{fb.created_at | time_from_now:'unix'}}
+      </span>
+      </div>
+      <img ng-src="{{fb.img}}">
+    </div>
+    <div class="col-md-8">
+      <div class="fb-notes">{{fb.note}}</div>
+      <hr>
+      <div class="fb-browser">{{fb.browser}}</div>
+    </div>
+  </div>
+</div>

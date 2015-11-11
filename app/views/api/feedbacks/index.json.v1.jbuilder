@@ -1,0 +1,1 @@
+json.feedbacks @feedbacks, partial: 'show', as: :feedback

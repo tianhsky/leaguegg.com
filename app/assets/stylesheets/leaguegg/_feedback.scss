@@ -1,0 +1,23 @@
+#feedback-module {
+  color: #595959;
+}
+
+.feedbacks {
+  .fb-item {
+    border-radius: 10px;
+    position: relative;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: rgba(66, 66, 114, 0.45);
+    .fb-img {
+      img {
+        max-width: 300px;
+        max-height: 250px;
+      }
+    }
+    .fb-notes {}
+    .fb-time {
+      padding: 5px 0px 15px 0px;
+    }
+  }
+}

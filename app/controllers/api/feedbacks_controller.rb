@@ -4,6 +4,10 @@ module Api
     protect_from_forgery with: :null_session
     skip_before_filter :check_api_key
 
+    def index
+      @feedbacks = Feedback.order_by(['created_at', -1])
+    end
+
     def create
       @feedback = Feedback.create(feedback_params)
       render json: {}

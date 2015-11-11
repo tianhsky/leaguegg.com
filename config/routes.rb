@@ -11,11 +11,12 @@ Rails.application.routes.draw do
     end
     resource :rotation, only: [:show]
     resources :matches, only: [:index, :show]
-    resources :feedbacks, only: [:create]
+    resources :feedbacks, only: [:index, :create]
   end
 
   get 'app' => 'apps#show', as: :mobile
   get 'rotation' => 'rotations#show', as: :rotation
+  get 'feedbacks' => 'feedbacks#index', as: :feedbacks
   get 'game/*region/*summoner_name' => 'games#show', as: :game_search
   # get 'match/*region/*match_id' => 'matches#show', as: :match_search
   get 'summoner/*region/*summoner_id_or_name' => 'summoners#show', as: :summoner_search
