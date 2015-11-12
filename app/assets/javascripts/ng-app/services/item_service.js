@@ -3,8 +3,8 @@ angular.module('leaguegg.consts').service('ItemService', [
   function($http, $q) {
     var self = this;
     var _data = {};
-    var _json_url = "http://ddragon.leagueoflegends.com/cdn/5.20.1/data/en_US/item.json";
-    var _img_url = "http://ddragon.leagueoflegends.com/cdn/5.20.1/img/item/";
+    var _json_url = "http://ddragon.leagueoflegends.com/cdn/5.22.3/data/en_US/item.json";
+    var _img_url = "http://ddragon.leagueoflegends.com/cdn/5.22.3/img/item/";
 
     self.getItemImgUrlByID = function(id) {
       var img_url = _img_url + id + ".png";

@@ -50,13 +50,12 @@ module Consts
     def self.load_data
       @version = @json['version']
       r = {}
-      @json['data'].each do |name, value|
-
-        r["#{value['id']}".to_i] = {
-          "id" => value['id'],
+      @json['data'].each do |id, value|
+        r["#{id}".to_i] = {
+          "id" => id.to_i,
           "name" => value['name'],
           "description" => value['description'],
-          "category" => find_category(@json['tree'], value['id']),
+          "category" => find_category(@json['tree'], id),
           "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/mastery/#{value['id']}.png"
         }
       end
@@ -65,24 +64,24 @@ module Consts
 
     def self.find_category(tree, mastery_id)
       search_id = mastery_id.try(:to_i)
-      tree['defense'].each do |d|
-        d['mastery_tree_items'].each do |m|
+      tree['ferocity'].each do |d|
+        d.each do |m|
           if m
-            return 'Defense' if m['mastery_id'] == search_id
+            return 'Ferocity' if m['mastery_id'].to_i == search_id
           end
         end
       end
-      tree['offense'].each do |d|
-        d['mastery_tree_items'].each do |m|
+      tree['cunning'].each do |d|
+        d.each do |m|
           if m
-            return 'Offense' if m['mastery_id'] == search_id
+            return 'Cunning' if m['mastery_id'].to_i == search_id
           end
         end
       end
-      tree['utility'].each do |d|
-        d['mastery_tree_items'].each do |m|
+      tree['resolve'].each do |d|
+        d.each do |m|
           if m
-            return 'Utility' if m['mastery_id'] == search_id
+            return 'Resolve' if m['mastery_id'].to_i == search_id
           end
         end
       end

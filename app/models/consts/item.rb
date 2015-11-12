@@ -50,14 +50,14 @@ module Consts
     def self.load_data
       @version = @json['version']
       r = {}
-      @json['data'].each do |name, value|
-        r["#{value['id']}".to_i] = {
-          "id" => value['id'],
-          "name" => value['name'],
+      @json['data'].each do |id, value|
+        r["#{id}".to_i] = {
+          "id" => id.to_i,
+          "name" => value['id'],
           "description" => value['description'],
           "plaintext" => value['plaintext'],
           "group" => value['group'],
-          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/item/#{value['id']}.png"
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/item/#{id}.png"
         }
       end
       r

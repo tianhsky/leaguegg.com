@@ -51,14 +51,14 @@ module Consts
       @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
-        r["#{value['id']}".to_i] = {
-          "id" => value['id'],
-          "key" => value['key'],
+        r["#{value['key']}".to_i] = {
+          "id" => value['key'],
+          "key" => value['id'],
           "name" => value['name'],
           "title" => value['title'],
-          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/champion/#{value['key']}.png",
-          "img_loadings" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{value['key']}_0.jpg"],
-          "img_splashes" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{value['key']}_0.jpg"]
+          "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/champion/#{value['id']}.png",
+          "img_loadings" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{value['id']}_0.jpg"],
+          "img_splashes" => ["http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{value['id']}_0.jpg"]
         }
       end
       r

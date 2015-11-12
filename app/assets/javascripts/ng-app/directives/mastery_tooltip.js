@@ -13,19 +13,19 @@ angular.module('leaguegg.partials').directive('masteryTooltip', function() {
           var grouped = _.groupBy(masteries, function(m) {
             return m.category;
           });
-          var offenses = _.reduce(grouped['Offense'], function(memo, o) {
+          var ferocity = _.reduce(grouped['Ferocity'], function(memo, o) {
             return memo + o.rank
           }, 0);
-          var defenses = _.reduce(grouped['Defense'], function(memo, o) {
+          var cunning = _.reduce(grouped['Cunning'], function(memo, o) {
             return memo + o.rank
           }, 0);
-          var utilities = _.reduce(grouped['Utility'], function(memo, o) {
+          var resolve = _.reduce(grouped['Resolve'], function(memo, o) {
             return memo + o.rank
           }, 0);
           var result = {
-            offense: offenses,
-            defense: defenses,
-            utility: utilities
+            ferocity: ferocity,
+            cunning: cunning,
+            resolve: resolve
           };
           return result;
         }
