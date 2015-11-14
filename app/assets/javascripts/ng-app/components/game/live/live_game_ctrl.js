@@ -22,6 +22,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     $scope.season = $filter('titleize')(ConstsService.season);
     $scope.game = null;
     $scope.error = null;
+    $scope.timeout_promise = null;
 
     LiveGameService.getGameBySummoner($scope.query)
       .then(function(resp) {
@@ -34,7 +35,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           $scope.error = err.data.error;
           if ($scope.error == 'Summoner is not currently in game') {
             $scope.error_summoner_not_in_game = true;
-            $timeout(function(){
+            $scope.timeout_promise = $timeout(function(){
               var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner + '/matches';
               $location.path(url);
             }, 3000);
@@ -51,6 +52,10 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     $scope.matchHistoryAdClicked = function() {
       Analytics.trackEvent('Game', 'ADMatches', 'Click', 1);
     }
+
+    $scope.$on('$destroy', function(){
+      $timeout.cancel($scope.timeout_promise);
+    })
 
   }
 ]);
