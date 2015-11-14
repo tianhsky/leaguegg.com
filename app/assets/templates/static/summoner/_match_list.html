@@ -39,9 +39,14 @@
         <div class="cs">
           CS {{m.cp.stats.minions_killed}}
         </div>
-        <div class="ckill" data-tooltip="Kill Contribution">
+        <div class="ckill" data-tooltip="Kill Participation">
           <uib-progressbar max="1" value="m.cp.stats_aggretated.killc_rate||0" type="{{m.cp.stats_aggretated.killc_rate > 0.5 ? 'danger' : 'info'}}">
-            <p class="progress-text">C/Kill {{m.cp.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+            <p class="progress-text">Kill/P {{m.cp.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
+        </div>
+        <div class="cdmg" data-tooltip="Damage Contribution">
+          <uib-progressbar max="1" value="m.cp.stats_aggretated.dmg_rate||0" type="{{m.cp.stats_aggretated.dmg_rate > 0.3 ? 'danger' : 'info'}}">
+            <p class="progress-text">Dmg/C {{m.cp.stats_aggretated.dmg_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
       </div>

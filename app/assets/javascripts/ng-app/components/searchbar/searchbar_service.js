@@ -52,7 +52,7 @@ angular.module('leaguegg.searchbar').service('SearchbarService', [
       var url = null;
       if (!_.isEmpty(_data.query.region) && !_.isEmpty(_data.query.summoner)) {
         self.cacheSearchQuery();
-        var url = "/summoner/" + _data.query.region + "/" + _data.query.summoner;
+        var url = "/game/" + _data.query.region + "/" + _data.query.summoner;
       }
       return url;
     }

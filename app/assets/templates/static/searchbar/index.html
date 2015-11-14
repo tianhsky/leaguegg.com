@@ -1,9 +1,9 @@
-<div class="summoner-search-bar" role="search">
-  <div class="summoner-search-container">
-    <input type="text" autocapitalize="off" autocorrect="off" autofocus="" spellcheck="false" class="form-element input-sm input-search" placeholder="Summoner..." ng-model="query.summoner" ng-enter="submitSearch()">
+<div class="summoner-searchbar" role="search">
+  <div class="summoner-searchbar-container">
+    <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" class="form-element input-sm input-search" placeholder="Summoner" ng-model="query.summoner" ng-enter="submitSearch()">
     <select class="form-element input-sm input-region" ng-options="p for p in platforms" ng-model="query.region"></select>
-    <button class="form-element btn btn-default btn-sm btn-search" type="submit" ng-click="submitSearch()">
+    <!-- <button class="form-element btn btn-default btn-sm btn-search" type="submit" ng-click="submitSearch()">
       <span class="glyphicon glyphicon-search"></span>
-    </button>
+    </button> -->
   </div>
 </div>

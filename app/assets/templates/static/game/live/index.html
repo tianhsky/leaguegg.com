@@ -1,17 +1,22 @@
 <div class="live-game">
-  <div class="row">
+  <div class="row row-fluid">
     <loading status="loading.game">
     </loading>
   </div>
-  <div class="live-game-wrapper row">
+  <div class="live-game-wrapper row row-fluid">
     <div class="error" ng-if="error">
       <div class="error-text">
         <h2>{{ error }}</h2>
       </div>
       <div class="error-champion" ng-if="error_summoner_not_in_game">
-        <a href="/summoner/{{query.region}}/{{query.summoner}}">
-          See {{query.summoner}}'s history stats
-        </a>
+        <div>
+          <a href="/summoner/{{query.region}}/{{query.summoner}}/matches">
+            See {{query.summoner}}'s history stats
+          </a>
+        </div>
+        <div>
+          Page will redirect in 3 seconds ...
+        </div>
       </div>
     </div>
     <div ng-if="!error && game">

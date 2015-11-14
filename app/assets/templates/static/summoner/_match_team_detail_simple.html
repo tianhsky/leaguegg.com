@@ -16,7 +16,7 @@
   </div>
   <div class="mtp-ckill">
     <uib-progressbar max="1" value="p.stats_aggretated.killc_rate||0" type="{{p.stats_aggretated.killc_rate > 0.5 ? 'danger' : 'info'}}">
-      <p class="progress-text">C/Kill {{p.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+      <p class="progress-text">Kill/P% {{p.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
     </uib-progressbar>
   </div>
 </div>

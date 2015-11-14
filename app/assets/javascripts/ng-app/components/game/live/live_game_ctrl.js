@@ -1,7 +1,9 @@
 angular.module('leaguegg.game').controller('LiveGameCtrl', [
-  '$scope', '$stateParams', '$location', 'LiveGameService',
+  '$scope', '$stateParams', '$location', '$timeout',
+  'LiveGameService',
   'ConstsService', '$filter', 'LayoutService', 'Analytics',
-  function($scope, $stateParams, $location, LiveGameService,
+  function($scope, $stateParams, $location, $timeout,
+    LiveGameService,
     ConstsService, $filter, LayoutService, Analytics) {
     LayoutService.setFatHeader(false);
     LayoutService.setBGImg('/static/img/bg-sand.png');
@@ -9,7 +11,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     $scope.loading = {
       game: {
         active: true,
-        text: 'Loading Game ...',
+        text: 'Searching Game ...',
         theme: 'default'
       }
     };
@@ -32,8 +34,10 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
           $scope.error = err.data.error;
           if ($scope.error == 'Summoner is not currently in game') {
             $scope.error_summoner_not_in_game = true;
-            var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner + '/matches';
-            $location.path(url);
+            $timeout(function(){
+              var url = '/summoner/' + $scope.query.region + '/' + $scope.query.summoner + '/matches';
+              $location.path(url);
+            }, 3000);
           }
         } else {
           $scope.error = "Sorry, there was a problem";

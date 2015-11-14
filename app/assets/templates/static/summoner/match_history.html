@@ -1,8 +1,8 @@
-<div class="page-summoner container">
+<div class="page-summoner">
   <div ng-if="data.error.summoner">
     {{data.error.summoner.data.error}}
   </div>
-  <div class="summoner-info-wrapper row" ng-if="!data.error.summoner && data.summoner">
+  <div class="summoner-info-wrapper row row-fluid" ng-if="!data.error.summoner && data.summoner">
     <div class="summoner-profile col-md-4">
       <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
     </div>

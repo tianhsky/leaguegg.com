@@ -5,14 +5,16 @@
 //*= require angular-send-feedback/dist/angular-send-feedback.css
 
 // cores
+@import 'var';
 @import 'fonts';
 @import 'cols';
-@import 'var';
-@import 'core';
 @import 'animation';
 @import 'loading';
 @import 'err';
 @import 'tooltip';
+@import 'button';
+@import 'blink';
+@import 'core';
 
 // pages
 @import 'leaguegg/theme';

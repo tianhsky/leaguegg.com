@@ -49,6 +49,7 @@ module MatchService
         stats.champion_id = m['champion_id']
         if ag = m['stats_aggretated']
           stats.total_killc_rate += ag['killc_rate']
+          stats.total_dmgc_rate += ag['dmg_rate']
         end
         if stat = m['stats']
           stats.won += 1 if stat['winner']

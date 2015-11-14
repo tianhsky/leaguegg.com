@@ -1,8 +1,8 @@
-<div class="page-summoner container">
+<div class="page-summoner">
   <div ng-if="data.error.summoner">
     {{data.error.summoner.data.error}}
   </div>
-  <div class="summoner-info-wrapper row" ng-if="!data.error.summoner && data.summoner">
+  <div class="summoner-info-wrapper row row-fluid" ng-if="!data.error.summoner && data.summoner">
     <div class="summoner-profile col-md-4">
       <summoner-profile season="data.season" summoner="data.summoner"></summoner-profile>
     </div>
@@ -10,7 +10,7 @@
       <div summoner-tabs class="summoner-tabs" tab-code="data.tab">
       </div>
       
-      <div class="link-to-all-stats row">
+      <div class="link-to-all-stats row row-fluid">
         <a href="/summoner/{{data.summoner.region}}/{{data.summoner.id}}-{{data.summoner.name}}">See {{data.summoner.name}}'s performance for other champions</a>
       </div>
 

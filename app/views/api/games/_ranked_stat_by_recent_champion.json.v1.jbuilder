@@ -29,3 +29,4 @@ json.aggresive_rate rstat.aggresive_rate
 json.win_rate rstat.win_rate
 json.kda_rate rstat.kda_rate
 json.killc_rate rstat.avg_killc_rate
+json.dmgc_rate rstat.avg_dmgc_rate

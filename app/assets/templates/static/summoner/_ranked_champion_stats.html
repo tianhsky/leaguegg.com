@@ -4,6 +4,28 @@
     <div class="fact-item-group">
       <div class="fact-item">
         <div class="item-label">
+          Damage Contribution
+        </div>
+        <div class="item-value">
+          <uib-progressbar max="1" value="stats.dmgc_rate||0" type="{{stats.dmgc_rate > 0.3 ? 'danger' : 'info'}}">
+            <p class="progress-text">{{stats.dmgc_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
+        </div>
+      </div>
+      <div class="fact-item">
+        <div class="item-label">
+          Kill Participation
+        </div>
+        <div class="item-value">
+          <uib-progressbar max="1" value="stats.killc_rate||0" type="{{stats.killc_rate > 0.5 ? 'danger' : 'info'}}">
+            <p class="progress-text">{{stats.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
+        </div>
+      </div>
+    </div>
+    <div class="fact-item-group">
+      <div class="fact-item">
+        <div class="item-label">
           Minion Kills
         </div>
         <div class="item-value">

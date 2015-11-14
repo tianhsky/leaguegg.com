@@ -2,11 +2,12 @@
   .summoner-match-history {
     .match-list {
       .match-row {
-        background-color: rgba(49, 68, 90, 0.82);
+        // background-color: rgba(49, 68, 90, 0.82);
+        border: 3px solid #4780C1;
         margin: 10px 0px;
         .title-row {
           position: relative;
-          background-color: rgb(46, 54, 63);
+          background-color: #4780C1;
           margin-bottom: 5px;
           font-size: 0.9em;
           font-weight: 900;
@@ -78,15 +79,19 @@
         .kill-info {}
         .combat-info {
           .level {
-            padding: 5px 0px;
+            padding: 2px 0px;
           }
           .cs {
-            padding: 5px 0px;
+            padding: 2px 0px;
           }
-          .ckill {
-            padding: 5px 0px;
+          .ckill,
+          .cdmg {
+            padding: 2px 0px;
             .progress {
-              max-width: 200px;
+              max-width: 180px;
+              .progress-text{
+                font-size: 0.8em;
+              }
             }
           }
         }
@@ -115,8 +120,9 @@
         }
         .match-detail-row {
           font-size: 0.8em;
-          margin: 3px 0px;
-          background-color: rgb(42, 72, 109);
+          margin: 0px;
+          padding: 8px 0px;
+          background-color: #4780C1;
         }
         .mtp-icon {
           display: table-cell;

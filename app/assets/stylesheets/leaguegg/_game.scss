@@ -168,6 +168,8 @@
           min-height: 22px;
         }
         .mas-runes {
+          margin: 0 auto;
+          width: 95px;
           .label {
             position: relative;
             cursor: help;
@@ -190,7 +192,8 @@
           }
         }
         .main-role {
-          min-height: 50px;
+          position: relative;
+          min-height: 35px;
           padding: 5px 0px;
         }
       }
@@ -215,13 +218,14 @@
             position: absolute;
             top: 100%;
             max-width: 230px;
-            background-color: #46A47D;
+            background-color: #373737;
             z-index: 10;
             padding: 5px;
             border-radius: 10px;
           }
           &:hover,
           &:active {
+            background-color: #8364FF;
             .cs-chart {
               display: block;
             }
@@ -239,12 +243,12 @@
           min-height: 40px;
           padding: 5px 0px;
         }
-        .kill-rate {
+        .kill-rate, .dmg-rate {
           min-height: 40px;
           padding: 5px 0px;
           .rate-chart {
             padding: 6px 5px;
-            max-width: 110px;
+            max-width: 100px;
             margin: 0 auto;
           }
         }
@@ -264,7 +268,7 @@
       }
     }
     .champion-name {
-      background-color: rgba(66, 141, 185, 0.38);
+      background-color: rgba(66, 141, 185, 0.75)
     }
     .cs-chart {
       left: 10%;
@@ -280,7 +284,7 @@
       }
     }
     .champion-name {
-      background-color: rgba(172, 39, 39, 0.42);
+      background-color: rgba(172, 39, 39, 0.75);
     }
     .cs-chart {
       right: 10%;
@@ -300,7 +304,8 @@
     .badge {
       cursor: pointer;
       margin-top: 3px;
-      min-width: 90px;
+      width: 80px;
+      border: 1px solid white;
       &.hot {
         background: #A75151;
       }
@@ -317,10 +322,12 @@
   }
   .item-tooltip,
   .runes,
+  .main-role,
   .masteries {
     .hover-detail {
       display: none;
       position: absolute;
+      font-size: 12px;
       top: 100%;
       left: 50%;
       min-width: 100px;

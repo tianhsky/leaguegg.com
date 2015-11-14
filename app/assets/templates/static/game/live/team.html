@@ -23,13 +23,13 @@
   <div class="player" ng-class="{'col-md-1':(team.participants.length==5), 'col-md-4':(team.participants.length==3)}" ng-repeat="p in team.participants track by $index">
     <div class="intro">
       <div class="summoner-name" title="{{p.summoner.name}}">
-        <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}" target="_blank" ng-click="summonerClicked(p.summoner)">{{p.summoner.name | characters:16}}</a>
+        <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}" ng-click="summonerClicked(p.summoner)">{{p.summoner.name | characters:16}}</a>
       </div>
       <div class="champion-icon">
         <div class="champ-icon-inner">
           <img ng-src="{{p.champion.img}}" err-src="/static/img/leaguegg-icon.png">
           <div class="champion-name">
-            <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}/champion/{{p.champion.id}}" target="_blank" ng-click="championClicked(p.summoner, p.champion)">{{p.champion.name | characters:10}}</a>
+            <a href="/summoner/{{region}}/{{p.summoner.id}}-{{p.summoner.name}}/champion/{{p.champion.id}}" ng-click="championClicked(p.summoner, p.champion)">{{p.champion.name | characters:10}}</a>
           </div>
         </div>
       </div>
@@ -55,13 +55,10 @@
         <mastery-tooltip masteries="p.masteries"></mastery-tooltip>
       </div>
       <div class="main-role">
-        <div class="item-labels">
-          <span class="item-label item-tooltip">
-            Mains
-            <div class="hover-detail">Most played roles based on last 60 games</div>
-          </span>
-        </div>
         <roles roles="p.player_roles" />
+        <div class="hover-detail">
+          Most played role based on {{p.summoner.name}}'s last 60 games
+        </div>
       </div>
     </div>
     <div class="hr b2 hidden-sm hidden-xs"></div>
@@ -101,7 +98,7 @@
       <div class="cs" ng-mouseenter="csHovered()">
         <div class="item-labels">
           <span class="item-label item-tooltip">
-            <i class="fa fa-line-chart cs-stats-icon"></i> CS
+            CS
             <div class="hover-detail">
               CS at 10 minutes
             </div>
@@ -172,15 +169,30 @@
       <div class="kill-rate">
         <div class="item-labels">
           <span class="item-label item-tooltip">
-            Kill Contrib %
+            Kill P%
             <div class="hover-detail">
-              Average kill contribution / participation
+              {{p.summoner.name}}'s kills and assists for {{p.champion.name}} over team's total kills
             </div>
           </span>
         </div>
         <div class="rate-chart">
           <uib-progressbar max="1" value="p.ranked_stat_recent.killc_rate||0" type="{{p.ranked_stat_recent.killc_rate > 0.5 ? 'danger' : 'info'}}">
             <p class="progress-text">{{p.ranked_stat_recent.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
+          </uib-progressbar>
+        </div>
+      </div>
+      <div class="dmg-rate">
+        <div class="item-labels">
+          <span class="item-label item-tooltip">
+            Damage C%
+            <div class="hover-detail">
+              {{p.summoner.name}}'s damages dealt for {{p.champion.name}} over team's total damages dealt
+            </div>
+          </span>
+        </div>
+        <div class="rate-chart">
+          <uib-progressbar max="1" value="p.ranked_stat_recent.dmgc_rate||0" type="{{p.ranked_stat_recent.dmgc_rate > 0.3 ? 'danger' : 'info'}}">
+            <p class="progress-text">{{p.ranked_stat_recent.dmgc_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
       </div>

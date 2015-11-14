@@ -23,6 +23,11 @@ a {
   }
 }
 
+.row-fluid {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .error {
   text-align: center;
   .error-img {
@@ -106,9 +111,11 @@ a {
 
 .progress {
   margin-bottom: 0px;
+  background: transparent;
+  border: 1px solid white;
   .progress-text {
-    color: #333;
+    color: white;
     font-weight: 400;
-    width: 75px;
+    width: 80px;
   }
 }

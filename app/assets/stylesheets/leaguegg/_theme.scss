@@ -17,18 +17,25 @@
   // background-color: $black_20;
   // background-image: url(/static/img/bg-polygon.png);
   // box-shadow: inset 0 0 100px $black_50;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   min-height: 500px;
 }
 
 .masthead {
+  position: relative;
   box-shadow: inset 0 0 100px $black_50;
   .masthead-brand {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    display: inline-block;
+    font-family: 'Exo', sans-serif;
+    font-weight: 900;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     a {
       text-decoration: none;
-      text-shadow: 5px 5px $gray;
+      // text-shadow: 5px 5px $gray;
     }
   }
   .masthead-nav {
@@ -69,6 +76,28 @@
             padding-left: 0;
           }
         }
+      }
+    }
+  }
+  .searchbar-wrapper {
+    display: inline-block;
+    float: right;
+    padding: 8px 0px;
+    .summoner-searchbar-container {
+      background-color: #595274;
+      color: white;
+      .input-search {
+        width: 105px;
+        margin: 0px;
+        border-radius: 0px;
+        background: transparent;
+        border: none;
+      }
+      .input-region {
+        margin: 0px;
+        border: none;
+        border-radius: 0px;
+        background: transparent;
       }
     }
   }

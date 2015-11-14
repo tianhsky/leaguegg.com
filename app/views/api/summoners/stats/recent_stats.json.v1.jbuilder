@@ -31,3 +31,6 @@ json.avg_sight_wards_bought @recent_stats.avg_sight_wards_bought
 
 json.avg_heals @recent_stats.avg_heals
 json.avg_crowd_control_time @recent_stats.avg_crowd_control_time
+
+json.killc_rate @recent_stats.avg_killc_rate
+json.dmgc_rate @recent_stats.avg_dmgc_rate
