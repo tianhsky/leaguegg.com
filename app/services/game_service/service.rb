@@ -153,7 +153,10 @@ module GameService
       workers = []
 
       summoner_ids = summoners.map{|x|x.summoner_id}
-      league_entries = LeagueService::Riot.find_league_entries_by_summoner_ids(summoner_ids, region)
+      begin
+        league_entries = LeagueService::Riot.find_league_entries_by_summoner_ids(summoner_ids, region)
+      rescue => ex
+      end
 
       game.teams.each do |team|
         team.participants.each do |participant|
