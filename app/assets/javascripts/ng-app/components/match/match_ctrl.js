@@ -4,6 +4,7 @@ angular.module('leaguegg.match').controller('MatchCtrl', [
   function($scope, $stateParams, $filter, $interval, LayoutService,
     SummonerService, MatchService, ConstsService, MetaService, Analytics) {
     LayoutService.setFatHeader(false);
+    LayoutService.setBGImg('/static/img/bg-sand.png');
     MetaService.setTitle('Match Replay - League of Legends');
 
     $scope.data = {

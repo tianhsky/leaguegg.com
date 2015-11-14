@@ -11,14 +11,15 @@ angular.module('utils').directive('bgvid', [
             var enable = newVal.showBGVideo;
             if (enable) {
               var poster = 'static/img/home-bg.png';
-              var src1 = $("<source>")
-                .attr('src', 'static/video/home-bg.mp4')
-                .attr('type', 'video/mp4');
-              var src2 = $("<source>")
-                .attr('src', 'static/video/home-bg.home-bg')
-                .attr('type', 'video/webm');
               vid.attr('poster', poster);
-              vid.append(src1).append(src2);
+              var src1 = $("<source>")
+                .attr('src', 'static/video/home-bg-s2.mp4')
+                .attr('type', 'video/mp4');
+              vid.append(src1);
+              // var src2 = $("<source>")
+              //   .attr('src', 'static/video/home-bg.home-bg')
+              //   .attr('type', 'video/webm');
+              // vid.append(src2);
               vid.show();
             } else {
               vid.attr('poster', null);

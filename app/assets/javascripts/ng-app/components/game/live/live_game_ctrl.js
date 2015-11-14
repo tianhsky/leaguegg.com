@@ -4,6 +4,7 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
   function($scope, $stateParams, $location, LiveGameService,
     ConstsService, $filter, LayoutService, Analytics) {
     LayoutService.setFatHeader(false);
+    LayoutService.setBGImg('/static/img/bg-sand.png');
 
     $scope.loading = {
       game: {

@@ -1,83 +1,42 @@
-[ui-view] {
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  &.ng-enter,
-  &.ng-leave {
-    position: fixed;
+@keyframes animated-background {
+  from {
     left: 0;
-    -ms-transition: 0.25s ease-in-out;
-    -webkit-transition: 0.25s ease-in-out;
-    -o-transition: 0.25s ease-in-out;
-    transition: 0.25s ease-in-out;
   }
-  &.ng-enter {
-    z-index: 101;
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    transform: translateX(100%);
-  }
-  &.ng-enter-active {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    transform: translateX(0);
-  }
-  &.ng-leave {
-    z-index: 100;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    transform: translateX(0);
-  }
-  &.ng-leave-active {
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    transform: translateX(-100%);
+  to {
+    left: -100%;
   }
 }
 
-
-
-.fade-in-anim {
-  &.ng-enter,
-  &.fade-with-show {
-    -webkit-transition: all .8s ease-in-out;
-    -moz-transition: all .8s ease-in-out;
-    -o-transition: all .8s ease-in-out;
-    transition: all .8s ease-in-out;
-  }
-  
-  &.ng-enter {
-    opacity: 0;
-  }
-  
-  &.ng-enter-active {
-    opacity: 1;
-  }
-  
-  &.ng-hide {
-    opacity: 0;
-  }
-}
-.fade-out-anim {
-  &.ng-leave,
-  &.fade-with-show {
-    -webkit-transition: all .8s ease-in-out;
-    -moz-transition: all .8s ease-in-out;
-    -o-transition: all .8s ease-in-out;
-    transition: all .8s ease-in-out;
-  }
-  
-  &.ng-leave {
-    opacity: 1;
-  }
-  
-  &.ng-leave-active,
-  &.ng-hide {
-    opacity: 0;
-  }
-}
 .grow {
   transform: scale(1.5);
   transition: all .3s ease-in-out;
+}
+
+[ui-view] {
+  &.ng-enter {
+    -ms-transition: 0.9s ease-in-out;
+    -webkit-transition: 0.9s ease-in-out;
+    -o-transition: 0.9s ease-in-out;
+    transition: 0.9s ease-in-out;
+  }
+  &.ng-leave,
+  &.ng-hide {
+    -ms-transition: 0s ease-in-out;
+    -webkit-transition: 0s ease-in-out;
+    -o-transition: 0s ease-in-out;
+    transition: 0s ease-in-out;
+  }
+  &.ng-enter {
+    opacity: 0;
+  }
+  &.ng-enter-active {
+    opacity: 1;
+  }
+  &.ng-leave,
+  &.ng-hide {
+    opacity: 0;
+  }
+  &.ng-leave-active {
+    opacity: 0;
+  }
 }

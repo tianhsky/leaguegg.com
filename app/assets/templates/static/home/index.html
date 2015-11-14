@@ -1,8 +1,14 @@
 <div class="home">
-  <div class="col-md-7 search-panel">
-    <live-game-search/>
+  <div class="search-panel">
+    <live-game-search></live-game-search>
   </div>
-  <div class="col-md-5 featured-panel">
-    <featured-games/>
+  <div class="rotation-desc">
+    This week's free champions
   </div>
+  <div class="rotation-roster">
+    <img ng-src="{{p.img}}" ng-repeat="p in data.free_champions">
+  </div>
+  <!-- <div class="col-md-5 featured-panel">
+    <featured-games></featured-games>
+  </div> -->
 </div>

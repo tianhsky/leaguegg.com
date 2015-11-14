@@ -4,6 +4,7 @@ angular.module('leaguegg.feedback').controller('FeedbackCtrl', [
   function($scope, $stateParams, $location,
     FeedbackService, LayoutService, Analytics) {
     LayoutService.setFatHeader(false);
+    LayoutService.setBGImg('/static/img/bg-sand.png');
 
     $scope.data = {};
 

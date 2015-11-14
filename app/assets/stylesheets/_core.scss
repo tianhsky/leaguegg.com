@@ -2,13 +2,15 @@ html,
 body {
   margin: 0px;
   height: 100%;
-  background-color: #2A2A2A;
-  // background-image: url(/static/img/bg-blur.png);
-  color: $color_font;
   font-size: 1em;
+  color: $color_font;
+  // background-color: #2A2A2A;
+  // background-image: url(/static/img/bg-blur.png);
+}
+
+* {
   text-shadow: 0 1px 3px $black_50;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
-  // font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
 }
 
 a {

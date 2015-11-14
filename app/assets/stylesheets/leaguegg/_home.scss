@@ -1,248 +1,131 @@
 .home {
   text-align: center;
   .search-panel {
-    padding: 0px 0px 60px 0px;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 60px 0px 60px 0px;
     .title-message {
-      padding: 20px 50px 40px 50px;
-      line-height: 1.8em;
-      font-size: 1.8em;
-      font-weight: 800;
+      font-family: 'Exo', sans-serif;
+      font-weight: 900;
+      font-size: 4.5em;
+      letter-spacing: 4px;
+      padding: 30px 0px 50px 0px;
       @media(max-width: 991px) {
-        padding: 0px 30px 20px 30px;
+        // padding: 0px 30px 20px 30px;
       }
       @media(max-width: 767px) {
-        font-size: 1.0em;
+        font-size: 3em;
       }
     }
     .search-game-container {
-      background-color: $gray;
-      display: inline-block;
+      display: block;
+      position: relative;
+      background-color: white;
+      color: black;
       border-radius: 0px;
+      height: 72px;
+      width: 590px;
+      margin: 0 auto;
       .form-element {
-        display: inline-block;
-        background-color: transparent;
-        vertical-align: bottom;
+        position: absolute;
+        bottom: 0px;
+        display: table-cell;
+        vertical-align: middle;
         border-color: none;
+        border-radius: 0px;
         border: none;
+        height: 72px;
+        font-size: 1.6em;
         &:focus {
           @extend %no_outline;
         }
       }
       .input-search {
-        font-size: 1.0em;
-        width: 330px;
+        width: 400px;
+        left: 0px;
       }
       .input-region {
-        font-size: 1.1em;
-        width: auto;
+        color: gray;
+        font-size: 1.3em;
+        width: 110px;
+        right: 80px;
         &:focus {
-          background-color: $gray;
-          color: white;
+          opacity: 0.7;
         }
       }
       .btn-search {
-        font-size: 1.2em;
-        padding: 12px 16px;
+        right: 0px;
         color: white;
+        border-radius: 0px;
+        width: 80px;
+        padding: 0px;
+        background: #76b852;
+        background: -webkit-linear-gradient(90deg, #76b852 10%, #8DC26F 90%);
+        background: -moz-linear-gradient(90deg, #76b852 10%, #8DC26F 90%);
+        background: -ms-linear-gradient(90deg, #76b852 10%, #8DC26F 90%);
+        background: -o-linear-gradient(90deg, #76b852 10%, #8DC26F 90%);
+        background: linear-gradient(90deg, #76b852 10%, #8DC26F 90%);
         &:hover {
-          background-color: rgb(106, 106, 106);
+          opacity: 0.7;
+        }
+      }
+      @media(max-width: 767px) {
+        width: 440px;
+        height: 60px;
+        .form-element {
+          height: 60px;
+          font-size: 1.1em;
+        }
+        .input-search {
+          width: 295px;
+        }
+        .input-region {
+          width: 75px;
+          right: 70px;
+        }
+        .btn-search {
+          width: 70px;
         }
       }
       @media(max-width: 500px) {
+        width: 295px;
+        height: 45px;
+        .form-element {
+          height: 45px;
+          font-size: 0.9em;
+        }
         .input-search {
-          font-size: 0.8em;
-          width: 50%;
+          width: 175px;
         }
         .input-region {
-          font-size: 0.9em;
-          width: auto;
+          width: 75px;
+          right: 45px;
         }
         .btn-search {
-          font-size: 1.0em;
-          padding: 12px 16px;
-          width: auto;
-          color: white;
+          width: 45px;
         }
       }
     }
   }
-  .featured-panel {
-    min-height: 420px;
-    .featured-header {
-      position: relative;
-      padding: 0px 10px;
-      margin: 0px auto;
-      background-color: $gray;
-      @media(max-width: 991px) {
-        width: 60%;
-      }
-      @media(max-width: 767px) {
-        font-size: 0.9em;
-        width: 90%;
-      }
-      .featured-title {
-        padding: 10px 0px 10px 0px;
-        text-align: left;
-        font-size: 1.1em;
-        font-weight: 800;
-      }
-      .game-indicators {
-        position: absolute;
-        right: 0px;
-        top: 10px;
-        width: auto;
-        color: $white_25;
-        .active {
-          color: white;
-        }
-        li {
-          cursor: pointer;
-          &:hover {
-            color: $white_50;
-          }
-        }
-      }
-    }
-    .featured-games {
-      top: 15px;
-      position: relative;
-      .game-item {
-        position: relative;
-        margin: 0px;
-      }
-      .game-timer {
-        position: absolute;
-        top: 0px;
-        left: 50%;
-        margin-left: -42px;
-        width: 84px;
-        font-size: 1.2em;
-        font-weight: 900;
-        border: 2px solid white;
-        background-color: #2D3448;
-      }
-      .featured-team {
-        width: 50%;
-        overflow: hidden;
-        .player {
-          height: 60px;
-          margin: 0px;
-          .summoner-name {
-            display: table-cell;
-            text-overflow: ellipsis;
-            font-size: 0.8em;
-          }
-          .champion-img {
-            display: table-cell;
-            img {
-              width: 50px;
-              height: 50px;
-            }
-          }
-        }
-        .team-banner {
-          position: relative;
-          height: 40px;
-          .bans {
-            text-align: center;
-            .ban-item {
-              display: inline-block;
-              width: 33px;
-              height: 33px;
-              position: relative;
-              .champion-img {
-                position: absolute;
-                width: 100%;
-                left: 0px;
-                top: 0px;
-              }
-              .champion-ban-icon {
-                position: relative;
-                font-size: 32px;
-                opacity: 0.8;
-                // color: $ban_color;
-              }
-            }
-          }
-        }
-        &.left {
-          float: left;
-          text-align: right;
-          padding-right: 10px;
-          border-right: 1px solid white;
-          .player {
-            position: relative;
-            .summoner-name {
-              position: absolute;
-              right: 62px;
-              bottom: 20px;
-            }
-            .champion-img {
-              position: absolute;
-              right: 5px;
-              bottom: 5px;
-            }
-          }
-          .team-banner {
-            .bans {
-              position: absolute;
-              right: 40px;
-              bottom: 5px;
-              color: $blue_team;
-            }
-          }
-        }
-        &.right {
-          float: right;
-          text-align: left;
-          padding-left: 10px;
-          .player {
-            position: relative;
-            .summoner-name {
-              position: absolute;
-              left: 62px;
-              bottom: 20px;
-            }
-            .champion-img {
-              position: absolute;
-              left: 5px;
-              bottom: 5px;
-            }
-          }
-          .team-banner {
-            .bans {
-              position: absolute;
-              left: 40px;
-              bottom: 5px;
-              color: $red_team;
-            }
-          }
-        }
-      }
-      .play-mask {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        .play {
-          position: absolute;
-          top: 100px;
-          left: 50%;
-          margin-left: -50px;
-          opacity: 0.0;
-          cursor: pointer;
-          i {
-            font-size: 100px;
-          }
-        }
-        &:hover {
-          .play {
-            opacity: 0.6;
-            &:hover {
-              opacity: 0.9;
-            }
-          }
-        }
-      }
+  .rotation-desc{
+    display: block;
+    max-width: 280px;
+    margin: 30px auto;
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 15px;
+    background-color: black;
+  }
+  .rotation-roster{
+    display: block;
+    max-width: 520px;
+    margin: 30px auto;
+    border: 10px solid gray;
+    border-radius: 10px;
+    img{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
     }
   }
 }

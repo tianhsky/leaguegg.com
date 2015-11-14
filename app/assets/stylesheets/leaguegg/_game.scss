@@ -209,7 +209,7 @@
             position: absolute;
             top: 100%;
             max-width: 230px;
-            background-color: #2E484A;
+            background-color: #8364FF;
             z-index: 10;
             padding: 5px;
             border-radius: 10px;
@@ -238,31 +238,12 @@
           padding: 5px 0px;
           .rate-chart {
             padding: 6px 5px;
-            max-width: 200px;
+            max-width: 110px;
             margin: 0 auto;
           }
         }
         .badges {
           padding: 5px 0px;
-          .badge-item {
-            .badge {
-              cursor: pointer;
-              margin-top: 3px;
-              min-width: 90px;
-              &.hot {
-                background: #A75151;
-              }
-              &.veteran {
-                background: #8A9939;
-              }
-              &.fresh {
-                background: #46A47D;
-              }
-              &.role {
-                background: #004E6D;
-              }
-            }
-          }
         }
       }
     }
@@ -309,6 +290,25 @@
   .loading {
     margin-top: 50px;
   }
+  .badge-item {
+    .badge {
+      cursor: pointer;
+      margin-top: 3px;
+      min-width: 90px;
+      &.hot {
+        background: #A75151;
+      }
+      &.veteran {
+        background: #8A9939;
+      }
+      &.fresh {
+        background: #46A47D;
+      }
+      &.role {
+        background: #6B46FF;
+      }
+    }
+  }
   .item-tooltip,
   .runes,
   .masteries {
@@ -318,10 +318,11 @@
       top: 100%;
       left: 50%;
       min-width: 100px;
-      background-color: #2E484A;
+      background-color: #8364FF;
       z-index: 10;
       padding: 5px;
       border-radius: 10px;
+      color: white;
     }
     &:hover,
     &:active {

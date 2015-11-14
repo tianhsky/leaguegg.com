@@ -14,7 +14,7 @@
         </a>
       </div>
     </div>
-    <div class="fade-in-anim" ng-if="!error && game">
+    <div ng-if="!error && game">
       <div class="intro-ad purple" ng-mouseenter="matchHistoryAdHovered()" ng-click="matchHistoryAdClicked()">
         <a href="/summoner/{{query.region}}/{{query.summoner}}/matches/">
           <span class="label label-info"><i class="fa fa-play-circle-o"></i>Replay</span> feature is available now, see how everyone did in your recent matches

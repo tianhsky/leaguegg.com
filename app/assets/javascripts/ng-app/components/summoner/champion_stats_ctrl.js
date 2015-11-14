@@ -4,6 +4,7 @@ angular.module('leaguegg.summoner').controller('SummonerChampionStatsCtrl', [
   function($scope, $stateParams, $filter, _, LayoutService,
     SummonerService, ConstsService, MetaService) {
     LayoutService.setFatHeader(false);
+    LayoutService.setBGImg('/static/img/bg-sand.png');
     MetaService.setTitle($stateParams.summoner + ' - ' + $stateParams.region + ' - Summoners - League of Legends');
     $scope.data = {
       tab: 'performance',
