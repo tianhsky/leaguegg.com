@@ -114,14 +114,14 @@
     padding: 5px;
     border: 1px solid white;
     border-radius: 15px;
-    background-color: black;
+    background-color: #466C65;
   }
   .rotation-roster{
     display: block;
     max-width: 520px;
     margin: 30px auto;
-    border: 10px solid gray;
-    border-radius: 10px;
+    border: 10px solid $gray;
+    border-radius: 8px;
     img{
       display: inline-block;
       width: 50px;
