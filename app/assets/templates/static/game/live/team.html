@@ -176,7 +176,7 @@
           </span>
         </div>
         <div class="rate-chart">
-          <uib-progressbar max="1" value="p.ranked_stat_recent.killc_rate||0" type="{{p.ranked_stat_recent.killc_rate > 0.5 ? 'danger' : 'info'}}">
+          <uib-progressbar max="1" value="p.ranked_stat_recent.killc_rate||0" type="{{p.ranked_stat_recent.killc_rate >= 0.5 ? 'danger' : 'info'}}">
             <p class="progress-text">{{p.ranked_stat_recent.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
@@ -191,7 +191,7 @@
           </span>
         </div>
         <div class="rate-chart">
-          <uib-progressbar max="1" value="p.ranked_stat_recent.dmgc_rate||0" type="{{p.ranked_stat_recent.dmgc_rate > 0.3 ? 'danger' : 'info'}}">
+          <uib-progressbar max="1" value="p.ranked_stat_recent.dmgc_rate||0" type="{{p.ranked_stat_recent.dmgc_rate >= 0.3 ? 'danger' : 'info'}}">
             <p class="progress-text">{{p.ranked_stat_recent.dmgc_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>

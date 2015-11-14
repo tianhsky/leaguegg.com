@@ -2,8 +2,22 @@
   .summoner-match-history {
     .match-list {
       .match-row {
+        &.win {
+          border: 2px solid #4BAB4B;
+          .title-row,
+          .match-detail-row {
+            background-color: #4BAB4B;
+          }
+        }
+        &.loss {
+          border: 2px solid #C33C38;
+          .title-row,
+          .match-detail-row {
+            background-color: #C33C38;
+          }
+        }
         // background-color: rgba(49, 68, 90, 0.82);
-        border: 3px solid #4780C1;
+        // border: 3px solid #4780C1;
         margin: 10px 0px;
         .title-row {
           position: relative;
@@ -76,7 +90,16 @@
             }
           }
         }
-        .kill-info {}
+        .kill-info {
+          .kda {
+            height: 65px;
+          }
+          .badge-role {
+            border: 1px solid white;
+            background-color: #484A9D;
+            width: 90px;
+          }
+        }
         .combat-info {
           .level {
             padding: 2px 0px;
@@ -87,12 +110,6 @@
           .ckill,
           .cdmg {
             padding: 2px 0px;
-            .progress {
-              max-width: 180px;
-              .progress-text{
-                font-size: 0.8em;
-              }
-            }
           }
         }
         .items {
@@ -158,6 +175,12 @@
           vertical-align: middle;
         }
       }
+    }
+  }
+  .progress {
+    max-width: 180px;
+    .progress-text {
+      font-size: 0.8em;
     }
   }
 }

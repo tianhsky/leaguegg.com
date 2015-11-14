@@ -1,5 +1,5 @@
 <div>
-  <div class="match-row row" ng-repeat="m in matches track by $index">
+  <div class="match-row row" ng-class="{'win':m.cp.stats.winner, 'loss':!m.cp.stats.winner}" ng-repeat="m in matches track by $index">
     <div class="title-row">
       <div class="match-type">
         {{m.queue_type | titleize}}
@@ -31,6 +31,9 @@
         <div class="kda">
           <kda k="m.cp.stats.kills" d="m.cp.stats.deaths" a="m.cp.stats.assists" rate="m.cp.stats_aggretated.kda_rate" />
         </div>
+        <div class="player-role">
+          <span class="badge badge-role">{{m.cp.player_role}}</span>
+        </div>
       </div>
       <div class="combat-info col-md-2">
         <div class="level">
@@ -40,12 +43,12 @@
           CS {{m.cp.stats.minions_killed}}
         </div>
         <div class="ckill" data-tooltip="Kill Participation">
-          <uib-progressbar max="1" value="m.cp.stats_aggretated.killc_rate||0" type="{{m.cp.stats_aggretated.killc_rate > 0.5 ? 'danger' : 'info'}}">
+          <uib-progressbar max="1" value="m.cp.stats_aggretated.killc_rate||0" type="{{m.cp.stats_aggretated.killc_rate >= 0.5 ? 'danger' : 'info'}}">
             <p class="progress-text">Kill/P {{m.cp.stats_aggretated.killc_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
         <div class="cdmg" data-tooltip="Damage Contribution">
-          <uib-progressbar max="1" value="m.cp.stats_aggretated.dmg_rate||0" type="{{m.cp.stats_aggretated.dmg_rate > 0.3 ? 'danger' : 'info'}}">
+          <uib-progressbar max="1" value="m.cp.stats_aggretated.dmg_rate||0" type="{{m.cp.stats_aggretated.dmg_rate >= 0.3 ? 'danger' : 'info'}}">
             <p class="progress-text">Dmg/C {{m.cp.stats_aggretated.dmg_rate | percentage: 1 | nullcheck: '-'}}</p>
           </uib-progressbar>
         </div>
@@ -70,17 +73,17 @@
     </div>
     <div class="footer-row">
       <div class="match-time">
-        <i class="fa fa-clock-o"></i>
         {{m.created_at | time_from_now:'unix'}}
-        - {{m.match_duration | duration:'sec'}}
+        <i class="fa fa-clock-o"></i>
+        {{m.match_duration | duration:'sec'}}
       </div>
       <div class="detail-expand-btn" ng-click="matchDetailClicked(m)" ng-mouseenter="matchDetailHovered()">
         <i class="fa fa-caret-down" ng-class="{'fa-caret-down':!m.active, 'fa-caret-up':m.active}"></i>
       </div>
     </div>
     <div class="match-detail-row row" ng-show="m.active">
-      <div match-team-detail-simple team="m.teams[0]" class="match-team col-md-6"></div>
-      <div match-team-detail-simple team="m.teams[1]" class="match-team col-md-6"></div>
+      <div match-team-detail-simple team="m.teams[0]"></div>
+      <div match-team-detail-simple team="m.teams[1]"></div>
     </div>
   </div>
 </div>
