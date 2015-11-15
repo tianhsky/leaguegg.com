@@ -152,7 +152,7 @@ module MatchService
       stress_starts = now - 2.hours
       lost_games = wl_sequence.select{|x|x['end_time'] >= stress_starts && x['wl'] == 0}
       won_games = wl_sequence.select{|x|x['end_time'] >= stress_starts && x['wl'] == 1}
-      tilt = !lost_games.blank? && won_games.blank?
+      tilt = (!lost_games.blank? && won_games.blank?) && lost_games.count>1
       r = {
         'last_10_wl' => last_10_wl,
         'hot_streak' => hot_streak,
