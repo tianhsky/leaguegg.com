@@ -164,7 +164,15 @@ module GameService
           champion_id = participant.champion_id
           summoner = summoners.find{|s|s.summoner_id==summoner_id}
           participant.meta['twitch_channel'] = summoner.try(:twitch_channel)
+          participant.summoner_level = summoner.try(:summoner_level)
           workers << Thread.new do
+            # find recent match stats
+            begin
+              recent_situation = MatchService::Service.find_recent_matches_for_aggregation(summoner_id, region)
+              participant.meta['recent_situation'] = recent_situation
+            rescue
+            end
+
             begin
               # summoner season stats
               summoner_stat = SummonerStatService::Service.find_summoner_season_stats(summoner_id, region)
@@ -215,7 +223,6 @@ module GameService
               matches = match_list_json.try(:[],'matches') || []
               match_stats_aggregation = MatchService::Service.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, 1, matches)
               participant.ranked_stat_by_recent_champion = match_stats_aggregation
-
             rescue => ex
               begin
                 Airbrake.notify_or_ignore(ex,

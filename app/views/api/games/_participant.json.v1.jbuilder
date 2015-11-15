@@ -9,6 +9,7 @@ end
 json.summoner do
   json.id participant.summoner_id
   json.name participant.summoner_name
+  json.level participant.summoner_level
 end
 
 json.champion do

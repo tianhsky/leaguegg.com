@@ -129,6 +129,23 @@ module MatchService
       return matches.sort_by{|x|-x.riot_created_at}
     end
 
+    def self.find_recent_matches_for_aggregation(summoner_id, region)
+      summoner_id = summoner_id.to_i
+      region = region.upcase
+      matches_json = Riot.find_recent_matches(summoner_id, region)
+      wl_sequence = matches_json['games'].map{|m|m['stats']['win'] ? 1 : 0}
+      hot_streak = wl_sequence.last(3) == [1,1,1]
+      cold_streak = wl_sequence.last(3) == [0,0,0]
+      super_streak = wl_sequence.last(5) == [1,1,1,1,1]
+      r = {
+        'last_10_wl' => wl_sequence,
+        'hot_streak' => hot_streak,
+        'cold_streak' => cold_streak,
+        'super_streak' => super_streak
+      }
+      r
+    end
+
     def self.get_matches_aggregation_for_last_x_matches(region, summoner_id, champion_id, x=3, prefetched_match_list=[])
       begin
         # last match
@@ -205,7 +222,7 @@ module MatchService
                 end
               end
             end
-            rescue
+          rescue
           end
         end
       end

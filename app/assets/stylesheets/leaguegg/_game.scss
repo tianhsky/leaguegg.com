@@ -176,10 +176,10 @@
             margin: 1px;
             text-overflow: ellipsis;
             overflow: hidden;
-            &.runes{
+            &.runes {
               background-color: #AA42EB;
             }
-            &.masteries{
+            &.masteries {
               background-color: #6185A3;
             }
           }
@@ -208,7 +208,7 @@
         }
         .cs {
           position: relative;
-          min-height: 40px;
+          min-height: 50px;
           padding: 5px 0px;
           .cs-stats-icon {
             color: yellow;
@@ -232,24 +232,48 @@
           }
         }
         .jcs {
-          min-height: 40px;
+          min-height: 50px;
           padding: 5px 0px;
         }
         .support {
-          min-height: 40px;
+          min-height: 50px;
           padding: 5px 0px;
         }
         .aggresive {
-          min-height: 40px;
+          min-height: 50px;
           padding: 5px 0px;
         }
-        .kill-rate, .dmg-rate {
-          min-height: 40px;
+        .kill-rate,
+        .dmg-rate {
+          min-height: 65px;
           padding: 5px 0px;
           .rate-chart {
             padding: 6px 5px;
             max-width: 100px;
             margin: 0 auto;
+          }
+        }
+        .last10-wl {
+          margin: 0 auto;
+          min-height: 73px;
+          max-width: 85px;
+          padding: 5px 0px;
+          .wl-badges {
+            .wl-badge {
+              display: inline-block;
+              border-radius: 10px;
+              width: 15px;
+              height: 15px;
+              padding: 1px;
+              margin: 1px;
+              font-size: 0.6em;
+            }
+            .w {
+              background-color: #4BAB4B;
+            }
+            .l {
+              background-color: #C33C38;
+            }
           }
         }
         .badges {
@@ -304,10 +328,10 @@
     .badge {
       cursor: pointer;
       margin-top: 3px;
-      width: 80px;
+      width: 85px;
       border: 1px solid white;
       &.hot {
-        background: #A75151;
+        background: #A95804;
       }
       &.veteran {
         background: #8A9939;
@@ -317,6 +341,12 @@
       }
       &.role {
         background: #6B46FF;
+      }
+      &.tilt {
+        background: #C33C38;
+      }
+      &.super {
+        background: rgb(247, 126, 0);
       }
     }
   }

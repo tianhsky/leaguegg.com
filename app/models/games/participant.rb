@@ -8,6 +8,7 @@ module Games
     field :spell2_id, type: Integer
     field :summoner_id, type: Integer
     field :summoner_name, type: String
+    field :summoner_level, type: Integer
     field :champion_id, type: Integer
     field :highest_achieved_season_tier, type: String
     field :match_history_uri, type: String

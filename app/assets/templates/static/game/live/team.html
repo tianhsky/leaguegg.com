@@ -38,7 +38,12 @@
         <img ng-src="{{p.spell2.img}}" err-src="/static/img/leaguegg-icon.png">
       </div>
       <div class="tier">
-        {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
+        <span ng-if="p.league_entry.tier">
+          {{p.league_entry.tier | titleize}}&nbsp;{{p.league_entry.division}}
+        </span>
+        <span ng-if="!p.league_entry.tier && p.summoner.level">
+          Lv. {{p.summoner.level}}
+        </span>
       </div>
       <div class="lp">
         <img class="tier-img" ng-src="/static/img/riot/tier/sm/{{p.league_entry.tier|lowercase}}.png" err-src="/static/img/leaguegg-icon.png" ng-if="p.league_entry.tier" />
@@ -196,15 +201,54 @@
           </uib-progressbar>
         </div>
       </div>
+      <div class="last10-wl">
+        <div class="item-labels">
+          <span class="item-label item-tooltip">
+            Last 10 games
+            <div class="hover-detail">
+              {{p.summoner.name}}'s win/loss for last 10 games
+            </div>
+          </span>
+        </div>
+        <div class="wl-badges">
+          <span class="wl-badge" ng-class="{'w':s==1, 'l':s==0}" ng-repeat="s in p.meta.recent_situation.last_10_wl track by $index">
+            {{s==1 ? 'W' : 'L'}}
+          </span>
+        </div>
+      </div>
       <div class="badges">
         <div class="item-labels">
-          <span class="item-label">Ranked Badges</span>
+          <span class="item-label">Badges</span>
         </div>
         <div class="badge-item" ng-if="p.league_entry.is_hot_streak">
           <span class="badge hot item-tooltip">
             Hot Streak
             <div class="hover-detail">
-              Win 3 or more games in a row
+              Win 3 or more ranked games in a row
+            </div>
+          </span>
+        </div>
+        <div class="badge-item" ng-if="!p.league_entry.is_hot_streak && p.meta.recent_situation.hot_streak">
+          <span class="badge hot item-tooltip">
+            Hot Streak
+            <div class="hover-detail">
+              Won 3 or more games in a row
+            </div>
+          </span>
+        </div>
+        <div class="badge-item" ng-if="p.meta.recent_situation.super_streak">
+          <span class="badge super item-tooltip">
+            Super Streak
+            <div class="hover-detail">
+              Won 5 or more games in a row
+            </div>
+          </span>
+        </div>
+        <div class="badge-item" ng-if="!p.league_entry.is_hot_streak && p.meta.recent_situation.cold_streak">
+          <span class="badge tilt item-tooltip">
+            Tilt
+            <div class="hover-detail">
+              Lost 3 or more games in a row, emotional distress :(
             </div>
           </span>
         </div>
