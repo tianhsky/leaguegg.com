@@ -134,6 +134,7 @@ module MatchService
       region = region.upcase
       matches_json = Riot.find_recent_matches(summoner_id, region)
       wl_sequence = matches_json['games'].map{|m|m['stats']['win'] ? 1 : 0}
+      wl_sequence.reverse!
       hot_streak = wl_sequence.last(3) == [1,1,1]
       cold_streak = wl_sequence.last(3) == [0,0,0]
       super_streak = wl_sequence.last(5) == [1,1,1,1,1]
