@@ -212,7 +212,7 @@
         </div>
         <div class="wl-badges">
           <span class="wl-badge" ng-class="{'w':s==1, 'l':s==0}" ng-repeat="s in p.meta.recent_situation.last_10_wl track by $index">
-            {{s==1 ? 'W' : 'L'}}
+            <i class="fa" ng-class="{'fa-check':s==1, 'fa-times':s==0}"></i>
           </span>
         </div>
       </div>
@@ -248,7 +248,7 @@
           <span class="badge tilt item-tooltip">
             Tilt
             <div class="hover-detail">
-              Lost 3 or more games in a row, emotional distress :(
+              Lost 3 or more games in a row
             </div>
           </span>
         </div>

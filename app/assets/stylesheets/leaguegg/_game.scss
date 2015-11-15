@@ -256,23 +256,25 @@
         .last10-wl {
           margin: 0 auto;
           min-height: 73px;
-          max-width: 85px;
+          max-width: 90px;
           padding: 5px 0px;
           .wl-badges {
             .wl-badge {
               display: inline-block;
-              border-radius: 10px;
-              width: 15px;
-              height: 15px;
-              padding: 1px;
+              border-radius: 5px;
+              width: 16px;
+              height: 16px;
               margin: 1px;
-              font-size: 0.6em;
+              padding: 0px;
+              i{
+                font-size: 1em;
+              }
             }
             .w {
-              background-color: #4BAB4B;
+              background-color: #5FED5F;
             }
             .l {
-              background-color: #C33C38;
+              background-color: #E75955;
             }
           }
         }
