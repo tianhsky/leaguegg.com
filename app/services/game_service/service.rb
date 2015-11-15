@@ -172,6 +172,9 @@ module GameService
               participant.meta['recent_situation'] = recent_situation
             rescue
             end
+          end
+
+          workers << Thread.new do
 
             begin
               # summoner season stats
