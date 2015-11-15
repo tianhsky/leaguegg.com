@@ -170,7 +170,7 @@ module GameService
             begin
               recent_situation = MatchService::Service.find_recent_matches_for_aggregation(summoner_id, region)
               participant.meta['recent_situation'] = recent_situation
-            rescue
+            # rescue
             end
           end
 

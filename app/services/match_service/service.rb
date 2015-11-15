@@ -133,16 +133,32 @@ module MatchService
       summoner_id = summoner_id.to_i
       region = region.upcase
       matches_json = Riot.find_recent_matches(summoner_id, region)
-      wl_sequence = matches_json['games'].map{|m|m['stats']['win'] ? 1 : 0}
+      wl_sequence = matches_json['games'].map do |m|
+        start_timestamp = m['create_date']/1000
+        end_timestamp = start_timestamp + m['stats']['time_played']
+        {
+          'start_time' => Time.at(start_timestamp),
+          'end_time' => Time.at(end_timestamp),
+          'wl' => m['stats']['win'] ? 1 : 0
+        }
+      end
       wl_sequence.reverse!
-      hot_streak = wl_sequence.last(3) == [1,1,1]
-      cold_streak = wl_sequence.last(3) == [0,0,0]
-      super_streak = wl_sequence.last(5) == [1,1,1,1,1]
+      last_10_wl = wl_sequence.map{|x|x['wl']}
+      hot_streak = last_10_wl.last(3) == [1,1,1]
+      cold_streak = last_10_wl.last(3) == [0,0,0]
+      super_streak = last_10_wl.last(5) == [1,1,1,1,1]
+      
+      now = Time.now
+      stress_starts = now - 2.hours
+      lost_games = wl_sequence.select{|x|x['end_time'] >= stress_starts && x['wl'] == 0}
+      won_games = wl_sequence.select{|x|x['end_time'] >= stress_starts && x['wl'] == 1}
+      tilt = !lost_games.blank? && won_games.blank?
       r = {
-        'last_10_wl' => wl_sequence,
+        'last_10_wl' => last_10_wl,
         'hot_streak' => hot_streak,
         'cold_streak' => cold_streak,
-        'super_streak' => super_streak
+        'super_streak' => super_streak,
+        'tilt' => tilt
       }
       r
     end

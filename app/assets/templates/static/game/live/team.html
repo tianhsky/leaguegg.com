@@ -220,6 +220,14 @@
         <div class="item-labels">
           <span class="item-label">Badges</span>
         </div>
+        <div class="badge-item" ng-if="!p.league_entry.is_hot_streak && p.meta.recent_situation.tilt">
+          <span class="badge tilt item-tooltip">
+            Tilt
+            <div class="hover-detail">
+              Lost games in a row in the past 2 hours
+            </div>
+          </span>
+        </div>
         <div class="badge-item" ng-if="p.league_entry.is_hot_streak">
           <span class="badge hot item-tooltip">
             Hot Streak
@@ -245,8 +253,8 @@
           </span>
         </div>
         <div class="badge-item" ng-if="!p.league_entry.is_hot_streak && p.meta.recent_situation.cold_streak">
-          <span class="badge tilt item-tooltip">
-            Tilt
+          <span class="badge cold item-tooltip">
+            Cold Streak
             <div class="hover-detail">
               Lost 3 or more games in a row
             </div>
