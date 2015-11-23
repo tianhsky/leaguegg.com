@@ -35,6 +35,10 @@
       <div>
         <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in ::game.teams track by $index" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
       </div>
+      <div class="ads">
+        <div class="ad" id="ad-live-game-bottom">
+        </div>
+      </div>
     </div>
   </div>
 </div>

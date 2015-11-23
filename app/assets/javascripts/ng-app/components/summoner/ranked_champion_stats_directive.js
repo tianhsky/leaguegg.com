@@ -6,9 +6,13 @@ angular.module('leaguegg.summoner').directive('summonerRankedChampionStats', fun
       'stats': '=',
       'season': '='
     },
-    controller: ['$scope',
-      function($scope) {
-
+    controller: ['$scope', '$postscribe',
+      function($scope, $postscribe) {
+        // $(function(){
+        //   var adElemId = "#ad-summoner-champion-stat-footer";
+        //   var adUrl = "//go.padstm.com/?id=456348";
+        //   postscribe(adElemId, '<script src="' + adUrl + '"><\/script>');
+        // });
       }
     ]
   }

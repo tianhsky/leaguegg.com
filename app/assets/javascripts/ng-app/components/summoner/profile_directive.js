@@ -5,9 +5,13 @@ angular.module('leaguegg.summoner').directive('summonerProfile', function() {
     scope: {
       'summoner': '='
     },
-    controller: ['$scope',
-      function($scope) {
-
+    controller: ['$scope', '$postscribe',
+      function($scope, $postscribe) {
+        $(function(){
+          var adElemId = "#ad-summoner-profile-left";
+          var adUrl = "//go.padstm.com/?id=456401";
+          $postscribe(adElemId, '<script src="' + adUrl + '"><\/script>');
+        });
       }
     ]
   }

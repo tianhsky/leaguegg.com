@@ -69,7 +69,7 @@ angular.module('leaguegg').run([
       var query = uri.query();
 
       // Alexa
-      $alexa.track();
+      // $alexa.track();
 
       // Quantcast
       $quantcast.track();

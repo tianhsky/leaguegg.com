@@ -4,7 +4,9 @@
   <title><%= AppConsts::SITE_TITLE %></title>
   <meta name="description" content="<%= AppConsts::SITE_DESCRIPTION %>"></meta>
   <meta name="keywords" content="<%= AppConsts::SITE_KEYWORDS.join(',') %>"></meta>
+  <% if false %>
   <meta name="alexaVerifyID" content="NJGDtlu8vJ68ghA42Fs8cAAjkk"/>
+  <% end %>
   <meta name="msvalidate.01" content="C431EBE42A624DC26C4BCA4797EF56BE" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="fragment" content="!">
@@ -23,7 +25,7 @@
 </head>
 <body>
   <%= render 'shared/error_browser' %>
-  <%= render 'shared/tracker/alexa_error_browser' %>
+  <% # render 'shared/tracker/alexa_error_browser' %>
   <%= render 'shared/tracker/quantcast_error_browser' %>
   <% if content_for?(:before_head) %>
     <%= yield(:before_head) %>
@@ -36,6 +38,5 @@
   <% if content_for?(:js) %>
     <%= yield(:js) %>
   <% end %>
-
-</body>
+</body>  
 </html>

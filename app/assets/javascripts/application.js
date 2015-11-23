@@ -18,6 +18,7 @@
 //= require moment
 //= require bootstrap-sass-official
 //= require Chart.js/Chart.min.js
+//= require postscribe
 
 // custom
 //= require initializers
