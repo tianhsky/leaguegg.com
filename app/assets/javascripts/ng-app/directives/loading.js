@@ -3,6 +3,7 @@ angular.module('utils').directive('loading', [
     return {
       restrict: 'E',
       templateUrl: 'static/partials/loading.html',
+      transclude: true,
       scope: {
         status: '='
       }

@@ -24,16 +24,28 @@ angular.module('leaguegg.game').controller('LiveGameCtrl', [
     $scope.error = null;
     $scope.timeout_promise = null;
 
+    $timeout(function() {
+      var adElemId = "#ad-live-game-loading";
+      var adUrl = "//go.padstm.com/?id=456401";
+      $postscribe(adElemId, '<script src="' + adUrl + '"><\/script>');
+    }, 500);
+
     LiveGameService.getGameBySummoner($scope.query)
       .then(function(resp) {
-        $scope.loading.game.active = false;
-        $scope.error_summoner_not_in_game = false;
-        $scope.game = resp;
         $timeout(function(){
-          var adElemId = "#ad-live-game-bottom";
-          var adUrl = "//go.padstm.com/?id=456348";
-          $postscribe(adElemId, '<script src="' + adUrl + '"><\/script>');
-        }, 1000);
+          $scope.loading.game.active = false;
+          $scope.error_summoner_not_in_game = false;
+          $scope.game = resp;
+          $timeout(function() {
+            var adElemId = "#ad-live-game-bottom";
+            var adUrl1 = "//go.padstm.com/?id=461865";
+            // var adUrl2 = "//go.padstm.com/?id=461873";
+            // var adUrl3 = "//go.padstm.com/?id=461875";
+            $postscribe(adElemId+'1', '<script src="' + adUrl1 + '"><\/script>');
+            // $postscribe(adElemId+'2', '<script src="' + adUrl2 + '"><\/script>');
+            // $postscribe(adElemId+'3', '<script src="' + adUrl3 + '"><\/script>');
+          }, 1500);
+        }, 2000);
       }, function(err) {
         $scope.loading.game.active = false;
         if (err.status == 404) {

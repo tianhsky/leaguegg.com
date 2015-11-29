@@ -1,6 +1,10 @@
 <div class="live-game">
   <div class="row row-fluid">
     <loading status="loading.game">
+      <div class="ads">
+        <div class="ad" id="ad-live-game-loading">
+        </div>
+      </div>
     </loading>
   </div>
   <div class="live-game-wrapper row row-fluid">
@@ -15,28 +19,28 @@
           </a>
         </div>
         <div>
-          Page will redirect in 3 seconds ...
+          Page will be redirected in 3 seconds ...
         </div>
       </div>
     </div>
     <div ng-if="!error && game">
-      <div class="intro-ad purple" ng-mouseenter="matchHistoryAdHovered()" ng-click="matchHistoryAdClicked()">
+      <!-- <div class="intro-ad purple" ng-mouseenter="matchHistoryAdHovered()" ng-click="matchHistoryAdClicked()">
         <a href="/summoner/{{query.region}}/{{query.summoner}}/matches/">
           <span class="label label-info"><i class="fa fa-play-circle-o"></i>Replay</span> feature is available now, see how everyone did in your recent matches
         </a>
-      </div>
+      </div> -->
       <div class="intro-ad game-info">
-        <div class="game-time">
+        <!-- <div class="game-time">
           <i class="fa fa-clock-o"></i>
           <timer start-time="game.started_at">{{hours}}:{{minutes}}:{{seconds}}</timer>
-        </div>
+        </div> -->
         <div class="game-type">{{game.game_queue.name}}</div>
       </div>
       <div>
         <game-team class="team col-sm-6" team="team" season="season" region="game.region" ng-repeat="team in ::game.teams track by $index" ng-class="{'right-border': team.id==100, 'blue-team':(team.id==100), 'red-team':(team.id==200)}" />
       </div>
       <div class="ads">
-        <div class="ad" id="ad-live-game-bottom">
+        <div class="ad" id="ad-live-game-bottom1">
         </div>
       </div>
     </div>
