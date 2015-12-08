@@ -22,7 +22,7 @@ module StaticDataService
 
     def self.fetch_runes(region='na')
       # url = "https://global.api.pvp.net/api/lol/static-data/#{region.downcase}/v1.2/rune?runeListData=all"
-      url = "http://ddragon.leagueoflegends.com/cdn/5.23.1/data/en_US/rune.json "
+      url = "http://ddragon.leagueoflegends.com/cdn/5.23.1/data/en_US/rune.json"
       resp = RiotAPI.get(url, region)
     end
 

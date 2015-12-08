@@ -47,17 +47,33 @@ module Consts
       end
     end
 
+    def self.type_parse(t)
+      r = ''
+      if t == 'blue'
+        r = 'glyphs'
+      elsif t== 'red'
+        r = 'marks'
+      elsif t == 'yellow'
+        r = 'seals'
+      elsif t == 'black'
+        r = 'quintessence'
+      end
+      r
+    end
+
     def self.load_data
       @version = @json['version']
       r = {}
       @json['data'].each do |name, value|
         img_file_name = "#{value['image'].try(:[],'full')}"
-        r["#{value['id']}".to_i] = {
-          "id" => value['id'],
+        id = "#{name}".to_i
+        r[id] = {
+          "id" => id,
           "name" => value['name'],
           "description" => value['description'],
           "tier" => value['rune']['tier'],
-          "type" => value['rune']['type'],
+          "color" => value['rune']['type'],
+          "type" => self.type_parse(value['rune']['type']),
           "img" => "http://ddragon.leagueoflegends.com/cdn/#{@version}/img/rune/#{img_file_name}"
         }
       end
