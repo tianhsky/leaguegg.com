@@ -192,24 +192,32 @@
                 .mg-title{
                   text-align: center;
                   font-weight: 900;
+                  color: #F1F800;
                 }
                 .mi {
                   display: table-row;
                   .mi-icon {
                     display: table-cell;
                     position: relative;
+                    padding: 1px;
                     img {
                       width: 23px;
                       height: 23px;
                     }
                     .mi-rank {
                       position: absolute;
+                      background-color: black;
                       right: 0px;
                       bottom: 0px;
                     }
                   }
                   .mi-desc {
                     display: table-cell;
+                    padding-left: 5px;
+                    width: 100%;
+                  }
+                  &:hover{
+                    background: #5235C7;
                   }
                 }
               }
@@ -399,7 +407,7 @@
       text-align: left;
       font-size: 12px;
       top: 100%;
-      left: 30%;
+      left: 20%;
       min-width: 150px;
       max-width: 300px;
       background-color: #8364FF;

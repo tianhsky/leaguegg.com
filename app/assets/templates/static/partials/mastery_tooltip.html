@@ -5,13 +5,13 @@
       <div class="mg-title">
         Ferocity({{data.ferocity.count}})
       </div>
-      <div class="mi" ng-repeat="i in data.ferocity.items">
+      <div class="mi" title="{{i.description}}" ng-repeat="i in data.ferocity.items">
         <div class="mi-icon">
           <img ng-src="{{i.img}}" />
           <span class="mi-rank">{{i.rank}}</span>
         </div>
         <div class="mi-desc">
-          {{i.description | characters:25 :true}}
+          {{i.name | characters:25 :true}}
         </div>
       </div>
     </div>
@@ -20,13 +20,13 @@
       <div class="mg-title">
         Cunning({{data.cunning.count}})
       </div>
-      <div class="mi" ng-repeat="i in data.cunning.items">
+      <div class="mi" title="{{i.description}}" ng-repeat="i in data.cunning.items">
         <div class="mi-icon">
           <img ng-src="{{i.img}}" />
           <span class="mi-rank">{{i.rank}}</span>
         </div>
         <div class="mi-desc">
-          {{i.description | characters:25 :true}}
+          {{i.name | characters:25 :true}}
         </div>
       </div>
     </div>
@@ -35,13 +35,13 @@
       <div class="mg-title">
         Resolve({{data.resolve.count}})
       </div>
-      <div class="mi" ng-repeat="i in data.resolve.items">
+      <div class="mi" title="{{i.description}}" ng-repeat="i in data.resolve.items">
         <div class="mi-icon">
           <img ng-src="{{i.img}}" />
           <span class="mi-rank">{{i.rank}}</span>
         </div>
         <div class="mi-desc">
-          {{i.description | characters:25 :true}}
+          {{i.name | characters:25 :true}}
         </div>
       </div>
     </div>
