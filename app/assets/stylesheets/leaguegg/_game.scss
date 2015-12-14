@@ -174,15 +174,45 @@
           width: 95px;
           .label {
             position: relative;
+            // white-space: inherit;
             cursor: help;
             margin: 1px;
             text-overflow: ellipsis;
             overflow: hidden;
             &.runes {
               background-color: #AA42EB;
+              .rune-icon {
+                width: 20px;
+                height: 20px;
+              }
             }
             &.masteries {
               background-color: #6185A3;
+              .mg {
+                .mg-title{
+                  text-align: center;
+                  font-weight: 900;
+                }
+                .mi {
+                  display: table-row;
+                  .mi-icon {
+                    display: table-cell;
+                    position: relative;
+                    img {
+                      width: 23px;
+                      height: 23px;
+                    }
+                    .mi-rank {
+                      position: absolute;
+                      right: 0px;
+                      bottom: 0px;
+                    }
+                  }
+                  .mi-desc {
+                    display: table-cell;
+                  }
+                }
+              }
             }
           }
         }
@@ -268,7 +298,7 @@
               height: 16px;
               margin: 1px;
               padding: 0px;
-              i{
+              i {
                 font-size: 1em;
               }
             }
@@ -350,7 +380,7 @@
       &.tilt {
         background: #C33C38;
       }
-      &.cold{
+      &.cold {
         background: #514C4C;
       }
       &.super {
@@ -358,6 +388,7 @@
       }
     }
   }
+
   .item-tooltip,
   .runes,
   .main-role,
@@ -365,19 +396,18 @@
     .hover-detail {
       display: none;
       position: absolute;
+      text-align: left;
       font-size: 12px;
       top: 100%;
-      left: 50%;
-      min-width: 100px;
+      left: 30%;
+      min-width: 150px;
+      max-width: 300px;
       background-color: #8364FF;
       z-index: 10;
       padding: 5px;
       border-radius: 10px;
       color: white;
-      .rune-icon{
-        width: 20px;
-        height: 20px;
-      }
+      // word-wrap: break-word;
     }
     &:hover,
     &:active {
@@ -386,10 +416,9 @@
       }
     }
   }
-
-  .ads{
+  .ads {
     padding-top: 10px;
-    .ad{
+    .ad {
       display: inline-block;
       padding: 10px;
     }

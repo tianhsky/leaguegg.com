@@ -1,8 +1,9 @@
-<span class="runes label label-default">
+<div class="runes label label-default">
   R
   <div class="hover-detail">
     <div style='text-align:left;' ng-repeat="r in runes track by $index">
-      <img class="rune-icon" ng-src="{{r.img}}"> {{r.count}} x {{r.description}}
+      <img class="rune-icon" ng-src="{{r.img}}" />
+      {{r.count}} x {{r.description | characters:25 :true}}
     </div>
   </div>
-</span>
+</div>

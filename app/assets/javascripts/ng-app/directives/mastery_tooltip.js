@@ -22,10 +22,20 @@ angular.module('leaguegg.partials').directive('masteryTooltip', function() {
           var resolve = _.reduce(grouped['Resolve'], function(memo, o) {
             return memo + o.rank
           }, 0);
+
           var result = {
-            ferocity: ferocity,
-            cunning: cunning,
-            resolve: resolve
+            ferocity: {
+              count: ferocity,
+              items: grouped['Ferocity']
+            },
+            cunning: {
+              count: cunning,
+              items: grouped['Cunning']
+            },
+            resolve: {
+              count: resolve,
+              items: grouped['Resolve']
+            }
           };
           return result;
         }

@@ -1,8 +1,49 @@
-<span class="masteries label label-default">
-  {{data.ferocity}}/{{data.cunning}}/{{data.resolve}}
+<div class="masteries label label-default">
+  {{data.ferocity.count}}/{{data.cunning.count}}/{{data.resolve.count}}
   <div class="hover-detail">
-    <div>Ferocity: {{data.ferocity}}</div>
-    <div>Cunning: {{data.cunning}}</div>
-    <div>Resolve: {{data.resolve}}</div>
+    <div class="mg">
+      <div class="mg-title">
+        Ferocity({{data.ferocity.count}})
+      </div>
+      <div class="mi" ng-repeat="i in data.ferocity.items">
+        <div class="mi-icon">
+          <img ng-src="{{i.img}}" />
+          <span class="mi-rank">{{i.rank}}</span>
+        </div>
+        <div class="mi-desc">
+          {{i.description | characters:25 :true}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="mg">
+      <div class="mg-title">
+        Cunning({{data.cunning.count}})
+      </div>
+      <div class="mi" ng-repeat="i in data.cunning.items">
+        <div class="mi-icon">
+          <img ng-src="{{i.img}}" />
+          <span class="mi-rank">{{i.rank}}</span>
+        </div>
+        <div class="mi-desc">
+          {{i.description | characters:25 :true}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="mg">
+      <div class="mg-title">
+        Resolve({{data.resolve.count}})
+      </div>
+      <div class="mi" ng-repeat="i in data.resolve.items">
+        <div class="mi-icon">
+          <img ng-src="{{i.img}}" />
+          <span class="mi-rank">{{i.rank}}</span>
+        </div>
+        <div class="mi-desc">
+          {{i.description | characters:25 :true}}
+        </div>
+      </div>
+    </div>
   </div>
-</span>
+</div>
