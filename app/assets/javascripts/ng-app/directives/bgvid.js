@@ -10,10 +10,10 @@ angular.module('utils').directive('bgvid', [
             var vid = $('#bg-vid');
             var enable = newVal.showBGVideo;
             if (enable) {
-              var poster = 'static/img/home-bg.png';
+              var poster = '/static/img/lol-full.jpg';
               vid.attr('poster', poster);
               var src1 = $("<source>")
-                .attr('src', 'static/video/home-bg-s2.mp4')
+                .attr('src', 'http://s.lolstatic.com/site/2016-season-update/90a9750484633b004fe7c155321bd4e50f0e5ce0/video/preseason/preseason-hero-1080.mp4')
                 .attr('type', 'video/mp4');
               vid.append(src1);
               // var src2 = $("<source>")

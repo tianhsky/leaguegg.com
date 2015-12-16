@@ -2,9 +2,9 @@ angular.module('leaguegg.home').controller('HomeCtrl', [
   '$scope', '$rootScope', 'LayoutService', 'RotationService',
   function($scope, $rootScope, LayoutService, RotationService) {
     // LayoutService.setFatHeader(false);
-    // LayoutService.setBGVideoVisible(true);
+    LayoutService.setBGVideoVisible(true);
     LayoutService.hideHeader(true);
-    LayoutService.setBGImg('/static/img/lol-full.jpg');
+    // LayoutService.setBGImg('/static/img/lol-full.jpg');
 
     $scope.data = {};
 
@@ -16,6 +16,7 @@ angular.module('leaguegg.home').controller('HomeCtrl', [
 
     $scope.$on('$destroy', function() {
       LayoutService.hideHeader(false);
+      LayoutService.setBGVideoVisible(false);
     });
   }
 ]);
