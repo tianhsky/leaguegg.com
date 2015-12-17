@@ -12,7 +12,7 @@ module LolboxSrv
     # config.assets.paths << Rails.root.join('lib/assets')
 
     # Cache
-    config.cache_store = :redis_store, ENV['REDIS_CACHE_URL']
+    config.cache_store = :redis_store, ENV['REDIS_CACHE_URL'], { expires_in: 60.minutes }
 
     # Generator
     config.generators do |g|
