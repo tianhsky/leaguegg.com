@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     resource :rotation, only: [:show]
     resources :matches, only: [:index, :show]
+    resources :cbuilds, only: [:index]
     resources :feedbacks, only: [:index, :create]
   end
 

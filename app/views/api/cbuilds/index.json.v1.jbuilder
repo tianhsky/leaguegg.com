@@ -1,0 +1,1 @@
+json.cbuilds @cbuilds, partial: 'show', as: :cbuild
