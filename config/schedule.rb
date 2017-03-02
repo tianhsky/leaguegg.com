@@ -4,7 +4,7 @@ set :output, File.join(File.expand_path(File.dirname(__FILE__)), '..', 'log', 'w
 #  rake "games:featured:fetch"
 #end
 
-every 1.hour do
+every 1.day, :at => '4:30 am' do
   rake "redis:cache:clear"
 end
 
