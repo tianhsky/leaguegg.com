@@ -1,7 +1,11 @@
 set :output, File.join(File.expand_path(File.dirname(__FILE__)), '..', 'log', 'whenever.log')
 
-every 8.minutes do
-  rake "games:featured:fetch"
+#every 8.minutes do
+#  rake "games:featured:fetch"
+#end
+
+every 1.hour do
+  Rails.cache.clear
 end
 
 # every 1.day, :at => '0:59 am' do
