@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'lolcaf'
-set :repo_url, 'git@bitbucket.org:tianhsky/lolcaf-srv.git'
+set :repo_url, 'git@bitbucket.org:leaguegg/lolcaf-srv.git'
 set :scm, :git
 set :format, :pretty
 set :log_level, :info
